@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cart">
+<!-- 장바구니 추가 -->
+<insert id="insertCart" parameterType="CartVO">
+	insert into noel_cart 
+		values(cart_seq.nextval,
+				#{userId},
+				#{cartQuan},
+				#{prdNo}
+				)
+</insert>
+
+<select id="cartList" parameterType="string" resultType="CartVO" >
+	select 
+	cart_no as cartNo,
+	user_id as userId,
+	cart_quan as cartQuan,
+	prd_no as prdNo,
+	prd_name as prdName,
+	prd_price as prdPrice
+	from noel_cart join noel_product using(prd_no)
+	 where user_id = #{userId}
+</select>
+
+
+<!--userid별 장바구니 조회  -->
+<select id="searchCart" parameterType="CartVO" resultType="CartVO">
+	select 
+		cart_no as cartNo,
+		cart_quan as cartQuan,
+		prd_no as prdNo,
+		prd_name as prdName,
+		prd_price as prdPrice
+	from noel_cart join noel_product using(prd_no)
+	where user_id = #{userId} and prd_no = #{prdNo}
+</select>
+
+<!-- 장바구니 수정 -->
+<update id="updateCart" parameterType="CartVO">
+	update noel_cart set
+	cart_quan = cart_quan + #{cartQuan}
+	where cart_no = #{cartNo} 
+</update>
+
+<!-- 장바구니 삭제  -->
+<delete id="deleteCart" parameterType="CartVO">
+	delete from noel_cart
+	where user_id = #{userId}
+	and cart_no = #{cartNo}
+</delete>
+
+<select id="cartOrder" parameterType="string" resultType="CartVO">
+select 
+		cart_no as cartNo,
+		user_id as userId,
+		prd_no as prdNo, 
+		cart_quan as cartQuan, 
+		prd_name as prdName, 
+		prd_price as prdPrice
+		from noel_cart join noel_product using(prd_no) 
+		where user_id= #{_parameter} 
+</select>
+</mapper>

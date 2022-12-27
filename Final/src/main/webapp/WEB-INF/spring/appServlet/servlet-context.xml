@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<!-- 오라클 접속 -->
+   <beans:bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+      <beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+      <beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
+      <beans:property name="username" value="khfinal"/>
+      <beans:property name="password" value="0630"/>
+   </beans:bean>
+
+	<!-- 다중파일 업로드 -->
+	<beans:bean id="multipartResolver"
+				class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10485760" />
+		<beans:property name="maxInMemorySize" value="10000000" />
+		<beans:property name="defaultEncoding" value="utf-8" />
+	</beans:bean>
+   
+	<!-- Mybatis 설정 객체-->
+	<beans:bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="configLocation"
+			value="classpath:mybatis-config.xml" />
+		<beans:property name="mapperLocations" value="classpath:/mapper/*SQL.xml" />
+	</beans:bean>
+
+	<!-- DB작업을 수행하는 객체 -->
+	<beans:bean id="sqlSessionTemplate"
+				class="org.mybatis.spring.SqlSessionTemplate">
+		<beans:constructor-arg ref="sqlSession"/>
+	</beans:bean>
+
+
+
+	<context:component-scan base-package="com.kh.myapp/**" />
+
+</beans:beans>
