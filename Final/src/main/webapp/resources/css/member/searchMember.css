@@ -1,0 +1,240 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&display=swap');
+/*아이디/ 비번찾기 선택창*/
+.search-wrap{
+	width: 400px;
+	min-width: 400px;
+	text-align: center;
+	margin-top: 100px;
+	margin-left: 40px;
+	margin-right: 8px;
+	border-radius: 8px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+.search-content>a:nth-of-type(1) {
+	display: inline-block;
+	width: 120px;
+	height: 50px;
+	text-decoration: none;
+	border-radius: 6px;
+	cursor: pointer;
+	background-color: rgb(51,51,51);
+    color: #fff;
+    border: none;
+    transition: 0.5s;
+}
+.search-content>a:nth-of-type(1)>div {
+	margin-top: 14px;
+}
+.search-content>a:nth-of-type(2) {
+	display: inline-block;
+	width: 120px;
+	height: 50px;
+	text-decoration: none;
+	border-radius: 6px;
+	cursor: pointer;
+	background-color: rgb(51,51,51);
+    color: #fff;
+    border: none;
+    transition: 0.5s;
+}
+.search-content>a:nth-of-type(2)>div {
+	margin-top: 14px;
+}
+
+/*아이디 조회창*/
+[name=selSearch] {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+.searchMember #memberName,
+.searchMember #memberPhone{
+	height: 30px;
+	width: 200px;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	outline: none;
+}
+.searchOwner #ownerName,
+.searchOwner #ownerPhone{
+	height: 30px;
+	width: 200px;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	outline: none;
+}
+.searchMember,
+.searchOwner{
+	position: relative;
+}
+.label{
+    position: absolute;
+    left: 85px;
+    color: #999;
+}
+#searchMemberBtn {
+	margin-top: 20px;
+	width: 70px;
+	height: 30px;
+	cursor: pointer;
+	background-color: rgb(51,51,51);
+    color: #fff;
+    border: none;
+    transition: 0.5s;
+    border-radius: 5px;
+}
+#searchMemberBtn2 {
+	margin-top: 20px;
+	width: 70px;
+	height: 30px;
+	cursor: pointer;
+	background-color: rgb(51,51,51);
+    color: #fff;
+    border: none;
+    transition: 0.5s;
+    border-radius: 5px;
+}
+
+/*아이디 조회 결과창*/
+.result-wrap{
+	text-align: center;
+	margin-top: 50px;
+}
+.searchSuccess>div:nth-of-type(1){
+	margin-bottom: 20px;
+}
+.searchSuccess>div:nth-of-type(2) {
+	font-size: 20px;
+}
+.searchSuccess>div:nth-of-type(2)>span {
+	font-weight: 700;
+}
+.closeBtn{
+	margin-top: 20px;
+	width: 70px;
+	height: 30px;
+	cursor: pointer;
+	background-color: rgb(51,51,51);
+    color: #fff;
+    border: none;
+    transition: 0.5s;
+    border-radius: 5px;
+}
+
+/*비번 조회창*/
+.searchMember #memberId,
+.searchMember #certifyNum,
+.searchMember #certifyNum2{
+	margin-top: 20px;
+	height: 30px;
+	width: 200px;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	outline: none;
+}
+.searchOwner #ownerId,
+.searchOwner #certifyNum,
+.searchOwner #certifyNum2{
+	margin-top: 20px;
+	height: 30px;
+	width: 200px;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	outline: none;
+}
+.phoneChkSendBtn1,
+.phoneChkSendBtn2{
+	cursor: pointer;
+	background-color: rgb(51,51,51);
+    color: #fff;
+    border: none;
+    transition: 0.5s;
+    border-radius: 5px;
+    width: 50px;
+    height: 30px;
+}
+.phoneChkBtn1{
+	cursor: pointer;
+	background-color: rgb(51,51,51);
+    color: #fff;
+    border: none;
+    transition: 0.5s;
+    border-radius: 5px;
+    width: 50px;
+    height: 30px;
+}
+.phoneChkBtn2{
+	cursor: pointer;
+	background-color: rgb(51,51,51);
+    color: #fff;
+    border: none;
+    transition: 0.5s;
+    border-radius: 5px;
+    width: 50px;
+    height: 30px;
+}
+
+/*updateNomalPw*/
+.updatePw-wrap {
+	text-align: center;
+	margin-top: 40px;
+}
+.updatePw-wrap>.updatePwContent input {
+	width: 280px;
+	height: 40px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+	padding-left: 10px;
+}
+.updatePw-wrap>.updatePwContent .updatePwBtn{
+	margin-top: -35px;
+	width: 120px;
+	height: 40px;
+	cursor: pointer;
+	background-color: rgb(51,51,51);
+    color: #fff;
+    border: none;
+    transition: 0.5s;
+    border-radius: 5px;
+    font-family: 'Gowun Dodum', sans-serif;
+}
+.updatePw-wrap .updatePwTitle{
+	margin-bottom: 30px;
+	font-family: 'Gowun Dodum', sans-serif;
+	font-size: 20px;
+	font-weight: 700;
+}
+.updatePwBox{
+	position: relative;
+	
+}
+.updatePwContent .label {
+	font-size: 12px;
+	position: absolute;
+	left: 110px;
+	top: 12px;
+}
+.text-note{
+	margin: 0;
+	font-size: 12px;
+}
+
+/*비밀번호 변경 결과창*/
+.pwResult-wrap{
+	text-align: center;
+	margin-top: 110px;
+}
+.pwResult-wrap>div{
+	font-family: 'Gowun Dodum', sans-serif;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+
+

@@ -1,0 +1,204 @@
+#content {
+	float: right;
+	margin-right: 35px;
+}
+
+.bookmarkList-wrap {
+	width: 800px;
+	margin-bottom: 50px;
+}
+
+.bookmark-title>h4 {
+	padding-top:5px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #000;
+}
+
+.img-box {
+	line-height: 130px;
+	width: 150px;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.img-box>img {
+	width: 130px;
+	height: 90px;
+	border-radius: 10px;
+	margin-left: 10px;
+	margin-bottom: 8px;
+}
+
+.bookmark-content-list {
+	margin-top: 50px;
+	border-top: 3px solid black;
+	border-bottom: 1px solid lightgray;
+	padding-bottom: 25px;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0px;
+}
+
+.bookmark-content-list>ul {
+	padding-left: 0px;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+.bookmark-content-list>ul>li {
+	display: inline-flex;
+	width: 550px;
+	height: 130px;
+	margin-top: 30px;
+	border: 2px solid transparent;
+	margin-left: 40px;
+	border-radius: 10px;
+}
+
+.bookmark-content-list>ul>li:hover {
+	border: 2px solid gold;
+}
+
+.bookmark-content {
+	display: flex;
+}
+
+.bookmark-man {
+	width: 250px;
+}
+
+.bookmark-man>ul {
+	padding-left: 10px;
+	margin-top: 35px;
+}
+
+.delBtn {
+	width: 150px;
+	line-height: 130px;
+	text-align: center;
+}
+
+.delBtn>button {
+	width: 80px;
+}
+
+.bookmark-content-list>ul>li>a {
+	text-decoration: none;
+}
+
+.bookmark-content-list>ul>li>a:hover {
+	text-decoration: underline;
+	color: #212529;
+}
+
+.paging {
+	width: 1000px;
+	text-align: center;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.paging>a {
+	display: inline-block;
+	width: 30px;
+	text-decoration: none;
+	font-size: 20px;
+}
+
+.paging>a:hover {
+	color: #212529;
+}
+
+.noMsg {
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 35px;
+	padding-bottom: 50px;
+	border-bottom: 1px solid gray;
+}
+
+.warningMark {
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
+	border-top: 1px solid gray;
+	margin-top: 30px;
+	padding-top: 50px;
+}
+
+.noMsg1 {
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 35px;
+	padding-bottom: 50px;
+	border-bottom: 1px solid gray;
+	margin-bottom: 100px;
+}
+
+.warningMark1 {
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
+	border-top: 1px solid gray;
+	margin-top: 30px;
+	padding-top: 50px;
+}
+
+.paging>span {
+	display: inline-block;
+	width: 30px;
+	text-decoration: none;
+	font-size: 20px;
+}
+
+.numberDeco {
+	background-color: gray;
+	color: white;
+	border-radius: 100%;
+}
+
+.pageNo {
+	font-size: 20px;
+	background-color: gray;
+	color: white;
+	width: 30px;
+	border-radius: 100%;
+	line-height: 34px;
+}
+
+.category1 {
+	width: 500px;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 25px;
+	margin-bottom: 50px;
+	font-size: 20px;
+}
+
+#category_class, #category_market {
+	display: inline-block;
+	text-decoration: none;
+	color: lightgray;
+	font-weight: bold;
+}
+
+#category_class:hover, #category_market:hover {
+	text-decoration: none;
+	color: #dc3545;
+	font-weight: bold;
+}
+
+.category1>a:first-child {
+	margin-right: 30px;
+}
+
+.category1>a:last-child {
+	margin-left: 30px;
+}

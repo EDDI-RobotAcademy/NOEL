@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="marketer">
+	<insert id="insertMarketer" parameterType="mk">
+		insert into noel_marketer(MARKETER_ID, MARKETER_PW, MARKETER_NAME, MARKETER_TEL, MARKETER_EMAIL)
+		values( #{marketerId}, #{marketerPw}, #{marketerName}, #{marketerTel},#{marketerEmail})
+	</insert>
+	
+	<select id="marketerCheckId" parameterType="string" resultType="string">
+		select marketer_id as marketerId
+		from noel_marketer
+		where marketer_id = #{marketerCheckId}
+	</select>
+	<select id="pwChkMarketer" parameterType="mk" resultType="mk">
+		select marketer_id as marketerId
+		from noel_marketer
+		where marketer_id = #{marketerId} and marketer_pw = #{marketerPw} 
+	</select>
+	<select id="selectOneMarketer" parameterType="mk" resultType="mk">
+		select 
+			marketer_id as marketerId,
+			marketer_pw as marketerPw,
+			marketer_name as marketerName,
+			marketer_tel as marketerTel,
+			MARKETER_REGDATE as marketerRegdate,
+			marketer_level as marketerLevel,
+			MARKETER_AUTH as marketerAuth
+		from noel_marketer
+		where marketer_id=#{marketerId} and marketer_pw=#{marketerPw}
+	</select>
+	
+		<select id="selectJoinedMarketer" parameterType="mk" resultType="string">
+		select marketer_id as marketerId
+		from noel_marketer
+		where marketer_id = #{marketerId}
+	</select>
+	
+	
+</mapper>

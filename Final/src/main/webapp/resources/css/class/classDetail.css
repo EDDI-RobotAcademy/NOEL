@@ -1,0 +1,679 @@
+/*------------헤더-----------*/
+body{
+    margin: 0 auto;
+    position: relative;
+}
+
+.login-join{
+    position: absolute;
+    top: -25px;
+    left: 80vw;
+}
+
+.login-join>a{
+    text-decoration: none;
+    color: rgb(51, 51, 51);
+}
+
+.header-wrap{
+    width: 100vw;
+    background-color:  rgb(51, 51, 51);
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.header-list1{
+    height: 45px;
+    display: flex;
+    position: relative;
+}
+
+.ul1{
+    list-style-type: none;
+    display: inline-block;
+    padding: 0px;
+    margin: 0 auto;
+    
+    }
+
+.ul1>li{
+    float: left;
+    width: 300px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+}
+
+.ul1>li:hover{
+    cursor: pointer;
+    font-weight: 900;
+    font-size: 18px;
+}
+
+.ul2{
+    list-style-type: none;
+    padding: 0px;
+    margin: 0 auto;
+}
+
+.ul2>li{
+    float: right;
+    width: 300px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+}
+
+.ul2>li:hover{
+    cursor: pointer;
+    font-weight: 900;
+    font-size: 18px;
+}
+
+.header-list1>a{
+    position: absolute;
+    left: 47vw;
+    top: -43px;
+}
+
+.logoImg{
+    border-radius: 100%;
+}
+
+.header-list1{
+    margin-top: 50px;
+}
+
+/*------------맛집 상세 페이지-----------*/
+
+.content-wrap{
+    width: 80vw;
+    height:100%;
+    margin: 0 auto;
+}
+
+.content-wrap1{
+    width: 80vw;
+    height:50px;
+    margin: 0 auto;
+    line-height: 50px;
+    margin-top: 70px;
+    border-bottom: 1px solid black;
+    font-weight: bolder;
+}
+
+.content-wrap1-1{
+    width:200px;
+    float: left;
+}
+
+.star{
+    margin-top: 12px;
+    position: absolute;
+    
+}
+
+.reviewNum{
+    float: right;
+}
+
+.content-wrap1-2{
+    width:200px;
+    float: right;
+}
+
+.share{
+    float: right;
+    margin-top: 10px;
+}
+
+#share{
+	text-decoration-line:none;
+}
+
+
+.favorite{
+    float: right;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+
+.pointer{
+    cursor: pointer;
+}
+
+
+.content-wrap2{
+    width: 80vw;
+    height:500px;
+    background-color: rgba(224, 224, 224, 0.36);
+    margin: 0 auto;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.content-wrap2-1{
+    width: 1400px;
+    height:500px;
+    margin: 0 auto;
+}
+
+.photo-wrap{
+    width:600px;
+    height:460px;
+    border: 0.5px solid gainsboro;
+    float: left;
+    position: relative;
+    overflow: hidden;
+}
+.photo-wrap>ul{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    overflow: hidden;
+}
+
+.photo-wrap>ul>li{
+    width:600px;
+    float: left;
+}
+
+/*--- 슬라이드 버튼 ---*/
+.slide-navi{
+    height: 460px;
+    line-height: 460px;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    opacity: 0.4;
+}
+
+.prev{
+    left: 0;
+}
+
+.next{
+    right:0;
+}
+
+.slide-navi>span{
+    font-size: 30px;
+    color: white;
+}
+
+.slide-navi:hover{
+    cursor:pointer;
+    opacity: 0.8;
+}
+
+.info-reserve-wrap{
+    width: 580px;
+    height: 500px;
+    float: left;
+    margin: 0 auto;
+    margin-left: 2%;
+}
+
+#infoTable td{
+    line-height: 2;
+}
+
+#infoTable th{
+    text-align: left;
+    width:100px;
+    height: 47px;
+    line-height: 2;
+}
+
+
+
+.reserve-wrap{
+    width:580px;
+    margin-left: 20px;
+    float: left;
+}
+
+.calTd{
+    width:10px;
+    height: 47px;
+    padding: 0;
+
+}
+
+span[name=calBtn]{
+    margin: 0 auto;
+    padding: 0;
+    margin: 0;
+    height: 47px;
+}
+
+.people{
+    width: 10px;
+    text-align: center;
+    margin:0 auto;
+    line-height: 2.5;
+}
+
+.peopleTd{
+    width:10px;
+    margin:0 auto;
+    position: relative;
+    font-weight: bolder;
+}
+
+select[name=selectMenu]{
+    width:300px;
+}
+
+.w3-button{
+    padding: 0;
+}
+
+.table-wrap2>tbody>tr{
+    height: 40px;
+}
+
+/*--- 시간 버튼 ---*/
+.timeBtn{
+    margin-top: 1%;
+    border-radius: 5px;
+    border: 0.5px solid rgb(51, 51, 51);
+    background-color: rgb(51, 51, 51);
+    color: white;
+}
+
+.timeBtn:hover{
+    background-color: white;
+    color: rgb(51, 51, 51);
+}
+
+
+/*--- 예약하기 버튼 ---*/
+button[name=reserveBtn]{
+    margin-top: 10px;
+    width:280px;
+    height:50px;
+    border-radius: 10px;
+    background-color: rgb(51, 51, 51);
+    color: white;
+}
+
+button[name=reserveBtn]:hover{
+    background-color: white;
+    color: rgb(51, 51, 51); 
+    cursor: pointer;
+}
+
+/*--- 추천글작성 버튼 ---*/
+button[name=recommendBtn]{
+    margin-top: 10px;
+    float: right;
+    width:280px;
+    height:50px;
+    margin-left: 10px;
+    border-radius: 10px;
+    background-color: rgb(51, 51, 51);
+    color: white;
+}
+
+button[name=recommendBtn]:hover{
+    background-color: white;
+    color: rgb(51, 51, 51);
+    cursor: pointer; 
+}
+
+
+
+/* --- 조회수, 리뷰수 wrap ---*/
+.content-wrap3{
+    width: 80vw;
+    height:30px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.content-wrap3-1{
+    width:8vw;
+    height: 20px;
+    float: right;
+}
+
+
+/*--- 조회수 아이콘 ---*/
+.content-wrap3-1>span:nth-of-type(1){
+    display: inline;
+    float: left;
+    color: rgb(51, 51, 51);
+}
+
+/*--- 조회수 ---*/
+.content-wrap3-1>span:nth-of-type(2){
+    display: inline;
+    float: left;
+    margin-right: 10px;
+}
+
+/*--- 리뷰수 아이콘---*/
+.content-wrap3-1>span:nth-of-type(3){
+    display: inline;
+    float: left;
+    color: rgb(51, 51, 51);
+}
+
+/*--- 리뷰수 ---*/
+.content-wrap3-1>span:nth-of-type(4){
+    display: inline;
+    float: left;
+}
+
+.content-wrap4{
+    width: 80vw;
+    height: 3800px;;
+    margin: 0 auto;
+    border-top: 1px solid black;
+}
+
+/*--- 메뉴 타이틀---*/
+.menuTitle {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+}
+
+.menuSubTitle{
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 20px;
+    font-weight: bold;
+}
+
+#menuWrap{
+    width:60vw;
+    height: 300px;
+    margin: 0 auto;
+}
+
+#menuTable{
+    margin: 0 auto;
+    width:600px;
+    margin-top: 20px;
+}
+
+#menuTable>tbody>tr>td{
+    height: 15px;
+    text-align: center;
+}
+
+
+/*--- 메뉴 사진 ---*/
+.food-wrap{
+    margin: 0 auto;
+    width:60vw;
+    height:800px;
+    margin-top: 10px;
+}
+
+#photoWrap{
+    float: left;
+    width: 49.5%;
+    margin-left: 0.5%;
+    margin-bottom: 1%;
+}
+
+
+/*--- STORE ---*/
+#aboutStore{
+    width:60vw;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.photo-wrap2{
+    margin: 0 auto;
+	width:60vw;
+    height:420px;
+    border: 0.5px solid gainsboro;
+    margin-bottom: 20px;
+    float: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.photo-wrap2>ul{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    overflow: hidden;
+}
+
+.photo-wrap2>ul>li{
+	width:60vw;
+    float: left;
+	display:flex;
+	justify-content: center;
+}
+
+
+
+/*----- 슬라이드 버튼 -----*/
+.slide-navi2{
+    height: 420px;
+    line-height: 420px;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    opacity: 0.4;
+}
+
+.prev2{
+    left: 0;
+}
+
+.next2{
+    right:0;
+}
+
+.slide-navi2>span{
+    font-size: 30px;
+    color: black;
+}
+
+.slide-navi2:hover{
+    cursor:pointer;
+    opacity: 0.4;
+}
+
+
+/*----- 지도 부분 -----*/
+.map-wrap{
+    margin: 0 auto;
+    width:60vw;
+    height:400px;
+    background-color: whitesmoke;
+}
+
+
+/*----- 마켓 부분 -----*/
+.market-wrap{
+    margin: 0 auto;
+    width:60vw;
+    height: 100%;
+    margin-top: 10px;
+}
+
+#marketWrap{
+    float: left;
+    width: 31%;
+    height: fit-content;
+    margin-bottom: 1%;
+    margin-left: 1.5%;
+
+}
+
+/*----- 후기 부분 -----*/
+.review-wrap{
+    margin: 0 auto;
+    height: 100%;
+}
+
+#reviewWrapUl{
+    margin: 0 auto;
+    width:60vw;
+}
+
+.reviewDelete{
+    line-height: 88px;
+    float: right;
+    margin-right: 2%;
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.reviewDelete:hover{
+    cursor: pointer;
+    color: #568A35;
+}
+
+.regDate{
+    float: right;
+}
+
+
+.w3-bar-item{
+    max-width: 450px;
+    height: 245px;
+    display: inline;
+    float: left;
+}
+
+.testDiv{
+    margin: 0 auto;
+    width:60vw;
+}
+
+.w3-bar-1{
+    padding: 0;
+    margin: 0 auto;
+    max-width: 900px;
+    height: 250px;
+}
+
+.w3-bar-item-1{
+    height: 30px;
+    line-height: 30px;
+    width: 420px;
+    float: left;
+    margin-top: 10%;
+}
+
+
+.modal-wrap{
+    background-color: rgba(51, 51, 51, 0.5);
+    position: fixed;
+    top:0; left: 0; bottom: 0; right: 0;
+}
+
+.modal-box{
+    position: absolute;
+    top: 30vh;
+    left: 70vh;
+    background-color: white;
+    border-radius: 10px;
+    width: 30vw;
+    height: 40vh;
+    min-width: 385px;
+    min-height: 288px;
+}
+
+.modal-title{
+    width: 100%;
+    height: 10%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-indent: 35px;
+    font-weight: bolder;
+    border-bottom: 0.5px solid darkgray;
+}
+
+.modal-content{
+    width: 100%;
+    height: 75%;
+}
+
+#reserveCheckTbl{
+    width: 90%;
+    height: 70%;
+    margin: 0 auto;
+    font-size: 13px;
+}
+
+#reserveCheckTbl>tbody>tr>th{
+    background-color: rgba(224, 224, 224, 0.36); 
+    width: 30%; 
+    text-align: center;
+}
+
+#reserveCheckTbl>tbody>tr>td{
+    text-indent: 10px;
+}
+.closeModal{
+    border: 1px solid rgb(51, 51, 51);
+    border-radius: 10px;
+    background-color: rgb(51, 51, 51);
+    color: white;
+    margin-left: 3%;
+    margin-top: 3%;
+    font-size: 12px; 
+}
+
+.closeModal:hover{
+    border: 1px solid rgb(51, 51, 51);
+    border-radius: 10px;
+    background-color: white;
+    color: rgb(51, 51, 51);
+    margin-left: 3%;
+    margin-top: 3%;
+    font-size: 12px; 
+}
+
+.reserveBtn{
+    border: 1px solid rgb(51, 51, 51);
+    border-radius: 10px;
+    background-color: rgb(51, 51, 51);
+    color: white;
+    float: right;
+    margin-right: 3%;
+    margin-top: 3%;
+    font-size: 12px; 
+}
+
+.reserveBtn:hover{
+    border: 1px solid rgb(51, 51, 51);
+    border-radius: 10px;
+    background-color: white;
+    color: rgb(51, 51, 51);
+    float: right;
+    margin-right: 3%;
+    margin-top: 3%;
+    font-size: 12px; 
+}
+.explanation{
+    width:90%; 
+    height: 8%; 
+    font-size: 12px; 
+    margin: 0 auto;
+    margin-top: 3%;
+}
+
+.hidden{
+	display:none;
+}
+
+

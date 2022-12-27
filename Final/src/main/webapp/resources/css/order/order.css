@@ -1,0 +1,282 @@
+
+.cart-table > table {
+    width: 1300px;
+    margin: 30px auto;
+    border-spacing: 0;
+}
+
+
+.cart-table > table tr {
+    height: 55px;
+}
+
+.cart-table > table tr > th {
+  	border-top: 3px solid #eee;
+	border-bottom: 3px solid #eee;
+	padding: 10px 0;
+	font-size: 18px;
+	color: #ccc;
+	font-weight: 600;
+	width: 100px;
+	text-align: center;
+}
+
+.cart-table > table tr > td {
+    text-align: center;
+    border-top: 1px solid #ccc;
+    font-size: 16px;
+    font-weight: lighter;
+    width: 350px;
+}
+
+.cart-table > table tr > td:first-child > img {
+    width: 250px;
+    height: 200px;
+    margin: 10px;
+    border: 1px solid #eee;
+}
+
+.cart-table > table tr:last-child > td {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 20px;
+    font-size: 20px;
+    text-align: right;
+}
+
+.cart-table > table tr:last-child > td span {
+    font-weight: 900;
+    font-size: 24px;
+    color: rgb(172, 34, 34);
+}
+
+
+#order-form{
+    width: 1200px;
+    text-align: left;
+    margin: 0 auto;
+    padding-left: 50px;
+}
+
+
+
+.order-title {
+    margin-bottom: 20px;
+    width: 100px;
+}
+
+.order-info {
+    margin-bottom: 50px;
+}
+
+.order-info .order-box {
+    margin-bottom: 20px;
+}
+
+.order-info .order-input {
+    width: 300px;
+    height: 30px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #dc3545;
+    text-indent: 10px;
+    font-size: 16px;
+    background-color : white;
+}
+
+/* .order-info .order-input.short {
+    width: 50px;
+} */
+
+.order-info .order-input.medium {
+    width: 250px;
+}
+
+.order-info .order-input.long {
+    width: 500px;
+}
+
+.order-info .order-input.llong {
+    width: 580px;
+}
+
+.order-info .order-label {
+    display: inline-block;
+    width: 150px;
+}
+
+#same-check {
+    height: 20px;
+    line-height: 20px;
+    text-align: right;
+}
+
+.order-agree {
+    display: none;
+}
+
+.order-agree+label {
+    cursor: pointer;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #eee;
+    border-radius: 5px;
+    line-height: 1;
+    margin-left: 10px;
+}
+
+.order-agree+label > i {
+    color: transparent;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.order-agree:checked+label {
+    background-color: #eee;
+}
+
+.order-agree:checked+label > i {
+    display: inline;
+    color: white;
+}
+
+.order-agree+label+label {
+    cursor: pointer;
+}
+
+#addr-btn {
+    border: 1px solid #dc3545;
+    background-color: white;
+    border-radius: 5px;
+    height: 30px;
+    width: 80px;
+    color: #dc3545;
+    cursor: pointer;
+}
+
+#addr-btn:hover{
+	background-color: #dc3545;
+	color: #fff;
+	border: 1px solid #dc3545;
+}
+
+input[name=payType] {
+    display: none;
+}
+
+input[name=payType]+label {
+    display: inline-block;
+    width: 150px;
+    height: 40px;
+    box-sizing: border-box;
+    line-height: 38px;
+    text-align: center;
+    border: 2px solid #ffc107;
+    color: #ffc107;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[name=payType]:checked+label {
+    background-color: #ffc107;
+    border: 1px solid #ffc107;
+    color: white;
+}
+
+#agree-box {
+    text-align: center;
+}
+
+.order-btn {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.order-btn > button {
+    display: inline-block;
+    height: 50px;
+    width: 250px;
+    border: 1px solid #dc3545;
+    background-color: white;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #dc3545;
+    cursor: pointer;
+}
+
+.order-btn > button:hover {
+    background-color: #dc3545;
+    color: #fff;
+    border: 1px solid #dc3545;
+}
+
+.comment {
+	color : #ffc107;
+	font-size : 13px;
+}
+
+.pImg >img{
+	 width: 150px;
+    height: 120px;
+    border-radius: 5px;
+    margin: 5px;
+}
+#cart-option{
+    float: left;
+    margin: 10px;
+    width: 150px;
+    height: 60px;
+    border: none;
+    border-radius: 5px;
+    background-color : #f5d575;
+    text-align: center;
+    color: white;
+    line-height: 60px;
+    
+}
+
+.cart-option{
+  margin-left: 380px;
+  margin-top: 50px;
+ }
+ 
+ .line{
+
+    float: left;
+    margin: 10px;
+   
+    float: left;
+    width: 2px;
+    height: 60px;
+    border-left: 1px solid rgb(136, 136, 136);
+ }
+ 	#cart-option{
+    float: left;
+    margin: 10px;
+    width: 150px;
+    height: 60px;
+    border: none;
+    border-radius: 5px;
+    background-color : #f5d575;
+    text-align: center;
+    color: white;
+    line-height: 60px;
+    
+}
+
+.cart-option{
+  margin-left: 380px;
+  margin-top: 50px;
+ }
+ 
+ .line{
+
+    float: left;
+    margin: 10px;
+   
+    float: left;
+    width: 2px;
+    height: 60px;
+    border-left: 1px solid rgb(136, 136, 136);
+ }

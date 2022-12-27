@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- mybatis 작동 규칙정의 -->
+	<settings>
+		<setting name="cacheEnabled" value="false"/>
+		<setting name="useGeneratedKeys" value="true"/>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="com.kh.myapp.member.model.vo.Member" alias="m"/>
+		<typeAlias type="com.kh.myapp.member.model.vo.Marketer" alias="mk" />
+		<typeAlias type="com.kh.myapp.cl.model.vo.Class" alias="Class"/>
+		<typeAlias type="com.kh.myapp.market.model.vo.ProductVO" alias="productVO"/>
+		<typeAlias type="com.kh.myapp.market.model.vo.ProductImgVO" alias="prdimgVO"/>
+		<typeAlias type="com.kh.myapp.market.model.vo.MarketReviewVO" alias="marketReviewVO"/>
+		<typeAlias type="com.kh.myapp.market.model.vo.MarketQnaVO" alias="marketQnaVO"/>
+		<typeAlias type="com.kh.myapp.cart.model.vo.CartVO" alias="CartVO"/>
+		<typeAlias type="com.kh.myapp.order.model.vo.OrderVO" alias="OrderVO"/>
+		<typeAlias type="com.kh.myapp.market.model.vo.MarketQnaReplyVO" alias="marketQnaReplyVO"/>
+	</typeAliases>
+</configuration>       
+

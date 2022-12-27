@@ -1,0 +1,201 @@
+@charset "UTF-8";
+
+
+#content{
+    float: right;
+    margin-right: 35px;
+}
+.form-write>h4{
+    padding-top: 12px;
+    text-align: center;
+    margin-left: 20px;
+}
+.membership-form>.form-write>ul li{
+    list-style: none;
+}
+.contents{
+    width: 800px;
+    margin: 0 auto 40px;
+}
+.form-write>ul{
+    padding-top: 10px;
+}
+.form-write>ul li{
+    padding-top: 30px;
+}
+.tit{
+    float: left;
+    color: var(--dark);
+    height: 40px;
+    line-height: 40px;
+}
+.cnt{
+    margin-left: 120px;
+    position: relative;
+}
+
+.input01{
+    border: 1px solid #d7d7d7;
+    height: 38px;
+    position: relative;
+}
+.input02{
+    border: 1px solid #d7d7d7;
+    height: 38px;
+    position: relative;
+}
+.form-write>ul li div .input01{
+    color: #999;
+    line-height: 36px;
+}
+.input01>input{
+    width: 100%;
+    border: none;
+    height: 35px;
+}
+.input02{
+	width: 648px;
+}
+.input02>input{
+	 width: 100%;
+    border: none;
+    height: 35px;
+}
+.label{
+    position: absolute;
+    font-size: smaller;
+}
+.membership-form {
+    margin-bottom: 50px;
+}
+.membership-form input {
+	
+}
+.text-note{
+    color: #999;
+    font-size: 12px;
+}
+#idChkBtn{
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 38px;
+	width: 103px;
+	background-color: rgb(51,51,51);
+    color: #fff;
+    border: none;
+    transition: 0.5s;
+}
+
+.box01{
+    float: left;
+    width: 200px;
+}
+.selBox01>select{
+    width: 200px;
+    height: 36px;
+    border: 1px solid #d7d7d7;
+}
+.box02{
+    float: left;
+    width: 648px;
+    height: 36px;
+    border: 1px solid #d7d7d7;
+    padding: 0 12px;
+    position: relative;
+}
+.box02>input{
+    width: 100%;
+    border: none;
+    height: 35px;
+}
+.box02>.label{
+    line-height: 35px;
+    color: #999;
+}
+.phoneChkSendBtn{
+    height: 36px;
+    width: 98px;
+    margin-left: 10px;
+    background-color: rgb(51,51,51);
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    transition: 0.5s;
+}
+.box03{
+    float: left;
+    width: 200px;
+    height: 38px;
+    border: 1px solid #d7d7d7;
+    margin-top: 10px;
+}
+.box03>input{
+    width: 97%;
+    height: 32px;
+    border: none;
+}
+.box03>label{
+    line-height: 35px;
+    color: #999;
+}
+.phoneChkBtn{
+    margin-left: 11px;
+    margin-top: 10px;
+    width: 70px;
+    height: 38px;
+    background-color: rgb(51,51,51);
+    color: #fff;
+    border: none;
+    transition: 0.5s;
+}
+
+.agreeChkBox-wrap{
+    border-top: 1px solid #d7d7d7;
+    border-bottom: 1px solid #d7d7d7;
+    margin-top: 40px;
+    padding-top: 30px;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+}
+.agreeChkBox{
+    width: 620px;
+    margin: 0 auto;
+}
+hr{
+    display: block;
+    margin: 1em 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+.chk-box2{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+}
+.chk-box2 label{
+    display: inline-block;
+    font-size: 13px;
+}
+.chk-box2 a{
+    font-size: 13px;
+}
+.allowContent{
+    float: right;
+}
+.joinBtn{
+    text-align: center;
+    margin-top: 80px;
+    margin-left: 20px;
+}
+.joinBtn>input{
+    width: 300px;
+    height: 40px;
+    margin: 0 auto;
+    background-color: rgb(51,51,51);
+    color: #fff;
+    border: none;
+    transition: 0.5s;
+}
+
+
