@@ -222,161 +222,60 @@ public class MarketController {
 	   }
 
 	// 마켓 상품 리스트 페이지 카테고리(전체 뺀 나머지) 000
-	   @RequestMapping(value = "/selectTag")
-	   public String selectTag(String category, int reqPage, Model model) {
-	      HashMap<String, Object> map = productService.selectTag(category, reqPage);
-	      
-	      model.addAttribute("list", map.get("list"));
-	      model.addAttribute("reqPage", reqPage);
-	      model.addAttribute("category", category);
-	      model.addAttribute("pageNavi", map.get("pageNavi"));
-	      model.addAttribute("total", map.get("total"));
-	      model.addAttribute("pageNo", map.get("pageNo"));
-	      
-	   
-	      return "/market/marketListFrm";
-	   }
-	   
-	   
-	   // 마켓 상품 상세 페이지 (리뷰 & qna 목록, 모달)
-	   @RequestMapping(value = "/marketDetailView", method = RequestMethod.GET)
-	   public String marketDetailView(Integer prdNo, Model model, String bookmarkId, 
-	         @RequestParam("rnum") int rnum, @RequestParam("qnum") int qnum) throws Exception {
-	      logger.info("마켓 상세");
-	      HashMap<String, Object> map = productService.selectOnePrd(prdNo, bookmarkId);
-	      model.addAttribute("prd", map.get("prd"));
+	@RequestMapping(value = "/selectTag")
+	public String selectTag(String category, int reqPage, Model model) {
+		HashMap<String, Object> map = productService.selectTag(category, reqPage);
 
-	      // 해당상품의 리뷰 갯수, qna 갯수
-	      int reviewcount = reviewService.reviewCount(prdNo);
-	      int qnacount = qnaService.qnaCount(prdNo);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("category", category);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
 
-	      // 한 페이지에 출력할 게시물 갯수
-	      int postNN = 5;
+		return "/market/marketListFrm";
+	}
 
-	      int postNum = 5 * rnum;
-	      int qnapostNum = 5 * qnum;
+	// 마켓 상품 상세 페이지 (리뷰 & qna 목록, 모달)
+	@RequestMapping(value = "/marketDetailView", method = RequestMethod.GET)
+	public String marketDetailView(Integer prdNo, Model model, @RequestParam("rnum") int rnum,
+			@RequestParam("qnum") int qnum) throws Exception {
+		logger.info("마켓 상세");
+		HashMap<String, Object> map = productService.selectOnePrd(prdNo);
+		model.addAttribute("prd", map.get("prd"));
 
-	      // 하단 페이징 번호 ([ 게시물 총 갯수 ÷ 한 페이지에 출력할 갯수 ]의 올림)
-	      int reviewpageNum = (int) Math.ceil((double) reviewcount / postNN);
-	      int qnapageNum = (int) Math.ceil((double) qnacount / postNN);
+		// 해당상품의 리뷰 갯수, qna 갯수
+		int reviewcount = reviewService.reviewCount(prdNo);
+		int qnacount = qnaService.qnaCount(prdNo);
 
-	      // 출력할 게시물
-	      int displayPost = (rnum - 1) * postNN;
-	      int qnadisplayPost = (qnum - 1) * postNN;
-	      
-	      
-	      model.addAttribute("reviewcount", reviewcount);
-	      model.addAttribute("reviewpageNum", reviewpageNum);
-	      model.addAttribute("qnapageNum", qnapageNum);
+		// 한 페이지에 출력할 게시물 갯수
+		int postNN = 5;
 
-	      List<MarketReviewVO> reviewlist = reviewService.reviewList(prdNo, displayPost, postNum);
-	      model.addAttribute("reviewlist", reviewlist);
-	      
-	      List<MarketQnaVO> qnalist = qnaService.qnaList(prdNo, qnadisplayPost, qnapostNum);
-	      model.addAttribute("qnalist", qnalist);
-	      
-	      //qnaService.qnarCount(prdQnano);
+		int postNum = 5 * rnum;
+		int qnapostNum = 5 * qnum;
 
-	      return "/market/marketDetailView";
-	   }
-	   
-	   // 리뷰 작성
-	   @RequestMapping(value = "/market/reviewInsert", method = RequestMethod.POST)
-	   public String reviewInsert(MarketReviewVO marketreviewVO, Model model, int prdNo, String bookmarkId, HttpServletRequest request) throws Exception {
-	      logger.info("리뷰 작성");
-	      System.out.println(prdNo);
-	      System.out.println(bookmarkId);
-	      int result = reviewService.reviewInsert(marketreviewVO);
-	      //reviewService.reviewInsert(marketreviewVO);
-	       //return "redirect:marketDetailView?regPage=1";
+		// 하단 페이징 번호 ([ 게시물 총 갯수 ÷ 한 페이지에 출력할 갯수 ]의 올림)
+		int reviewpageNum = (int) Math.ceil((double) reviewcount / postNN);
+		int qnapageNum = (int) Math.ceil((double) qnacount / postNN);
 
-	      if(result > 0) {
-	         return "redirect:/market/marketDetailView?reqPage=1&prdNo="+prdNo+"&num=1";
-	      }
-	      return "redirect:/market/marketDetailView?reqPage=1&prdNo="+prdNo+"&num=1";
-	   }
+		// 출력할 게시물
+		int displayPost = (rnum - 1) * postNN;
+		int qnadisplayPost = (qnum - 1) * postNN;
 
-	   // 리뷰 상세
-	   @RequestMapping(value = "/market/reviewDetail", method = RequestMethod.GET)
-	   public String reivewDetail(MarketReviewVO marketReviewVO, Model model, int prdReviewno) throws Exception {
-	      logger.info("리뷰 상세조회");
-	      reviewService.reviewDetail(marketReviewVO.getPrdReviewno());
-	      model.addAttribute("reviewdetail", reviewService.reviewDetail(marketReviewVO.getPrdReviewno()));
-	      return "/market/reviewDetail";
-	   }
+		model.addAttribute("reviewcount", reviewcount);
+		model.addAttribute("reviewpageNum", reviewpageNum);
+		model.addAttribute("qnapageNum", qnapageNum);
 
-	   // 리뷰 수정
-	   @RequestMapping(value = "/market/reviewUpdate", method = RequestMethod.POST)
-	   public String reviewUpdate(MarketReviewVO marketReviewVO, int prdNo) throws Exception {
-	      logger.info("리뷰 수정");
-	      reviewService.reviewUpdate(marketReviewVO);
-	      return "redirect:/marketDetailView?reqPage=1&prdNo=" + prdNo + "&num=1";
-	   }
+		List<MarketReviewVO> reviewlist = reviewService.reviewList(prdNo, displayPost, postNum);
+		model.addAttribute("reviewlist", reviewlist);
 
-	   // 리뷰 삭제
-	   @RequestMapping(value = "/market/reviewDelete")
-	   public String reviewDelete(MarketReviewVO marketReviewVO, int prdNo) throws Exception {
-	      logger.info("리뷰 삭제");
-	      reviewService.reviewDelete(marketReviewVO.getPrdReviewno());
-	      return "redirect:/marketDetailView?reqPage=1&prdNo=" + prdNo + "&num=1";
-	   }
+		List<MarketQnaVO> qnalist = qnaService.qnaList(prdNo, qnadisplayPost, qnapostNum);
+		/* qnalist += qnaService.qnarCount(prdQnano); */
+		model.addAttribute("qnalist", qnalist);
 
+		
 
-	// QnA 상세 & 댓글 상세
-	   @RequestMapping(value = "/market/qnaDetail", method = RequestMethod.GET)
-	   public String qnaDetail(MarketQnaVO marketQnaVO, Model model, int prdQnano) throws Exception {
-	      logger.info("리뷰 상세조회");
-	      qnaService.qnaDetail(marketQnaVO.getPrdQnano());
-	      model.addAttribute("qnadetail", qnaService.qnaDetail(marketQnaVO.getPrdQnano()));
-	      
-	      List<MarketQnaReplyVO> qnareply = null;
-	      qnareply = qnaService.qnarList(prdQnano);
-	      model.addAttribute("qnareply", qnareply);
-	      
-	      return "/market/qnaDetail";
-	   }
-	   
-	   // QnA 작성
-	   @RequestMapping(value = "/market/qnaInsert", method = RequestMethod.POST)
-	   public String qnaInsert(MarketQnaVO marketqnaVO) throws Exception {
-	      logger.info("QnA 작성");
-	      qnaService.qnaInsert(marketqnaVO);
-	      return "redirect:/marketListFrm?reqPage=1";
-	   }
+		return "/market/marketDetailView";
+	}
 
-	   // QnA 수정
-	   @RequestMapping(value = "/market/qnaUpdate", method = RequestMethod.POST)
-	   public String qnaUpdate(MarketQnaVO marketqnaVO, int prdNo) throws Exception {
-	      logger.info("QnA 수정");
-	      qnaService.qnaUpdate(marketqnaVO);
-	      return "redirect:/marketDetailView?reqPage=1&prdNo="+prdNo+"&num=1";
-	   }
-
-	   // QnA 삭제
-	   @RequestMapping(value = "/market/qnaDelete")
-	   public String qnaDelete(MarketQnaVO marketqnaVO, int prdNo) throws Exception {
-	      logger.info("QnA 삭제");
-	      qnaService.qnaDelete(marketqnaVO.getPrdQnano());
-	      return "redirect:/marketDetailView?reqPage=1&prdNo=" + prdNo + "&num=1";
-	   }
-
-	// QnA 리플 작성
-	   @RequestMapping(value = "/market/qnareply", method = RequestMethod.POST)
-	   public String qnarInsert(MarketQnaReplyVO marketQnaReplyVO) throws Exception {
-	      logger.info("reply 입력" + marketQnaReplyVO);
-	      qnaService.qnarInsert(marketQnaReplyVO);
-
-	      return "redirect:/market/qnaDetail?prdQnano=" + marketQnaReplyVO.getPrdQnano();
-	   }
-
-	   // QnA 리플 삭제
-	   @RequestMapping(value = "/market/qnareplyDelete", method = RequestMethod.GET)
-	   public String replyDelete(MarketQnaReplyVO marketQnaReplyVO, int prdQnarno) throws Exception {
-	      logger.info("qna reply delete" + prdQnarno);
-
-	      qnaService.qnarDelete(marketQnaReplyVO.getPrdQnarno());
-
-	      return "redirect:/market/qnaDetail?prdQnano=";
-	   }
-	   
 }

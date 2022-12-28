@@ -1,6 +1,5 @@
 package com.kh.myapp.market.model.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.myapp.market.model.vo.MarketQnaReplyVO;
 import com.kh.myapp.market.model.vo.MarketQnaVO;
+
 
 @Repository
 public class MarketQnaDAO {
@@ -23,7 +23,7 @@ public class MarketQnaDAO {
 		return sqlSession.selectOne("marketMapper.qnaCount", prdNo);
 	}
 
-	// qna 게시물 목록+페이징
+	//qna 게시물 목록+페이징
 	public List<MarketQnaVO> qnaList(int prdNo, int qnadisplayPost, int qnapostNum) throws Exception {
 
 		HashMap data = new HashMap();
@@ -35,18 +35,9 @@ public class MarketQnaDAO {
 		return sqlSession.selectList("marketMapper.qnaList", data);
 	}
 
-	public String prdQnaWrite(int regPage) throws Exception {
-		String select = sqlSession.selectOne("marketMapper.select");
-		return select;
-	}
-
-	public ArrayList<MarketQnaVO> qnaList(int prdNo) {
-		List<MarketQnaVO> qnaList = sqlSession.selectList("marketMapper.qnaList");
-		return (ArrayList<MarketQnaVO>) qnaList;
-	}
-
-	public void qnaInsert(MarketQnaVO marketqnaVO) throws Exception {
-		sqlSession.insert("marketMapper.qnaInsert", marketqnaVO);
+	public int qnaInsert(MarketQnaVO marketqnaVO) throws Exception {
+		int result = sqlSession.insert("marketMapper.qnaInsert", marketqnaVO);
+		return result;
 	}
 
 	public MarketQnaVO qnaDetail(int prdQnano) throws Exception {
@@ -80,9 +71,12 @@ public class MarketQnaDAO {
 	public void qnarDelete(int prdQnarno) throws Exception {
 		sqlSession.delete("marketMapper.qnareplyDelete", prdQnarno);
 	}
-
+	
 	// QNA 댓글 개수
-	public void qnarCount(int prdQnano) throws Exception {
+	public void qnarCount(int prdQnano) throws Exception{
 		sqlSession.update("marketMapper.qnareplyCount", prdQnano);
+		System.out.println("prdqnano dao"+prdQnano);
 	}
+	
+   
 }

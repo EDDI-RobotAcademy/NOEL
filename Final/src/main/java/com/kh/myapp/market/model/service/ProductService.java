@@ -71,7 +71,7 @@ public class ProductService {
 	}
 
 	//마켓에서 하나의 상품을 눌렀을 떄
-	   public HashMap<String, Object> selectOnePrd (int prdNo, String bookmarkId){
+	   public HashMap<String, Object> selectOnePrd (int prdNo){
 	      HashMap<String, Object> map = new HashMap<String, Object>();
 	      ProductVO vo = dao.selectOnePrd(prdNo);
 	      map.put("prd", vo);

@@ -21,8 +21,6 @@
       padding-right: 40px;
       width:1000px;   
       margin:0 auto;
-     
-      
    }
    
    .qnaDetail_btn{
@@ -35,9 +33,7 @@
       padding-right: 40px;
       width:1000px;   
       margin:0 auto;
-      
    }
-
 
 </style>
 </head>
@@ -59,8 +55,13 @@
                </tr>   
                <tr>
                   <td>
-                     <textarea name="prdQnacontent" class="form-control" id="message-text"
-                       style="height:10em; width:840px; resize:none;" autofocus>${qnadetail.prdQnacontent}</textarea>
+                  	<c:choose>
+                  	<c:when test=""></c:when>
+                  		<c:otherwise>
+                     	<textarea name="prdQnacontent" class="form-control" id="message-text"
+                       	style="height:10em; width:840px; resize:none;" autofocus>${qnadetail.prdQnacontent}</textarea>
+                  		</c:otherwise>
+                  	</c:choose>
                   </td>
                </tr>
             </tbody>
@@ -77,43 +78,51 @@
     
    
    
-<!-- Q&A 댓글 시작 -->   
-   <div class="qna-reply-wrap">
-      <hr>
-      <ul>
-         <c:forEach items="${qnareply}" var="qnareply">
-            <li>
-               <div>
-                  <p><b>${qnareply.writer}</b> / <fmt:formatDate value="${qnareply.prdQnarregdate}" pattern="yyyy-MM-dd"/></p>
-                  <p>${qnareply.prdQnarcontent}</p>
-                  <p>
-                     <a href="">수정</a> / <a href="/market/qnareplyDelete?prdQnarno=${qnareply.prdQnarno}" 
-                                                   onclick="return confirm('댓글을 삭제하시겠습니까?');">삭제</a>
-                  </p>
-                  <br>
-               </div>
-            </li>
-         </c:forEach>
-      </ul>
-
-      <div>
-         <form name="qnaReplyForm" method="post" action="/market/qnareply">
-            <hr>
-            <p>
-               <label>댓글 작성자 : </label> <input type="text" name="writer"></input>
-            </p>
-            <p>
-               <textarea rows="5" cols="50" name="prdQnarcontent" style="height:10em; width:840px; resize:none;" placeholder=" 댓글을 남겨주세요."
-                  title="댓글을 입력해주세요" class="chk1 form-control"></textarea>
-            </p>
-            <p>
-               <input type="hidden" name="prdQnano" value="${qnadetail.prdQnano}">
-               <button type="submit" class="replysave btn btn-brand">댓글 작성</button>
-            </p>
-         </form>
-      </div>
-   </div>
-<!-- Q&A 댓글 끝 -->    
+	<!-- Q&A 댓글 시작 -->
+	<div class="qna-reply-wrap">
+		<hr>
+		<ul>
+			<c:forEach items="${qnareply}" var="qnareply">
+				<li>
+					<div>
+						<p>
+							<b>${qnareply.writer}</b> /
+							<fmt:formatDate value="${qnareply.prdQnarregdate}"
+								pattern="yyyy-MM-dd" />
+						</p>
+						<p>${qnareply.prdQnarcontent}</p>
+						<p>
+							<a href="">수정</a> / 
+							<a href="/market/qnareplyDelete?prdQnarno=${qnareply.prdQnarno}"
+							   onclick="return confirm('댓글을 삭제하시겠습니까?');">삭제</a>
+						</p>
+						<br>
+					</div>
+				</li>
+			</c:forEach>
+		</ul>
+		<div>
+			<form name="qnaReplyForm" method="post" action="/market/qnareply">
+				<hr>
+				<p>
+					<label>댓글 작성자 : </label> <input type="text" name="writer" value="${sessionScope.m.userId}"
+												readonly="readonly"></input>
+				</p>
+				<p>
+					<textarea rows="5" cols="50" name="prdQnarcontent"
+						style="height: 10em; width: 840px; resize: none;"
+						placeholder=" 댓글을 남겨주세요." title="댓글을 입력해주세요"
+						class="chk1 form-control"></textarea>
+				</p>
+				<p>
+					<input type="hidden" name="prdQnano" value="${qnadetail.prdQnano}">
+					<button type="submit" class="replysave btn btn-brand">댓글
+						작성</button>
+				</p>
+			</form>
+		</div>
+	</div>
+	<!-- Q&A 댓글 끝 -->    
    
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />

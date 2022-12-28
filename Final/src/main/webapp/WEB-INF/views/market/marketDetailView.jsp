@@ -120,39 +120,46 @@
 		</div>
 	</div>
 	<!-- 리뷰 목록 -->
-   <div class="review-wrap" id="review-wrap">
-      <div class="review-title">
-         <div><b>구매평</b></div><br>
-            <button type="button" class="btn btn-brand" data-bs-toggle="modal" data-bs-target="#modal-review">구매평 작성</button>
-      </div>
-      <section>
-         <table class="review-list">
-            <tbody>
-               <c:forEach items="${reviewlist}" var="reviewlist">
-                  <input type="hidden" name="prdNo" value="${reviewlist.prdNo}">
-                  <tr height="80px">
-                     <td width="80%">
-                        <div style="color: rgb(255, 83, 86); float: center;">
-                           <c:forEach begin="1" step="1" end="${reviewlist.rating}"
-                              varStatus="i">♥</c:forEach>
-                        </div> 
-                        <a href="/market/reviewDetail?prdReviewno=${reviewlist.prdReviewno}">
-                        <c:out value="${reviewlist.prdReviewcontent}" />
-                        </a>
-                     </td>
-                     <td width="20%">
-                        <c:out value="${reviewlist.userId}" /><br>
-                        <fmt:formatDate value="${reviewlist.prdReviewregdate}"
-                           pattern="yyyy-MM-dd" />
-                     </td>
-                  </tr>
-               </c:forEach>
-            </tbody>
-         </table>
-      </section>
-   </div>
-   
-   <div align="center"> <!-- 리뷰 목록 페이지 번호 -->
+	<div class="review-wrap" id="review-wrap">
+		<div class="review-title">
+			<div>
+				<b>구매평</b>
+			</div>
+			<br>
+			<button type="button" class="btn btn-brand" data-bs-toggle="modal"
+				data-bs-target="#modal-review">구매평 작성</button>
+		</div>
+		<section>
+			<table class="review-list">
+				<tbody>
+					<c:choose>
+						<c:when test="${empty reviewlist}"><p>" 등록된 구매평이 없습니다. "</p></c:when>
+						<c:otherwise>
+							<c:forEach items="${reviewlist}" var="reviewlist">
+								<input type="hidden" name="prdNo" value="${reviewlist.prdNo}">
+								<tr height="80px">
+									<td width="80%">
+										<div style="color: rgb(255, 83, 86); float: center;">
+											<c:forEach begin="1" step="1" end="${reviewlist.rating}"
+												varStatus="i">♥</c:forEach>
+										</div> <a
+										href="/market/reviewDetail?prdReviewno=${reviewlist.prdReviewno}">
+											<c:out value="${reviewlist.prdReviewcontent}" />
+									</a>
+									</td>
+									<td width="20%"><c:out value="${reviewlist.userId}" /><br>
+										<fmt:formatDate value="${reviewlist.prdReviewregdate}"
+											pattern="yyyy-MM-dd" /></td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</tbody>
+			</table>
+		</section>
+	</div>
+
+	<div align="center"> <!-- 리뷰 목록 페이지 번호 -->
       <c:forEach begin="1" end="${reviewpageNum}" var="rnum">
          <span> <a
             href="/marketDetailView?prdNo=${param.prdNo}&bookmarkId=mlolw2&rnum=${rnum}&qnum=1#review-wrap">
@@ -173,6 +180,7 @@
                <div class="modal-body mb-3">
                   <h4>상품은 어떠셨나요?</h4>
                   <fieldset>
+                     <input type="hidden" name="userId" value="${sessionScope.m.userId}">
                      <input type="hidden" name="prdNo" value="${prd.prdNo}">
                      <input type="radio" name="rating" value="5" id="rate1" checked>
                         <label for="rate1">♥</label>
@@ -202,6 +210,7 @@
    <%-- <c:if test="${user != null}"></c:if> //유저일때 모달창 오픈--%>
    <div class="qna-wrap" id="qna-wrap">
       <div class="qna-title">
+      	 <br><br><br>
          <div><b>QnA</b></div>
          구매하시려는 상품에 대한 궁금점이 있으면 문의주세요.<br><br>
             <c:choose>
@@ -212,41 +221,51 @@
 				</c:otherwise>
             </c:choose>
       </div>
-      <section>
-         <table class="qna-list">
-            <tbody>
-               <tr height="50">
-                  <th width="10%">상태</th><th width="60%">제목</th><th width="15%">작성자</th><th width="15%">등록일</th>
-               </tr>
-               <c:forEach items="${qnalist}" var="qnalist">
-                  <tr  height="50">
-                     <td>
-                        <c:choose>
-                           <c:when test="${qnalist.prdQnastatus == '1'}">
+		<section>
+			<table class="qna-list">
+				<tbody>
+					<c:choose>
+						<c:when test="${empty qnalist}">
+							<p>" 등록된 QNA가 없습니다. "</p>
+						</c:when>
+						<c:otherwise>
+							<tr height="50">
+								<th width="10%">상태</th>
+								<th width="60%">제목</th>
+								<th width="15%">작성자</th>
+								<th width="15%">등록일</th>
+							</tr>
+							<c:forEach items="${qnalist}" var="qnalist">
+								<tr height="50">
+									<td><c:choose>
+											<c:when test="${qnalist.prdQnastatus == '1'}">
                               답변대기
                            </c:when>
-                           <c:otherwise>
+											<c:otherwise>
                               답변완료
                            </c:otherwise>
-                        </c:choose>                              
-                     </td>
-                     <td>
-                     <a href="/market/qnaDetail?prdQnano=${qnalist.prdQnano}">
-                        <c:out value="${qnalist.prdQnacontent}" />
-                        <c:if test="${qnalist.prdQnareply ne 0}">
-                  <small><b>[&nbsp;<c:out value="${qnalist.prdQnareply}"/>&nbsp;]</b></small>
-                  </c:if>
-                     </a>
-                     </td>
-                     <td><c:out value="${qnalist.userId}"/></td>
-                     <td><fmt:formatDate value="${qnalist.prdQnaregdate}" pattern="yyyy-MM-dd"/></td>
-                  </tr>
-                   
-               </c:forEach>
-            </tbody>
-         </table>
-      </section>
-   </div>
+										</c:choose></td>
+									<td><a
+										href="/market/qnaDetail?prdQnano=${qnalist.prdQnano}"> <c:out
+												value="${qnalist.prdQnacontent}" /> <c:if
+												test="${qnalist.prdQnareply ne 0}">
+												<small><b>[&nbsp;<c:out
+															value="${qnalist.prdQnareply}" />&nbsp;]
+												</b></small>
+											</c:if>
+									</a></td>
+									<td><c:out value="${qnalist.userId}" /></td>
+									<td><fmt:formatDate value="${qnalist.prdQnaregdate}"
+											pattern="yyyy-MM-dd" /></td>
+								</tr>
+
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</tbody>
+			</table>
+		</section>
+	</div>
    <div align="center"><!-- qna 목록 페이지 번호 -->
       <c:forEach begin="1" end="${qnapageNum}" var="qnum">
          <span> <a
@@ -268,6 +287,7 @@
                      aria-label="Close"></button>
                </div>
                <div class="modal-body mb-3">
+               	  <input type="hidden" name="userId" value="${sessionScope.m.userId}">	
                   <input type="hidden" name="prdNo" value="${prd.prdNo}">
                   <label for="message-text" class="col-form-label">문의할 내용을 작성해주세요.</label>
                      <textarea name="prdQnacontent" class="chk2 form-control" id="message-text" title="내용을 입력하세요" 
