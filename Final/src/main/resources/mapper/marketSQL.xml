@@ -59,7 +59,7 @@
       'marketer1',
       #{rating},
       #{prdReviewcontent},
-      'user1'
+      #{userId}
       )
    </insert>
 
@@ -126,7 +126,7 @@
       #{prdNo},
       'marketer2',
       #{prdQnacontent},
-      'user2')
+      #{userId})
    </insert>
 
    <update id="qnaUpdate" parameterType="marketQnaVO">
