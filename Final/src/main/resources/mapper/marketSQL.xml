@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="marketMapper">
+
+   <!-- 리뷰 총개수 -->
+   <select id="reviewCount" parameterType="int" resultType="int">
+      select count(prd_review_no)
+      from noel_product_review
+      where prd_no = #{prdNo}
+   </select>
+
+   <!-- 리뷰 게시물 목록 + 페이징 -->
+   <select id="reviewList" parameterType="hashmap" resultType="marketReviewVO">
+      select
+         prd_review_no as prdReviewno,
+         prd_no as prdNo,
+         prd_review_content as prdReviewcontent,
+         rating,
+         user_id as userId,
+         prd_review_regdate as prdReviewregdate
+      from(
+             select
+                prd_review_no,
+                prd_no,
+                prd_review_content,
+                user_id,
+                rating,
+                prd_review_regdate,
+                row_number() over(order by prd_review_no desc) as rNum
+             from noel_product_review where prd_no = #{prdNo})
+         <![CDATA[where rNum > #{displayPost} and rNum <= #{postNum}]]>
+   </select>
+
+   <select id="reviewDetail" parameterType="int" resultType="marketReviewVO">
+      select
+         prd_review_no as prdReviewno,
+         prd_no as prdNo,
+         marketer_id as marketerId,
+         rating as rating,
+         prd_review_content as prdReviewcontent,
+         user_id as userId
+      from noel_product_review
+      where prd_review_no = #{prdReviewno}
+   </select>
+
+   <insert id="reviewInsert">
+      insert into noel_product_review(
+         prd_review_no,
+         prd_no,
+         marketer_id,
+         rating,
+         prd_review_content,
+         user_id)
+      values(
+               prd_review_seq.nextval,
+               #{prdNo},
+               'marketer1',
+               #{rating},
+               #{prdReviewcontent},
+               #{userId}
+            )
+   </insert>
+
+   <update id="reviewUpdate" parameterType="marketReviewVO">
+      update noel_product_review
+      set prd_review_content = #{prdReviewcontent}
+      where prd_review_no = #{prdReviewno}
+   </update>
+
+   <delete id="reviewDelete" parameterType="int">
+      delete
+      from noel_product_review
+      where prd_review_no = #{prdReviewno}
+   </delete>
+
+   <!-- qna 총개수 -->
+   <select id="qnaCount" parameterType="int" resultType="int">
+      select count(prd_qna_no)
+      from noel_product_qna
+      where prd_no = #{prdNo}
+   </select>
+
+   <!-- qna 게시물 목록 + 페이징 -->
+   <select id="qnaList" parameterType="hashmap" resultType="marketQnaVO">
+      select
+         prd_qna_no as prdQnano,
+         prd_no as prdNo,
+         prd_qna_content as prdQnacontent,
+         user_id as userId,
+         prd_qna_regdate as prdQnaregdate
+
+      from(
+             select
+                prd_qna_no,
+                prd_no,
+                prd_qna_content,
+                user_id,
+                prd_qna_regdate,
+                row_number() over(order by prd_qna_no desc) as rNum
+             from noel_product_qna where prd_no = #{prdNo})
+         <![CDATA[where rNum > #{qnadisplayPost} and rNum <= #{qnapostNum}]]>
+   </select>
+
+   <select id="qnaDetail" parameterType="int" resultType="marketQnaVO">
+      select
+         prd_qna_no as prdQnano,
+         prd_no as prdNo,
+         marketer_id as marketerId,
+         prd_qna_content as prdQnacontent,
+         user_id as userId
+      from noel_product_qna
+      where prd_qna_no = #{prdQnano}
+   </select>
+
+   <insert id="qnaInsert">
+      insert into noel_product_qna(
+         prd_qna_no,
+         prd_no,
+         marketer_id,
+         prd_qna_content,
+         user_id)
+      values(
+               prd_qna_seq.nextval,
+               #{prdNo},
+               'marketer2',
+               #{prdQnacontent},
+               #{userId})
+   </insert>
+
+   <update id="qnaUpdate" parameterType="marketQnaVO">
+      update noel_product_qna
+      set prd_qna_content = #{prdQnacontent}
+      where prd_qna_no = #{prdQnano}
+   </update>
+
+   <delete id="qnaDelete" parameterType="int">
+      delete
+      from noel_product_qna
+      where prd_qna_no = #{prdQnano}
+   </delete>
+
+   <!-- QNA 댓글 조회 -->
+   <select id="qnareplyList" parameterType="int" resultType="marketQnaReplyVO">
+      select
+         prd_qnar_no as prdQnarno,
+         prd_qna_no as prdQnano,
+         writer as writer,
+         prd_qnar_content as prdQnarcontent,
+         prd_qnar_regdate as prdQnarregdate
+      from noel_product_qnar
+      where prd_qna_no = #{prdQnano}
+
+   </select>
+
+   <!-- QNA 댓글 작성 -->
+   <insert id="qnareplyWrite" parameterType="marketQnaReplyVO">
+      insert into noel_product_qnar(
+         prd_qnar_no,
+         prd_qna_no,
+         writer,
+         prd_qnar_content)
+      values(
+               prd_qnar_seq.nextval,
+               #{prdQnano},
+               #{writer},
+               #{prdQnarcontent})
+   </insert>
+
+   <!-- QNA 댓글 조회 -->
+   <select id="qnareplyDetail" resultType="marketQnaReplyVO">
+      select
+         prd_qnar_no as prdQnarno,
+         prd_qna_no as prdQnano,
+         writer as writer,
+         prd_qnar_content as prdQnarcontent,
+         prd_qnar_regdate as prdQnarregdate
+      from noel_product_qnar
+      where prd_qnar_no = #{prdQnarno}
+   </select>
+
+   <!-- QNA 댓글 수정 -->
+   <update id="qnareplyModify" parameterType="marketQnaReplyVO">
+      update noel_product_qnar set
+         prdQnarcontent = #{prdQnarcontent}
+      where prdQnarno = #{prdQnarno}
+        and prdQnano = #{prdQnano}
+   </update>
+
+   <!-- QNA 댓글 삭제 -->
+   <delete id="qnareplyDelete" parameterType="int">
+      delete from noel_product_qnar
+      where prd_qnar_no = #{prdQnarno}
+   </delete>
+
+   <!-- QNA 댓글 개수 -->
+   <select id="qnareplyCount">
+      update noel_product_qna q
+      set q.prd_qna_reply = (
+         select count(*)
+         from noel_product_qnar
+         where prd_qna_no = #{prdQnano})
+      where q.prd_qna_no = #{prdQnano}
+   </select>
+
+</mapper>

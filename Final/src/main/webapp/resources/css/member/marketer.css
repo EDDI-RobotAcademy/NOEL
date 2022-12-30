@@ -1,0 +1,309 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&display=swap');
+*{
+	margin: 0;
+	padding: 0;
+	font-family: 'Gowun Dodum', sans-serif;
+}
+/*업주 마이페이지*/
+.content-wrap{
+	height: 1570px;
+	width: 1100px;
+	min-width: 850px;
+	margin: 35px auto;
+	padding: 0 20px;
+}
+.updateRsBtn{
+	float: right;
+	margin-right: 20px;
+	width: 50px;
+	height: 30px;
+	border-style: none;
+	background-color: rgb(51,51,51);
+	color: #fff;
+	transition: 0.5s;
+}
+
+.sidebar{
+	float: left;
+	width: 21.2%;
+	padding: 60px 0 400px;
+	border-right: 1px solid #eee;
+	border-top: 1px solid #eee;
+}
+.category{
+	display: block;
+	margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+li{
+	list-style-type: none;
+}
+.category>li div {
+	padding: 10px 0;
+}
+.category>li div a{
+	text-decoration: none;
+}
+
+.sidebar-2{
+	border-top: 1px solid #eee;
+}
+
+.content{
+	border-top: 1px solid #eee;
+	
+}
+
+/*업체 정보 수정*/
+.file-upload-default{
+    visibility: hidden;
+}
+.file-upload-browse{
+	height: 43px;
+}
+
+
+
+.time{
+    display: inline-block;
+    width: 396px;
+    font-weight: 400;
+    font-size: 20px;
+    text-align: center;
+}
+
+.form-group>.btnday {
+	display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 2.5;
+    border: 1px solid rgb(51, 51, 51);
+    color: #000;
+    z-index: 0;
+}
+.btn-check {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  pointer-events: none;
+}
+
+
+
+
+.submitBtn {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.submitBtn>button {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9375rem;
+  line-height: 1;
+  border-radius: 0.1875rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: #fff;
+  margin-right: 10px;
+  height: 40px;
+  width: 80px;
+  border: 1px solid rgb(51, 51, 51);
+}
+
+.submitBtn>button:hover {
+  background-color: #fff;
+  color: rgb(51, 51, 51);
+
+}
+.submitBtn>.cancle {
+  border: 1px solid rgb(51, 51, 51);
+  background-color: #fff;
+  color: rgb(51, 51, 51);
+}
+
+.submitBtn>.cancle:hover {
+  background-color: rgb(51, 51, 51);
+  color: #fff;
+}
+.btn-check[disabled]+.btn,
+.btn-check:disabled+.btn {
+  pointer-events: none;
+  filter: none;
+  opacity: 0.65;
+}
+.btn-check+.btn:hover {
+  color: #fff;
+  background-color: rgb(51, 51, 51);
+  border-color: rgb(51, 51, 51);
+}
+.btn:focus-visible {
+  color: #fff;
+  background-color: rgb(51, 51, 51);
+  border-color: rgb(51, 51, 51);
+  outline: 0;
+}
+.btn-check:focus-visible+.btn {
+  border-color: var(--bs-btn-hover-border-color);
+  outline: 0;
+  box-shadow: var(--bs-btn-focus-box-shadow);
+}
+
+.btn-check:checked+.btn,
+:not(.btn-check)+.btn:active,
+.btn:first-child:active,
+.btn.active,
+.btn.show {
+  color: #fff;
+  background-color: rgb(51, 51, 51);
+  border-color: rgb(51, 51, 51);
+}
+
+.btn-check:checked+.btn:focus-visible,
+:not(.btn-check)+.btn:active:focus-visible,
+.btn:first-child:active:focus-visible,
+.btn.active:focus-visible,
+.btn.show:focus-visible {
+  box-shadow: var(--bs-btn-focus-box-shadow);
+}
+
+.btn:hover {
+  color: #fff;
+  background-color: rgb(51, 51, 51);
+  border-color: rgb(51, 51, 51);
+  outline: 0;
+}
+
+.btn-check+.btn:hover {
+  color: #fff;
+  background-color: rgb(51, 51, 51);
+  border-color: rgb(51, 51, 51);
+  outline: 0;
+}
+
+.btn-check:focus-visible+.btn {
+  border-color: rgb(51, 51, 51);
+  outline: 0;
+  box-shadow: var(--bs-btn-focus-box-shadow);
+}
+
+.btn-check:checked+.btn,
+:not(.btn-check)+.btn:active,
+.btn:first-child:active,
+.btn.active,
+.btn.show {
+  color: #fff;
+  background-color: rgb(51, 51, 51);
+  border-color: rgb(51, 51, 51);
+}
+
+.form-group>.btnday {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 2.5;
+  border: 1px solid rgb(51, 51, 51);
+  color: #000;
+  z-index: 0;
+  margin: 0px 0px 9px 20px;
+  padding: 5px 12px;
+}
+
+.btnday {
+  margin-left: 20px;
+}
+
+.form-group input {
+  border: 0;
+  border-bottom: 1px solid gainsboro;
+}
+
+#textarea {
+	height: 200px;
+	resize: none;
+}
+.btn-primary{
+	color: #fff;
+  	background-color: rgb(51, 51, 51);
+  	border-color: rgb(51, 51, 51);
+}
+
+.imgDelBtn{
+	border: 1px solid #999;
+  border-radius: 5px;
+  background-color: rgb(97, 76, 76);
+  color: #fff;
+  width: 100%;
+}
+
+/*검색창*/
+
+.searchName{
+	margin-right: 10px;
+	font-weight: bold;
+}
+.searchWrap-reserve{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.searchWrap-reserve>.search-area .searchBtn{
+	width: 69px;
+	border-style: none;
+	height: 31.2px;
+	background-color: rgb(51,51,51);
+	color: #fff;
+	transition: 0.5s;
+}
+/*========================page*/
+.page{
+	margin-top: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+/*업주 예약관리 페이지*/
+.th{
+	font-size: 14px;
+}
+
+#menuList{
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

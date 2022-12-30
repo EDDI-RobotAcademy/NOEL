@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="classWishList">
+    <select id="selectOneStoreBookmark" parameterType="map" resultType="com.kh.myapp.cl.model.vo.Wishlist">
+        select
+            wish_no as wishNo,
+            user_id as userId,
+            cl_no as classNo
+        from noel_class_wishlist where cl_no = #{classNo}
+    </select>
+
+    <insert id="insertClassWishlist" parameterType="com.kh.myapp.cl.model.vo.Wishlist">
+        insert into
+            noel_class_wishlist values(noel_class_wishlist_seq.nextval, #{userId}, #{classNo})
+    </insert>
+
+    <delete id="deleteClassWishlist" parameterType="com.kh.myapp.cl.model.vo.Wishlist">
+        delete from
+            noel_class_wishlist where cl_no = #{classNo} and user_Id = #{userId}
+    </delete>
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
+
+
+

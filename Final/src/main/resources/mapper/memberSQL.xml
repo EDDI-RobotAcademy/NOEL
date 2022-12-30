@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="member">
+	<select id="checkId" parameterType="string" resultType="string">
+		select user_id as userId
+		from noel_user
+		where user_id = #{checkId}
+	</select>
+	<insert id="insertMember" parameterType="m">
+		insert into noel_user(USER_ID, USER_PW, USER_NAME, USER_TEL, USER_BIRTH)
+		values(#{userId}, #{userPw}, #{userName}, #{userTel}, #{userBirth})
+	</insert>
+
+	<select id="selectOneMember" parameterType="m" resultType="m">
+		select
+			user_id as userId,
+			user_pw as userPw,
+			user_name as userName,
+			user_tel as userTel,
+			user_regdate as userRegdate,
+			user_birth as userBirth,
+			user_level as userLevel
+		from noel_user
+		where user_id=#{userId}
+	</select>
+
+	<!-- 비밀번호 수정  -->
+	<update id="updateMember" parameterType="m">
+		update noel_user
+		set user_pw = #{userPw}
+		where user_id=#{userId}
+	</update>
+
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteMember" parameterType="string">
+		delete noel_user
+      where user_id = #{userId}
+	</delete>
+
+	<!-- 일반회원 목록 조회 -->
+	<select id="memberList" parameterType="map" resultType="m">
+		select
+			user_id as userId,
+			user_name as userName,
+			user_tel as userTel,
+			user_regdate as userRegdate
+		from(select rownum as rnum, n.* from (select * from noel_user) n)
+		where rnum between #{start} and #{end}
+	</select>
+
+	<!-- 일반회원 목록 전체 개수-->
+	<select id="countAllMember" resultType="int">
+		select
+			count(*)
+		from noel_user
+	</select>
+
+	<!-- 회원강제 탈퇴 -->
+	<delete id="dropout" parameterType="m">
+		delete from noel_user
+		where user_id=#{userId}
+	</delete>
+
+	<select id="searchMemberId" parameterType="m" resultType="string">
+		select
+			user_Id as userId
+		from noel_user
+		where user_name = #{userName} and user_tel = #{userTel}
+	</select>
+
+	<select id="searchNormalPw" parameterType="m" resultType="string">
+		select
+			user_id as userId
+		from noel_user
+		where user_Id = #{userId} and user_tel = #{userTel}
+	</select>
+</mapper>

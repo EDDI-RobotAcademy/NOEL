@@ -1,0 +1,246 @@
+@import
+url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap')
+;
+
+@import
+url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&display=swap')
+;
+
+.cart-table,#priceTb {
+    width: 1300px;
+    margin: 0 auto;
+}
+#priceTd{
+    text-align: right;
+}
+
+#priceTb,.cart-table>table {
+    width: 1300px;
+    margin: 30px auto;
+    border-spacing: 0;
+}
+
+.cart-table>table tr {
+    height: 55px;
+}
+
+.cart-table>table tr>th {
+    border-top: 3px solid #eee;
+    border-bottom: 3px solid #eee;
+    padding: 10px 0;
+    font-size: 18px;
+    color: #ccc;
+    font-weight: 600;
+    width: 100px;
+    text-align: center;
+}
+
+.cart-table>table tr>th:first-child {
+    width: 700px;
+}
+
+.cart-table>table tr>td {
+    text-align: center;
+    border-top: 1px solid #ccc;
+    font-size: 16px;
+    font-weight: lighter;
+}
+
+.cart-table>table tr>td:nth-child(2)>img {
+    width: 150px;
+    height: 120px;
+    margin: 10px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+}
+
+.cart-table>table tr:last-child>td {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 20px;
+    font-size: 16px;
+    text-align: right;
+}
+
+.cart-table>table tr:last-child>td span {
+    font-weight: 900;
+    font-size: 24px;
+    color: rgb(172, 34, 34);
+}
+
+.cart-check {
+    display: none;
+}
+
+.cart-check+label {
+    cursor: pointer;
+    display: block;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #eee;
+    border-radius: 5px;
+    line-height: 30px;
+    margin-left: 10px;
+}
+
+.cart-check+label>i {
+    display: none;
+    color: #eee;
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.cart-check:checked+label {
+    background-color: #eee;
+}
+
+.cart-check:checked+label>i {
+    display: inline;
+    color: white;
+}
+
+.cart-quantity {
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    border: none;
+}
+
+.cart-quantity-down, .cart-quantity-up {
+    height: 20px;
+    width: 20px;
+    background-color: #fceca7;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cart-price {
+    border-right: 1px solid #eee;
+}
+
+.cart-checks-btn {
+    margin-bottom: 100px;
+}
+
+.cart-checks-btn>button {
+    border: 1px solid #dc3545;
+    background-color: white;
+    border-radius: 5px;
+    height: 30px;
+    width: 80px;
+    cursor: pointer;
+    color: #dc3545;
+}
+
+#allCheckbox {
+    display: none;
+}
+
+.allCheck, .deleteCheck {
+    font-size: 12px;
+}
+
+.cart-btn {
+    width: 1200px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.cart-btn>button {
+    display: inline-block;
+    height: 40px;
+    width: 150px;
+    border: 1px solid #dc3545;
+    background-color: #fff;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #dc3545;
+    cursor: pointer;
+}
+
+.cart-btn>button:hover {
+    background-color: #dc3545;
+    color: #fff;
+    border: 1px solid #dc3545;
+}
+.cart-checks-btn>button:hover {
+    background-color: #dc3545;
+    color: #fff;
+    border: 1px solid #dc3545;
+}
+
+
+
+#font {
+    font-family: 'Gowun Dodum', sans-serif;
+}
+
+#cart-option {
+    float: left;
+    margin: 10px;
+    width: 150px;
+    height: 60px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f5d575;
+    text-align: center;
+    line-height: 60px;
+}
+
+.cart-option {
+    margin-left: 380px;
+    margin-top: 50px;
+}
+
+.line {
+    float: left;
+    margin: 10px;
+    float: left;
+    width: 2px;
+    height: 60px;
+    border-left: 1px solid rgb(136, 136, 136);
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    position: relative;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    outline: none !important;
+    border: 2px solid #eee;
+    border-radius: 2px;
+    background: #fbfbfb;
+}
+
+input[type="checkbox"]::before {
+    content: "\2713";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    transform: scale(0) translate(-50%, -50%);
+    line-height: 1;
+}
+
+input[type="checkbox"]:hover {
+    border-color: #eee;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #eee;
+    border-color: #eee;
+    color: black;
+}
+
+input[type="checkbox"]:checked::before {
+    border-radius: 2px;
+    transform: scale(1) translate(-50%, -50%)
+}
+
+.cart-option {
+    width: 1300px;
+    background-color: #eee;
+    margin: 0 auto;
+}

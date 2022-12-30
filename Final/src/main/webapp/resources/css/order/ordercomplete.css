@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&display=swap');
+
+#cart-option{
+    float: left;
+    margin: 10px;
+    width: 150px;
+    height: 60px;
+    border: none;
+    border-radius: 5px;
+    background-color : #f5d575;
+    text-align: center;
+    line-height: 60px;
+}
+
+.cart-option{
+    margin-left: 380px;
+    margin-top: 50px;
+}
+.line{
+
+    float: left;
+    margin: 10px;
+    float: left;
+    width: 2px;
+    height: 60px;
+    border-left: 1px solid rgb(136, 136, 136);
+}
+
+.page-content{
+    margin-bottom: 100px;
+}
+
+.done{
+    padding-bottom: 100px;
+    text-align: center;
+    margin: 0 auto;
+}
+.done1{
+    margin: 0 auto;
+    width: 700px;
+    height: 250px;
+    border-radius: 10px;
+    /* background-color: #eee;
+    border : 0.5px solid #d15662; */
+    text-align: center;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 200px;
+}
+
+#order-msg{
+    padding-top: 40px;
+}
+#order-msg1{
+    font-size: 15px;
+}
+
+.back{
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 200px;
+}
+
+.back p{
+    font-size: 15px;
+}
+
+
+.back-main{
+    margin: 0 auto;
+    float: left;
+    width: 50px;
+    margin-right: 40px;
+    margin-left: 80px;
+}
+
+.back-mypage{
+    float: left;
+    margin: 0 auto;
+    float: left;
+    width: 100px;
+
+}

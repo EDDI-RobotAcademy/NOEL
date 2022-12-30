@@ -1,0 +1,22 @@
+@charset "UTF-8";
+#list-tb{
+    width: 900px;
+    margin: auto;
+    text-align: center;
+}
+#list-tb>table tr>th {
+    border-top: 3px solid #eee;
+    border-bottom: 3px solid #eee;
+    padding: 10px 0;
+    font-size: 18px;
+    color: #ccc;
+    font-weight: 600;
+    width: 100px;
+    text-align: center;
+}
+#list-tb>table tr>td {
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    font-weight: lighter;
+}
