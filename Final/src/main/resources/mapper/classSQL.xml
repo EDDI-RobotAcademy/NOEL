@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="class">
+
+    <select id="classList" parameterType="map" resultType="com.kh.myapp.cl.model.vo.Class">
+        SELECT *
+        from
+            (SELECT
+                 rownum as rnum,
+                 nc.cl_no       AS classno,
+                 nc.marketer_id AS marketerid,
+                 nc.cl_name     AS classname,
+                 nc.cl_price    AS classprice,
+                 nc.cl_content  AS classcontent,
+                 nc.cl_date     AS classdate,
+                 nc.cl_res_date AS classresdate,
+                 nc.cl_res_time AS classrestime,
+                 nc.cl_addr     AS classaddr,
+                 (
+                     SELECT
+                         img_path
+                     FROM
+                         noel_class_img ci
+                     WHERE
+                         ci.cl_no = nc.cl_no
+                 ) AS thumnail
+             FROM
+                 noel_class nc
+             ORDER BY
+                 classno ASC)
+        where rnum between #{start} and #{end}
+    </select>
+
+    <select id="selectOneClass" parameterType="_int" resultType="com.kh.myapp.cl.model.vo.Class">
+        select
+            cl_no as classNo,
+            marketer_id as marketerId,
+            cl_name as className,
+            cl_price as classPrice,
+            cl_content as classContent,
+            cl_date as classDate,
+            cl_res_date as classResDate,
+            cl_res_time as classResTime,
+            cl_addr as classAddr,
+            (select img_path from noel_class_img ci where ci.cl_no = nc.cl_no) as thumNail
+        from noel_class nc
+        where nc.cl_no = #{_parameter}
+
+    </select>
+    <!-- 리뷰리스트 -->
+    <select id="selectReviewList" parameterType="int" resultType="com.kh.myapp.cl.model.vo.Review">
+        select
+            cl_review_no as clReviewNo,
+            cl_no as clNo,
+            marketer_id as marketerId,
+            res_no as resNo,
+            cl_review_content as clReviewContent,
+            cl_review_img as clReviewImg,
+            cl_review_date as clReviewDate,
+            cl_review_rating as clReviewRating
+        from noel_class_review
+        where cl_review_no = #{_parameter}
+    </select>
+
+    <!-- 맛집 상세 > 메뉴 조회 -->
+    <select id="selectMenuList" parameterType="int" resultType="com.kh.myapp.cl.model.vo.Menu">
+        select
+            menu_no as menuNo,
+            cl_no as clNo,
+            menu_name as menuName,
+            menu_Content as menuPrice,
+            menu_img as menuImg
+        from noel_class_menu
+        where cl_no = #{_parameter}
+        order by cl_no DESC
+    </select>
+
+
+    <select id="countAllList" resultType="int">
+        select count(*)
+        from noel_class
+    </select>
+
+    <!-- 예약한 건 확인 -->
+    <select id="checkReserve" resultType="com.kh.myapp.cl.model.vo.Reserve" parameterType="com.kh.myapp.cl.model.vo.Reserve">
+        SELECT
+            book_no as bookNo,
+            cl_no as classNo,
+            book_name as bookName,
+            user_id as userId,
+            book_tel as bookTel,
+            coupon_no as couponNo,
+            book_date as bookDate,
+            book_time as bookTime
+        from noel_book
+        where cl_no = #{classNo}
+    </select>
+
+    <select id="ajaxCheckReserveTime" resultType="com.kh.myapp.cl.model.vo.Reserve" parameterType="map">
+        SELECT
+            book_time as bookTime
+        FROM noel_book
+        WHERE cl_No=#{classNo} AND book_Date=#{selectDate}
+        GROUP BY book_time
+    </select>
+
+
+    <!-- 예약하기 -->
+    <insert id="insertReserve" parameterType="com.kh.myapp.cl.model.vo.Reserve">
+        insert into noel_book
+        values(noel_book_seq.NEXTVAL, #{classNo}, #{bookName},  #{userId}, #{bookTel}, 1, #{bookDate}, #{bookTime}, #{bookNum}, #{impUid})
+    </insert>
+
+
+    <insert id="addClass" parameterType="Class">
+        insert into noel_class
+        values
+            (class_seq.nextval,
+             #{marketerId},
+             #{className},
+             #{classPrice},
+             #{classContent},
+             to_char(sysdate,'yyyy-mm-dd'),
+             #{classResDate},
+             #{classResTime},
+             #{classAddr},
+             #{closedDay},
+             #{maxNum}
+            )
+    </insert>
+
+    <!-- storeSQL 참고 -->
+    <select id="selectClassNo" resultType="_int">
+        select max (cl_no) as
+                   classNo
+        from noel_class
+    </select>
+
+    <!-- 시퀀스 만듦 -->
+    <insert id="insertImg" parameterType="ci">
+        insert into noel_class_img
+        values
+            (classimg_seq.nextval,
+             #{classNo},
+             #{imgPath}
+            )
+    </insert>
+
+</mapper>
