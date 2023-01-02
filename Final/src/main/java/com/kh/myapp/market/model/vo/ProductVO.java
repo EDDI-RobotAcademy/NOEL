@@ -17,9 +17,6 @@ public class ProductVO {
 	private String prdPrice;
 	private int prdStock;
 	private String prdNote;
-	private String prdTel;
-	private String prdAddr1;
-	private String prdAddr2;
 	private String prdContent;
 	private Date regDate;
 	private ArrayList<ProductImgVO> prdImgList;

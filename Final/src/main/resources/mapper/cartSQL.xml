@@ -19,6 +19,8 @@
             prd_no as prdNo,
             prd_name as prdName,
             prd_price as prdPrice
+           <!--  (select prd_Img_path from noel_product_img pi where pi.prd_no = np.prd_no) as prdthumNail
+        from noel_cart nc join noel_product np on nc.prd_no = np.prd_no -->
         from noel_cart join noel_product using(prd_no)
         where user_id = #{userId}
     </select>
@@ -32,6 +34,8 @@
             prd_no as prdNo,
             prd_name as prdName,
             prd_price as prdPrice
+            <!-- (select prd_Img_path from noel_product_img pi where pi.prd_no = np.prd_no) as prdthumNail
+        from noel_cart nc join noel_product np on nc.prd_no = np.prd_no -->
         from noel_cart join noel_product using(prd_no)
         where user_id = #{userId} and prd_no = #{prdNo}
     </select>
@@ -58,6 +62,8 @@
             cart_quan as cartQuan,
             prd_name as prdName,
             prd_price as prdPrice
+            <!-- (select prd_Img_path from noel_product_img pi where pi.prd_no = np.prd_no) as prdthumNail
+        from noel_cart nc join noel_product np on nc.prd_no = np.prd_no -->
         from noel_cart join noel_product using(prd_no)
         where user_id= #{_parameter}
     </select>
