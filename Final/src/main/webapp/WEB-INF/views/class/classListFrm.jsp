@@ -68,16 +68,17 @@
             <c:forEach items="${list}" var="s">
                 <div class="showList">
                     <c:choose>
+                    
                     <c:when test="${not empty sessionScope.m }">
-                    <a href="/classDetail?classNo=${s.classNo }&bookmarkId=mlolw2">
-                        </c:when>
+                    <a href="/classDetail?classNo=${s.classNo }&userId=${m.userId}">
+                    </c:when>
 
-                        <c:when test="${not empty sessionScope.o }">
-                        <a href="/classDetail?classNo=${s.classNo }&bookmarkId=mlolw2">
-                            </c:when>
+                        <c:when test="${not empty sessionScope.o}">
+                        <a href="/classDetail?classNo=${s.classNo }&userId='mlolw2'">
+                        </c:when>
                                 <c:otherwise>
-                                <a href="/classDetail?classNo=${s.classNo }&bookmarkId=mlolw2">
-                                    </c:otherwise>
+                                <a href="/classDetail?classNo=${s.classNo }">
+                                </c:otherwise>
                                 </c:choose>
                                 <div>
                                     <img src="resources/upload/class/${s.thumNail }">

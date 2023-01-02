@@ -158,7 +158,7 @@
 
 
 	<!-- 마켓 상품 카테고리 000 -->
-	<select id="selectTag" parameterType="map"	resultType="ProductVO">
+	<select id="selectTag" parameterType="map"	resultType="productVO">
 		select * from
 			(select row_number() over (order by rnum desc) as rnum1, rb.* from
 				(select rownum as rnum, b.* from

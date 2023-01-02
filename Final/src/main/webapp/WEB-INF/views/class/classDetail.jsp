@@ -114,57 +114,52 @@
             <c:choose>
                 <c:when test="${empty sbm}">
                     <c:choose>
-                        <c:when test="${bookmarkId == mlolw2}">
-                            <button name="reserveBtn" class="reserveBtn2" style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: rgb(51,51,51); color: white;
-                                 margin-top: 10px;">예약하기
-                            </button>
-                            <button  name="reserveBtn" id="wishlist"   style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: white; color: black;
-                                 margin-top: 10px; padding: 17.3px;"  onclick="addWishlist(this, ${s.classNo}, 'mlolw2')">
-                                <img  style = "width: 15px;" src="/resources/img/index/heart.svg">
-                            </button>
-                            <button  name="reserveBtn" id="wishlist1"   style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: white; color: black;
-                                 margin-top: 10px; padding: 17.3px; display: none;"  onclick="deleteWishlist(this, ${s.classNo}, 'mlolw2')">
-                                <img  style = "width: 15px;" src="/resources/img/index/heart-fill.svg">
+                        <c:when test="${empty sessionScope.m}">
+                            <button name="reserveBtn" class="loginBtn" style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: rgb(51,51,51); color: white;
+                                 margin-top: 10px;" onclick="loginCh()">예약하기
                             </button>
                         </c:when>
                         <c:otherwise>
+                        	<button name="reserveBtn" class="reserveBtn2" style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: rgb(51,51,51); color: white;
+                                 margin-top: 10px;">예약하기
+                            </button>
+                            <button  name="reserveBtn" id="wishlist"   style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: white; color: black;
+                                 margin-top: 10px; padding: 17.3px;"  onclick="addWishlist(this, ${s.classNo}, '${m.userId}')">
+                                <img  style = "width: 15px;" src="/resources/img/index/heart.svg">
+                            </button>
+                            <button  name="reserveBtn" id="wishlist1"   style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: white; color: black;
+                                 margin-top: 10px; padding: 17.3px; display: none;"  onclick="deleteWishlist(this, ${s.classNo}, '${m.userId}')">
+                                <img  style = "width: 15px;" src="/resources/img/index/heart-fill.svg">
+                           </button>
                         </c:otherwise>
                     </c:choose>
                 </c:when>
 
                 <c:otherwise>
                     <c:choose>
-                        <c:when test="${bookmarkId == mlolw2}">
+                        <c:when test="${!empty sessionScope.m}">
                             <button name="reserveBtn" class="reserveBtn2" style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: rgb(51,51,51); color: white;
                                  margin-top: 10px;">예약하기
                             </button>
                             <button  name="reserveBtn" id="wishlist1"   style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: white; color: black;
-                                 margin-top: 10px; padding: 17.3px;"  onclick="deleteWishlist(this, ${s.classNo}, 'mlolw2')">
+                                 margin-top: 10px; padding: 17.3px;"  onclick="deleteWishlist(this, ${s.classNo}, '${m.userId}')">
                                 <img  style = "width: 15px;" src="/resources/img/index/heart-fill.svg">
                             </button>
 
                             <button  name="reserveBtn" id="wishlist"   style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: white; color: black;
-                                 margin-top: 10px; padding: 17.3px; display: none;"   onclick="addWishlist(this, ${s.classNo}, 'mlolw2')">
+                                 margin-top: 10px; padding: 17.3px; display: none;"   onclick="addWishlist(this, ${s.classNo}, '${m.userId}')">
                                 <img  style = "width: 15px;" src="/resources/img/index/heart.svg">
                             </button>
                         </c:when>
+                        
                         <c:otherwise>
-                            <a href="#">
-                                <button id="loginBtn" style="font-family:Gowun Dodum; border-radius: 15px; width:550px; height:50px; background-color: rgb(51,51,51); color: white;
-                         margin-top: 10px;">로그인
-                                </button>
-                            </a>
+                        	<button name="reserveBtn" class="loginBtn" style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: rgb(51,51,51); color: white;
+                                 margin-top: 10px;" onclick="loginCh()">예약하기
+                            </button>    
                         </c:otherwise>
                     </c:choose>
                 </c:otherwise>
             </c:choose>
-
-
-
-
-
-
-
         </div>
     </div>
 </div>
@@ -280,7 +275,7 @@
                     </tr>
                 </table>
 
-                <input type="hidden" name="userId" value="mlolw2">
+                <input type="hidden" name="userId" value="${m.userId }">
                 <input type="hidden" name="classNo" value="${s.classNo}">
                 <input type="hidden" name="bookName" value="${s.className}">
                 <input type="hidden" name="bookDate" class="bookDate">
@@ -605,6 +600,17 @@
                         }
                     })
                 }
+                
+                var login = $("button[class='loginBtn']");
+                
+                function loginCh() {
+                    login.attr("data-bs-toggle", "modal");
+                    login.attr("data-bs-target", "#login-modal");
+                    login.attr("location.href", "login-modal");
+                    /* buy.attr("data-bs-toggle", "modal");
+                    buy.attr("data-bs-target", "#login-modal");
+                    buy.attr("location.href", "login-modal"); */
+                 }
 
             </script>
 
