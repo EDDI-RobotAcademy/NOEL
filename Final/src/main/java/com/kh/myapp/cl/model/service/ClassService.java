@@ -93,13 +93,13 @@ public class ClassService {
     }
 
 
-    public HashMap<String, Object> selectOneClass(int classNo, String bookmarkId) {
+    public HashMap<String, Object> selectOneClass(int classNo, String userId) {
         HashMap<String, Object> map = new HashMap<String, Object>();
         Class c = dao.selectOneClass(classNo);
 
         HashMap<String, Object> bookMap = new HashMap<String, Object>();
         bookMap.put("classNo", classNo);
-        bookMap.put("bookmarkId", bookmarkId);
+        bookMap.put("userId", userId);
 
         Wishlist sbm = dao.selectOneStoreBookmark(bookMap);
         map.put("s", c);

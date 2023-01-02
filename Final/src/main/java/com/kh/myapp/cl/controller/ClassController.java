@@ -59,8 +59,9 @@ public class ClassController {
 
     // 맛집 상세 보기
     @RequestMapping(value = "/classDetail")
-    public String classDetail(int classNo, String bookmarkId, Model model) {
-        HashMap<String, Object> map = service.selectOneClass(classNo, bookmarkId);
+    public String classDetail(int classNo, String userId, Model model) {
+    	
+        HashMap<String, Object> map = service.selectOneClass(classNo, userId);
         model.addAttribute("s", map.get("s"));
         model.addAttribute("sbm", map.get("sbm"));
 
