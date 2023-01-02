@@ -9,10 +9,8 @@
   <title>bonjour noël</title>
   <link rel="stylesheet" href="/resources/css/order/order.css">
   <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-  <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"
-          type="text/javascript"></script>
-  <script
-          src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
@@ -34,8 +32,8 @@
     <div class="cart-table order-info">
       <table>
         <tr id="font">
-          <th style="width: 20%;" class="cart-product-title">상품명</th>
           <th style="width: 20%;">이미지</th>
+          <th style="width: 20%;">상품명</th>
           <th style="width: 15%;">가격</th>
           <th style="width: 10%;">수량</th>
           <th style="width: 15%;">배송비</th>
@@ -46,14 +44,14 @@
 
         <tr class="showCartList" id="font">
 
-          <td style="text-align: center">${Order.prdName }</td>
-          <td class="pImg" style="text-align: center">이미지 불러오기 <%-- <img src="/resources/upload/market/${Order.prd }"> --%></td>
+          <td class="pImg" style="text-align: center"><img src="/resources/upload/product/${Order.prdthumNail }"></td>
+          <td class="pName" style="text-align: center">${Order.prdName }</td>
           <td class="pPrice" style="text-align: center"><fmt:formatNumber
-                  value="${Order.prdPrice}" pattern="#,###" /></td>
+                  value="${Order.prdPrice}" pattern="#,###" /> 원</td>
           <td style="text-align: center">${Order.cartQuan }</td>
           <td class="shipping">무료</td>
           <td style="text-align: center;" class="cartTotalPrice"><fmt:formatNumber
-                  value="${Order.prdPrice*Order.cartQuan }" pattern="#,###" /></td>
+                  value="${Order.prdPrice*Order.cartQuan }" pattern="#,###" /> 원</td>
         </tr>
         <tr>
           <td colspan="4"></td>
@@ -114,8 +112,7 @@
       <div class="order-box">
         <label for="shippingPhone" class="order-label">전화번호</label>
         <input type="text" name="shippingPhone" id="shippingPhone"
-               class="order-input medium view-order-info" placeholder="숫자만 입력
-                  해주세요" required>
+               class="order-input medium view-order-info" placeholder="숫자만 입력해주세요" required>
         <input type="text" class="order-input medium hidden-order-info"
                value="${sessionScope.m.userTel }" style="display: none;">
         <span class="comment"></span>

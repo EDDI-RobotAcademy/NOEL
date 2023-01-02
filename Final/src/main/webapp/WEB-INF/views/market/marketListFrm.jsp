@@ -31,7 +31,7 @@
     <!-- 마켓 리스트 생성 -->
     <div class="prdList-list">
         <div class="prdList-list-content">
-            <c:forEach items="${list }" var="s">
+            <c:forEach items="${list}" var="s">
                 <div class="showList">
                     <c:choose>
                     <c:when test="${not empty sessionScope.m }">
@@ -46,7 +46,7 @@
                                 </c:otherwise>
                                 </c:choose>
                                 <div>
-                                    <img src="/resources/upload/prd/${s.prdthumNail }" width="300px"
+                                    <img src="resources/upload/product/${s.prdthumNail }" width="300px"
                                          height="300px">
                                 </div>
                                 <div id="font">

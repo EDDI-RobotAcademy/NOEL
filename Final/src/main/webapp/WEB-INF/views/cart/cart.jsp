@@ -47,7 +47,7 @@
                             <input type="hidden" name="cartNo" value="${Cart.cartNo }" >
                             <input class="pNo" type="hidden" name="prdNo" value="${Cart.prdNo }">
                         </td>
-                        <td class="pImg" style="text-align: center">이미지 불러오기<%-- <img src="/resources/upload/prd_add/${Cart.PImg }" > --%></td>
+                        <td class="pImg" style="text-align: center"><img src="/resources/upload/product/${Cart.prdthumNail }" ></td>
                         <td style="text-align: center">
                             <input type="hidden" name="prdName" value="${Cart.prdName }">
                                 ${Cart.prdName }
@@ -69,21 +69,18 @@
         </div>
     </div>
 
-    <table id="priceTb">
+    <table id="priceTb" >
         <tr>
             <td>
                 <div class="cart-checks-btn">
-                    <button type="button" class="deleteCheck" id="font">선택   삭제</button>
+                    <button type="button" class="deleteCheck" id="font">선택 삭제</button>
                 </div>
             </td>
-            <td colspan="5" > </td>
-            <td style="font-weight: 600;text-align: right;">
-                <div  id="priceTd">
-                    <input type="hidden" style="border: none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
-                    <p style="float: left; margin-right: 5px;">총 합계 :</p>
-                    <p id="font" class="lastPrice" style="float: left;"></p>
-                    <p id="font" style="float: left;">원</p>
-                </div>
+            <td colspan="6"> 
+            	<input type="hidden" style="border: none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
+            </td>
+            <td id="Last">
+            	총 합계 : <span id="font" class="lastPrice"></span>원
             </td>
         </tr>
     </table>

@@ -30,8 +30,8 @@
 }
 
 .cart-table > table tr > td:first-child > img {
-    width: 250px;
-    height: 200px;
+    width: 150px;
+    height: 120px;
     margin: 10px;
     border: 1px solid #eee;
 }
@@ -220,7 +220,7 @@ input[name=payType]:checked+label {
     width: 150px;
     height: 120px;
     border-radius: 5px;
-    margin: 5px;
+    margin: 10px;
 }
 #cart-option{
     float: left;

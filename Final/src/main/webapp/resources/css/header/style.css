@@ -484,7 +484,7 @@ footer {
 
 footer .footer-top {
     padding-top: 80px;
-    padding-bottom: 40px;
+    /* padding-bottom: 40px; */
 }
 
 .footer-bottom {
