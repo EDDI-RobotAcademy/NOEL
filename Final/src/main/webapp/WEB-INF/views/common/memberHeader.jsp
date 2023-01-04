@@ -15,7 +15,7 @@
                     <!-- <a href="/orderList.do?reqPage=1">주문 내역</a> -->
                 </div>
                 <div>
-                    <a href="/myWishList">위시리스트</a>
+                    <a href="/myPrdWishList?reqPage=1">위시리스트</a>
                 </div>
                 <div>
                     <a href="#">Q&A</a>

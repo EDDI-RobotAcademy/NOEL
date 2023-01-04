@@ -7,10 +7,9 @@
 <head>
    <meta charset="UTF-8">
    <title>bonjour noël</title>
-   <link rel="stylesheet"
-         href="/resources/css/product/marketDetailView.css">
-   <script
-           src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+   <link rel="stylesheet" href="/resources/css/product/marketDetailView.css">
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+      
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 
@@ -63,8 +62,7 @@
          <form action="/insertCart">
             <c:choose>
                <c:when test="${empty sessionScope.m}">
-                  <button type="button" class="loginBtn" id="cartBtn"
-                          onclick="loginCh()">장바구니</button>
+                  <button type="button" class="loginBtn" id="cartBtn" onclick="loginCh()">장바구니</button>
                </c:when>
                <c:otherwise>
                   <button type="submit" class="cartBtn">장바구니</button>
@@ -92,17 +90,39 @@
             <input type="hidden" name="pName" value="${prd.prdName}">
             <input type="hidden" name="cartQuan" class="count">
             <input type="hidden" name="userId" value="${sessionScope.m.userId }">
-         </form>
-         <c:choose>
-            <c:when test="${empty sessionScope.m}">
-               <button type="button" class="loginBtn" id="cartBtn"
-                       onclick="loginCh()">위시리스트</button>
-            </c:when>
-            <c:otherwise>
-               <button type="button" class="wishBtn">위시리스트</button>
-            </c:otherwise>
-         </c:choose>
-      </div>
+        </form>
+			<c:choose>
+				<c:when test="${empty sessionScope.m.userId}">
+					<button type="button" class="loginBtn" onclick="loginCh()">
+						<img style="width: 15px;" src="/resources/img/index/heart.svg">
+					</button>
+				</c:when>
+				<c:otherwise>
+					<c:choose>
+						<c:when test="${param.bookmarkId == marketwish.userId}">
+							<button type="button" name="reserveBtn" id="wishlist" style="display: none; "
+								onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+								<img style="width: 15px;" src="/resources/img/index/heart.svg">
+							</button>
+							<button type="button" name="reserveBtn" id="wishlist1" 
+								onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+								<img style="width: 15px;" src="/resources/img/index/heart-fill.svg">
+							</button>
+						</c:when>
+						<c:otherwise>
+							<button type="button" name="reserveBtn" id="wishlist"
+									onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+								<img style="width: 15px;" src="/resources/img/index/heart.svg">
+							</button>
+							<button type="button" name="reserveBtn" id="wishlist1" style="display: none;"
+								onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+								<img style="width: 15px;" src="/resources/img/index/heart-fill.svg">
+							</button>
+						</c:otherwise>
+					</c:choose>
+				</c:otherwise>
+			</c:choose>
+		</div>
    </div>
 </div>
 <div class="content-wrap4">
@@ -303,97 +323,127 @@
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
 
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script> 
 <script src="/resources/js/index/jquery.min.js"></script>
 <script src="/resources/js/index/owl.carousel.min.js"></script>
 <script src="/resources/js/index/app.js"></script>
 
 <script type="text/javascript">
-   //리뷰 & qna 내용 미입력시 alert
-   $(document).ready(function() {
-      var formObj1 = $("form[name='prdreviewForm']");
-      var formObj2 = $("form[name='prdqnaForm']");
+//리뷰 & qna 내용 미입력시 alert
+$(document).ready(function() {
+   var formObj1 = $("form[name='prdreviewForm']");
+   var formObj2 = $("form[name='prdqnaForm']");
 
-      $(".reviewsave").on("click", function() {
-         if (fn_valiChk1()) {
-            return false;
-         }
-         formObj1.attr("action", "/market/reviewInsert");
-         formObj1.attr("method", "post");
-         formObj1.submit();
-      });
-
-      $(".qnasave").on("click", function() {
-         if (fn_valiChk2()) {
-            return false;
-         }
-         formObj2.attr("action", "/market/qnaInsert");
-         formObj2.attr("method", "post");
-         formObj2.submit();
-      });
-   })
-   function fn_valiChk1() {
-      var regForm = $("form[name='prdreviewForm'] .chk1").length;
-
-      if ($(".chk1").val() == "" || $(".chk1").val() == null) {
-         alert($(".chk1").attr("title"));
-         return true;
-      }
-   }
-   function fn_valiChk2() {
-      var regForm = $("form[name='prdqnaForm'] .chk2").length;
-
-      if ($(".chk2").val() == "" || $(".chk2").val() == null) {
-         alert($(".chk2").attr("title"));
-         return true;
-      }
-   }
-
-   //장바구니,구매하기 클릭시 로그인 체크
-   var login = $("button[class='loginBtn']");
-
-   function loginCh() {
-      login.attr("data-bs-toggle", "modal");
-      login.attr("data-bs-target", "#login-modal");
-      login.attr("location.href", "login-modal");
-      /* buy.attr("data-bs-toggle", "modal");
-      buy.attr("data-bs-target", "#login-modal");
-      buy.attr("location.href", "login-modal"); */
-   }
-   //---------- 수량 늘리기
-   var countNumVal = $(".peopleTd").text();
-   var price = "${prd.prdPrice}";
-   $(".priceSpan").text((countNumVal * price).toLocaleString('ko-KR'));
-   let count = 1;
-
-   $("#up").on("click", function(e) {
-      count++;
-      $(".countNum").text(count);
-      var countNumVal = $(".peopleTd").text();
-      const sumPrice = (countNumVal * price).toLocaleString('ko-KR');
-      $(".priceSpan").text(sumPrice);
-   });
-
-   $("#down").on("click", function(e) {
-      if (count == 1) {
+   $(".reviewsave").on("click", function() {
+      if (fn_valiChk1()) {
          return false;
       }
-      count--;
-      $(".countNum").text(count);
-      var countNumVal = $(".peopleTd").text();
-      const sumPrice = (countNumVal * price).toLocaleString('ko-KR');
-      $(".priceSpan").text(sumPrice);
-
+      formObj1.attr("action", "/market/reviewInsert");
+      formObj1.attr("method", "post");
+      formObj1.submit();
    });
 
-   //장바구니 클릭 시 hidden으로 넘겨주는 값
-   var pNo = "${prd.prdNo}"
-   $(".cartBtn").on("click", function() {
-      $(".count").attr("value", count);
+   $(".qnasave").on("click", function() {
+      if (fn_valiChk2()) {
+         return false;
+      }
+      formObj2.attr("action", "/market/qnaInsert");
+      formObj2.attr("method", "post");
+      formObj2.submit();
    });
-   //구매하기 클릭 시 hidden으로 넘겨주는 값
-   $(".buyBtn").on("click", function() {
-      $(".count").attr("value", count);
-   });
+})
+function fn_valiChk1() {
+   var regForm = $("form[name='prdreviewForm'] .chk1").length;
+
+   if ($(".chk1").val() == "" || $(".chk1").val() == null) {
+      alert($(".chk1").attr("title"));
+      return true;
+   }
+}
+function fn_valiChk2() {
+   var regForm = $("form[name='prdqnaForm'] .chk2").length;
+
+   if ($(".chk2").val() == "" || $(".chk2").val() == null) {
+      alert($(".chk2").attr("title"));
+      return true;
+   }
+}
+
+//장바구니,구매하기 클릭시 로그인 체크
+var login = $("button[class='loginBtn']");
+
+function loginCh() {
+   login.attr("data-bs-toggle", "modal");
+   login.attr("data-bs-target", "#login-modal");
+   login.attr("location.href", "login-modal");
+   /* buy.attr("data-bs-toggle", "modal");
+   buy.attr("data-bs-target", "#login-modal");
+   buy.attr("location.href", "login-modal"); */
+}
+//---------- 수량 늘리기
+var countNumVal = $(".peopleTd").text();
+var price = "${prd.prdPrice}";
+$(".priceSpan").text((countNumVal * price).toLocaleString('ko-KR'));
+let count = 1;
+
+$("#up").on("click", function(e) {
+   count++;
+   $(".countNum").text(count);
+   var countNumVal = $(".peopleTd").text();
+   const sumPrice = (countNumVal * price).toLocaleString('ko-KR');
+   $(".priceSpan").text(sumPrice);
+});
+
+$("#down").on("click", function(e) {
+   if (count == 1) {
+      return false;
+   }
+   count--;
+   $(".countNum").text(count);
+   var countNumVal = $(".peopleTd").text();
+   const sumPrice = (countNumVal * price).toLocaleString('ko-KR');
+   $(".priceSpan").text(sumPrice);
+
+});
+
+//장바구니 클릭 시 hidden으로 넘겨주는 값
+var pNo = "${prd.prdNo}"
+$(".cartBtn").on("click", function() {
+   $(".count").attr("value", count);
+});
+//구매하기 클릭 시 hidden으로 넘겨주는 값
+$(".buyBtn").on("click", function() {
+   $(".count").attr("value", count);
+});
+
+		//상품 위시
+		function addWishlist(obj, prdNo, userId){
+		    $("#wishlist").hide();
+		    $("#wishlist1").show();
+		
+		    $.ajax({
+		        url : "/insertMarketWish",
+		        type : "post",
+		        data : {prdNo : prdNo, userId : userId},
+		        success : function(data){
+		            console.log(data);
+		        }
+		    })
+		}
+		//상품 위시 취소
+		function deleteWishlist(obj, prdNo, userId){
+		    $("#wishlist1").hide();
+		    $("#wishlist").show();
+		
+		    $.ajax({
+		        url : "/deleteMarketWish",
+		        type : "post",
+		        data : {prdNo : prdNo, userId : userId},
+		        success : function(data){
+		            console.log(data)
+		        }
+		    })
+		}
 
 </script>
 </body>
