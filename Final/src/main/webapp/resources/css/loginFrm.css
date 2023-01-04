@@ -25,7 +25,8 @@
 
 input[type='radio'],
 input[type='radio']:checked {
-    appearance: none;
+    
+    accent-color: #dc3545;
     width: 0.9rem;
     height: 0.9rem;
     border-radius: 100%;
@@ -38,7 +39,8 @@ input[type='radio'] {
 }
 
 input[type='radio']:checked {
-    background-color: rgb(51, 51, 51);
+    background-color: #dc3545;
+    border: 1px solid #dc3545;
 }
 
 
