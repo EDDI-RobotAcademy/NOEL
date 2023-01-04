@@ -293,8 +293,8 @@
     width: 1200px;
 }
 .showList {
-    width: 250px;
-    height: 340px;
+    width: 350px;
+    height: 440px;
     margin-left: 24px;
     margin-right: 24px;
     margin-bottom: 40px;
@@ -311,8 +311,8 @@
 }
 
 .showList>a>div:nth-child(2) {
-    width: 250px;
-    height: 140px;
+    width: 350px;
+    height: 240px;
     padding: 24px;
 }
 
@@ -333,9 +333,9 @@
 }
 */
 .showList>a>div>img {
-    width: 240px;
-    height: 200px;
-    padding: 5px;
+    width: 350px;
+    height: 350px;
+    padding: 0px;
 }
 /*========================page*/
 .page{

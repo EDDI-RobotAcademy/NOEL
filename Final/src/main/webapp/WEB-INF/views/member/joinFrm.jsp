@@ -64,6 +64,46 @@
                                 <p class="text-note"></p>
                             </div>
                         </li>
+                        
+                        <li>
+                            <span class="tit">생년월일</span>
+                            <div class="cnt">
+                            	<div>
+                                    <div class="box04" style = "margin-left:0px; margin-right: 10px; width: 240px;">
+                                        <label class="label" for="birth_year">연도를 입력해주세요(숫자만 4자)</label>
+                                        <input type="text" id="birth_year" name="birth_year">
+                                       	<input type="hidden" id="userBirth" name="userBirth">
+                                    </div>
+                                        <div class="selBox01 box01"  >
+                                            <select id="birth_month" name="birth_month" >
+                                                <option value="">월</option>
+                                                <option value="01">1</option>
+                                                <option value="02">2</option>
+                                                <option value="03">3</option>
+                                                <option value="04">4</option>
+                                                <option value="05">5</option>
+                                                <option value="06">6</option>
+                                                <option value="07">7</option>
+                                                <option value="08">8</option>
+                                                <option value="09">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                    </div>
+                                    
+                                     <div class="box04" style = "margin-left:10px; margin-right: 0px; width: 230px;">
+                                        <label class="label" for="birth_day">일을 입력해주세요(숫자만 2자)</label>
+                                        <input type="text" id="birth_day" name="birth_day">
+                                         
+                                    </div>
+                                    
+                                    <br>
+                                    <p class="text-note"></p>
+                            	</div>
+                            </div>
+                        </li>
+                        
                         <li>
                             <span class="tit">휴대폰 인증</span>
                             <div class="cnt">
@@ -150,7 +190,6 @@
 			$("[name=contentModal2]").attr("target","contentModal2");
 			$("[name=contentModal2]").submit();
 		});
-		
 		
 	
 		var idFlag = 0;
@@ -273,6 +312,9 @@
 		});
 		
 		/*정규표현식 유효성검사*/
+		
+		 
+	
 		$("#joinBtn").on("click",function(event){
 			//이름 유효성 검사
 			const nameReg = /^[가-힣]{2,5}$/;
@@ -294,7 +336,6 @@
 			const idComment = id.parent().next();
 			if(idReg.test(idValue)){
 				idComment.text("");
-				
 			}else {
 				idComment.text("* 4~20자리 이내로 입력해주세요.");
 				idComment.css("color","red");
@@ -327,6 +368,7 @@
 				event.preventDefault();
 			}
 			
+			//핸드폰 확인
 			var phone1 = $("[name=frontNum]").val();
 			var phone2 = $("[name=memberPhone1]").val();
 			var phone = phone1+phone2;
@@ -341,58 +383,93 @@
 				event.preventDefault();
 			}
 			
+			//생년월일 유효성검사
+			const birthReg = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+			var birth_year = $("[name=birth_year]").val();
+			var birth_month = $("[name=birth_month]").val();
+			var birth_day = $("[name=birth_day]").val();
+			var birth = birth_year+"-"+birth_month+"-"+birth_day;
+			$("[name=userBirth]").val(birth);
+			
+			 if(!birth_year){
+			      alert("연도를 입력해주세요");
+			    $("#birth_year").focus();
+			    return false;
+			  }
+			  if(!birth_month){
+			      alert("월을 입력해주세요");
+			    $("#birth_month").focus();
+			    return false;
+			  }
+			  if(!birth_day){
+			      alert("일을 입력해주세요");
+			    $("#birth_day").focus();
+			    return false;
+			  }
+			  if(!birthReg.test(birth)){
+			      alert("생년월일을 형식에 맞게 입력해주세요.");
+			    return false;
+			  }
+			
+			
 		});
+		
+	
 		
        
 		
 		
 			
-		
-		$("input").on("focus",function(){
-		    const label = $(this).prev();
-		    label.css("display","none");
-		});
-		$("input").on("blur",function(){
-		    const label = $(this).prev();
-		    if($(this).val() == ""){
-			    label.css("display","");
-		    }
-		});
+	const Jinput01 = $(".label").next();
+	Jinput01.on("focus",function(){
+	    const label = $(this).prev();
+	    label.css("display","none");
+	});
+	Jinput01.on("blur",function(){
+	    const label = $(this).prev();
+	    if($(this).val() == ""){
+		    label.css("display","");
+	    }
+	});
 		$(".phoneChkSendBtn").on("mouseover",function(){
-			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("background-color","#d15662");
 			$(this).css("border","1px solid black");
-			$(this).css("color","#ffc107");
+			$(this).css("color","rgb(255, 255, 255)");
 		})
 		$(".phoneChkSendBtn").on("mouseleave",function(){
 			$(this).css("background-color","");
+			$(this).css("border","");
 			$(this).css("color","");
 		})
         $(".phoneChkBtn").on("mouseover",function(){
-			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("background-color","#d15662");
 			$(this).css("border","1px solid black");
-			$(this).css("color","#ffc107");
+			$(this).css("color","rgb(255, 255, 255)");
 		})
 		$(".phoneChkBtn").on("mouseleave",function(){
 			$(this).css("background-color","");
+			$(this).css("border","");
 			$(this).css("color","");
 		})
 		$("#idChkBtn").on("mouseover",function(){
-			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("background-color","#d15662");
 			$(this).css("border","1px solid black");
-			$(this).css("color","#ffc107");
+			$(this).css("color","rgb(255, 255, 255)");
 		})
 		$("#idChkBtn").on("mouseleave",function(){
 			$(this).css("background-color","");
+			$(this).css("border","");
 			$(this).css("color","");
 		})
 		const joinBtn = $(".joinBtn").children();
 		$("#joinBtn").on("mouseover",function(){
-			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("background-color","#d15662");
 			$(this).css("border","1px solid black");
-			$(this).css("color","#ffc107");
+			$(this).css("color","rgb(255, 255, 255)");
 		})
 		$("#joinBtn").on("mouseleave",function(){
 			joinBtn.css("background-color","");
+			$(this).css("border","");
 			$(this).css("color","");
 		})
 		

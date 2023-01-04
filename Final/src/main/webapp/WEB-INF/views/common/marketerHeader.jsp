@@ -8,6 +8,12 @@
 			<li>
 				<c:if test="${sessionScope.mk.marketerAuth eq 1}">
 				<div>
+					<a href="/marketerMypage">내 정보 수정</a>
+				</div>
+				<div>
+					<a href="/deleteMarketer?marketerId=${sessionScope.mk.marketerId }" class="delMember">회원 탈퇴</a>
+				</div>
+				<div>
 					<a href="/class/addClassFrm">클래스 등록</a>
 				</div>
 				<div>
@@ -17,23 +23,11 @@
 					<a href="/market/orderManagementView?reqPage=1">주문 관리</a>
 				</div>
 				</c:if>
-				<div>
-					<a href="/marketerMypage">내 정보 수정</a>
-				</div>
-				<div>
-					<a href="/deleteMarketer?marketerId=${sessionScope.mk.marketerId }" class="delMember">회원 탈퇴</a>
-				</div>
 
 			</li>
 		</ul>
 	</div>
-	<div class="sidebar-2">
-		<ul class="category">
-			<li>
-				<h4>공지사항</h4>
-			</li>
-		</ul>
-	</div>
+
 </aside>
 <script>
 	$(".delMember").on("click", function(e) {

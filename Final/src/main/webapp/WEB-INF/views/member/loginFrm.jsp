@@ -35,15 +35,15 @@
                         <li>         
                             <div class="Linput01">
                                 <div>
-                                    <label class="Llabel" for="memberId">아이디</label>
-                                    <input type="text" name="userId" id="memberId">
+                                    <label class="Llabel" for="userId">아이디</label>
+                                    <input type="text" name="userId" class="userId">
                                 </div>
                             </div>                
                         </li>
                         <li>
                             <div class="Linput01">
-                                <label class="Llabel" for="memberPw">비밀번호</label>
-                                <input type="password" name="userPw" id="memberPw">
+                                <label class="Llabel" for="userPw">비밀번호</label>
+                                <input type="password" name="userPw" class="userPw">
                             </div>
                         </li>
                         <button class="login-btn" type="submit">로그인</button>
@@ -90,13 +90,13 @@
     <script>
         const input = $(".Llabel").next();
         input.on("focus",function(){
-		    const label = $(this).prev();
-		    label.css("display","none");
+		    const Llabel = $(this).prev();
+		    Llabel.css("display","none");
 		});
 		input.on("blur",function(){
-		    const label = $(this).prev();
+		    const Llabel = $(this).prev();
 		    if($(this).val() == ""){
-			    label.css("display","");
+			    Llabel.css("display","");
 		    }
 		});
 		
@@ -136,9 +136,9 @@
 		
 		$(".login-btn").on("click",function(e){
 			if(selLogin == 1) {
-				var memberId = $("#memberId").val();
-				var memberPw = $("#memberPw").val();
-				if(memberId == "" || memberPw == "") {
+				var userId = $("#userId").val();
+				var userPw = $("#userPw").val();
+				if(userId == "" || userPw == "") {
 					alert("정보를 입력해주세요.");
 					e.preventDefault();
 				}

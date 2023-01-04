@@ -60,6 +60,6 @@
 
 
 
-	<context:component-scan base-package="com.kh.myapp" />
+	<context:component-scan base-package="com.kh.myapp/**" />
 
 </beans:beans>
