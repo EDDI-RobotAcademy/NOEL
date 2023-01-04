@@ -275,6 +275,21 @@ div{
     padding:0;
 }
 
+button[name=reserveBtn]{
+    margin-top: 10px;
+    width:160px; 
+    height:44px; 
+    border-radius: 15px; 
+    background-color: white; 
+    border-color: #dc3545; 
+    margin-left: 5%;
+}
+
+button[name=reserveBtn]:hover{
+    background-color: #dc3545;
+    cursor: pointer;
+}
+
 /* .buyBtn{
    width: 160px;
    height:44px;

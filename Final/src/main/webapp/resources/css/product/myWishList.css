@@ -15,18 +15,20 @@
 }
 
 .img-box {
-    line-height: 130px;
-    width: 150px;
+    line-height: 140px;
+    width: 140px;
     border-radius: 10px;
     overflow: hidden;
 }
 
 .img-box>img {
-    width: 130px;
-    height: 90px;
-    border-radius: 10px;
+    width: 125px;
+    height: 125px;
+    /* border-radius: 10px; */
     margin-left: 10px;
-    margin-bottom: 8px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .bookmark-content-list {
@@ -49,8 +51,8 @@ ul {
 
 .bookmark-content-list>ul>li {
     display: inline-flex;
-    width: 550px;
-    height: 130px;
+    width: 400px;
+    height: 150px;
     margin-top: 30px;
     border: 2px solid transparent;
     margin-left: 40px;
@@ -58,7 +60,7 @@ ul {
 }
 
 .bookmark-content-list>ul>li:hover {
-    border: 2px solid gold;
+    border: 2px solid lightgray;
 }
 
 .bookmark-content {
@@ -66,16 +68,17 @@ ul {
 }
 
 .bookmark-man {
-    width: 250px;
+    width: 150px;
 }
 
 .bookmark-man>ul {
     padding-left: 10px;
+    padding-right: 10px;
     margin-top: 35px;
 }
 
 .delBtn {
-    width: 150px;
+    width: 80px;
     line-height: 130px;
     text-align: center;
 }
@@ -90,7 +93,7 @@ ul {
 
 .bookmark-content-list>ul>li>a:hover {
     text-decoration: underline;
-    color: #212529;
+    color: #dc3545;
 }
 
 .paging {
@@ -111,7 +114,7 @@ ul {
 }
 
 .paging>a:hover {
-    color: #212529;
+    color: #dc3545;
 }
 
 .noMsg {
@@ -177,7 +180,7 @@ ul {
     width: 500px;
     margin: 0 auto;
     text-align: center;
-    margin-top: 25px;
+    margin-top: 50px;
     margin-bottom: 50px;
     font-size: 20px;
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="marketWish">
+
+	<select id="selectOneMarketWish" parameterType="map" resultType="marketWishVO">
+		select
+			wish_no as wishNo,
+			user_id as userId,
+			prd_no as prdNo
+		from noel_market_wishlist where prd_no = #{prdNo} and user_id = #{bookmarkId}	
+	</select>
+
+	<insert id="insertMarketWish" parameterType="marketWishVO">
+		insert into noel_market_wishlist
+			values(noel_market_wishlist_seq.nextval, #{prdNo}, #{userId})
+		
+	</insert>
+	
+	<delete id="deleteMarketWish" parameterType="marketWishVO">
+		delete from noel_market_wishlist
+			where prd_no = #{prdNo} and user_Id = #{userId}
+	</delete>
+	
+	<select id="myPrdWishList" parameterType="map" resultType="marketWishVO">
+		select * from
+		(select rownum as rnum, b.* from
+		(select
+			wish_no as wishNo,
+			prd_no as prdNo,
+			user_id as userId,
+			(select prd_img_path from noel_product_img si where prd_img_no =
+			(select min(prd_img_no) from noel_product_img si2 where si2.prd_no =
+			s.prd_no)) as thumbNail,
+			(select prd_name from noel_product s1 where s1.prd_no = s.prd_no) as prdName,
+			(select to_char(prd_price, '999,999,999') from noel_product s2 where s2.prd_no = s.prd_no) as prdPrice
+		from noel_market_wishlist s where user_id = #{bookmarkId})b) where rnum
+		between #{start} and #{end} order by 1 desc
+	</select>
+	
+	<select id="toalPrdWish" parameterType="string" resultType="int">
+		select count(*) from noel_market_wishlist where user_id = #{bookmarkId}
+	</select>
+	
+	<delete id="deletePrdWishList" parameterType="int">
+		delete from noel_market_wishlist where prd_no = #{prdNo}
+	</delete>
+	
+</mapper>        

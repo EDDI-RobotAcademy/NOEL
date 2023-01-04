@@ -30,7 +30,7 @@
 	<!-- 오라클 접속 -->
    <beans:bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
       <beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-      <beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+      <beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
       <beans:property name="username" value="khfinal"/>
       <beans:property name="password" value="0630"/>
    </beans:bean>
@@ -60,6 +60,6 @@
 
 
 
-	<context:component-scan base-package="com.kh.myapp" />
+	<context:component-scan base-package="com.kh.myapp/**" />
 
 </beans:beans>
