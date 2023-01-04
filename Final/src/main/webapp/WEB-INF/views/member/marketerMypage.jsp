@@ -24,7 +24,7 @@
 					<input type="hidden" name="marketerId" value="${sessionScope.mk.marketerId }">
 					<div class="membership-form">
 						<div class="form-write">
-							<h4>회원 정보</h4>
+							<h4>회원 정보 수정</h4>
 							<ul>
 								<li>
 									<span class="tit">이름</span>

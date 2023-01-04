@@ -7,6 +7,10 @@
         <ul class="category">
             <li>
                 <div>
+                    <a href="/myPage">내 정보 수정</a>
+                    <!-- <a href="/updateMemberFrm.do">내 정보 수정</a> -->
+                </div>
+                <div>
                     <a href="#">예약 내역</a>
                     <!-- <a href="/reserveList.do?reqPage=1">예약 내역</a> -->
                 </div>
@@ -21,27 +25,12 @@
                     <a href="#">Q&A</a>
                 </div>
                 <div>
-                    <a href="/myPage">내 정보 수정</a>
-                    <!-- <a href="/updateMemberFrm.do">내 정보 수정</a> -->
-                </div>
-                <div>
                     <a href="/deleteMember?userId=${sessionScope.m.userId }" class="delMember">회원 탈퇴</a>
                 </div>
             </li>
         </ul>
     </div>
-    <div class="sidebar-2">
-        <ul class="category">
-            <li>
-                <h4>공지사항</h4>
-                <%--    <c:forEach items="${ncList " var="n">
-                      <div class="list-wrap">
-                         <a href="/noticeDetail.do?noticeNo=${n.noticeNo }" class="titleShow">${n.noticeTitle }</a>
-                      </div>
-                   </c:forEach> --%>
-            </li>
-        </ul>
-    </div>
+   
 </aside>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 
