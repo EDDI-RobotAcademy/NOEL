@@ -198,8 +198,8 @@ section {
 
 .btn-brand {
     border-color:  #dc3545;
-    background-color: #fff;
-    color: #dc3545;
+    background-color: #dc3545;
+    color: #fff;
 }
 
 .btn-brand1 {
@@ -218,7 +218,7 @@ section {
 }
 
 .btn-brand:hover {
-    background-color: #dc3545;
+    background-color: #d15662;
     border-color: #d15662;
     color: rgb(255, 255, 255);
 }
@@ -484,7 +484,7 @@ footer {
 
 footer .footer-top {
     padding-top: 80px;
-    padding-bottom: 40px;
+    /* padding-bottom: 40px; */
 }
 
 .footer-bottom {

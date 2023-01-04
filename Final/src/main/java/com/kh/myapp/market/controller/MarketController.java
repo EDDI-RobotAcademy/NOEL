@@ -19,14 +19,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.kh.myapp.commom.FileRename;
 import com.kh.myapp.market.model.service.MarketQnaService;
 import com.kh.myapp.market.model.service.MarketReviewService;
 import com.kh.myapp.market.model.service.ProductService;
-import com.kh.myapp.market.model.vo.MarketQnaReplyVO;
 import com.kh.myapp.market.model.vo.MarketQnaVO;
 import com.kh.myapp.market.model.vo.MarketReviewVO;
 import com.kh.myapp.market.model.vo.ProductImgVO;
@@ -61,12 +62,11 @@ public class MarketController {
 		List<ProductVO> list = productService.list(mk.getMarketerId());
 		model.addAttribute("prdlist", list);
 	}
+
 	// 판매자 주문관리 출력
 	@RequestMapping(value = "market/orderManagement")
 	public void orderManagement(Model model) throws Exception {
 	}
-
-
 
 	/*
 	 * // 판매자 관리화면 출력, 판매자 상품등록 리스트 출력
@@ -83,14 +83,15 @@ public class MarketController {
 
 	// 판매자 상품 등록하기(다중 이미지)
 	@RequestMapping(value = "/prd_add", method = RequestMethod.POST)
-	public String addPrd(ProductVO vo, MultipartFile[] file, HttpServletRequest request, @SessionAttribute Marketer mk) {
+	public String addPrd(ProductVO vo, MultipartFile[] file, HttpServletRequest request,
+			@SessionAttribute Marketer mk) {
 		logger.info("판매자 상품등록 하기");
 
 		// 첨부이미지 목록 저장할 리스트 생성
 		ArrayList<ProductImgVO> prdImgList = new ArrayList<ProductImgVO>();
 
 		if (!file[0].isEmpty()) {
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/prd/");
+			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/product/");
 
 			for (MultipartFile file2 : file) {
 				String filename = file2.getOriginalFilename();
@@ -112,42 +113,45 @@ public class MarketController {
 			}
 		}
 
-
 		vo.setPrdImgList(prdImgList);
 		vo.setMarketerId(mk.getMarketerId());
 		int result = productService.add(vo);
 		return "redirect:/market/marketerProductMypage";
 
 	}
-	/*
-	 * // 판매자 상품 등록하기(다중 이미지)
-	 *
-	 * @RequestMapping(value = "/prd_add", method = RequestMethod.POST) public
-	 * String addPrd(ProductVO vo, MultipartFile[] file, HttpServletRequest request)
-	 * { logger.info("판매자 상품등록 하기");
-	 *
-	 * // 첨부이미지 목록 저장할 리스트 생성 ArrayList<ProductImgVO> prdImgList = new
-	 * ArrayList<ProductImgVO>();
-	 *
-	 * if (!file[0].isEmpty()) { String savePath =
-	 * request.getSession().getServletContext().getRealPath(
-	 * "resources/upload/prd_add/");
-	 *
-	 * for (MultipartFile file2 : file) { String filename =
-	 * file2.getOriginalFilename(); String imgpath = fileRename.fileRename(savePath,
-	 * filename); try { FileOutputStream fos = new FileOutputStream(new
-	 * File(savePath + imgpath)); BufferedOutputStream bos = new
-	 * BufferedOutputStream(fos); byte[] bytes = file2.getBytes(); bos.write(bytes);
-	 * bos.close(); } catch (FileNotFoundException e) { e.printStackTrace(); } catch
-	 * (IOException e) { e.printStackTrace(); } ProductImgVO prdImg = new
-	 * ProductImgVO(); prdImg.setPrdImgpath(imgpath); prdImgList.add(prdImg);
-	 * }//for문 끝 }//if문 끝
-	 *
-	 * vo.setPrdImgList(prdImgList); int result = productService.add(vo); return
-	 * "redirect:/market/main";
-	 *
-	 * }
-	 */
+
+	// prd content내에 이미지를 삽입하기 위한 메소드
+	@ResponseBody
+	@RequestMapping(value = "/prdEditorUpload", produces = "application/json;charset=utf-8")
+	public String prdEditorUpload(MultipartFile[] files, HttpServletRequest request) {
+		String filepath = null;
+
+		if (!files[0].isEmpty()) {
+			// 파일 경로 설정
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/product/editor/");
+			// 파일 중복처리
+			for (MultipartFile fileList : files) {
+				String filename = fileList.getOriginalFilename();
+				filepath = fileRename.fileRename(savePath, filename);
+				try {
+					FileOutputStream fos = new FileOutputStream(savePath + filepath);
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = fileList.getBytes();
+
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+
+					e.printStackTrace();
+				}
+			}
+		}
+		Gson gson = new Gson();
+		String result = gson.toJson("/resources/upload/product/editor/" + filepath);
+		return result;
+	}
 
 	// 판매자 상품 수정폼
 	@RequestMapping(value = "/market/prd_update", method = RequestMethod.GET)
@@ -162,10 +166,10 @@ public class MarketController {
 	// 판매자 상품 수정하기
 	@RequestMapping(value = "/market/prd_update", method = RequestMethod.POST)
 	public String updatePrd(int[] imgNoList, ProductVO vo, String[] imgpathList, MultipartFile[] file,
-							HttpServletRequest request, String zipCode) throws Exception {
+			HttpServletRequest request) throws Exception {
 
 		ArrayList<ProductImgVO> prdImgList = new ArrayList<ProductImgVO>();
-		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/prd/");
+		String savePath = request.getSession().getServletContext().getRealPath("resources/upload/product/");
 		if (!file[0].isEmpty()) {
 			for (MultipartFile File : file) {
 				String filename = File.getOriginalFilename();
@@ -216,14 +220,14 @@ public class MarketController {
 
 		if (map == null) {
 			model.addAttribute("msg", "등록된 상품이 없습니다.");
-			return "/market/marketListFrm";
+			return "market/marketListFrm";
 		} else {
 			model.addAttribute("list", map.get("list"));
 			model.addAttribute("reqPage", reqPage);
 			model.addAttribute("pageNavi", map.get("pageNavi"));
 			model.addAttribute("total", map.get("total"));
 			model.addAttribute("pageNo", map.get("pageNo"));
-			return "/market/marketListFrm";
+			return "market/marketListFrm";
 		}
 	}
 
@@ -245,7 +249,7 @@ public class MarketController {
 	// 마켓 상품 상세 페이지 (리뷰 & qna 목록, 모달)
 	@RequestMapping(value = "/marketDetailView", method = RequestMethod.GET)
 	public String marketDetailView(Integer prdNo, Model model, @RequestParam("rnum") int rnum,
-								   @RequestParam("qnum") int qnum) throws Exception {
+			@RequestParam("qnum") int qnum) throws Exception {
 		logger.info("마켓 상세");
 		HashMap<String, Object> map = productService.selectOnePrd(prdNo);
 		model.addAttribute("prd", map.get("prd"));
@@ -278,8 +282,6 @@ public class MarketController {
 		List<MarketQnaVO> qnalist = qnaService.qnaList(prdNo, qnadisplayPost, qnapostNum);
 		/* qnalist += qnaService.qnarCount(prdQnano); */
 		model.addAttribute("qnalist", qnalist);
-
-
 
 		return "/market/marketDetailView";
 	}

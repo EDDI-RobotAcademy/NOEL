@@ -4,11 +4,14 @@ import com.google.gson.Gson;
 import com.kh.myapp.cl.model.service.ClassService;
 import com.kh.myapp.cl.model.vo.Class;
 import com.kh.myapp.commom.FileRename;
+import com.kh.myapp.member.model.vo.Member;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -59,8 +62,9 @@ public class ClassController {
 
     // 맛집 상세 보기
     @RequestMapping(value = "/classDetail")
-    public String classDetail(int classNo, String bookmarkId, Model model) {
-        HashMap<String, Object> map = service.selectOneClass(classNo, bookmarkId);
+    public String classDetail(int classNo, String userId, Model model) {
+    	
+        HashMap<String, Object> map = service.selectOneClass(classNo, userId);
         model.addAttribute("s", map.get("s"));
         model.addAttribute("sbm", map.get("sbm"));
 
@@ -207,5 +211,35 @@ public class ClassController {
         Gson gson = new Gson();
         String result = gson.toJson("/resources/upload/class/editor/" + filepath);
         return result;
+    }
+    
+  //예약관리
+    @RequestMapping(value="/reserveList")
+    public String reserveList(@SessionAttribute Member m, Model model, int reqPage) {
+        String userId = m.getUserId();
+        HashMap<String, Object> map = service.selectReserveList(reqPage, userId);
+//        ArrayList<Notice> ncList = service.myPageNcList();
+//        model.addAttribute("ncList", ncList);
+        model.addAttribute("list", map.get("list"));
+//        model.addAttribute("reqPage", map.get("reqPage"));
+//        model.addAttribute("pageNavi", map.get("pageNavi"));
+//        model.addAttribute("total", map.get("total"));
+//        model.addAttribute("pageNo", map.get("pageNo"));
+        return "class/reserveList";
+    }
+    
+    // 예약취소
+    @RequestMapping(value = "/cancleReserve")
+    public String cancleReserve(int reserveNo, HttpServletRequest request) {
+        int result = service.cancleReserve(reserveNo);
+        if(result > 0) {
+            request.setAttribute("msg", "예약이 취소되었습니다.");
+            request.setAttribute("url", "/reserveList?reqPage=1");
+            return "layouts/alert";
+        } else {
+            request.setAttribute("msg", "취소 중 문제가 발생했습니다.");
+            request.setAttribute("url", "/reserveList?reqPage=1");
+            return "layouts/alert";
+        }
     }
 }

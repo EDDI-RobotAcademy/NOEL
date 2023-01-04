@@ -48,7 +48,7 @@
 							<a class="nav-link" href="/sj">Register</a>
 						</li>
 					</ul>
-
+	
 
 					<!--일반 회원-->
 				</c:when>
@@ -56,7 +56,7 @@
 					<ul class="navbar-nav ms-auto">
 						<c:if test="${sessionScope.m.userLevel eq 1}">
 							<li class="nav-item">
-								<a href="/myPage" class="nav-link" id="font"> ${sessionScope.m.userName }</a>
+								<label class="nav-link" id="font">${sessionScope.m.userName }</label>
 							</li>
 							<li class="nav-item">
 								<a href="/logout" class="nav-link" id="font">Logout</a>
@@ -78,7 +78,7 @@
 								<a href="/logout" class="nav-link" id="font">Logout</a>
 							</li>
 							<li class="nav-item">
-								<a href="memberManage?reqPage=1" class="nav-link" id="font"> adminPage</a>
+								<a href="memberManage?reqPage=1" class="nav-link" id="font"> AdminPage</a>
 							</li>
 						</c:if>
 
@@ -92,7 +92,7 @@
 							</li>
 							<c:if test="${sessionScope.mk.marketerAuth eq 1}">
 								<li class="nav-item">
-									<a class="nav-link" href="/marketerMypage">상품&클래스등록</a>
+									<a class="nav-link" href="/marketerMypage">MY 상품 / 클래스</a>
 								</li>
 							</c:if>
 							<c:if test="${sessionScope.mk.marketerAuth eq 0}">

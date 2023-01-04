@@ -18,7 +18,7 @@
 <div class="container text-left" id="product_wrap">
    <div class="directoryDiv">home > market > detail</div>
    <div class="infoDiv1">
-      <img src="/resources/upload/market/${prd.prdthumNail }" class="pImg">
+      <img src="/resources/upload/product/${prd.prdthumNail }" class="pImg">
       <!-- ///////////////////////////////////////////////////////////////////// -->
       <div class="tableDiv">
          <table class="productTable">
@@ -68,11 +68,11 @@
                   <button type="submit" class="cartBtn">장바구니</button>
                </c:otherwise>
             </c:choose>
-            <input type="hidden" name="prdPrice" class="allPrice" value="${prd.prdPrice }">
-            <input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }">
-            <input   type="hidden" name="prdName" class="pNumber" value="${prd.prdName }">
-            <input type="hidden" name="cartQuan" class="count">
-            <input type="hidden" name="userId" value="${sessionScope.m.userId }">
+	            <input type="hidden" name="prdPrice" class="allPrice" value="${prd.prdPrice }">
+	            <input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }">
+	            <input type="hidden" name="prdName" class="pNumber" value="${prd.prdName }">
+	            <input type="hidden" name="cartQuan" class="count">
+	            <input type="hidden" name="userId" value="${sessionScope.m.userId }">
          </form>
 
          <form action="/insertOrder">
@@ -87,7 +87,7 @@
             </c:choose>
             <input type="hidden" name="prdPrice" class="allPrice" value="${prd.prdPrice }">
             <input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }">
-            <input type="hidden" name="pName" value="${prd.prdName}">
+            <input type="hidden" name="prdName" value="${prd.prdName}">
             <input type="hidden" name="cartQuan" class="count">
             <input type="hidden" name="userId" value="${sessionScope.m.userId }">
         </form>

@@ -68,12 +68,13 @@
                             <span class="tit">이메일</span>
                             <div class="cnt">
                             	<div>
-                                    <div class="box04" style = "margin-left:0px; margin-right: 10px">
+                                    <div class="box04" style = "margin-left:0px; margin-right: 10px; ">
                                         <label class="label" for="email">이메일 아이디를 입력해주세요</label>
                                         <input type="text" id="email" name="email">
                                         <input type="hidden" id="marketerEmail" name="marketerEmail">
                                     </div>
-                                        <div class="selBox01 box01" >
+                                    	<div style ="margin-right: 10px; float: left; font-size: 20px">@</div>
+                                        <div class="selBox01 box01"  >
                                             <select id="email_domain" >
                                                 <option value="naver.com">naver.com</option>
 											    <option value="gmail.com">gmail.com</option>
@@ -368,11 +369,11 @@
 			}
 			
 			// 이메일 유효성 검사
-			var email_rule =  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			var email_rule =  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
 			  var email =$("#email").val();
 			  var email_domain =$("#email_domain").val();
 			  var mail = email+"@"+email_domain;
-			  $("[name=marketerEmail]").val(mail);  ;
+			  $("[name=marketerEmail]").val(mail);
 			 
 			  if(!marketerEmail){
 			      alert("이메일을 입력해주세요");
@@ -384,59 +385,63 @@
 			    $("#email_domain").focus();
 			    return false;
 			  }
-			  
-			  
 			  if(!email_rule.test(mail)){
 			      alert("이메일을 형식에 맞게 입력해주세요.");
 			    return false;
 			  }
 			  
 		});
-		$("input").on("focus",function(){
+		
+		const Jinput01 = $(".label").next();
+		Jinput01.on("focus",function(){
 		    const label = $(this).prev();
 		    label.css("display","none");
 		});
-		$("input").on("blur",function(){
+		Jinput01.on("blur",function(){
 		    const label = $(this).prev();
 		    if($(this).val() == ""){
 			    label.css("display","");
 		    }
 		});
 		$(".phoneChkSendBtn").on("mouseover",function(){
-			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("background-color","#d15662");
 			$(this).css("border","1px solid black");
-			$(this).css("color","#ffc107");
+			$(this).css("color","rgb(255, 255, 255)");
 		})
 		$(".phoneChkSendBtn").on("mouseleave",function(){
 			$(this).css("background-color","");
+			$(this).css("border","");
 			$(this).css("color","");
 		})
         $(".phoneChkBtn").on("mouseover",function(){
-			$(this).css("background-color","rgb(97, 76, 76)");
+        	$(this).css("background-color","#d15662");
 			$(this).css("border","1px solid black");
-			$(this).css("color","#ffc107");
+			$(this).css("color","rgb(255, 255, 255)");
 		})
 		$(".phoneChkBtn").on("mouseleave",function(){
 			$(this).css("background-color","");
+			$(this).css("border","");
 			$(this).css("color","");
 		})
 		$("#idChkBtn").on("mouseover",function(){
-			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("background-color","#d15662");
 			$(this).css("border","1px solid black");
-			$(this).css("color","#ffc107");
+			$(this).css("color","rgb(255, 255, 255)");
 		})
 		$("#idChkBtn").on("mouseleave",function(){
 			$(this).css("background-color","");
+			$(this).css("border","");
 			$(this).css("color","");
 		})
 		const joinBtn = $(".joinBtn").children();
 		$("#joinBtn").on("mouseover",function(){
-			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("background-color","#d15662");
 			$(this).css("border","1px solid black");
-			$(this).css("color","#ffc107");
+			$(this).css("color","rgb(255, 255, 255)");
 		})
 		$("#joinBtn").on("mouseleave",function(){
 			joinBtn.css("background-color","");
+			$(this).css("border","");
 			$(this).css("color","");
 		})
 		

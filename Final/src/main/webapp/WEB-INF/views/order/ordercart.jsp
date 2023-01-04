@@ -32,8 +32,8 @@
         <div class="cart-table order-info">
             <table>
                 <tr id="font">
-                    <th style="width: 20%;" class="cart-product-title">상품명</th>
                     <th style="width: 20%;">이미지</th>
+                    <th style="width: 20%;" class="cart-product-title">상품명</th>
                     <th style="width: 15%;">가격</th>
                     <th style="width: 10%;">수량</th>
                     <th style="width: 15%;">배송비</th>
@@ -45,9 +45,8 @@
                 <c:forEach items="${list }" var="Cart">
                     <tr class="showCartList" id="font">
 
+                        <td class="pImg" style="text-align:center"><img src="/resources/upload/product/${Cart.prdthumNail }"></td>
                         <td style="text-align: center">${Cart.prdName }</td>
-                        <td>이미지 불러오기</td>
-                            <%-- <td class="pImg" style="text-align:center"><img src="/resources/upload/market/${Cart.PImg }"></td> --%>
                         <td class="pPrice" style="text-align: center"><fmt:formatNumber
                                 value="${Cart.prdPrice}" pattern="#,###" /></td>
                         <td style="text-align: center">${Cart.cartQuan }</td>

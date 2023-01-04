@@ -7,7 +7,7 @@
             wish_no as wishNo,
             user_id as userId,
             cl_no as classNo
-        from noel_class_wishlist where cl_no = #{classNo}
+        from noel_class_wishlist where cl_no = #{classNo} and user_Id = #{userId}
     </select>
 
     <insert id="insertClassWishlist" parameterType="com.kh.myapp.cl.model.vo.Wishlist">

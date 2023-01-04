@@ -7,6 +7,7 @@
 }
 .form-write>h4{
     padding-bottom: 12px;
+    padding-left : 15px;	
     border-bottom: 2px solid #000;
 }
 .membership-form>.form-write>ul li{
@@ -14,7 +15,7 @@
 }
 .contents{
     width: 800px;
-    padding-top: 10px;
+    padding-top: 30px;
     margin: 0 auto 40px;
 }
 .form-write>ul{
