@@ -3,6 +3,7 @@ package com.kh.myapp.member.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.kh.myapp.member.model.dao.MemberDao;
 import com.kh.myapp.member.model.vo.Marketer;
 import com.kh.myapp.member.model.vo.Member;
+import com.kh.myapp.order.model.vo.OrderVO;
+import com.kh.myapp.order.model.vo.OrderlistVO;
 
 @Service
 public class MemberService {
@@ -248,7 +251,100 @@ public class MemberService {
 	public int deleteMarketer(String marketerId) {
 		return dao.deleteMarketer(marketerId);
 	}
+	
+	//판매자 > 주문관리
+	public List<OrderlistVO> selectAllOrderListPrd(String marketerId) {
+		List result = dao.selectAllOrderListPrd(marketerId);
+		return result;
+	}
 
+	
+	//총 주문수량
+	public int orderQuanAll(int prdNo) {
+		return dao.orderQuanAll(prdNo);
+	}
+	
+	//판매자 > 주문관리 > 주문 상세내역(모든 주문 건)
+	public HashMap<String, Object> selectAllOrderListMarketer(int reqPage, String marketerNo) {
+
+		//한 페이지 당 보여지는 주문건수
+		int numPerPage = 10;
+		// end = 10
+		int end = numPerPage *reqPage;
+		//start = 1
+		int start = (end-numPerPage)+1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("marketerNo", marketerNo);
+		
+		ArrayList<OrderVO> list = dao.selectAllOrderList(map);
+		
+		int totalPage = dao.countAllOrder(marketerNo);
+		int totalMan = 0;
+		if(totalPage % numPerPage == 0) {
+			totalMan = totalPage / numPerPage;
+		}else {
+			totalMan = totalPage / numPerPage +1;
+			
+		}
+		// 페이지 네비 사이즈
+		int pageNaviSize = 5;
+		
+		// 페이지 시작 번호
+		int pageNo = 1;
+		
+		if(reqPage > 3) {
+			pageNo = reqPage - 2;
+		}
+		
+		//이전 버튼 ownerOrderManageFrm
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/market/orderManagement?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/market/orderManagement?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalMan) {
+				break;
+			}
+		}
+		
+		// 다음버튼
+		if(pageNo <= totalMan) {
+			pageNavi += "<a href='/market/orderManagement?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_right\r\n" + 
+					"            </span></a>"; 
+		}
+
+		HashMap<String, Object> orderMap = new HashMap<String, Object>();
+		System.out.println("서비스 orderMap : "+orderMap);
+		orderMap.put("list", list);
+		orderMap.put("reqPage", reqPage);
+		orderMap.put("pageNavi", pageNavi);
+		orderMap.put("total", totalPage);
+		orderMap.put("pageNo", pageNo);
+		
+		if(list == null) {
+			return null;
+		}else {
+			return orderMap;
+		}
+		
+	}
+
+
+
+	
 
 
 

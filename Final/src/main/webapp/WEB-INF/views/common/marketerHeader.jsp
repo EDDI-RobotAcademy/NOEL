@@ -20,7 +20,7 @@
 					<a href="/market/marketerProductMypage">상품 관리</a>
 				</div>
 				<div>
-					<a href="/market/orderManagement">주문 관리</a>
+					<a href="/market/orderManagementView?reqPage=1">주문 관리</a>
 				</div>
 				</c:if>
 

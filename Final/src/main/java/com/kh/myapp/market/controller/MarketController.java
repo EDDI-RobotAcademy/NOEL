@@ -63,18 +63,6 @@ public class MarketController {
 		model.addAttribute("prdlist", list);
 	}
 
-	// 판매자 주문관리 출력
-	@RequestMapping(value = "market/orderManagement")
-	public void orderManagement(Model model) throws Exception {
-	}
-
-	/*
-	 * // 판매자 관리화면 출력, 판매자 상품등록 리스트 출력
-	 *
-	 * @RequestMapping(value = "market/main", method = RequestMethod.GET) public
-	 * void getMarketer(Model model) throws Exception { List<ProductVO> list =
-	 * productService.list(); model.addAttribute("prdlist", list); }
-	 */
 	// 판매자 상품 등록폼
 	@RequestMapping(value = "/market/prd_add", method = RequestMethod.GET)
 	public void getPrdadd() throws Exception {

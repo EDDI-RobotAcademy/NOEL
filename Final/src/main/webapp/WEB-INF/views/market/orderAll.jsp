@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +9,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<link rel="stylesheet" href="/resources/css/product/myWishList.css">
-<link rel="stylesheet" href="/resources/css/member/orderManagement.css">
+<link rel="stylesheet"
+	href="/resources/css/member/orderManagementView.css">
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 </head>
 <body>
@@ -22,21 +23,21 @@
 					<div class="bookmarkList-wrap">
 						<div class="card">
 							<div class="card-body">
-								<div class="directoryDiv">mypage > 주문관리 > 주문상세</div>
+								<div class="directoryDiv">mypage > <a href="/market/orderManagementView?reqPage=1">주문관리</a> > 주문상세</div>
 								<br>
-								<h4>주문상세</h4>
+								<h1>주문 상세(모든 주문 건)</h1>
 								<div class="category1">
 									<a href="#" id="category_class">클래스</a>
 
 									<%--            <a href="/myBookmarkList.do?bookMarkId=${sessionScope.o.ownerId }&reqPage=1" style="color: gold;"> --%>
-									<a href="#" id="category_market">마켓</a>
+									<a href="/market/orderManagementView?reqPage=1"" id="category_market">마켓</a>
 								</div>
 
-								<%-- <c:choose>
+								<%-- 	<c:choose>
 							<c:when test="${empty list }">
 								<div class="warningMark">
 									<span class="material-symbols-outlined"
-										style="font-size: 30px;"> error </span>
+										style="font-size: 30px;"> 주문내역이 없습니다. </span>
 								</div>
 
 								<div class="noMsg">${msg }</div>
@@ -45,15 +46,15 @@
 							<c:otherwise> --%>
 								<div class="bookmark-content-list">
 									<form action="/searchOrderOwnerList.do?reqPage=1" method="post">
-										<select name="type" style="width: 100px; height: 32px;">
-											<option value="orderNo">주문번호</option>
-											<option value="id">아이디</option>
-										</select> <input type="text" name="keyword" style="height: 32px;">
-										<input type="submit" value="조회"
-											style="background-color: rgb(51, 51, 51); color: white; width: 40px;">
+										<div id="type">
+											<select class="type" name="type">
+												<option value="orderNo">상품명</option>
+												<option value="id">아이디</option>
+											</select> <input type="text" name="keyword" class="keywork"> <input
+												type="submit" value="조회" class="submitInput ">
+										</div>
 									</form>
-									<table class="table"
-										style="text-align: center; vertical-align: middle; margin-top: 20px;">
+									<table class="table" style="width: 800px;">
 										<tr>
 											<th scope="col">주문번호</th>
 											<th scope="col">아이디</th>
@@ -201,7 +202,7 @@
    <a href="#"><span class="material-symbols-outlined"  style="font-size: 30px;">
        chevron_right
        </span></a>  -->
-									${pageNavi }
+									<div id="pageNavi">${pageNavi }</div>
 
 								</div>
 							</div>
@@ -213,35 +214,5 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
 
-	<script type="text/javascript">
-		function deleteBookmark(obj, bmNo) {
-			if (confirm("삭제하시겠습니까?")) {
-				$.ajax({
-					url : "/deleteBookMarkNo.do",
-					type : "post",
-					data : {
-						bmNo : bmNo
-					},
-					success : function(data) {
-						console.log(data);
-						$(obj).parent().parent().remove();
-						console.log($(".list").length);
-						if ($(".list").length == 0) {
-							$(".bookmark-content-list").hide();
-							$(".warningMark1").css("display", "block");
-							$(".noMsg1").css("display", "block");
-							$(".noMsg1").show();
-							console.log($(".noMsg1").text());
-							$(".paging").hide();
-
-						}
-					}
-				})
-			} else {
-				console.log($(obj).text());
-			}
-
-		}
-	</script>
 </body>
 </html>
