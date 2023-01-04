@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="reserve">
+
+    <select id="selectReserveList" parameterType="map" resultType="com.kh.myapp.cl.model.vo.Reserve">
+        select book_no      as bookNo,
+               cl_no        as classNo,
+               book_name    as bookName,
+               book_date    as bookDate,
+               book_time    as bookTime,
+               book_num     as bookNum,
+               user_id      as userId
+        from noel_book
+        where user_id = #{userId}
+    </select>
+
+    <delete id="cancleReserve" parameterType="int">
+        delete from noel_book
+        where book_no = #{_parameter}
+    </delete>
+
+
+</mapper>

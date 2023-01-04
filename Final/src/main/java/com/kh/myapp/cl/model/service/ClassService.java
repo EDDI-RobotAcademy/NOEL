@@ -152,6 +152,23 @@ public class ClassService {
     public int reserve(Reserve r) {
         return dao.reserve(r);
     }
+    
+    public HashMap<String, Object> selectReserveList(int reqPage, String userId) {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("reqPage", reqPage);
+        map.put("userId", userId);
+        ArrayList<Reserve> list = dao.selectReserveList(map);
+
+        HashMap<String, Object> reserveMap = new HashMap<String, Object>();
+        reserveMap.put("list", list);
+
+        return reserveMap;
+
+    }
+
+    public int cancleReserve(int reserveNo) {
+        return dao.cancleReserve(reserveNo);
+    }
 
 
 }

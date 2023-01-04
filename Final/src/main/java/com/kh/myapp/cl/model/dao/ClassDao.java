@@ -99,6 +99,16 @@ public class ClassDao {
         Wishlist sbm = sqlSession.selectOne("classWishList.selectOneStoreBookmark", map);
         return sbm;
     }
+    
+  //예약관리
+    public ArrayList<Reserve> selectReserveList(HashMap<String, Object> map) {
+        List list = sqlSession.selectList("reserve.selectReserveList",map);
+        return (ArrayList<Reserve>) list;
+    }
+
+    public int cancleReserve(int reserveNo) {
+        return sqlSession.delete("cancleReserve", reserveNo);
+    }
 
 
 }
