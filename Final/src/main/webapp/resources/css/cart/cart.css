@@ -206,36 +206,12 @@ url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&
     border-left: 1px solid rgb(136, 136, 136);
 }
 
-input[type="checkbox"] {
-    -webkit-appearance: none;
-    position: relative;
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-    outline: none !important;
-    border: 2px solid #eee;
-    border-radius: 2px;
-    background: #fbfbfb;
-}
-
-input[type="checkbox"]::before {
-    content: "\2713";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    overflow: hidden;
-    transform: scale(0) translate(-50%, -50%);
-    line-height: 1;
-}
-
 input[type="checkbox"]:hover {
-    border-color: #eee;
+    border-color:  #dc3545;
 }
 
 input[type="checkbox"]:checked {
-    background-color: #eee;
-    border-color: #eee;
-    color: black;
+    accent-color: #dc3545; 
 }
 
 input[type="checkbox"]:checked::before {

@@ -1,6 +1,7 @@
 package com.kh.myapp.member.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,10 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.kh.myapp.market.model.service.ProductService;
+import com.kh.myapp.market.model.vo.ProductVO;
 import com.kh.myapp.member.model.service.MemberService;
 import com.kh.myapp.member.model.vo.Marketer;
 import com.kh.myapp.member.model.vo.Member;
+import com.kh.myapp.order.model.vo.OrderVO;
+import com.kh.myapp.order.model.vo.OrderlistVO;
 
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -30,6 +36,9 @@ public class MemberController {
 
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
+	
+	@Autowired
+	private ProductService productService;
 
 	@RequestMapping(value = "/joinFrm")
 	public String joinFrm() {
@@ -57,31 +66,30 @@ public class MemberController {
 		return "member/marketerJoinFrm";
 	}
 
-	@RequestMapping(value="/contentModal1")
+	@RequestMapping(value = "/contentModal1")
 	public String contentModal1() {
 		return "member/contentModal1";
 	}
-	@RequestMapping(value="/contentModal2")
+
+	@RequestMapping(value = "/contentModal2")
 	public String contentModal2() {
 		return "member/contentModal2";
 	}
 
-	@RequestMapping(value="/searchMemberFrm")
+	@RequestMapping(value = "/searchMemberFrm")
 	public String searchMemberFrm() {
 		return "member/searchMemberFrm";
 	}
 
-	@RequestMapping(value="/searchIdFrm")
+	@RequestMapping(value = "/searchIdFrm")
 	public String searchIdFrm() {
 		return "/member/searchIdFrm";
 	}
 
-	@RequestMapping(value="/searchPwFrm")
+	@RequestMapping(value = "/searchPwFrm")
 	public String searchPwFrm() {
 		return "/member/searchPwFrm";
 	}
-
-
 
 	@RequestMapping(value = "/checkId")
 	public String checkId(String checkId, Model model) {
@@ -115,7 +123,7 @@ public class MemberController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value="/memberPhoneCheck")
+	@RequestMapping(value = "/memberPhoneCheck")
 	public String memberPhoneCheck(String phone, Model model) throws CoolsmsException {
 
 		String api_key = "NCSNIQHLPIYDZDYO";
@@ -124,7 +132,7 @@ public class MemberController {
 
 		Random rand = new Random();
 		String numStr = "";
-		for(int i=0; i<4; i++) {
+		for (int i = 0; i < 4; i++) {
 			String ran = Integer.toString(rand.nextInt(10));
 			numStr += ran;
 		}
@@ -132,7 +140,7 @@ public class MemberController {
 		set.put("to", phone); // 수신번호
 
 		set.put("from", "01040753418"); // 발신번호
-		set.put("text","인증번호는 [" + numStr + "]입니다."); // 문자내용
+		set.put("text", "인증번호는 [" + numStr + "]입니다."); // 문자내용
 		set.put("type", "sms"); // 문자 타입
 		set.put("app_version", "test app 1.2");
 
@@ -148,8 +156,9 @@ public class MemberController {
 		return numStr;
 
 	}
+
 	@ResponseBody
-	@RequestMapping(value="/marketerPhoneCheck")
+	@RequestMapping(value = "/marketerPhoneCheck")
 	public String ownerPhoneCheck(String phone, Model model) throws CoolsmsException {
 
 		String api_key = "NCSNIQHLPIYDZDYO";
@@ -158,7 +167,7 @@ public class MemberController {
 
 		Random rand = new Random();
 		String numStr = "";
-		for(int i=0; i<4; i++) {
+		for (int i = 0; i < 4; i++) {
 			String ran = Integer.toString(rand.nextInt(10));
 			numStr += ran;
 		}
@@ -217,16 +226,15 @@ public class MemberController {
 		String inputPw = member.getUserPw();
 		Member m = service.selectOneMember(member);
 		boolean Pwmatches = pwEncoder.matches(inputPw, m.getUserPw());
-		if (m != null && Pwmatches == true){
+		if (m != null && Pwmatches == true) {
 			session.setAttribute("m", m);
 			return "redirect:/";
-		}else{
+		} else {
 			request.setAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
 			request.setAttribute("url", "/");
 		}
 		return "layouts/alert";
 	}
-
 
 	@RequestMapping(value = "/marketerLogin")
 	public String marketerLogin(Marketer marketer, HttpSession session, HttpServletRequest request) {
@@ -252,90 +260,89 @@ public class MemberController {
 		return "layouts/alert";
 	}
 
-	@RequestMapping(value="/searchNormalId")
+	@RequestMapping(value = "/searchNormalId")
 	public String searchNormalId(Member m, Model model) {
 		String userId = service.searchMemberId(m);
 		model.addAttribute("userId", userId);
-		if(userId != null) {
+		if (userId != null) {
 			model.addAttribute("result", false);
 			model.addAttribute("userId", userId);
-		}else {
+		} else {
 			model.addAttribute("result", true);
 			model.addAttribute("userId", userId);
 		}
 		return "member/searchIdResult";
 	}
 
-	@RequestMapping(value="/searchMarketerId")
+	@RequestMapping(value = "/searchMarketerId")
 	public String searchMarketerId(Marketer mk, Model model) {
 		String marketerId = service.searchMarketerId(mk);
 		model.addAttribute("marketerId", marketerId);
-		if(marketerId != null) {
+		if (marketerId != null) {
 			model.addAttribute("result", false);
 			model.addAttribute("marketerId", marketerId);
-		}else {
+		} else {
 			model.addAttribute("result", true);
 			model.addAttribute("marketerId", marketerId);
 		}
 		return "member/searchIdResult";
 	}
 
-
-	@RequestMapping(value="/searchNormalPw")
+	@RequestMapping(value = "/searchNormalPw")
 	public String searchNormalPw(Member member, Model model) {
 		String userId = service.searchNormalPw(member);
-		if(userId != null) {
+		if (userId != null) {
 			model.addAttribute("result", false);
 			model.addAttribute("userId", userId);
-		}else {
+		} else {
 			model.addAttribute("result", true);
 			model.addAttribute("userId", userId);
 		}
 		return "member/updateMemberPw";
 	}
 
-	@RequestMapping(value="/updateNormalPw")
+	@RequestMapping(value = "/updateNormalPw")
 	public String updateNormalPw(Member m) {
 		String inputPw = m.getUserPw();
 		String encodePw = pwEncoder.encode(inputPw);
 		m.setUserPw(encodePw);
 		int result = service.updatePwMember(m);
-		if(result > 0) {
+		if (result > 0) {
 			return "member/updatePwSuccess";
-		}else {
+		} else {
 			return "/";
 		}
 	}
 
-	@RequestMapping(value="/searchMarketerPw")
+	@RequestMapping(value = "/searchMarketerPw")
 	public String searchMarketerPw(Marketer marketer, Model model) {
 		String marketerId = service.searchMarketerPw(marketer);
-		if(marketerId != null) {
+		if (marketerId != null) {
 			model.addAttribute("result", false);
 			model.addAttribute("marketerId", marketerId);
-		}else {
+		} else {
 			model.addAttribute("result", true);
 			model.addAttribute("marketerId", marketerId);
 
 		}
 		return "member/updateMarketerPw";
 	}
-	@RequestMapping(value="/updateMarketerPw")
+
+	@RequestMapping(value = "/updateMarketerPw")
 	public String updateOwnerPw(Marketer mk) {
 		String inputPw = mk.getMarketerPw();
 		String encodePw = pwEncoder.encode(inputPw);
 		mk.setMarketerPw(encodePw);
 		int result = service.updatePwMarketer(mk);
-		if(result > 0) {
-			return"/member/updatePwSuccess";
-		}else {
+		if (result > 0) {
+			return "/member/updatePwSuccess";
+		} else {
 			return "/";
 		}
 	}
 
-
-	//최고관리자 > 회원관리
-	@RequestMapping(value="/memberManage")
+	// 최고관리자 > 회원관리
+	@RequestMapping(value = "/memberManage")
 	public String memberManage(Model model, Member m, int reqPage) {
 		HashMap<String, Object> map = service.selectMemberList(reqPage);
 		/* ArrayList<Notice> ncList = service.myPageNcList(); */
@@ -348,8 +355,8 @@ public class MemberController {
 		return "member/memberManage";
 	}
 
-	//최고관리자 > 업주관리
-	@RequestMapping(value="/adminMemberManage")
+	// 최고관리자 > 업주관리
+	@RequestMapping(value = "/adminMemberManage")
 	public String adminMemberManage(Model model, Marketer mk, int reqPage) {
 		HashMap<String, Object> map = service.selectMarketerList(reqPage);
 		/* ArrayList<Notice> ncList = service.myPageNcList(); */
@@ -362,28 +369,28 @@ public class MemberController {
 		return "member/admin";
 	}
 
-	//최고관리자 > 업주관리 > 업주레벨 지정
-	@RequestMapping(value="/updateMarketerLevel")
+	// 최고관리자 > 업주관리 > 업주레벨 지정
+	@RequestMapping(value = "/updateMarketerLevel")
 	public String updateMarketerLevel(String marketerId, Marketer mk, HttpServletRequest request) {
-		int result = service.updateMarketerLevel(marketerId,mk);
-		if(result>0) {
+		int result = service.updateMarketerLevel(marketerId, mk);
+		if (result > 0) {
 			request.setAttribute("msg", "판매자 승인처리가 되었습니다.");
 			request.setAttribute("url", "/adminMemberManage?reqPage=1");
 			return "layouts/alert";
-		}else {
+		} else {
 			return "redirect:/";
 		}
 	}
 
-	//최고관리자 > 회원관리 > 회원강제 탈퇴
-	@RequestMapping(value="/dropoutMember")
+	// 최고관리자 > 회원관리 > 회원강제 탈퇴
+	@RequestMapping(value = "/dropoutMember")
 	public String dropoutMember(String userId, Member m, HttpServletRequest request) {
-		int result = service.dropoutMember(userId,m);
-		if(result>0) {
+		int result = service.dropoutMember(userId, m);
+		if (result > 0) {
 			request.setAttribute("msg", "회원을 탈퇴 시켰습니다.");
 			request.setAttribute("url", "/memberManage?reqPage=1");
 			return "layouts/alert";
-		}else {
+		} else {
 			return "redirect:/";
 		}
 	}
@@ -399,62 +406,60 @@ public class MemberController {
 		}
 	}
 
-
-
-	@RequestMapping(value="/updateMember")
+	@RequestMapping(value = "/updateMember")
 	public String updateMember(Member m, HttpSession session, HttpServletRequest request) {
 		String inputPw = m.getUserPw();
 		String encodePw = pwEncoder.encode(inputPw);
 		m.setUserPw(encodePw);
 		int result = service.updateMember(m);
-		if(result > 0) {
+		if (result > 0) {
 			request.setAttribute("msg", "수정 되었습니다. 다시 로그인 해주세요.");
 			request.setAttribute("url", "/");
 			session.invalidate();
 			return "layouts/alert";
-		}else {
+		} else {
 			request.setAttribute("msg", "error");
 			request.setAttribute("url", "member/mypage");
 			return "layouts/alert";
 		}
 	}
 
-	@RequestMapping(value="/deleteMember")
+	@RequestMapping(value = "/deleteMember")
 	public String deleteMember(@RequestParam String userId, HttpServletRequest request) {
 		int result = service.deleteMember(userId);
-		if(result > 0) {
+		if (result > 0) {
 			return "redirect:/logout";
-		}else {
+		} else {
 			request.setAttribute("msg", "오류가 발생했습니다. 관리자에게 문의해주세요.");
 			request.setAttribute("url", "/");
 			return "layouts/alert";
 		}
 	}
 
-	@RequestMapping(value="/updateMarketer")
+	@RequestMapping(value = "/updateMarketer")
 	public String updateMarketer(Marketer mk, HttpSession session, HttpServletRequest request) {
 		String inputPw = mk.getMarketerPw();
 		String encodePw = pwEncoder.encode(inputPw);
 		mk.setMarketerPw(encodePw);
 		int result = service.updateMarketer(mk);
-		if(result > 0) {
+		if (result > 0) {
 			request.setAttribute("msg", "수정 되었습니다. 다시 로그인 해주세요.");
 			request.setAttribute("url", "/");
 			session.invalidate();
 			return "layouts/alert";
-		}else {
+		} else {
 			request.setAttribute("msg", "error");
 			request.setAttribute("url", "/marketerMypage");
 			return "layouts/alert";
 		}
 	}
 
-	@RequestMapping(value="/deleteMarketer")
+	@RequestMapping(value = "/deleteMarketer")
 	public String deleteMarketer(@RequestParam String marketerId, HttpServletRequest request) {
 		int result = service.deleteMarketer(marketerId);
-		if(result > 0) {
+		if (result > 0) {
 			return "redirect:/logout";
-		}else {
+		} else {
 			request.setAttribute("msg", "오류가 발생했습니다. 관리자에게 문의해주세요.");
 			request.setAttribute("url", "/");
 			return "layouts/alert";
@@ -462,10 +467,49 @@ public class MemberController {
 	}
 
 	// marketerMypage.jsp로 이동
-	@RequestMapping(value="/marketerMypage", method = RequestMethod.GET)
-	public String form()
-	{
+	@RequestMapping(value = "/marketerMypage", method = RequestMethod.GET)
+	public String form() {
 		return "/member/marketerMypage";
 	}
+
+	// 판매자 > 주문관리
+	@RequestMapping(value = "market/orderManagementView")
+	public String orderManagementView(Model model, OrderlistVO vo, int reqPage, @SessionAttribute Marketer mk) throws Exception {
+
+		//vo.setPrdStock(service.orderQuanAll(1));
+		List<OrderlistVO> list = service.selectAllOrderListPrd(mk.getMarketerId());
+		model.addAttribute("list",list);
+		
+		/*
+		 * String marketerNo = mk.getMarketerId(); HashMap<String, Object> map =
+		 * service.selectAllOrderListPrd(reqPage, marketerNo);
+		 * 
+		 * model.addAttribute("list", map.get("list"));
+		 * model.addAttribute("reqPage",reqPage);
+		 * model.addAttribute("pageNavi",map.get("pageNavi"));
+		 * model.addAttribute("total", map.get("total")); model.addAttribute("pageNo",
+		 * map.get("pageNo")); model.addAttribute("marketerNo", marketerNo);
+		 */
+		return "market/orderManagementView";
+
+	}
+	//판매자 > 주문관리 > 주문내역
+		@RequestMapping(value = "market/orderAll")
+		public void orderAll(Model model, int reqPage, @SessionAttribute Marketer mk) throws Exception {
+			
+			String marketerNo = mk.getMarketerId();
+			HashMap<String, Object> map = service.selectAllOrderListMarketer(reqPage, marketerNo);
+			System.out.println("컨트롤러 map : "+map);
+			
+			model.addAttribute("list", map.get("list"));
+			model.addAttribute("reqPage",reqPage);
+			model.addAttribute("pageNavi",map.get("pageNavi"));
+			model.addAttribute("total", map.get("total"));
+			model.addAttribute("pageNo", map.get("pageNo"));
+			model.addAttribute("marketerNo", marketerNo);
+			
+		}
+	
+
 
 }

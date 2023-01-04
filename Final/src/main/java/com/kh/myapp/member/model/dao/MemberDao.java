@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.myapp.member.model.vo.Marketer;
 import com.kh.myapp.member.model.vo.Member;
+import com.kh.myapp.order.model.vo.OrderVO;
 
 @Repository
 public class MemberDao {
@@ -123,6 +124,30 @@ public class MemberDao {
 		return sqlSession.delete("marketer.deleteMarketer", marketerId);
 
 	}
+
+	//판매자 > 주문관리
+	public List selectAllOrderListPrd(String marketerId) {
+		return sqlSession.selectList("order.selectAllOrderListPrd",marketerId);
+	}
+	
+	// 판매자 > 주문관리 > 주문 총 갯수
+		public int countAllOrder(String marketerId) {
+			return sqlSession.selectOne("order.AllOrderListMarketer",marketerId);
+		}
+	//판매자 > 주문관리 > 주문 상세내역(모든 주문 건)
+	public ArrayList<OrderVO> selectAllOrderList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("order.selectAllOrderList",map);
+		System.out.println("dao 출력 확인  : "+list);
+		return (ArrayList<OrderVO>) list;
+	}
+	
+	//판매자 > 주문관리, 총 주문수량
+	public int orderQuanAll(int prdNo) {
+		return sqlSession.selectOne("order.orderQuanAll",prdNo);
+	}
+	
+	
+	
 
 
 

@@ -158,7 +158,7 @@
 
 
 	<!-- 마켓 상품 카테고리 000 -->
-	<select id="selectTag" parameterType="map"	resultType="ProductVO">
+	<select id="selectTag" parameterType="map"	resultType="productVO">
 		select * from
 			(select row_number() over (order by rnum desc) as rnum1, rb.* from
 				(select rownum as rnum, b.* from
@@ -171,7 +171,7 @@
 						 prd_content as prdContent,
 						 prd_regdate as regDate,
 						 (select round(avg(rating),1) from noel_product_review r where r.prd_no =
-																			 p.prd_no)as rating,
+																			 p.prd_no) as rating,
 						 (select prd_img_path from noel_product_img pi where pi.prd_img_no = p.prd_no) 
 							 as prdthumNail 
 					from noel_product p order by prdNo desc) b

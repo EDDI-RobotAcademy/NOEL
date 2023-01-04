@@ -21,6 +21,7 @@
 		<typeAlias type="com.kh.myapp.market.model.vo.MarketQnaVO" alias="marketQnaVO"/>
 		<typeAlias type="com.kh.myapp.cart.model.vo.CartVO" alias="CartVO"/>
 		<typeAlias type="com.kh.myapp.order.model.vo.OrderVO" alias="OrderVO"/>
+		<typeAlias type="com.kh.myapp.order.model.vo.OrderlistVO" alias="OrderlistVO"/>
 		<typeAlias type="com.kh.myapp.market.model.vo.MarketQnaReplyVO" alias="marketQnaReplyVO"/>
 
 	</typeAliases>

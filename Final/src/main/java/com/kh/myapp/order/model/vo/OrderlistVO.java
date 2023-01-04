@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderVO {
+public class OrderlistVO {
 
     private int orderNo;
     private String userId;
@@ -25,5 +25,8 @@ public class OrderVO {
     private String prdthumNail;
     private String prdName;
     private String prdPrice;
+    private String marketerId;
+	private int prdAllStock;
+	private int prdStock;
 
 }
