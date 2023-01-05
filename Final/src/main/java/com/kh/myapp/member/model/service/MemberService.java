@@ -347,14 +347,83 @@ public class MemberService {
 		
 	}
 
+	//회원 > 주문관리 
+	public HashMap<String, Object> selectMyOrderList(int reqPage, String userId) {  
+		// 화면에 보여주는 게시물 수
+		int numPerPage = 10;
 
+		// 끝페이지
+		int end = numPerPage * reqPage;
 
-	
+		// 시작페이지
+		int start = (end - numPerPage) + 1;
 
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("userId", userId);
+		ArrayList<OrderVO> list = dao.selectMyOrderList(map);
+		int totalCnt = dao.countMyOrderList(userId);
+		int totalPage = 0;
+		if (totalCnt % numPerPage == 0) {
+			totalPage = totalCnt / numPerPage;
+		} else {
+			totalPage = totalCnt / numPerPage + 1;
+		}
 
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
+		// 페이지 네비게이션 제작 시작
+		String pageNavi = "<ul class='pagination circle-style'>";
+		// 이전 버튼
+		if (pageNo != 1) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/memberManage.do?reqPage=" + (pageNo - 1) + "' style='text-decoration:none;'>";
+			pageNavi += "<span class='material-icons'>chevron_left</span>";
+			pageNavi += "</a></li>";
+		}
+		// 페이지 숫자
+		for (int i = 0; i < pageNaviSize; i++) {
+			if (pageNo == reqPage) {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item active-page' href='/userOrderList?reqPage=" + pageNo + "' style='text-decoration:none;'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			} else {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item' href='/userOrderList?reqPage=" + pageNo + "' style='text-decoration:none;'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}
+			pageNo++;
+			if (pageNo > totalPage) {
+				break;
+			}
+		}
 
+		// 다음 버튼
+		if (pageNo <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/userOrderList?reqPage=" + pageNo + "'>";
+			pageNavi += "<span class='material-icons'>chevron_right</span>";
+			pageNavi += "</a></li>";
+		}
+		pageNavi += "</ul>";
+		ArrayList<OrderVO> uidCnt = dao.uidCnt(userId);
+		HashMap<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("list", list);
+		searchMap.put("reqPage", reqPage);
+		searchMap.put("pageNavi", pageNavi);
+		searchMap.put("total", totalPage);
+		searchMap.put("pageNo", pageNo);
+		searchMap.put("uidCnt", uidCnt);
+		return searchMap;
+		  
+	  }
 
-
-
+	public int cancleOrder(int orderNo) {
+		return dao.cancleOrder(orderNo);
+	}
+	 
 
 }

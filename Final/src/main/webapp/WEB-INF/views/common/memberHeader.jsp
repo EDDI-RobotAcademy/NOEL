@@ -15,7 +15,7 @@
                     <!-- <a href="/reserveList.do?reqPage=1">예약 내역</a> -->
                 </div>
                 <div>
-                    <a href="#">주문 내역</a>
+                    <a href="/userOrderList?&reqPage=1">주문 내역</a>
                     <!-- <a href="/orderList.do?reqPage=1">주문 내역</a> -->
                 </div>
                 <div>

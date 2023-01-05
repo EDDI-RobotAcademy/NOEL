@@ -73,4 +73,39 @@
     	where (select marketer_id from noel_product np where no.prd_no = np.prd_no) =#{marketerId}
     </select>
     
+    
+    <!-- 회원 > 주문관리 -->
+    <select id="selectMyOrderList" parameterType="map" resultType="OrderVO">
+    	select 
+    		order_no as orderNo,
+		    user_id as userId,
+		    order_quan as orderQuan,
+		    order_status as orderStatus,
+		    prd_no as prdNo,
+		    to_char(order_date, 'yyyy-mm-dd') as orderDate, 
+		    (select prd_name from noel_product mp where ot.prd_no = mp.prd_no) as prdName,
+		    (select prd_price from noel_product mp where ot.prd_no = mp.prd_no)*order_quan as prdPrice,
+            imp_uid as impUid
+        from noel_order ot 
+        where imp_uid in (select distinct imp_uid from noel_order where user_id= #{userId}) order by order_no
+    </select> 
+    
+    <select id="countMyOrderList" parameterType="string" resultType="int">
+		select count(*) as cnt from noel_order where user_id = #{userId}
+	</select>
+    
+    <select id="uidCnt" parameterType="string" resultType="OrderlistVO">
+		select 
+		imp_uid as impUid, 
+		count(*) as uidCount
+		from 
+		noel_order
+		where user_id = #{userId}
+		group by imp_uid
+	</select>
+	
+	<delete id="cancleOrder" parameterType="int">
+		delete from noel_order where order_no = #{orderNo}
+	</delete>
+    
 </mapper>
