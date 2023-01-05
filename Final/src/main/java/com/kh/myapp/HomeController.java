@@ -41,4 +41,10 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value="/aboutUs")
+	public String aboutUs()
+	{
+		return "aboutUs";
+	}
+	
 }
