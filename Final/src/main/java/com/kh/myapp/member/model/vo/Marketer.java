@@ -20,4 +20,5 @@ public class Marketer {
 	private String prdNo;	
 	private String clNo;	
 	private int marketerLevel;
+	private String marketerAddr;	
 }
