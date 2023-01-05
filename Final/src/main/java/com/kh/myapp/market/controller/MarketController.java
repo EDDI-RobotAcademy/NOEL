@@ -248,12 +248,13 @@ public class MarketController {
 
 	// 마켓 상품 상세 페이지 (리뷰 & qna 목록, 모달)
 	@RequestMapping(value = "/marketDetailView", method = RequestMethod.GET)
-	public String marketDetailView(Integer prdNo, Model model, @RequestParam("rnum") int rnum,
-			@RequestParam("qnum") int qnum) throws Exception {
-		logger.info("마켓 상세");
-		HashMap<String, Object> map = productService.selectOnePrd(prdNo);
+	public String marketDetailView(Integer prdNo, String bookmarkId, Model model, 
+					@RequestParam("rnum") int rnum, @RequestParam("qnum") int qnum) throws Exception {
+		logger.info("마켓 컨트롤러");
+		HashMap<String, Object> map = productService.selectOnePrd(prdNo, bookmarkId);
 		model.addAttribute("prd", map.get("prd"));
-
+		model.addAttribute("marketwish", map.get("marketwish"));
+		
 		// 해당상품의 리뷰 갯수, qna 갯수
 		int reviewcount = reviewService.reviewCount(prdNo);
 		int qnacount = qnaService.qnaCount(prdNo);

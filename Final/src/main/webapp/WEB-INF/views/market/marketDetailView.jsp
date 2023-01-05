@@ -130,7 +130,7 @@
       <%-- 상세정보 --%>
       <p class="menuTitle">CONTENT</p>
       <p class="menuSubTitle">상품 설명</p>
-      <br> <br>
+      <br>
       <div class="contentWrap2">${prd.prdContent}</div>
       <hr style="border: 1px">
    </div>
