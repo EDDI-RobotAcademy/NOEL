@@ -81,6 +81,12 @@ public class MemberDao {
 		int result = sqlSession.delete("member.dropout", m);
 		return result;
 	}
+	
+	//최고관리자 > 판매자관리 > 판매자탈퇴
+	public int dropoutMarketer(String marketer, Marketer mk) {
+		int result = sqlSession.delete("marketer.dropout", mk);
+		return result;
+	}
 
 	public String searchMemberId(Member m) {
 		return sqlSession.selectOne("member.searchMemberId",m);

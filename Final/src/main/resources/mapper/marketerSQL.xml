@@ -37,6 +37,13 @@
 		delete noel_marketer
       where marketer_id = #{marketerId}
 	</delete>
+	
+	<!-- 판매자 강제 탈퇴 -->
+	<delete id="dropout" parameterType="mk">
+		delete from noel_marketer
+		where marketer_id=#{marketerId}
+	</delete>
+	
 
 	<!-- 판매자 목록 -->
 	<select id="marketerList" parameterType="map" resultType="mk">

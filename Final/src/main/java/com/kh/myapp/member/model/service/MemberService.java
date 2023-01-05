@@ -208,6 +208,11 @@ public class MemberService {
 	public int dropoutMember(String userId, Member m) {
 		return dao.dropoutMember(userId,m);
 	}
+	
+	//최고관리자 > 판매자관리 > 판매자탈퇴
+	public int dropoutMarketer(String marketer, Marketer mk) {
+		return dao.dropoutMarketer(marketer,mk);
+	}
 
 	public String searchMemberId(Member m) {
 		return dao.searchMemberId(m);

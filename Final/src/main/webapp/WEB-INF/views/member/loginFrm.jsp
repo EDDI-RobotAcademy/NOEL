@@ -36,14 +36,14 @@
                             <div class="Linput01">
                                 <div>
                                     <label class="Llabel" for="userId">아이디</label>
-                                    <input type="text" name="userId" class="userId">
+                                    <input type="text" name="userId" id="userId">
                                 </div>
                             </div>                
                         </li>
                         <li>
                             <div class="Linput01">
                                 <label class="Llabel" for="userPw">비밀번호</label>
-                                <input type="password" name="userPw" class="userPw">
+                                <input type="password" name="userPw" id="userPw">
                             </div>
                         </li>
                         <button class="login-btn" type="submit">로그인</button>
