@@ -19,7 +19,7 @@
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link" href="#">About us</a>
+					<a class="nav-link" href="/aboutUs">About us</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/marketListFrm?reqPage=1">Market</a>
