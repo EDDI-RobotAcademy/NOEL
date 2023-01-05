@@ -284,6 +284,15 @@ li{
 	
 }
 
+/*일반회원 주문내역 없음*/
+.warningMark{
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	border-bottom: 2px solid #000;
+}
 
 
 

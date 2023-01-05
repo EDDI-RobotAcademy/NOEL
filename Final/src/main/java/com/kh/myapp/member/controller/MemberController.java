@@ -36,7 +36,7 @@ public class MemberController {
 
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
-	
+
 	@Autowired
 	private ProductService productService;
 
@@ -474,12 +474,13 @@ public class MemberController {
 
 	// 판매자 > 주문관리
 	@RequestMapping(value = "market/orderManagementView")
-	public String orderManagementView(Model model, OrderlistVO vo, int reqPage, @SessionAttribute Marketer mk) throws Exception {
+	public String orderManagementView(Model model, OrderlistVO vo, int reqPage, @SessionAttribute Marketer mk)
+			throws Exception {
 
-		//vo.setPrdStock(service.orderQuanAll(1));
+		// vo.setPrdStock(service.orderQuanAll(1));
 		List<OrderlistVO> list = service.selectAllOrderListPrd(mk.getMarketerId());
-		model.addAttribute("list",list);
-		
+		model.addAttribute("list", list);
+
 		/*
 		 * String marketerNo = mk.getMarketerId(); HashMap<String, Object> map =
 		 * service.selectAllOrderListPrd(reqPage, marketerNo);
@@ -493,23 +494,56 @@ public class MemberController {
 		return "market/orderManagementView";
 
 	}
-	//판매자 > 주문관리 > 주문내역
-		@RequestMapping(value = "market/orderAll")
-		public void orderAll(Model model, int reqPage, @SessionAttribute Marketer mk) throws Exception {
-			
-			String marketerNo = mk.getMarketerId();
-			HashMap<String, Object> map = service.selectAllOrderListMarketer(reqPage, marketerNo);
-			System.out.println("컨트롤러 map : "+map);
-			
-			model.addAttribute("list", map.get("list"));
-			model.addAttribute("reqPage",reqPage);
-			model.addAttribute("pageNavi",map.get("pageNavi"));
-			model.addAttribute("total", map.get("total"));
-			model.addAttribute("pageNo", map.get("pageNo"));
-			model.addAttribute("marketerNo", marketerNo);
-			
-		}
-	
 
+	// 판매자 > 주문관리 > 주문내역
+	@RequestMapping(value = "market/orderAll")
+	public void orderAll(Model model, int reqPage, @SessionAttribute Marketer mk) throws Exception {
+
+		String marketerNo = mk.getMarketerId();
+		HashMap<String, Object> map = service.selectAllOrderListMarketer(reqPage, marketerNo);
+		System.out.println("컨트롤러 map : " + map);
+
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("marketerNo", marketerNo);
+
+	}
+
+	// 회원 > 주문내역
+	@RequestMapping(value = "/userOrderList")
+	public String orderList(HttpSession session, int reqPage, Model model) {
+		
+		Member m = (Member) session.getAttribute("m");
+		String userId = m.getUserId();
+		HashMap<String, Object> map = service.selectMyOrderList(reqPage, userId);
+		
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("userId", userId);
+		model.addAttribute("uidCntList", map.get("uidCnt"));
+
+		return "/member/userOrderList";
+	}
+	
+	// 회원 > 주문 취소
+	@RequestMapping(value="/cancleOrder")
+	public String cancleOrder(int orderNo, HttpServletRequest request) {
+		int result = service.cancleOrder(orderNo);
+		if(result > 0) {
+			request.setAttribute("msg", "주문이 취소되었습니다.");
+			request.setAttribute("url", "/userOrderList?reqPage=1");
+			return "common/alert";
+		} else {
+			request.setAttribute("msg", "취소 중 문제가 발생했습니다.");
+			request.setAttribute("url", "/userOrderList?reqPage=1");
+			return "common/alert";
+		}
+	}
 
 }

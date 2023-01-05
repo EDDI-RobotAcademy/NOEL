@@ -94,12 +94,10 @@ public class ProductDAO {
 
 	public ArrayList<ProductVO> selectTag(HashMap<String, Object> map) {
 		List list = sql.selectList("productMapper.selectTag", map);
-		System.out.println("productDAO list : " + list);
 		return (ArrayList<ProductVO>) list;
 	}
 
 	public int countTagList(String category) {
-		System.out.println("productDAO category : " + category);
 		return sql.selectOne("productMapper.countTagList", category);
 	}
 	
