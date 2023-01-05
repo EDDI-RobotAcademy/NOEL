@@ -3,7 +3,7 @@ div{
     font-family: 'Gowun Dodum';
 }
 #product_wrap{
-    width:1320px;
+    width:1250px;
     margin:0 auto;
     flex-direction:column;
 }
@@ -12,7 +12,7 @@ div{
     padding-left: 10px;
     padding-right: 10px;
     position:relative;
-    width:1320px;
+    width:1250px;
     margin:0 auto;
 }
 .review-list{
@@ -66,7 +66,7 @@ div{
     padding-left: 10px;
     padding-right: 10px;
     position:relative;
-    width:1320px;
+    width:1250px;
     margin:0 auto;
 }
 .qna-list{
@@ -156,7 +156,7 @@ div{
 }
 
 .infoDiv1>img{
-    width:50%;
+    width:500px;
     height: 100%;
     display:inline;
     float:left;
@@ -196,7 +196,7 @@ div{
     width: 625px;
     margin-top: 20px;
     vertical-align: middle;
-    padding-left:20px;
+    padding-left:50px;
     padding-right:10px;
 }
 
@@ -206,7 +206,7 @@ div{
 }
 
 .productTable>tbody>tr>th{
-    width: 100px;
+    width: 150px;
     text-align: left;
     color:black;
 }
@@ -222,7 +222,7 @@ div{
     display:inline;
     float:left;
     line-height: 50px;
-    margin-left: 20px;
+    margin-left: 50px;
     margin-top:20px;
     border-top: 0.5px solid black;
 }
@@ -244,6 +244,7 @@ div{
     display:inline;
     float:left;
     margin-top:30px;
+    margin-left:50px;
 }
 
 .cartBtn, .wishBtn, .buyBtn, .loginBtn {
@@ -374,12 +375,12 @@ button[name=reserveBtn]:hover{
     font-family: Gowun Dodum;
     margin-top: 30px;
     height: 100%;
-    width: 1200px;
+    width: 1250px;
     margin-bottom: 100px;
     margin: 0 auto;
 }
 .testDiv{
-    width: 1200px;
+    width: 1250px;
     margin: 0 auto;
 }
 .menuTitle{

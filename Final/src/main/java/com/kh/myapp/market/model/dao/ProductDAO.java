@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.myapp.market.model.vo.MarketWishVO;
 import com.kh.myapp.market.model.vo.ProductImgVO;
 import com.kh.myapp.market.model.vo.ProductVO;
 
@@ -100,5 +101,11 @@ public class ProductDAO {
 	public int countTagList(String category) {
 		System.out.println("productDAO category : " + category);
 		return sql.selectOne("productMapper.countTagList", category);
+	}
+	
+	//상품상세에서 클릭한 위시 그대로 보여지도록
+	public MarketWishVO selectOneMarketWish(HashMap<String, Object> map) {
+		MarketWishVO marketwish = sql.selectOne("marketWish.selectOneMarketWish", map);
+		return marketwish;
 	}
 }

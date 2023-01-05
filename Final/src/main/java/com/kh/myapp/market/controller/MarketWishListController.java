@@ -26,7 +26,6 @@ public class MarketWishListController {
     @ResponseBody
     @RequestMapping(value="/insertMarketWish", produces = "application/json;charset=utf-8")
     public String insertMarketWish(MarketWishVO marketwish) {
-    	logger.info("marketwish insert 컨트롤러 : " + marketwish);
         int result = service.insertMarketWish(marketwish);
 
         if(result > 0) {
@@ -39,7 +38,6 @@ public class MarketWishListController {
     @ResponseBody
     @RequestMapping(value="/deleteMarketWish", produces = "application/json;charset=utf-8")
     public String deleteMarketWish(MarketWishVO marketwish) {
-    	logger.info("marketwish delete 컨트롤러 : " + marketwish);
         int result = service.deleteMarketWish(marketwish);
 
         if(result > 0) {
@@ -78,30 +76,3 @@ public class MarketWishListController {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

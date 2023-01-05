@@ -236,6 +236,7 @@
 }
 .prdList-tag-content>ul>li>a:hover{
     color: #dc3545;
+    text-decoration:none;
 }
 /* =====================================sort */
 .prdList-sort {
@@ -255,6 +256,7 @@
 
 .prdList-sort-content>form>ul:hover {
     cursor: pointer;
+    text-decoration:none;
 }
 
 .prdList-sort-content>form>ul {

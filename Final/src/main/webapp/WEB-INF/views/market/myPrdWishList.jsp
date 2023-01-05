@@ -7,15 +7,6 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <link rel="stylesheet" href="/resources/css/product/myWishList.css">
-
-    <!-- CSS only -->
-    <!-- <link
-       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-       rel="stylesheet">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet"
-       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-     -->
     <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 </head>
 <body>
@@ -50,23 +41,23 @@
                                  <c:choose>
                                     <c:when test="${not empty sessionScope.m }">
                                        <li class="list">
-                                       		<a href="marketDetailView?prdNo=${prd.prdNo }&bookmarkId=${sessionScope.m.userId}&num=1&rnum=1&qnum=1">
-                                             <div class="bookmark-content">
-                                                <div class="img-box">
-                                                   <img src="/resources/upload/prd/${prd.thumbNail }" alt="">
-                                                </div>
+                                     	   <a href="marketDetailView?prdNo=${prd.prdNo }&bookmarkId=${sessionScope.m.userId}&num=1&rnum=1&qnum=1">
+                                           <div class="bookmark-content">
+                                              <div class="img-box">
+                                                 <img src="resources/upload/product/${prd.thumbNail }" alt="">
+                                              </div>
 
-                                                <div class="bookmark-man">
-                                                   <ul>
-                                                      <li>${prd.prdName }</li>
-                                                      <li>${prd.prdPrice }</li>
-                                                   </ul>
-                                                </div>
-                                             </div>
-                                       		</a>
+                                              <div class="bookmark-man">
+                                                 <ul>
+                                                    <li><b>${prd.prdName }</b></li>
+                                                    <li>${prd.prdPrice }</li>
+                                                 </ul>
+                                              </div>
+                                           </div>
+                                     		</a>
                                           <div class="delBtn">
-                                             <button type="button" class="btn btn-danger"
-                                                onclick="deleteBookmark(this,${prd.prdNo})">삭제</button>
+                                             <button type="button" class="delButton" style="border:none; background:none;"
+                                                onclick="deleteBookmark(this,${prd.prdNo})"><b>삭제</b></button>
                                           </div>
                                        </li>
                                     </c:when>
@@ -88,10 +79,9 @@
                                              </div>
                                        </a>
                                           <div class="delBtn">
-                                             <button type="button" class="btn btn-danger"
-                                                style="width: 80px;"
+                                             <button type="button" class="btn btn-danger" style="width: 80px;"
                                                 onclick="deleteBookmark(this,${prd.prdNo})">삭제</button>
-                                          </div></li>
+                                          </div>
                                     </c:otherwise>
                                  </c:choose>
 
@@ -109,18 +99,18 @@
                 <div class="noMsg1" style="display: none;">아직 찜한 목록이 없습니다.</div>
 
                 <div class="paging">
-                    <!-- <a href="#"><span class="material-symbols-outlined" style="font-size: 30px;">
-               chevron_left
-               </span>
-           </a>
-           <a href="#"><span>1</span></a>
-           <a href="#"><span>2</span></a>
-           <a href="#"><span>3</span></a>
-           <a href="#"><span class="material-symbols-outlined"  style="font-size: 30px;">
-               chevron_right
-               </span></a>  -->
-                    <%--                   ${pageNavi }
---%>
+		                    <!-- <a href="#"><span class="material-symbols-outlined" style="font-size: 30px;">
+		               chevron_left
+		               </span>
+		           </a>
+		           <a href="#"><span>1</span></a>
+		           <a href="#"><span>2</span></a>
+		           <a href="#"><span>3</span></a>
+		           <a href="#"><span class="material-symbols-outlined"  style="font-size: 30px;">
+		               chevron_right
+		               </span></a>  -->
+		                    <%--                   ${pageNavi }
+							--%>
                 </div>
             </div>
         </div>
