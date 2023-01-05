@@ -394,6 +394,19 @@ public class MemberController {
 			return "redirect:/";
 		}
 	}
+	
+	//최고관리자 > 판매자관리 > 판매자강제 탈퇴
+	@RequestMapping(value="/dropoutMarketer")
+	public String dropoutMember(String marketerId, Marketer mk, HttpServletRequest request) {
+		int result = service.dropoutMarketer(marketerId,mk);
+		if(result>0) {
+			request.setAttribute("msg", "판매자 회원을 탈퇴 시켰습니다.");
+			request.setAttribute("url", "/adminMemberManage?reqPage=1");
+			return "layouts/alert";
+		}else {
+			return "redirect:/";
+		}
+	}
 
 	@RequestMapping(value = "/myPage")
 	public String mypage(HttpSession session, HttpServletRequest request, Member member) {

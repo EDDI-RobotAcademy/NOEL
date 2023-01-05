@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <!DOCTYPE html>
 <html>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -59,6 +60,27 @@
                                 <div class="Jinput01">
                                     <label class="label" for="marketerPw2">비밀번호를 한 번 더 입력해주세요.</label>
                                     <input type="password" id="marketerPw2" name="marketerPw2">
+                                <p class="text-note"></p>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li>
+                            <span class="tit">주소</span>
+                            <div class="cnt" style = "display: flex;">
+                                <div class="Jinput01" style = "width: 500px;">
+                                    <label class="label" for="marketerAddr1">주소를 입력해주세요</label>
+                                    <input type="text" id="marketerAddr1" name="marketerAddr1">
+                                </div>
+                            		<button style = "margin-top: 0px;" type="button" id="addrBtn" onclick="searchAddr();">주소찾기</button>
+                            </div>
+                        </li>
+                        <li style = "padding-top: 5px;">
+                            <div class="cnt">
+                                <div class="Jinput01" style = "width: 500px;">
+                                    <label class="label" for="marketerAddr2">상세 주소를 입력해주세요.</label>
+                                    <input type="text" id="marketerAddr2" name="marketerAddr2">
+                                    <input type="hidden" id="marketerAddr" name="marketerAddr">
                                 <p class="text-note"></p>
                                 </div>
                             </div>
@@ -179,10 +201,20 @@
 			$("[name=contentModal2]").submit();
 		});
 	
-	
-	
 		var idFlag = 0;
 		var phoneFlag = 0;
+		
+		  //주소 찾기 api
+	    function searchAddr() {
+	        new daum.Postcode({
+	            oncomplete : function(data) {
+	                console.log(data);
+	                //주소 합치기
+	                $("#marketerAddr1").val(
+	                    data.zonecode + " " + data.roadAddress);
+	                $("#marketerAddr1").focus();
+	            }
+	        }).open();}
 		
 		/*아이디 중복체크*/
 		$("#idChkBtn").on("click",function(){
@@ -389,6 +421,24 @@
 			      alert("이메일을 형식에 맞게 입력해주세요.");
 			    return false;
 			  }
+			  
+			// 주소 유효성 검사
+			  var marketerAddr1 =$("#marketerAddr1").val();
+			  var marketerAddr2 =$("#marketerAddr2").val();
+			  var marketerAddr = marketerAddr1+"*"+marketerAddr2;
+			  $("[name=marketerAddr]").val(marketerAddr);
+			 
+			  if(!marketerAddr1){
+			      alert("주소를 입력해주세요");
+			    $("#marketerAddr1").focus();
+			    return false;
+			  }
+			  if(!marketerAddr2){
+			      alert("상세주소를 입력해주세요");
+			    $("#marketerAddr2").focus();
+			    return false;
+			  }
+			
 			  
 		});
 		

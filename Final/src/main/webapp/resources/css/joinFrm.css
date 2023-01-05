@@ -80,6 +80,18 @@ input {
     transition: 0.5s;
 }
 
+#addrBtn{
+	margin-left: 10px;
+    right: 0;
+    top: 0;
+    height: 38px;
+    width: 103px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    transition: 0.5s;
+}
+
 .box01{
     float: left;
     width: 200px;

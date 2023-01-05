@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="marketer">
 	<insert id="insertMarketer" parameterType="mk">
-		insert into noel_marketer(MARKETER_ID, MARKETER_PW, MARKETER_NAME, MARKETER_TEL, MARKETER_EMAIL)
-		values( #{marketerId}, #{marketerPw}, #{marketerName}, #{marketerTel},#{marketerEmail})
+		insert into noel_marketer(MARKETER_ID, MARKETER_PW, MARKETER_NAME, MARKETER_TEL, MARKETER_EMAIL,MARKETER_ADDR)
+		values( #{marketerId}, #{marketerPw}, #{marketerName}, #{marketerTel},#{marketerEmail},#{marketerAddr})
 	</insert>
 
 	<select id="marketerCheckId" parameterType="string" resultType="string">
@@ -21,7 +21,8 @@
 			MARKETER_REGDATE as marketerRegdate,
 			marketer_level as marketerLevel,
 			marketer_email as marketerEmail,
-			MARKETER_AUTH as marketerAuth
+			MARKETER_AUTH as marketerAuth,
+			MARKETER_ADDR as marketerAddr
 		from noel_marketer
 		where marketer_id=#{marketerId}
 	</select>
@@ -37,6 +38,13 @@
 		delete noel_marketer
       where marketer_id = #{marketerId}
 	</delete>
+	
+	<!-- 판매자 강제 탈퇴 -->
+	<delete id="dropout" parameterType="mk">
+		delete from noel_marketer
+		where marketer_id=#{marketerId}
+	</delete>
+	
 
 	<!-- 판매자 목록 -->
 	<select id="marketerList" parameterType="map" resultType="mk">
@@ -48,7 +56,8 @@
 			marketer_regdate as marketer_Regdate,
 			marketer_level as marketerLevel,
 			marketer_email as marketerEmail,
-			marketer_auth as marketerAuth
+			marketer_auth as marketerAuth,
+			MARKETER_ADDR as marketerAddr
 		from(select rownum as rnum, n.* from (select * from noel_marketer) n)
 		where rnum between #{start} and #{end}
 	</select>
