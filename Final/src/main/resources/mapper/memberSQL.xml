@@ -44,7 +44,7 @@
 			user_name as userName,
 			user_tel as userTel,
 			user_regdate as userRegdate
-		from(select rownum as rnum, n.* from (select * from noel_user) n)
+		from(select rownum as rnum, n.* from (select * from noel_user order by user_regdate desc) n)
 		where rnum between #{start} and #{end}
 	</select>
 
