@@ -47,7 +47,8 @@
                             <input type="hidden" name="cartNo" value="${Cart.cartNo }" >
                             <input class="pNo" type="hidden" name="prdNo" value="${Cart.prdNo }">
                         </td>
-                        <td class="pImg" style="text-align: center"><img src="/resources/upload/product/${Cart.prdthumNail }" ></td>
+                        <td class="pImg" style="text-align: center">
+                        	<img src="resources/upload/product/${Cart.prdthumNail }" ></td>
                         <td style="text-align: center">
                             <input type="hidden" name="prdName" value="${Cart.prdName }">
                                 ${Cart.prdName }

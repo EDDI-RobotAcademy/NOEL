@@ -61,8 +61,8 @@
 												</tr>
 												<c:forEach items="${list }" var="ol">
 													<tr>
-														<td><a
-															href="/market/orderPrd?reqPage=1&prdNo=${ol.prdNo}">${ol.prdName}</a></td>
+														<td>
+															<a href="/market/orderPrd?reqPage=1&prdNo=${ol.prdNo}">${ol.prdName}</a></td>
 														<td>${ol.prdAllStock}</td>
 														<td>${ol.prdStock}</td>
 														<td>남은 재고 넣을 것</td>

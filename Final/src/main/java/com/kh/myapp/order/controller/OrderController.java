@@ -1,5 +1,7 @@
 package com.kh.myapp.order.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +20,7 @@ public class OrderController {
 
     //상품 디테일 → 구매하기 → 배송지 입력
     @RequestMapping(value = "/insertOrder")
-    public String insertOrder(OrderVO vo, Model model) {
+    public String insertOrder(OrderVO vo, Model model, @SessionAttribute Member m) {
         model.addAttribute("Order", vo);
         return "order/order";
     }

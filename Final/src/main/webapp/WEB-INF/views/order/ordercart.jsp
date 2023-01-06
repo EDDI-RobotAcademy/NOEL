@@ -45,7 +45,7 @@
                 <c:forEach items="${list }" var="Cart">
                     <tr class="showCartList" id="font">
 
-                        <td class="pImg" style="text-align:center"><img src="/resources/upload/product/${Cart.prdthumNail }"></td>
+                        <td class="pImg" style="text-align:center"><img src="resources/upload/product/${Cart.prdthumNail }"></td>
                         <td style="text-align: center">${Cart.prdName }</td>
                         <td class="pPrice" style="text-align: center"><fmt:formatNumber
                                 value="${Cart.prdPrice}" pattern="#,###" /></td>
