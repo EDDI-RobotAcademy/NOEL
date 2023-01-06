@@ -125,15 +125,28 @@
     margin-left: 10px;
 }
 
+input[type="checkbox" i]:checked {
+    accent-color: #dc3545;    ;
+
+}
+
 .order-agree+label > i {
     color: transparent;
     font-size: 16px;
     font-weight: 900;
 }
 
-.order-agree:checked+label {
-    background-color: #eee;
+.order-agree:checked+label { 
+    border-color:  #dc3545;
+	background-color: black;
 }
+
+
+input[type="checkbox"]:checked::before {
+    border-radius: 2px;
+    transform: scale(1) translate(-50%, -50%)
+}
+
 
 .order-agree:checked+label > i {
     display: inline;

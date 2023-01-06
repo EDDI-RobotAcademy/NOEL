@@ -26,7 +26,7 @@
 								<div class="directoryDiv">mypage > 주문관리 > 주문상세</div>
 								<br>
 								<h1>주문 상세</h1>
-								<h5>상품명 : ${prdName}</h5>
+								<h5>상품명 : </h5>
 								<%-- <c:forEach items="${list }" var="ol">
 									<h1>주문 상세</h1>
 									<h5>&nbsp;&nbsp;상품명 : ${ol.prdName }</h5>
