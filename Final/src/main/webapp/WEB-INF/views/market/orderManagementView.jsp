@@ -25,10 +25,10 @@
 								<br>
 								<h1>주문 관리</h1>
 								<div class="category1">
-									<a href="#" id="category_class">클래스</a>
+									<a href="/market/orderManagementView?reqPage=1" id="category_class">상품 별 주문</a>
 
 									<%--            <a href="/myBookmarkList.do?bookMarkId=${sessionScope.o.ownerId }&reqPage=1" style="color: gold;"> --%>
-									<a href="/market/orderManagementView?reqPage=1" id="category_market">마켓</a>
+									<a href="/market/orderAll?reqPage=1" id="category_market">전체 주문</a>
 								</div>
 
 								<%-- 	<c:choose>
@@ -45,7 +45,6 @@
 								<div class="bookmark-content-list">
 									<form action="/searchOrderOwnerList.do?reqPage=1" method="post">
 										<div id="type">
-										<a href="/market/orderAll?reqPage=1" class="btn btn-brand" id="font">모든 주문</a>
 											<select class="type" name="type">
 												<option value="orderNo">상품명</option>
 												<option value="id">아이디</option>
@@ -63,7 +62,7 @@
 										</tr>
 										<c:forEach items="${list }" var="ol">
 											<tr>
-												<td><a href="/market/orderManagement?prdNo=${ol.prdNo}">${ol.prdName}</a></td>
+												<td><a href="/market/orderPrd?reqPage=1&prdNo=${ol.prdNo}">${ol.prdName}</a></td>
 												<td>${ol.prdAllStock}</td>
 												<td>${ol.prdStock} </td>
 												<td>남은 재고 넣을 것</td>

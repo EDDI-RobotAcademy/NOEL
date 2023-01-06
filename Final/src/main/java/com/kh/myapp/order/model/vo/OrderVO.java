@@ -1,5 +1,7 @@
 package com.kh.myapp.order.model.vo;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,7 @@ public class OrderVO {
 
     private int orderNo;
     private String userId;
-    private String orderDate;
+    private Date orderDate;
     private int orderQuan;
     private String orderStatus;
     private String shippingName;

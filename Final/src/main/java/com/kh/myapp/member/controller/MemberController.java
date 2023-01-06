@@ -36,7 +36,7 @@ public class MemberController {
 
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
-	
+
 	@Autowired
 	private ProductService productService;
 
@@ -474,12 +474,13 @@ public class MemberController {
 
 	// 판매자 > 주문관리
 	@RequestMapping(value = "market/orderManagementView")
-	public String orderManagementView(Model model, OrderlistVO vo, int reqPage, @SessionAttribute Marketer mk) throws Exception {
+	public String orderManagementView(Model model, OrderlistVO vo, int reqPage, @SessionAttribute Marketer mk)
+			throws Exception {
 
-		//vo.setPrdStock(service.orderQuanAll(1));
+		// vo.setPrdStock(service.orderQuanAll(1));
 		List<OrderlistVO> list = service.selectAllOrderListPrd(mk.getMarketerId());
-		model.addAttribute("list",list);
-		
+		model.addAttribute("list", list);
+
 		/*
 		 * String marketerNo = mk.getMarketerId(); HashMap<String, Object> map =
 		 * service.selectAllOrderListPrd(reqPage, marketerNo);
@@ -493,23 +494,46 @@ public class MemberController {
 		return "market/orderManagementView";
 
 	}
-	//판매자 > 주문관리 > 주문내역
-		@RequestMapping(value = "market/orderAll")
-		public void orderAll(Model model, int reqPage, @SessionAttribute Marketer mk) throws Exception {
-			
-			String marketerNo = mk.getMarketerId();
-			HashMap<String, Object> map = service.selectAllOrderListMarketer(reqPage, marketerNo);
-			System.out.println("컨트롤러 map : "+map);
-			
-			model.addAttribute("list", map.get("list"));
-			model.addAttribute("reqPage",reqPage);
-			model.addAttribute("pageNavi",map.get("pageNavi"));
-			model.addAttribute("total", map.get("total"));
-			model.addAttribute("pageNo", map.get("pageNo"));
-			model.addAttribute("marketerNo", marketerNo);
-			
-		}
-	
 
+	// 판매자 > 주문관리 > 주문내역(모든상품)
+	@RequestMapping(value = "market/orderAll")
+	public void orderAll(Model model, int reqPage, @SessionAttribute Marketer mk) throws Exception {
+
+		String marketerNo = mk.getMarketerId();
+		HashMap<String, Object> map = service.selectAllOrderListMarketer(reqPage, marketerNo);
+
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("marketerNo", marketerNo);
+
+	}
+
+	// 판매자 > 주문관리 > 상품 별 주문내역
+	@RequestMapping(value = "market/orderPrd")
+	public void orderPrd(OrderlistVO vo, Model model, int reqPage, @SessionAttribute Marketer mk) throws Exception {
+
+		String marketerNo = mk.getMarketerId();
+		int prdNo = vo.getPrdNo();
+		HashMap<String, Object> map = service.selectOrderPrdListMarketer(reqPage, prdNo);
+
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("marketerNo", marketerNo);
+	}
+
+	// 판매자 > 주문관리 > 배송상태 지정
+	@RequestMapping(value = "/market/updateOrderLevel")
+	public String updateOrderLevel(OrderlistVO vo, int prdNo) {
+		System.out.println("주문번호" + vo);
+		int result = service.updateOrderLevel(vo);
+
+		return "redirect:/market/orderPrd?reqPage=1&prdNo="+prdNo;
+	}
 
 }
