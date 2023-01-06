@@ -153,12 +153,22 @@ public class MemberDao {
 	}
 	
 	
-	
-
-
-
-
-
-
-
+	//회원 > 주문관리
+	public ArrayList<OrderVO> selectMyOrderList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("order.selectMyOrderList", map);
+		System.out.println("memberdao list : " + list);
+		return (ArrayList<OrderVO>) list;
+	}
+	//회원 > 주문관리, 총 주문수량
+	public int countMyOrderList(String userId) {
+		return sqlSession.selectOne("order.countMyOrderList", userId) ;
+	}
+	//회원 > 주문관리 uid 개수
+	public ArrayList<OrderVO> uidCnt(String userId) {
+		List list = sqlSession.selectList("order.uidCnt", userId);
+		return null;
+	}
+	public int cancleOrder(int orderNo) {
+		return sqlSession.delete("order.cancleOrder", orderNo);
+	}
 }
