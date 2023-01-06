@@ -394,16 +394,16 @@ public class MemberController {
 			return "redirect:/";
 		}
 	}
-	
-	//최고관리자 > 판매자관리 > 판매자강제 탈퇴
-	@RequestMapping(value="/dropoutMarketer")
+
+	// 최고관리자 > 판매자관리 > 판매자강제 탈퇴
+	@RequestMapping(value = "/dropoutMarketer")
 	public String dropoutMember(String marketerId, Marketer mk, HttpServletRequest request) {
-		int result = service.dropoutMarketer(marketerId,mk);
-		if(result>0) {
+		int result = service.dropoutMarketer(marketerId, mk);
+		if (result > 0) {
 			request.setAttribute("msg", "판매자 회원을 탈퇴 시켰습니다.");
 			request.setAttribute("url", "/adminMemberManage?reqPage=1");
 			return "layouts/alert";
-		}else {
+		} else {
 			return "redirect:/";
 		}
 	}
@@ -490,7 +490,6 @@ public class MemberController {
 	public String orderManagementView(Model model, OrderlistVO vo, int reqPage, @SessionAttribute Marketer mk)
 			throws Exception {
 
-		// vo.setPrdStock(service.orderQuanAll(1));
 		List<OrderlistVO> list = service.selectAllOrderListPrd(mk.getMarketerId());
 		model.addAttribute("list", list);
 
@@ -508,14 +507,12 @@ public class MemberController {
 
 	}
 
-	// 판매자 > 주문관리 > 주문내역
+	// 판매자 > 주문관리 > 주문내역(모든상품)
 	@RequestMapping(value = "market/orderAll")
 	public void orderAll(Model model, int reqPage, @SessionAttribute Marketer mk) throws Exception {
 
 		String marketerNo = mk.getMarketerId();
 		HashMap<String, Object> map = service.selectAllOrderListMarketer(reqPage, marketerNo);
-		System.out.println("컨트롤러 map : " + map);
-
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));
@@ -525,14 +522,27 @@ public class MemberController {
 
 	}
 
+	// 판매자 > 주문관리 > 상품 별 주문내역
+	@RequestMapping(value = "market/orderPrd")
+	public void orderPrd(OrderlistVO vo, Model model, int reqPage, @SessionAttribute Marketer mk) throws Exception {
+
+		String marketerNo = mk.getMarketerId();
+		int prdNo = vo.getPrdNo();
+		HashMap<String, Object> map = service.selectOrderPrdListMarketer(reqPage, prdNo);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+	}
+
 	// 회원 > 주문내역
 	@RequestMapping(value = "/userOrderList")
 	public String orderList(HttpSession session, int reqPage, Model model) {
-		
+
 		Member m = (Member) session.getAttribute("m");
 		String userId = m.getUserId();
 		HashMap<String, Object> map = service.selectMyOrderList(reqPage, userId);
-		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));
@@ -540,15 +550,25 @@ public class MemberController {
 		model.addAttribute("pageNo", map.get("pageNo"));
 		model.addAttribute("userId", userId);
 		model.addAttribute("uidCntList", map.get("uidCnt"));
-
 		return "/member/userOrderList";
+
 	}
-	
+
+	// 판매자 > 주문관리 > 배송상태 지정
+
+	@RequestMapping(value = "/market/updateOrderLevel")
+	public String updateOrderLevel(OrderlistVO vo, int prdNo) {
+		System.out.println("주문번호" + vo);
+		int result = service.updateOrderLevel(vo);
+		return "redirect:/market/orderPrd?reqPage=1&prdNo=" + prdNo;
+	}
+
 	// 회원 > 주문 취소
-	@RequestMapping(value="/cancleOrder")
+	@RequestMapping(value = "/cancleOrder")
 	public String cancleOrder(int orderNo, HttpServletRequest request) {
 		int result = service.cancleOrder(orderNo);
-		if(result > 0) {
+		System.out.println("컨트롤러:"+orderNo);
+		if (result > 0) {
 			request.setAttribute("msg", "주문이 취소되었습니다.");
 			request.setAttribute("url", "/userOrderList?reqPage=1");
 			return "common/alert";

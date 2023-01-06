@@ -26,23 +26,17 @@
 								<div class="directoryDiv">mypage > 주문관리 > 주문상세</div>
 								<br>
 								<h1>주문 상세</h1>
-								<h5>&nbsp;&nbsp;모든상품</h5>
+								<h5>상품명 : ${prdName}</h5>
+								<%-- <c:forEach items="${list }" var="ol">
+									<h1>주문 상세</h1>
+									<h5>&nbsp;&nbsp;상품명 : ${ol.prdName }</h5>
+								</c:forEach> --%>
 								<div class="category1">
 									<a href="/market/orderManagementView?reqPage=1"
 										id="category_class">상품 별 주문</a> <a
 										href="/market/orderAll?reqPage=1" id="category_market">전체
 										주문</a>
 								</div>
-
-								<c:choose>
-									<c:when test="${empty list }">
-										<div class="warningMark">
-											<span class="material-symbols-outlined"
-												style="font-size: 30px;"> 주문내역이 없습니다. </span>
-										</div>
-									</c:when>
-
-									<c:otherwise>
 										<div class="bookmark-content-list">
 											<form action="/searchOrderOwnerList.do?reqPage=1"
 												method="post">
@@ -54,6 +48,16 @@
 													<input type="submit" value="조회" class="submitInput ">
 												</div>
 											</form>
+												<c:choose>
+									<c:when test="${empty list }">
+										<table class="table" style="width: 800px;">
+										<tr style="font-size: 50px;">주문내역이 없습니다. <tr>
+										
+										</table>
+									</c:when>
+
+									<c:otherwise>
+											
 											<table class="table" style="width: 800px;">
 												<tr>
 													<th scope="col">주문번호</th>
@@ -74,10 +78,11 @@
 														<td>${ol.orderQuan}</td>
 														<td><fmt:formatNumber value="${ol.orderPrice}" pattern="#,###"/></td>
 
-														<form
-															action="/updateOrderLevel.do?orderNo=${ol.orderNo}&reqPage=1"
-															method="post">
-														<td class="orderStatusTd"><c:choose>
+														<form action="/market/updateOrderLevel" method="post">
+															<input type="hidden" name="orderNo" value="${ol.orderNo}">
+															<input type="hidden" name="orderNo" value="${ol.prdNo}">
+														<td class="orderStatusTd">
+															<c:choose>
 																<c:when test="${ol.orderStatus eq '배송준비중'}">
 																	<select name="orderStatus" class="selectbox">
 																		<option value="배송준비중" selected>배송준비중</option>
@@ -124,6 +129,12 @@
 		</article>
 	</div>
 	<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
-
+<script type="text/javascript">
+<script>
+$(".saveBtn").on("click",function(){
+	var selectValue= $(".selectbox").val();
+});
+</script>
+</script>
 </body>
 </html>

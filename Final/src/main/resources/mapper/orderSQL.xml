@@ -1,111 +1,163 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="order">
-    <!-- 주문 및 결제 -->
-    <insert id="nextOrder" parameterType="OrderVO">
-        insert into noel_order values(
-                                         order_seq.nextval,
-                                         #{userId},
-                                         to_char(sysdate,'yyyy-mm-dd'),
-                                         #{orderQuan},
-                                         '배송준비중',
-                                         #{shippingName},
-                                         #{shippingAddr},
-                                         #{shippingPhone},
-                                         #{impUid},
-                                         #{prdNo},
-                                         #{orderPrice}
-                                     )
-    </insert>
-    <!-- 결제 성공 시 장바구니에서 삭제 -->
-    <delete id="deleteCartAll" parameterType="String">
-        delete from noel_cart where user_id=#{userId}
-    </delete>
-      <!-- 판매자 > 주문관리 -->
-      <select id="selectAllOrderListPrd" parameterType="string" resultType="OrderlistVO">
-      	 select 
-      	 	order_no as orderNo,
-      	 	user_id as userId,
-	        order_quan as orderQuan,
-	        order_status as orderStatus,
-	         order_date as orderDate ,
-	         order_price as orderPrice,
-	         prd_name as prdName
-	        from noel_order no join noel_product np on no.prd_no = np.prd_no
-        where marketer_id= #{marketerId}
-        order by order_date desc
-        
-      </select>
-      
-      
-      <!-- 판매자 > 주문관리, 총 주문수량 -->
-      <select id="orderQuanAll" parameterType="int" resultType="OrderlistVO">
-       select sum(order_quan) as prdStock
-       from noel_order
-       where prd_no = #{prdNo}
-      </select>
-      
-      
-     <!-- 판매자 > 주문관리 >주문 상세내역 -->
-    <select id="selectAllOrderList" parameterType="map" resultType="OrderVO">
-   	select 
-    		order_no as orderNo,
-    		user_id as userId,
-    		order_date as orderDate,
-    		order_quan as orderQuan,
-    		order_status as orderStatus,
-    		(select prd_price from noel_product np where ot.prd_no = np.prd_no )*order_quan as orderPrice,
-    		(select prd_name from noel_product np where ot.prd_no = np.prd_no ) as prdName,
-    		(select prd_price from noel_product np where ot.prd_no = np.prd_no ) as prdPrice,
-    		(select marketer_id from noel_product np where ot.prd_no = np.prd_no) as marketerId
-    	from (select rownum as rnum, n.* from (select * from noel_order order by order_date desc) n )ot
-    	<!-- where (select marketer_id from noel_product np where ot.prd_no = np.prd_no) = #{marketerId} -->
-    	where rnum between #{start} and #{end}
-    		
-    </select>
-    
-     
-    <!--  판매자 > 주문관리 > 주문 총 갯수 -->
-    <select id="AllOrderListMarketer" parameterType="map" resultType="int" >
-    	select 
-    		count(*)
-    	from noel_order no
-    	where (select marketer_id from noel_product np where no.prd_no = np.prd_no) =#{marketerId}
-    </select>
-    
-    
-    <!-- 회원 > 주문관리 -->
-    <select id="selectMyOrderList" parameterType="map" resultType="OrderVO">
-    	select 
-    		order_no as orderNo,
-		    user_id as userId,
-		    order_quan as orderQuan,
-		    order_status as orderStatus,
-		    prd_no as prdNo,
-		    to_char(order_date, 'yyyy-mm-dd') as orderDate, 
-		    (select prd_name from noel_product mp where ot.prd_no = mp.prd_no) as prdName,
-		    (select prd_price from noel_product mp where ot.prd_no = mp.prd_no)*order_quan as prdPrice,
-            imp_uid as impUid
-        from noel_order ot 
-        where imp_uid in (select distinct imp_uid from noel_order where user_id= #{userId}) order by order_no
-    </select> 
-    
-    <select id="countMyOrderList" parameterType="string" resultType="int">
-		select count(*) as cnt from noel_order where user_id = #{userId}
+	<!-- 주문 및 결제 -->
+	<insert id="nextOrder" parameterType="OrderVO">
+		insert into noel_order
+		values(
+		order_seq.nextval,
+		#{userId},
+		to_char(sysdate,'yyyy-mm-dd'),
+		#{orderQuan},
+		'배송준비중',
+		#{shippingName},
+		#{shippingAddr},
+		#{shippingPhone},
+		#{impUid},
+		#{prdNo},
+		#{orderPrice}
+		)
+	</insert>
+	<!-- 결제 성공 시 장바구니에서 삭제 -->
+	<delete id="deleteCartAll" parameterType="String">
+		delete from noel_cart
+		where user_id=#{userId}
+	</delete>
+	
+<!-- 판매자 > 주문관리 -->
+	<select id="selectAllOrderListPrd" parameterType="string"
+		resultType="OrderlistVO">
+		select
+			prd_no as prdNo,
+			prd_name as prdName,
+			prd_stock as
+			prdAllStock
+			from noel_product
+		where marketer_id= #{marketerId}
+		order by prd_regdate desc
+
 	</select>
-    
-    <select id="uidCnt" parameterType="string" resultType="OrderlistVO">
-		select 
-		imp_uid as impUid, 
+
+	<!-- 판매자 > 주문관리 >상품 별 주문상세 -->
+	<select id="selectOrderPrdList" parameterType="map"
+		resultType="OrderlistVO">
+		select
+			order_no as orderNo,
+			user_id as userId,
+			order_quan as orderQuan,
+			to_char(order_date, 'yyyy-mm-dd') as orderDate,
+			order_status as orderStatus,
+			order_price as orderPrice,
+			(select prd_name from noel_product np where ot.prd_no = np.prd_no) as prdName
+			from (select rownum as rnum, n.* from (select * from noel_order order by
+			order_date desc) n )ot
+		where prd_no = #{prdNo} and rnum between #{start} and #{end}
+	</select>
+
+
+	<!-- 판매자 > 주문관리, 총 주문수량 -->
+	<select id="orderQuanAll" parameterType="int"
+		resultType="OrderlistVO">
+		select sum(order_quan) as prdStock
+		from noel_order
+		where
+		prd_no = #{prdNo}
+	</select>
+
+	<!-- 판매자 > 주문관리 > 주문 총 갯수 -->
+	<select id="AllOrderListMarketer" parameterType="map"
+		resultType="int">
+		select
+		count(*)
+		from noel_order no
+		where (select marketer_id from noel_product np where no.prd_no = np.prd_no)
+		=#{marketerId}
+	</select>
+
+	<!-- 판매자 > 주문관리 >각 상품별 주문 총 갯수 -->
+	<select id="PrdOrderListMarketer" parameterType="map"
+		resultType="int">
+		select
+		count(*)
+		from noel_order no
+		where (select prd_no from
+		noel_product np where no.prd_no = np.prd_no)
+		=#{prdNo}
+	</select>
+
+	<!-- 판매자 > 주문관리 > 배송상태 지정 -->
+	<update id="updateOrder" parameterType="OrderlistVO">
+		update noel_order no
+		set
+		order_status =#{orderStatus}
+		where order_no =#{orderNO}
+	</update>
+
+	<!-- 판매자 > 주문관리 >주문 상세내역 -->
+	<select id="selectAllOrderList" parameterType="map"
+		resultType="OrderVO">
+		select
+		order_no as orderNo,
+		user_id as userId,
+		to_char(order_date, 'yyyy-mm-dd') as orderDate,
+		order_quan as orderQuan,
+		order_status as orderStatus,
+		(select prd_price from noel_product np where ot.prd_no = np.prd_no
+		)*order_quan as orderPrice,
+		(select prd_name from noel_product np where ot.prd_no = np.prd_no ) as
+		prdName,
+		(select prd_price from noel_product np where ot.prd_no = np.prd_no ) as
+		prdPrice,
+		(select marketer_id from noel_product np where ot.prd_no = np.prd_no) as
+		marketerId
+		from (select rownum as rnum, n.* from (select * from noel_order order by
+		order_date desc) n )ot
+		<!-- where (select marketer_id from noel_product np where ot.prd_no = np.prd_no) 
+			= #{marketerId} -->
+		where rnum between #{start} and #{end}
+
+	</select>
+
+	<!-- 회원 > 주문관리 -->
+	<select id="selectMyOrderList" parameterType="map"
+		resultType="OrderVO">
+		select
+		order_no as orderNo,
+		user_id as userId,
+		order_quan as orderQuan,
+		order_status as orderStatus,
+		prd_no as prdNo,
+		to_char(order_date, 'yyyy-mm-dd') as orderDate,
+		(select prd_name from noel_product mp where ot.prd_no = mp.prd_no) as
+		prdName,
+		(select prd_price from noel_product mp where ot.prd_no =
+		mp.prd_no)*order_quan as prdPrice,
+		imp_uid as impUid
+		from noel_order ot
+		where imp_uid in (select distinct imp_uid from noel_order where user_id=
+		#{userId}) order by order_no
+	</select>
+
+	<select id="countMyOrderList" parameterType="string"
+		resultType="int">
+		select count(*) as cnt from noel_order where user_id =
+		#{userId}
+	</select>
+
+	<select id="uidCnt" parameterType="string"
+		resultType="OrderlistVO">
+		select
+		imp_uid as impUid,
 		count(*) as uidCount
-		from 
+		from
 		noel_order
 		where user_id = #{userId}
 		group by imp_uid
 	</select>
-	
+
 	<delete id="cancleOrder" parameterType="int">
-		delete from noel_order where order_no = #{orderNo}
+		delete from noel_order
+		where order_no = #{orderNo}
 	</delete>
-    
+
 </mapper>

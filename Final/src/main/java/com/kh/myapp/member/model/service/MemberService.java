@@ -262,7 +262,6 @@ public class MemberService {
 		List result = dao.selectAllOrderListPrd(marketerId);
 		return result;
 	}
-
 	
 	//총 주문수량
 	public int orderQuanAll(int prdNo) {
@@ -332,7 +331,6 @@ public class MemberService {
 		}
 
 		HashMap<String, Object> orderMap = new HashMap<String, Object>();
-		System.out.println("서비스 orderMap : "+orderMap);
 		orderMap.put("list", list);
 		orderMap.put("reqPage", reqPage);
 		orderMap.put("pageNavi", pageNavi);
@@ -345,6 +343,85 @@ public class MemberService {
 			return orderMap;
 		}
 		
+	}
+
+	////판매자 > 주문관리 > 주문 상세내역(상품 별)
+	public HashMap<String, Object> selectOrderPrdListMarketer(int reqPage, int prdNo) {
+		//한 페이지 당 보여지는 주문건수
+		int numPerPage = 10;
+		// end = 10
+		int end = numPerPage *reqPage;
+		//start = 1
+		int start = (end-numPerPage)+1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("prdNo", prdNo);
+		ArrayList<OrderVO> list = dao.selectOrderPrdList(map);
+		int totalPage = dao.countOrderPrd(prdNo);
+		int totalMan = 0;
+		if(totalPage % numPerPage == 0) {
+			totalMan = totalPage / numPerPage;
+		}else {
+			totalMan = totalPage / numPerPage +1;
+			
+		}
+		// 페이지 네비 사이즈
+		int pageNaviSize = 5;
+		
+		// 페이지 시작 번호
+		int pageNo = 1;
+		
+		if(reqPage > 3) {
+			pageNo = reqPage - 2;
+		}
+		
+		//이전 버튼 ownerOrderManageFrm
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/market/orderManagement?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/market/orderManagement?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalMan) {
+				break;
+			}
+		}
+		
+		// 다음버튼
+		if(pageNo <= totalMan) {
+			pageNavi += "<a href='/market/orderManagement?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_right\r\n" + 
+					"            </span></a>"; 
+		}
+
+		HashMap<String, Object> orderMap = new HashMap<String, Object>();
+		orderMap.put("list", list);
+		orderMap.put("reqPage", reqPage);
+		orderMap.put("pageNavi", pageNavi);
+		orderMap.put("total", totalPage);
+		orderMap.put("pageNo", pageNo);
+		
+		if(list == null) {
+			return null;
+		}else {
+			return orderMap;
+		}
+		
+	}
+
+	//판매자 > 주문관리 > 배송상태 지정
+	public int updateOrderLevel(OrderlistVO vo) {
+		return dao.updateOrderLevel(vo);
 	}
 
 	//회원 > 주문관리 

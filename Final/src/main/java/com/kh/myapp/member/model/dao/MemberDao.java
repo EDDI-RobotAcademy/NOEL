@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.myapp.member.model.vo.Marketer;
 import com.kh.myapp.member.model.vo.Member;
 import com.kh.myapp.order.model.vo.OrderVO;
+import com.kh.myapp.order.model.vo.OrderlistVO;
 
 @Repository
 public class MemberDao {
@@ -140,16 +141,32 @@ public class MemberDao {
 		public int countAllOrder(String marketerId) {
 			return sqlSession.selectOne("order.AllOrderListMarketer",marketerId);
 		}
+		
+	// 판매자 > 주문관리 > 주문 상품 별 갯수
+	public int countOrderPrd(int prdNo) {
+		return sqlSession.selectOne("order.PrdOrderListMarketer",prdNo);
+	}
+	
 	//판매자 > 주문관리 > 주문 상세내역(모든 주문 건)
 	public ArrayList<OrderVO> selectAllOrderList(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("order.selectAllOrderList",map);
-		System.out.println("dao 출력 확인  : "+list);
 		return (ArrayList<OrderVO>) list;
 	}
 	
 	//판매자 > 주문관리, 총 주문수량
 	public int orderQuanAll(int prdNo) {
 		return sqlSession.selectOne("order.orderQuanAll",prdNo);
+	}
+	
+	//판매자 > 주문관리 > 주문 상세내역(상품 별)
+	public ArrayList<OrderVO> selectOrderPrdList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("order.selectOrderPrdList",map);
+		return (ArrayList<OrderVO>) list;
+	}
+	//판매자 > 주문관리 > 배송상태 지정
+	public int updateOrderLevel(OrderlistVO vo) {
+		int result = sqlSession.update("order.updateOrder", vo);
+		return result;
 	}
 	
 	

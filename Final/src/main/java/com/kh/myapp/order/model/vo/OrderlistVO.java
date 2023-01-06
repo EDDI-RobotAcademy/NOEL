@@ -1,5 +1,7 @@
 package com.kh.myapp.order.model.vo;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

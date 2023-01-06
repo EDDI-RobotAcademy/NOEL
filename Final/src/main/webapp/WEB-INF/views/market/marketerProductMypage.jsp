@@ -4,9 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="/resources/css/member/updateMarketer.css">
-<link rel="stylesheet"
-	href="/resources/css/product/marketProductMypage.css">
+<link rel="stylesheet" href="/resources/css/product/marketProductMypage.css">
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <head>
 <meta charset="UTF-8">
