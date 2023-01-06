@@ -58,7 +58,7 @@
 			marketer_email as marketerEmail,
 			marketer_auth as marketerAuth,
 			MARKETER_ADDR as marketerAddr
-		from(select rownum as rnum, n.* from (select * from noel_marketer) n)
+		from(select rownum as rnum, n.* from (select * from noel_marketer order by marketer_regdate desc) n)
 		where rnum between #{start} and #{end}
 	</select>
 
