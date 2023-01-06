@@ -74,18 +74,7 @@
                 </li>
             </ul>
         </div>
-        <div class="sidebar-2">
-            <ul class="category">
-                <li>
-                    <h4>공지사항</h4>
-                    <c:forEach items="${ncList }" var="n">
-						<div class="list-wrap">
-							<a href="/noticeDetail.do?noticeNo=${n.noticeNo }" class="titleShow">${n.noticeTitle }</a>
-						</div>
-					</c:forEach>
-                </li>
-            </ul>
-        </div>
+        
     </aside>
     <article id="content" class="content">
         <div class="contents">
@@ -101,7 +90,7 @@
             	</form>
             </div>
 	            <table class="tablewrap" style="text-align: center; vertical-align: middle;">
-	                <tr style="height: 50px; border-bottom: 2px solid black"">
+	                <tr style="height: 50px; border-bottom: 2px solid black">
 	                    <th>이름</th>
 	                    <th>아이디</th>
 	                    <th>휴대폰번호</th>
@@ -109,6 +98,7 @@
 	                    <th>가입일</th>
 	                    <th>승인관리</th>
 	                    <th>처리</th>
+	                    <th>탈퇴</th>
 	                </tr>
 	                
 	  				<c:forEach items="${list }" var="mk">
@@ -136,6 +126,9 @@
 	                    	</c:choose>
 	                    </td>
 	                    <td><button class="saveBtn" type="submit">확정</button></td>
+	                    </form>
+	                      <form action="/dropoutMarketer?marketerId=${mk.marketerId}" method="post">
+	                    <td><button class="saveBtn" type="submit">탈퇴</button></td>
 	                    </form>
 	                     </tr>
 	                     </c:forEach>

@@ -53,7 +53,7 @@ public class MarketWishListController {
     	HashMap<String, Object> map = service.myPrdWishList(bookmarkId, reqPage);
     	
     	if(map == null) {
-    		model.addAttribute("msg", "등록된 위시상품이 없습니다.");
+    		model.addAttribute("msg", "등록된 위시 상품이 없습니다.");
     		System.out.println("null");
     		return "market/myPrdWishList";
     	}else {

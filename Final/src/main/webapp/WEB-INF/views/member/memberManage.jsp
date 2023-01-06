@@ -76,18 +76,7 @@
                 </li>
             </ul>
         </div>
-        <div class="sidebar-2">
-            <ul class="category">
-                <li>
-                    <h4>공지사항</h4>
-                    <c:forEach items="${ncList }" var="n">
-						<div class="list-wrap">
-							<a href="/noticeDetail.do?noticeNo=${n.noticeNo }" class="titleShow">${n.noticeTitle }</a>
-						</div>
-					</c:forEach>
-                </li>
-            </ul>
-        </div>
+       
     </aside>
     <article id="content" class="content">
 		<div class="contents" style="padding:0;">
@@ -110,7 +99,7 @@
 	                    <th>아이디</th>
 	                    <th>휴대폰번호</th>
 	                    <th>가입일</th>
-	                    <th>처리</th>
+	                    <th>탈퇴</th>
 	                  
 	                </tr>
 	  				<c:forEach items="${list}" var="m">
@@ -120,7 +109,6 @@
 	                    <td>${m.userTel}</td>
 	                    <td><fmt:formatDate value="${m.userRegdate }" pattern="yyyy-MM-dd"/></td>
 	                   <form action="/dropoutMember?userId=${m.userId}" method="post">
-	                 
 	                    <td><button class="saveBtn" type="submit">탈퇴</button></td>
 	                    </form>
 	                </tr>

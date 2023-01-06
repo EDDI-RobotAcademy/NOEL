@@ -71,6 +71,13 @@
 									</div>
 								</li>
 								<li>
+									<span class="tit">주소</span>
+									<div class="cnt">
+										<div class="input02">
+											<input type="text" id="marketerAddr" name="marketerAddr" value="${sessionScope.mk.marketerAddr }" disabled>
+										</div>
+									</div>
+								</li>
 								<li>
 									<span class="tit">전화번호</span>
 									<div class="cnt">
