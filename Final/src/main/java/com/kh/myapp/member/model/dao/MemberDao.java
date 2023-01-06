@@ -163,6 +163,7 @@ public class MemberDao {
 		List list = sqlSession.selectList("order.selectOrderPrdList",map);
 		return (ArrayList<OrderVO>) list;
 	}
+	
 	//판매자 > 주문관리 > 배송상태 지정
 	public int updateOrderLevel(OrderlistVO vo) {
 		int result = sqlSession.update("order.updateOrder", vo);
@@ -187,5 +188,10 @@ public class MemberDao {
 	}
 	public int cancleOrder(int orderNo) {
 		return sqlSession.delete("order.cancleOrder", orderNo);
+	}
+	//판매자 > 주문관리 > 주문 상세 (상품명 조회) 
+	public String selectPrdName(int prdNo) {
+		String result = sqlSession.selectOne("order.selectPrdName", prdNo);
+		return result;
 	}
 }

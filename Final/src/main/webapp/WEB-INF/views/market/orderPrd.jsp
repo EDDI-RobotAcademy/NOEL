@@ -26,15 +26,11 @@
 								<div class="directoryDiv">mypage > 주문관리 > 주문상세</div>
 								<br>
 								<h1>주문 상세</h1>
-								<h5>상품명 : </h5>
-								<%-- <c:forEach items="${list }" var="ol">
-									<h1>주문 상세</h1>
-									<h5>&nbsp;&nbsp;상품명 : ${ol.prdName }</h5>
-								</c:forEach> --%>
+								<h5>&nbsp;&nbsp;상품명 :${prdName}</h5>
 								<div class="category1">
-									<a href="/market/orderManagementView?reqPage=1"
-										id="category_class">상품 별 주문</a> <a
-										href="/market/orderAll?reqPage=1" id="category_market">전체
+									<a href="/market/orderManagementView?reqPage=1" class="category_orderPrd"
+										id="category_class">상품 별 주문</a>
+									<a	href="/market/orderAll?reqPage=1" id="category_market" class="category_orderPrd">전체
 										주문</a>
 								</div>
 										<div class="bookmark-content-list">

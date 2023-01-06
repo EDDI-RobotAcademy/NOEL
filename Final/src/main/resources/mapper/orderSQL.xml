@@ -24,37 +24,48 @@
 		delete from noel_cart
 		where user_id=#{userId}
 	</delete>
-	
-<!-- 판매자 > 주문관리 -->
+
+	<!-- 판매자 > 주문관리 -->
 	<select id="selectAllOrderListPrd" parameterType="string"
 		resultType="OrderlistVO">
-		select
-			prd_no as prdNo,
-			prd_name as prdName,
-			prd_stock as
-			prdAllStock
-			from noel_product
+		
+		 select 
+            (select prd_no from noel_product np where np.prd_no=no.prd_no) as prdNo,
+            (select prd_name from noel_product np where np.prd_no=no.prd_no) as prdName,
+            (select prd_stock from noel_product np where np.prd_no=no.prd_no) as prdAllStock,           
+            sum(order_quan) as prdStock
+		from noel_order no
+		where (select marketer_id from noel_product np where no.prd_no = np.prd_no)= #{marketerId}
+        group by prd_no
+		
+		<!-- select
+		prd_no as prdNo,
+		prd_name as prdName,
+		prd_stock as
+		prdAllStock
+		from noel_product
 		where marketer_id= #{marketerId}
 		order by prd_regdate desc
-
+ -->
 	</select>
 
 	<!-- 판매자 > 주문관리 >상품 별 주문상세 -->
 	<select id="selectOrderPrdList" parameterType="map"
 		resultType="OrderlistVO">
 		select
-			order_no as orderNo,
-			user_id as userId,
-			order_quan as orderQuan,
-			to_char(order_date, 'yyyy-mm-dd') as orderDate,
-			order_status as orderStatus,
-			order_price as orderPrice,
-			(select prd_name from noel_product np where ot.prd_no = np.prd_no) as prdName
-			from (select rownum as rnum, n.* from (select * from noel_order order by
-			order_date desc) n )ot
-		where prd_no = #{prdNo} and rnum between #{start} and #{end}
+		order_no as orderNo,
+		user_id as userId,
+		order_quan as orderQuan,
+		to_char(order_date, 'yyyy-mm-dd') as orderDate,
+		order_status as orderStatus,
+		order_price as orderPrice,
+		(select prd_name from noel_product np where ot.prd_no = np.prd_no) as prdName
+		from (select rownum as rnum, n.* from (select * from noel_order order
+		by
+		order_date desc) n )ot
+		where prd_no = #{prdNo} and rnum between #{start} and
+		#{end}
 	</select>
-
 
 	<!-- 판매자 > 주문관리, 총 주문수량 -->
 	<select id="orderQuanAll" parameterType="int"
@@ -71,7 +82,8 @@
 		select
 		count(*)
 		from noel_order no
-		where (select marketer_id from noel_product np where no.prd_no = np.prd_no)
+		where (select marketer_id
+		from noel_product np where no.prd_no = np.prd_no)
 		=#{marketerId}
 	</select>
 
@@ -100,18 +112,25 @@
 		select
 		order_no as orderNo,
 		user_id as userId,
-		to_char(order_date, 'yyyy-mm-dd') as orderDate,
+		to_char(order_date,
+		'yyyy-mm-dd') as orderDate,
 		order_quan as orderQuan,
-		order_status as orderStatus,
-		(select prd_price from noel_product np where ot.prd_no = np.prd_no
+		order_status as
+		orderStatus,
+		(select prd_price from noel_product np where ot.prd_no =
+		np.prd_no
 		)*order_quan as orderPrice,
-		(select prd_name from noel_product np where ot.prd_no = np.prd_no ) as
+		(select prd_name from noel_product
+		np where ot.prd_no = np.prd_no ) as
 		prdName,
-		(select prd_price from noel_product np where ot.prd_no = np.prd_no ) as
+		(select prd_price from
+		noel_product np where ot.prd_no = np.prd_no ) as
 		prdPrice,
-		(select marketer_id from noel_product np where ot.prd_no = np.prd_no) as
+		(select
+		marketer_id from noel_product np where ot.prd_no = np.prd_no) as
 		marketerId
-		from (select rownum as rnum, n.* from (select * from noel_order order by
+		from (select rownum as rnum, n.* from (select * from
+		noel_order order by
 		order_date desc) n )ot
 		<!-- where (select marketer_id from noel_product np where ot.prd_no = np.prd_no) 
 			= #{marketerId} -->
@@ -125,18 +144,24 @@
 		select
 		order_no as orderNo,
 		user_id as userId,
-		order_quan as orderQuan,
+		order_quan as
+		orderQuan,
 		order_status as orderStatus,
 		prd_no as prdNo,
 		to_char(order_date, 'yyyy-mm-dd') as orderDate,
-		(select prd_name from noel_product mp where ot.prd_no = mp.prd_no) as
+		(select prd_name from
+		noel_product mp where ot.prd_no = mp.prd_no) as
 		prdName,
-		(select prd_price from noel_product mp where ot.prd_no =
-		mp.prd_no)*order_quan as prdPrice,
+		(select
+		prd_price from noel_product mp where ot.prd_no =
+		mp.prd_no)*order_quan
+		as prdPrice,
 		imp_uid as impUid
 		from noel_order ot
-		where imp_uid in (select distinct imp_uid from noel_order where user_id=
-		#{userId}) order by order_no
+		where imp_uid in
+		(select distinct imp_uid from noel_order where user_id=
+		#{userId})
+		order by order_no
 	</select>
 
 	<select id="countMyOrderList" parameterType="string"
@@ -160,5 +185,11 @@
 		delete from noel_order
 		where order_no = #{orderNo}
 	</delete>
-
+	<!-- 판매자 > 주문관리 > 주문 상세 (상품명 조회) -->
+	<select id="selectPrdName" parameterType="int"
+		resultType="String">
+		select prd_name as prdName from noel_product where prd_no =#{prdNo}
+	</select>
+	
+	
 </mapper>
