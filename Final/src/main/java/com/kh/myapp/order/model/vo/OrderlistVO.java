@@ -13,7 +13,7 @@ public class OrderlistVO {
 
     private int orderNo;
     private String userId;
-    private Date orderDate;
+    private String orderDate;
     private int orderQuan;
     private String orderStatus;
     private String shippingName;

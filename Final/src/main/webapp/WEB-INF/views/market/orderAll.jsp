@@ -70,9 +70,9 @@
 														<td>${ol.orderNo}</td>
 														<td>${ol.userId}</td>
 														<td>${ol.prdName}</td>
-														<td><fmt:formatDate value="${ol.orderDate}" pattern="yyy-MM-dd"/></td>
+														<td>${ol.orderDate}</td>
 														<td>${ol.orderQuan}</td>
-														<td>${ol.orderPrice}</td>
+														<td><fmt:formatNumber value="${ol.orderPrice}" pattern="#,###"/></td>
 
 														<form
 															action="/updateOrderLevel.do?orderNo=${ol.orderNo}&reqPage=1"

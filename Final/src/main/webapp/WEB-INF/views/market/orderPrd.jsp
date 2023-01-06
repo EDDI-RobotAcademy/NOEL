@@ -25,18 +25,18 @@
 							<div class="card-body">
 								<div class="directoryDiv">mypage > 주문관리 > 주문상세</div>
 								<br>
-								<c:forEach items="${list }" var="ol">
+								<h1>주문 상세</h1>
+								<h5>상품명 : ${prdName}</h5>
+								<%-- <c:forEach items="${list }" var="ol">
 									<h1>주문 상세</h1>
 									<h5>&nbsp;&nbsp;상품명 : ${ol.prdName }</h5>
-								</c:forEach>
+								</c:forEach> --%>
 								<div class="category1">
 									<a href="/market/orderManagementView?reqPage=1"
 										id="category_class">상품 별 주문</a> <a
 										href="/market/orderAll?reqPage=1" id="category_market">전체
 										주문</a>
 								</div>
-
-							
 										<div class="bookmark-content-list">
 											<form action="/searchOrderOwnerList.do?reqPage=1"
 												method="post">
@@ -74,9 +74,9 @@
 														<td>${ol.orderNo}</td>
 														<td>${ol.userId}</td>
 														<td>${ol.prdName}</td>
-														<td><fmt:formatDate value="${ol.orderDate}" pattern="yyy-MM-dd"/></td>
+														<td>${ol.orderDate}</td>
 														<td>${ol.orderQuan}</td>
-														<td>${ol.orderPrice}</td>
+														<td><fmt:formatNumber value="${ol.orderPrice}" pattern="#,###"/></td>
 
 														<form action="/market/updateOrderLevel" method="post">
 															<input type="hidden" name="orderNo" value="${ol.orderNo}">

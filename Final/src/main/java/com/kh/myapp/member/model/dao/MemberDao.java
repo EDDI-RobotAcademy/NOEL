@@ -150,7 +150,6 @@ public class MemberDao {
 	//판매자 > 주문관리 > 주문 상세내역(모든 주문 건)
 	public ArrayList<OrderVO> selectAllOrderList(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("order.selectAllOrderList",map);
-		System.out.println("dao 모든 주문건 출력 : "+list);
 		return (ArrayList<OrderVO>) list;
 	}
 	
