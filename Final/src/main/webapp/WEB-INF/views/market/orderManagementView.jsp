@@ -25,6 +25,7 @@
 								<div class="directoryDiv">mypage > 주문관리</div>
 								<br>
 								<h1>주문 관리</h1>
+								<h5>&nbsp;&nbsp;상품 별 주문</h5>
 								<div class="category1">
 									<a href="/market/orderManagementView?reqPage=1"
 										id="category_class">상품 별 주문</a> <a
@@ -65,8 +66,7 @@
 															<a href="/market/orderPrd?reqPage=1&prdNo=${ol.prdNo}">${ol.prdName}</a></td>
 														<td>${ol.prdAllStock}</td>
 														<td>${ol.prdStock}</td>
-														<td>남은 재고 넣을 것</td>
-
+														<td>${ol.prdAllStock - ol.prdStock}</td>
 													</tr>
 												</c:forEach>
 											</table>

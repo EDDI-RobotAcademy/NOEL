@@ -502,5 +502,7 @@ public class MemberService {
 		return dao.cancleOrder(orderNo);
 	}
 	 
-
+	public String selectPrdName(int prdNo) {
+		return dao.selectPrdName(prdNo);
+	}
 }

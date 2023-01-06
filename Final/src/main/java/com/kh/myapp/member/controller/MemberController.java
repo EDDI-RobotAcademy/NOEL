@@ -1,5 +1,6 @@
 package com.kh.myapp.member.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -19,11 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.kh.myapp.market.model.service.ProductService;
-import com.kh.myapp.market.model.vo.ProductVO;
 import com.kh.myapp.member.model.service.MemberService;
 import com.kh.myapp.member.model.vo.Marketer;
 import com.kh.myapp.member.model.vo.Member;
-import com.kh.myapp.order.model.vo.OrderVO;
 import com.kh.myapp.order.model.vo.OrderlistVO;
 
 import net.nurigo.java_sdk.api.Message;
@@ -529,11 +528,15 @@ public class MemberController {
 		String marketerNo = mk.getMarketerId();
 		int prdNo = vo.getPrdNo();
 		HashMap<String, Object> map = service.selectOrderPrdListMarketer(reqPage, prdNo);
+		String prdName = service.selectPrdName(prdNo);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("prdName", prdName);
+		
+		
 	}
 
 	// 회원 > 주문내역
