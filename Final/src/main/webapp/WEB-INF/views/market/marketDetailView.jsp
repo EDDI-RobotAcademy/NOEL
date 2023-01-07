@@ -93,8 +93,8 @@
         </form>
 			<c:choose>
 				<c:when test="${empty sessionScope.m.userId}">
-					<button type="button" class="loginBtn" onclick="loginCh()">
-						<img style="width: 15px;" src="/resources/img/index/heart.svg">
+					<button type="button" id="wishBtn" name="reserveBtn" onclick="wishCh()">
+						<img style="width: 21px;" src="/resources/img/index/heart.png">
 					</button>
 				</c:when>
 				<c:otherwise>
@@ -102,21 +102,21 @@
 						<c:when test="${param.bookmarkId == marketwish.userId}">
 							<button type="button" name="reserveBtn" id="wishlist" style="display: none; "
 								onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-								<img style="width: 15px;" src="/resources/img/index/heart.svg">
+								<img style="width: 21px;" src="/resources/img/index/heart.png">
 							</button>
 							<button type="button" name="reserveBtn" id="wishlist1" 
 								onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-								<img style="width: 15px;" src="/resources/img/index/heart-fill.svg">
+								<img style="width: 25px;" src="/resources/img/index/heart-fill.png">
 							</button>
 						</c:when>
 						<c:otherwise>
 							<button type="button" name="reserveBtn" id="wishlist"
 									onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-								<img style="width: 15px;" src="/resources/img/index/heart.svg">
+								<img style="width: 21px;" src="/resources/img/index/heart.png">
 							</button>
 							<button type="button" name="reserveBtn" id="wishlist1" style="display: none;"
 								onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-								<img style="width: 15px;" src="/resources/img/index/heart-fill.svg">
+								<img style="width: 25px;" src="/resources/img/index/heart-fill.png">
 							</button>
 						</c:otherwise>
 					</c:choose>
@@ -159,7 +159,7 @@
                            <c:forEach begin="1" step="1" end="${reviewlist.rating}"
                                       varStatus="i">♥</c:forEach>
                         </div> <a
-                             href="/market/reviewDetail?prdReviewno=${reviewlist.prdReviewno}">
+                             href="/market/reviewDetail?prdReviewno=${reviewlist.prdReviewno}" style="text-decoration:none;">
                         <c:out value="${reviewlist.prdReviewcontent}" />
                      </a>
                      </td>
@@ -198,6 +198,7 @@
                <fieldset>
                   <input type="hidden" name="userId" value="${sessionScope.m.userId}">
                   <input type="hidden" name="prdNo" value="${prd.prdNo}">
+                  <input type="hidden" name="prdName" value="${prd.prdName}">
                   <input type="radio" name="rating" value="5" id="rate1" checked>
                   <label for="rate1">♥</label>
                   <input type="radio" name="rating" value="4" id="rate2">
@@ -416,34 +417,42 @@ $(".buyBtn").on("click", function() {
    $(".count").attr("value", count);
 });
 
-		//상품 위시
-		function addWishlist(obj, prdNo, userId){
-		    $("#wishlist").hide();
-		    $("#wishlist1").show();
-		
-		    $.ajax({
-		        url : "/insertMarketWish",
-		        type : "post",
-		        data : {prdNo : prdNo, userId : userId},
-		        success : function(data){
-		            console.log(data);
-		        }
-		    })
-		}
-		//상품 위시 취소
-		function deleteWishlist(obj, prdNo, userId){
-		    $("#wishlist1").hide();
-		    $("#wishlist").show();
-		
-		    $.ajax({
-		        url : "/deleteMarketWish",
-		        type : "post",
-		        data : {prdNo : prdNo, userId : userId},
-		        success : function(data){
-		            console.log(data)
-		        }
-		    })
-		}
+
+//비회원 상품 위시 > 로그인모달
+var wishBtn = $("button[id='wishBtn']");
+function wishCh() {
+	wishBtn.attr("data-bs-toggle", "modal");
+	wishBtn.attr("data-bs-target", "#login-modal");
+	wishBtn.attr("location.href", "login-modal");
+}
+//상품 위시
+function addWishlist(obj, prdNo, userId){
+    $("#wishlist").hide();
+    $("#wishlist1").show();
+
+    $.ajax({
+        url : "/insertMarketWish",
+        type : "post",
+        data : {prdNo : prdNo, userId : userId},
+        success : function(data){
+            console.log(data);
+        }
+    })
+}
+//상품 위시 취소
+function deleteWishlist(obj, prdNo, userId){
+    $("#wishlist1").hide();
+    $("#wishlist").show();
+
+    $.ajax({
+        url : "/deleteMarketWish",
+        type : "post",
+        data : {prdNo : prdNo, userId : userId},
+        success : function(data){
+            console.log(data)
+        }
+    })
+}
 
 </script>
 </body>

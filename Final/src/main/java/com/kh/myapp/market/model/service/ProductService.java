@@ -208,5 +208,68 @@ public class ProductService {
 
 		return tagMap;
 	}
+	
+	//정렬기능(리뷰, 위시)
+	public HashMap<String, Object> sortList(String sortList, String sortFilter, int reqPage, String category) {
+		// 화면에 보여주는 게시물 수
+		int numPerPage = 9;
+		
+		// 끝페이지
+		int end = numPerPage * reqPage;
+		
+		// 시작페이지
+		int start = (end-numPerPage) + 1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("sortList", sortList);
+		map.put("category",category);
+		map.put("sortFilter", sortFilter);
+		ArrayList<ProductVO> list = dao.sortList(map);
+		
+		int totalCnt = dao.countTagList(map);
+		int totalPage = 0;
+		if(totalCnt % numPerPage == 0) {
+			totalPage = totalCnt / numPerPage;
+		}else {
+			totalPage = totalCnt / numPerPage + 1;
+		}
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
+		
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/sortList?category="+category+"&reqPage=" +(pageNo - 1) + "&sortList="+sortList+"'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/sortList?category="+category+"&reqPage=" + pageNo + "&sortList="+sortList+"'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		
+		if(pageNo <= totalPage) {
+			pageNavi += "<a href='/sortList?category="+category+"&reqPage=" + (pageNo) + "&sortList="+sortList+"'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_right\r\n" + 
+					"            </span></a>";
+		}
+		
+		HashMap<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("list", list);
+		searchMap.put("reqPage", reqPage);
+		searchMap.put("pageNavi", pageNavi);
+		searchMap.put("total", totalPage);
+		searchMap.put("pageNo", pageNo);
+		return searchMap;
+	}
 
 }

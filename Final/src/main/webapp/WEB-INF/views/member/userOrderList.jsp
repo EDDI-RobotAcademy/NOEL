@@ -90,7 +90,7 @@
 	      
 	    }else {
 	       if (confirm("주문을 취소 하시겠습니까?")) {
-	          const orderNo = $(this).parent().parent().children().eq(1).text();
+	          const orderNo = $(this).parent().parent().children().eq(0).text();
 	          $(location).attr('href', "/cancleOrder?orderNo=" + orderNo);
 	       }
 	    }

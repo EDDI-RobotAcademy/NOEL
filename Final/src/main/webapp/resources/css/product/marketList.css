@@ -197,7 +197,7 @@
 }
 
 .prdList-tag-content{
-    width: 100%;
+    width: 1170px;
     padding-right: var(--bs-gutter-x,.75rem);
     padding-left: var(--bs-gutter-x,.75rem);
     margin-right: auto;
@@ -207,7 +207,7 @@
     text-align: center;
     list-style-type: none;
     padding: 0;
-    height: 50px;
+    height: 30px;
     margin: 0;
 }
 
@@ -241,10 +241,10 @@
 /* =====================================sort */
 .prdList-sort {
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
-    margin-top: 20px;
-    width: 100vw;
+    margin-top: 5px;
+    width: 1145px;
 }
 
 .prdList-sort-content {

@@ -100,8 +100,7 @@
 
 
 	<!-- 마켓 상품 리스트 조회 -->
-	<select id="marketList" parameterType="map"
-			resultType="productVO">
+	<select id="marketList" parameterType="map" resultType="productVO">
 		select * from
 			(select row_number() over (order by rnum desc) as rnum1, rb.* from
 				(select rownum as rnum,
@@ -178,4 +177,38 @@
 				 where cateGory = #{category})rb order by 3 desc)
 		where rnum between #{start} and #{end}
 	</select>
+	
+	<!-- 마켓 상품 정렬기능(리뷰, 위시) -->
+	<select id="sortList" parameterType="map" resultType="productVO">
+		select * from
+		(select rownum as rnum, b.* from
+		(select
+			prd_no as prdNo,
+			prd_name as prdName,
+			to_char(prd_price, '999,999,999') as prdPrice,
+			prd_category as prdCategory,	
+			(select count(*) from noel_market_wishlist w where w.prd_no = s.prd_no)as wish,
+			(select count(*) from noel_product_review r where r.prd_no = s.prd_no)as reviewCount,
+			(select prd_img_path from noel_product_img si where prd_img_no = s.prd_no) as prdthumNail 
+			from noel_product s order by
+			 <choose>
+				<when test="sortList.equals('wish')">
+					wish desc
+				</when>
+				<when test="sortList.equals('reviewCount')">
+					reviewCount desc
+				</when>
+			</choose>
+			nulls last
+			 )b
+	
+			<if test="category != null and category != ''">
+				where prdCategory = #{category}
+			</if>
+			
+			)where rnum between #{start} and #{end}
+	</select>
+	
+	
+	
 </mapper>

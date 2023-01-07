@@ -17,7 +17,6 @@
     <div class="prdList-tag">
         <div class="prdList-tag-content" id="font">
             <ul>
-
                 <li><input type="hidden" name="category" value="${category}">
                     <a href="/marketListFrm?reqPage=1">All</a></li>
                 <li><a href="/selectTag?category=1&reqPage=1">Bread</a></li>
@@ -26,6 +25,15 @@
                 <li><a href="/selectTag?category=4&reqPage=1">Soap</a></li>
                 <li><a href="/selectTag?category=5&reqPage=1">Candle</a></li>
             </ul>
+			<div class="prdList-sort">
+				<form action="/sortList?category=${category}&reqPage=1" method="post" id="sortList">
+					<select onchange="this.form.submit()" name="sortList" >
+						<option value="" selected disabled>정렬</option>
+						<option value="wish" <c:if test="${sortList eq 'wish'}">selected</c:if>>wish♥</option>
+						<option value="reviewCount" <c:if test="${sortList eq 'reviewCount'}">selected</c:if>>review</option>
+					</select>
+				</form>
+			</div>
         </div>
     </div>
     <!-- 마켓 리스트 생성 -->

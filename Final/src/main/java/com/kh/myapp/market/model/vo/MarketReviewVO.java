@@ -18,5 +18,6 @@ public class MarketReviewVO {
    private String userId;
    private Date prdReviewregdate;
    private int rating;
+   private String prdName;
 
 }

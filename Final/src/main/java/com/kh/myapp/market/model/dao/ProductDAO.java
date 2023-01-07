@@ -106,4 +106,14 @@ public class ProductDAO {
 		MarketWishVO marketwish = sql.selectOne("marketWish.selectOneMarketWish", map);
 		return marketwish;
 	}
+
+	//정렬기능(리뷰, 위시)
+	public ArrayList<ProductVO> sortList(HashMap<String, Object> map) {
+		List list = sql.selectList("productMapper.sortList", map);
+		return (ArrayList<ProductVO>) list;
+	}
+
+	public int countTagList(HashMap<String, Object> map) {
+		return sql.selectOne("productMapper.countTagList",map);
+	}
 }
