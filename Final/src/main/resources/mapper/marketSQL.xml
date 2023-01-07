@@ -40,7 +40,8 @@
          marketer_id as marketerId,
          rating as rating,
          prd_review_content as prdReviewcontent,
-         user_id as userId
+         user_id as userId,
+         prd_name as prdName
       from noel_product_review
       where prd_review_no = #{prdReviewno}
    </select>
@@ -111,9 +112,10 @@
          prd_no as prdNo,
          marketer_id as marketerId,
          prd_qna_content as prdQnacontent,
-         user_id as userId
-      from noel_product_qna
-      where prd_qna_no = #{prdQnano}
+         user_id as userId,
+         (select prd_name from noel_product where prd_no =
+         (select prd_no from noel_product_qna where prd_qna_no = #{prdQnano}))as prdName
+      from noel_product_qna where prd_qna_no = #{prdQnano}
    </select>
 
    <insert id="qnaInsert">

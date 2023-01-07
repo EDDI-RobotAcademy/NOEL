@@ -50,7 +50,7 @@
                </tr>
                <tr height="40px">
                   <td width="35%" style="text-align:center;"> 상품명 </td>
-                  <td> ${sessionScope.productVO.prdName}</td>
+                  <td> ${reviewdetail.prdName}</td>
                </tr>
                <tr height="40px">
                   <td style="text-align:center;"> 작성자 </td>
@@ -93,7 +93,7 @@
                </tr>
                <tr height="40px">
                   <td width="35%" style="text-align:center;"> 상품명 </td>
-                  <td> ${sessionScope.productVO.prdName}</td>
+                  <td> ${reviewdetail.prdName}</td>
                </tr>
                <tr height="40px">
                   <td style="text-align:center;"> 작성자 </td>

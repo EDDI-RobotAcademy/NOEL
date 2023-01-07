@@ -42,12 +42,12 @@
 											required oninvalid="this.setCustomValidity('카테고리를 확인해주세요')"
 											oninput="this.setCustomValidity('')">
 											<option value="${prdlist.cateGory }" hidden=""
-												disabled="disabled" selected="selected">${prdlist.cateGory }</option>
-											<option value="빵">빵</option>
-											<option value="케이크">케이크</option>
-											<option value="잼 & 청">잼 & 청</option>
-											<option value="비누">비누</option>
-											<option value="캔들">캔들</option>
+												disabled="disabled" selected="selected" class="viewCategory">${prdlist.cateGory }</option>
+											<option value="1">Bread</option>
+											<option value="2">Cake</option>
+											<option value="3">Jam</option>
+											<option value="4">Soap</option>
+											<option value="5">Candle</option>
 										</select>
 									</div>
 								</div>
@@ -208,6 +208,25 @@
 		         }
 		      });
 		   }
+		   
+		   //----------카테고리
+	       // 1:Bread , 2: Cake, 3: Jam, 4: Soap, 5:Candle
+	       var categoryNum=${prdlist.cateGory};
+	       var category;//실카테고리
+	               
+	       if(categoryNum=="1"){
+	             category="Bread";
+	       }else if(categoryNum=="2"){
+	             category="Cake";
+	       }else if(categoryNum=="3"){
+	             category="Jam";
+	       }else if(categoryNum=="4"){
+	             category="Soap";
+	       }else if(categoryNum=="5"){
+	             category="Candle";
+	       }
+	      
+	      $(".viewCategory").text(category);
 </script>
 </body>
 </html>
