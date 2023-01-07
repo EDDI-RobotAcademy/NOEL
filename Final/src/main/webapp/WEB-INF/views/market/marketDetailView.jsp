@@ -76,55 +76,50 @@
 					<input type="hidden" name="prdName" class="pNumber" value="${prd.prdName }">
 					<input type="hidden" name="cartQuan" class="count"> <input type="hidden" name="userId" value="${sessionScope.m.userId }">
 				</form>
-
-				<form action="/insertOrder">
+        
+         <form action="/insertOrder">
+            <c:choose>
+               <c:when test="${empty sessionScope.m}">
+                  <button type="button" class="loginBtn" id="cartBtn"
+                          onclick="loginCh()">구매하기</button>
+               </c:when>
+               <c:otherwise>
+                  <button type="submit" class="buyBtn">구매</button>
+               </c:otherwise>
+            </c:choose>
+            <input type="hidden" name="prdPrice" class="allPrice" value="${prd.prdPrice }">
+            <input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }">
+            <input type="hidden" name="prdName" value="${prd.prdName}">
+            <input type="hidden" name="cartQuan" class="count">
+            <input type="hidden" name="userId" value="${sessionScope.m.userId }">
+        </form>
+			<c:choose>
+				<c:when test="${empty sessionScope.m.userId}">
+					<button type="button" id="wishBtn" name="reserveBtn" onclick="wishCh()">
+						<img style="width: 21px;" src="/resources/img/index/heart.png">
+					</button>
+				</c:when>
+				<c:otherwise>
 					<c:choose>
-						<c:when test="${empty sessionScope.m}">
-							<button type="button" class="loginBtn" id="cartBtn"
-								onclick="loginCh()">구매하기</button>
+						<c:when test="${param.bookmarkId == marketwish.userId}">
+							<button type="button" name="reserveBtn" id="wishlist" style="display: none; "
+								onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+								<img style="width: 21px;" src="/resources/img/index/heart.png">
+							</button>
+							<button type="button" name="reserveBtn" id="wishlist1" 
+								onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+								<img style="width: 25px;" src="/resources/img/index/heart-fill.png">
+							</button>
 						</c:when>
 						<c:otherwise>
-							<button type="submit" class="buyBtn">구매</button>
-						</c:otherwise>
-					</c:choose>
-					<input type="hidden" name="prdPrice" class="allPrice" value="${prd.prdPrice }"> 
-					<input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }"> 
-					<input type="hidden" name="prdName" value="${prd.prdName}"> 
-					<input type="hidden" name="prdthumNail" class="prdthumNail" value="${prd.prdthumNail }"> 
-					<input type="hidden" name="cartQuan" class="count">
-					<input type="hidden" name="userId" value="${sessionScope.m.userId }">
-				</form>
-				<c:choose>
-					<c:when test="${empty sessionScope.m.userId}">
-						<button type="button" class="loginBtn" onclick="loginCh()">
-							<img style="width: 15px;" src="/resources/img/index/heart.svg">
-						</button>
-					</c:when>
-					<c:otherwise>
-						<c:choose>
-							<c:when test="${param.bookmarkId == marketwish.userId}">
-								<button type="button" name="reserveBtn" id="wishlist"
-									style="display: none;"
+							<button type="button" name="reserveBtn" id="wishlist"
 									onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-									<img style="width: 15px;" src="/resources/img/index/heart.svg">
-								</button>
-								<button type="button" name="reserveBtn" id="wishlist1"
-									onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-									<img style="width: 15px;"
-										src="/resources/img/index/heart-fill.svg">
-								</button>
-							</c:when>
-							<c:otherwise>
-								<button type="button" name="reserveBtn" id="wishlist"
-									onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-									<img style="width: 15px;" src="/resources/img/index/heart.svg">
-								</button>
-								<button type="button" name="reserveBtn" id="wishlist1"
-									style="display: none;"
-									onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-									<img style="width: 15px;"
-										src="/resources/img/index/heart-fill.svg">
-								</button>
+								<img style="width: 21px;" src="/resources/img/index/heart.png">
+							</button>
+							<button type="button" name="reserveBtn" id="wishlist1" style="display: none;"
+								onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+								<img style="width: 25px;" src="/resources/img/index/heart-fill.png">
+							</button>
 							</c:otherwise>
 						</c:choose>
 					</c:otherwise>
@@ -141,6 +136,7 @@
 			<div class="contentWrap2">${prd.prdContent}</div>
 			<hr style="border: 1px">
 		</div>
+
 	</div>
 	<!-- 리뷰 목록 -->
 	<div class="review-wrap" id="review-wrap">
@@ -194,48 +190,44 @@
 		</c:forEach>
 	</div>
 
-	<!-- 리뷰 모달 시작 -->
-	<form name="reviewForm" id="reviewForm" method="post"
-		action="/market/reviewInsert">
-		<div class="modal fade" id="modal-review" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel"
-							style="font-family: Gowun Dodum;">구매평 작성</h5>
-						<button type="button" class="btn-close btn btn-brand"
-							data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body mb-3">
-						<h4>상품은 어떠셨나요?</h4>
-						<fieldset>
-							<input type="hidden" name="userId"
-								value="${sessionScope.m.userId}"> <input type="hidden"
-								name="prdNo" value="${prd.prdNo}"> <input type="radio"
-								name="rating" value="5" id="rate1" checked> <label
-								for="rate1">♥</label> <input type="radio" name="rating"
-								value="4" id="rate2"> <label for="rate2">♥</label> <input
-								type="radio" name="rating" value="3" id="rate3"> <label
-								for="rate3">♥</label> <input type="radio" name="rating"
-								value="2" id="rate4"> <label for="rate4">♥</label> <input
-								type="radio" name="rating" value="1" id="rate5"> <label
-								for="rate5">♥</label>
-						</fieldset>
-						<textarea name="prdReviewcontent" class="chk1 form-control"
-							id="message-text" title="어떤점이 좋으셨나요?"
-							style="height: 20em; resize: none;"></textarea>
-					</div>
-					<div class="modal-footer">
-						<button type="submit" class="reviewsave btn btn-brand">저장</button>
-						<button type="button" class="reviewcancel btn btn-brand"
-							data-bs-dismiss="modal">취소</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</form>
-	<!-- 리뷰 모달 끝 -->
+<!-- 리뷰 모달 시작 -->
+<form name="reviewForm" id="reviewForm" method="post" action="/market/reviewInsert" >
+   <div class="modal fade" id="modal-review" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel" style="font-family: Gowun Dodum;">구매평 작성</h5>
+               <button type="button" class="btn-close btn btn-brand" data-bs-dismiss="modal"aria-label="Close"></button>
+            </div>
+            <div class="modal-body mb-3">
+               <h4>상품은 어떠셨나요?</h4>
+               <fieldset>
+                  <input type="hidden" name="userId" value="${sessionScope.m.userId}">
+                  <input type="hidden" name="prdNo" value="${prd.prdNo}">
+                  <input type="hidden" name="prdName" value="${prd.prdName}">
+                  <input type="radio" name="rating" value="5" id="rate1" checked>
+                  <label for="rate1">♥</label>
+                  <input type="radio" name="rating" value="4" id="rate2">
+                  <label for="rate2">♥</label>
+                  <input type="radio" name="rating" value="3" id="rate3">
+                  <label for="rate3">♥</label>
+                  <input type="radio" name="rating" value="2" id="rate4">
+                  <label for="rate4">♥</label>
+                  <input type="radio" name="rating" value="1" id="rate5">
+                  <label for="rate5">♥</label>
+               </fieldset>
+               <textarea name="prdReviewcontent" class="chk1 form-control" id="message-text" title="어떤점이 좋으셨나요?"
+                         style="height:20em; resize:none;" ></textarea>
+            </div>
+            <div class="modal-footer">
+               <button type="submit" class="reviewsave btn btn-brand">저장</button>
+               <button type="button" class="reviewcancel btn btn-brand" data-bs-dismiss="modal">취소</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</form>
+<!-- 리뷰 모달 끝 -->
 
 	<!-- QNA 목록 시작 -->
 	<%-- <c:if test="${user != null}"></c:if> //유저일때 모달창 오픈--%>
@@ -442,34 +434,42 @@ $(".buyBtn").on("click", function() {
    $(".count").attr("value", count);
 });
 
-		//상품 위시
-		function addWishlist(obj, prdNo, userId){
-		    $("#wishlist").hide();
-		    $("#wishlist1").show();
-		
-		    $.ajax({
-		        url : "/insertMarketWish",
-		        type : "post",
-		        data : {prdNo : prdNo, userId : userId},
-		        success : function(data){
-		            console.log(data);
-		        }
-		    })
-		}
-		//상품 위시 취소
-		function deleteWishlist(obj, prdNo, userId){
-		    $("#wishlist1").hide();
-		    $("#wishlist").show();
-		
-		    $.ajax({
-		        url : "/deleteMarketWish",
-		        type : "post",
-		        data : {prdNo : prdNo, userId : userId},
-		        success : function(data){
-		            console.log(data)
-		        }
-		    })
-		}
+
+//비회원 상품 위시 > 로그인모달
+var wishBtn = $("button[id='wishBtn']");
+function wishCh() {
+	wishBtn.attr("data-bs-toggle", "modal");
+	wishBtn.attr("data-bs-target", "#login-modal");
+	wishBtn.attr("location.href", "login-modal");
+}
+//상품 위시
+function addWishlist(obj, prdNo, userId){
+    $("#wishlist").hide();
+    $("#wishlist1").show();
+
+    $.ajax({
+        url : "/insertMarketWish",
+        type : "post",
+        data : {prdNo : prdNo, userId : userId},
+        success : function(data){
+            console.log(data);
+        }
+    })
+}
+//상품 위시 취소
+function deleteWishlist(obj, prdNo, userId){
+    $("#wishlist1").hide();
+    $("#wishlist").show();
+
+    $.ajax({
+        url : "/deleteMarketWish",
+        type : "post",
+        data : {prdNo : prdNo, userId : userId},
+        success : function(data){
+            console.log(data)
+        }
+    })
+}
 
 </script>
 </body>

@@ -52,14 +52,16 @@
          marketer_id,
          rating,
          prd_review_content,
-         user_id)
+         user_id,
+         prd_name)
       values(
                prd_review_seq.nextval,
                #{prdNo},
                'marketer1',
                #{rating},
                #{prdReviewcontent},
-               #{userId}
+               #{userId},
+               #{prdName}
             )
    </insert>
 

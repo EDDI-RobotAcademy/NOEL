@@ -287,7 +287,7 @@ button[name=reserveBtn]{
 }
 
 button[name=reserveBtn]:hover{
-    background-color: #dc3545;
+    /* background-color: #dc3545; */
     cursor: pointer;
 }
 

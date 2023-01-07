@@ -81,7 +81,6 @@
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
 <script>
-   
    $(".cancleBtn").on("click", function(e) {
       const orderStatus = $(this).parent().parent().children().eq(6).text();
        if(orderStatus == "배송중") {

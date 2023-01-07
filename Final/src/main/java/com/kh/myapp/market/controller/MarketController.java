@@ -237,7 +237,6 @@ public class MarketController {
 	@RequestMapping(value = "/marketDetailView", method = RequestMethod.GET)
 	public String marketDetailView(Integer prdNo, String bookmarkId, Model model, 
 					@RequestParam("rnum") int rnum, @RequestParam("qnum") int qnum) throws Exception {
-		logger.info("마켓 컨트롤러");
 		HashMap<String, Object> map = productService.selectOnePrd(prdNo, bookmarkId);
 		model.addAttribute("prd", map.get("prd"));
 		model.addAttribute("marketwish", map.get("marketwish"));
@@ -272,6 +271,20 @@ public class MarketController {
 		model.addAttribute("qnalist", qnalist);
 
 		return "/market/marketDetailView";
+	}
+	
+	//정렬기능(리뷰, 위시)
+	@RequestMapping(value = "/sortList")
+	public String sortStoreList(String sortList,String sortFilter,  int reqPage, Model model, @RequestParam String category ) {
+		HashMap<String, Object> map = productService.sortList(sortList, sortFilter, reqPage, category);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("category", category);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("sortList", sortList);
+		return "/market/marketListFrm";
 	}
 
 }
