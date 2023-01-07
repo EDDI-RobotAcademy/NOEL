@@ -190,7 +190,6 @@ public class MarketController {
 				}
 			}
 		}
-		/* productService.update(vo); */
 		return "redirect:/market/marketerProductMypage";
 	}
 

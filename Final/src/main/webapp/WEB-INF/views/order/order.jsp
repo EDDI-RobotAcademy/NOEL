@@ -44,7 +44,8 @@
 
         <tr class="showCartList" id="font">
 
-          <td class="pImg" style="text-align: center"><img src="/resources/upload/product/${Order.prdthumNail }"></td>
+          <td class="pImg" style="text-align: center">
+          <img src="resources/upload/product/${Order.prdthumNail }"></td>
           <td class="pName" style="text-align: center">${Order.prdName }</td>
           <td class="pPrice" style="text-align: center"><fmt:formatNumber
                   value="${Order.prdPrice}" pattern="#,###" /> 원</td>
@@ -75,7 +76,7 @@
   <form id="order-form" action="/orderDirect" method="post"
         autocomplete="off">
 
-    <div class="page-title order-title" id="font">주문정보</div>
+    <h4 id="font">주문정보</h4><br>
     <div class="order-info" id="font">
       <div class="order-box">
         <label for="name" class="order-label">주문자명</label>
@@ -94,12 +95,11 @@
     <input type="hidden" id="cart-price-sum" name="orderPrice" value="${Order.prdPrice*Order.cartQuan }">
     <input type="hidden" id="cart-price-sum" name="prdNo" value="${Order.prdNo }">
 
-    <div class="page-title order-title">배송정보</div>
+    <br><h4 id="font">배송정보</h4><br>
     <div class="order-info shipping" id="font">
       <div id="same-check">
-        <input type="checkbox" id="order-same" class="order-agree">
-        <label for="order-same"><i class="fa-solid fa-check"></i></label>
-        <label for="order-same">주문자와 동일</label>
+        <label for="order-same"> 
+        <input type="checkbox" id="order-same">&nbsp;주문자와 동일</label>
       </div>
       <div class="order-box">
         <label for="shippingName" class="order-label">수령인명</label>
@@ -137,9 +137,8 @@
 
     <div class="order-info" style="padding-top: 80px;">
       <div id="agree-box">
-        <input type="checkbox" id="info-agree" class="order-agree">
-        <label for="info-agree"><i class="fa-solid fa-check"></i></label>
-        <label for="info-agree" id="font">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</label>
+        <label for="info-agree" id="font">
+        	<input type="checkbox" id="info-agree" class="info-agree">&nbsp;주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</label>
       </div>
       <div class="order-btn" id="font">
         <button type="button" id="payBtn">결제하기</button>
