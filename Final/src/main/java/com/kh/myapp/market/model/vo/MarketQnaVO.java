@@ -19,5 +19,6 @@ public class MarketQnaVO {
    private String userId;
    private Date prdQnaregdate;
    private String prdQnareply;
-
+   private String prdName;
+   
 }
