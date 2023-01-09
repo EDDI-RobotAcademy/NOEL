@@ -55,7 +55,6 @@ public class CartController {
     public String ordercart(Model model, String userId) {
         System.out.println(userId);
         ArrayList<CartVO> list = service.ordercart(userId);
-        System.out.println(list);
         model.addAttribute("list", list);
         return "order/ordercart";
     }

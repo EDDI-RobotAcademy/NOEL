@@ -26,7 +26,7 @@
 								<div class="directoryDiv">mypage > 주문관리 > 주문상세</div>
 								<br>
 								<h1>주문 상세</h1>
-								<h5>&nbsp;&nbsp;상품명 :${prdName}</h5>
+								<h5>&nbsp;&nbsp;상품명 : ${prdName}</h5>
 								<div class="category1">
 									<a href="/market/orderManagementView?reqPage=1" class="category_orderPrd"
 										id="category_class">상품 별 주문</a>
@@ -61,7 +61,7 @@
 													<th scope="col">상품명</th>
 													<th scope="col">주문일자</th>
 													<th scope="col">수량</th>
-													<th scope="col">주문금액</th>
+													<th scope="col">주문총금액</th>
 													<th scope="col">주문상태</th>
 													<th scope="col">처리</th>
 												</tr>
@@ -75,7 +75,7 @@
 														<td><fmt:formatNumber value="${ol.orderPrice}" pattern="#,###"/></td>
 
 														<form action="/market/updateOrderLevel" method="post">
-															<input type="hidden" name="orderNo" value="${ol.orderNo}">
+														<input type="hidden" value="${ol.orderNo}" name="orderNo">
 															<input type="hidden" name="orderNo" value="${ol.prdNo}">
 														<td class="orderStatusTd">
 															<c:choose>
@@ -101,6 +101,14 @@
 																		<option value="배송중">배송중</option>
 																		<option value="배송완료" selected>배송완료</option>
 																		<option value="주문취소">주문취소</option>
+																	</select>
+																</c:when>
+																<c:when test="${ol.orderStatus eq '주문취소'}">
+																	<select name="orderStatus" class="selectbox">
+																		<option value="배송준비중">배송준비중</option>
+																		<option value="배송중">배송중</option>
+																		<option value="배송완료">배송완료</option>
+																		<option value="주문취소" selected>주문취소</option>
 																	</select>
 																</c:when>
 															</c:choose></td>
