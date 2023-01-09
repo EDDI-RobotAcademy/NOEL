@@ -61,7 +61,7 @@
 													<th scope="col">상품명</th>
 													<th scope="col">주문일자</th>
 													<th scope="col">수량</th>
-													<th scope="col">주문금액</th>
+													<th scope="col">주문총금액</th>
 													<th scope="col">주문상태</th>
 													<th scope="col">처리</th>
 												</tr>
@@ -75,9 +75,10 @@
 														<td><fmt:formatNumber value="${ol.orderPrice}" pattern="#,###"/></td>
 
 														<form
-															action="/updateOrderLevel.do?orderNo=${ol.orderNo}&reqPage=1"
-															method="post">
-														<td class="orderStatusTd"><c:choose>
+															action="updateOrderAllLevel" method="post">
+															<input type="hidden" value="${ol.orderNo}" name="orderNo">
+														<td class="orderStatusTd">
+															<c:choose>
 																<c:when test="${ol.orderStatus eq '배송준비중'}">
 																	<select name="orderStatus" class="selectbox">
 																		<option value="배송준비중" selected>배송준비중</option>
@@ -102,6 +103,14 @@
 																		<option value="주문취소">주문취소</option>
 																	</select>
 																</c:when>
+																<c:when test="${ol.orderStatus eq '주문취소'}">
+																	<select name="orderStatus" class="selectbox">
+																		<option value="배송준비중">배송준비중</option>
+																		<option value="배송중">배송중</option>
+																		<option value="배송완료" >배송완료</option>
+																		<option value="주문취소" selected>주문취소</option>
+																	</select>
+																</c:when>
 															</c:choose></td>
 														<td><button class="saveBtn" type="submit">확정</button></td>
 														</form>
@@ -124,6 +133,10 @@
 		</article>
 	</div>
 	<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
-
+<script type="text/javascript">
+$(".saveBtn").on("click",function(){
+	var selectValue= $(".selectbox").val();
+});
+</script>
 </body>
 </html>

@@ -36,14 +36,10 @@
 
         <div class="back">
             <div class="back-main" id="font">
-                <a href="/">
-                    <!-- <img src="/resources/img/index/카트.png" /> -->HOME
-                </a>
+                <a href="/">HOME</a>
             </div>
             <div class="back-mypage" id="font">
-                <a href="/mypage.do">
-                    <!-- <img src="/resources/img/index/홈백.png" /> -->MyPage
-                </a>
+                <a href="/userOrderList?&reqPage=1">MyPage</a>
 
             </div>
 

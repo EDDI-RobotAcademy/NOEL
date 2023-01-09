@@ -269,7 +269,7 @@ public class MemberService {
 	}
 	
 	//판매자 > 주문관리 > 주문 상세내역(모든 주문 건)
-	public HashMap<String, Object> selectAllOrderListMarketer(int reqPage, String marketerNo) {
+	public HashMap<String, Object> selectAllOrderListMarketer(int reqPage, String marketerId) {
 
 		//한 페이지 당 보여지는 주문건수
 		int numPerPage = 10;
@@ -281,11 +281,11 @@ public class MemberService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-		map.put("marketerNo", marketerNo);
+		map.put("marketerId", marketerId);
 		
 		ArrayList<OrderVO> list = dao.selectAllOrderList(map);
 		
-		int totalPage = dao.countAllOrder(marketerNo);
+		int totalPage = dao.countAllOrder(marketerId);
 		int totalMan = 0;
 		if(totalPage % numPerPage == 0) {
 			totalMan = totalPage / numPerPage;

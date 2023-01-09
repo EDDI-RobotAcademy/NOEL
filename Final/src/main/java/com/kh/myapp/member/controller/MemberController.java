@@ -510,14 +510,14 @@ public class MemberController {
 	@RequestMapping(value = "market/orderAll")
 	public void orderAll(Model model, int reqPage, @SessionAttribute Marketer mk) throws Exception {
 
-		String marketerNo = mk.getMarketerId();
-		HashMap<String, Object> map = service.selectAllOrderListMarketer(reqPage, marketerNo);
+		String marketerId = mk.getMarketerId();
+		HashMap<String, Object> map = service.selectAllOrderListMarketer(reqPage, marketerId);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
-		model.addAttribute("marketerNo", marketerNo);
+		model.addAttribute("marketerId", marketerId);
 
 	}
 
@@ -557,9 +557,8 @@ public class MemberController {
 
 	}
 
-	// 판매자 > 주문관리 > 배송상태 지정
-
-	@RequestMapping(value = "/market/updateOrderLevel")
+	// 판매자 > 주문관리 > 배송상태 지정(상품별)
+	@RequestMapping(value = "/updateOrderLevel")
 	public String updateOrderLevel(OrderlistVO vo, int prdNo) {
 		System.out.println("주문번호" + vo);
 		int result = service.updateOrderLevel(vo);
@@ -581,5 +580,13 @@ public class MemberController {
 			return "common/alert";
 		}
 	}
+	
+	// 판매자 > 주문관리 > 배송상태 지정(모든 상품)
+		@RequestMapping(value = "/market/updateOrderAllLevel")
+		public String updateOrderAllLevel(OrderlistVO vo, int orderNo) {
+			vo.setOrderNo(orderNo);
+			int result = service.updateOrderLevel(vo);
+			return "redirect:/market/orderAll?reqPage=1";
+		}
 
 }
