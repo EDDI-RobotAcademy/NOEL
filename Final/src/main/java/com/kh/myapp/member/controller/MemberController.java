@@ -483,6 +483,25 @@ public class MemberController {
 	public String form() {
 		return "/member/marketerMypage";
 	}
+	
+	//최고관리자 > 판매자관리 > 업주검색기능
+	@RequestMapping(value="/searchMarketer")
+	public String searchOwner(String type, String keyword,int reqPage, Model model){
+		HashMap<String, Object> list = service.searchMarketer(type,keyword, reqPage);
+		model.addAttribute("list", list.get("list"));
+		model.addAttribute("pageNavi", list.get("pageNavi"));
+		return "member/admin";
+	}
+	
+	//최고관리자 > 회원관리 > 검색기능
+	@RequestMapping(value="/searchMember")
+	public String searchMember(String type, String keyword,int reqPage, Model model){
+		HashMap<String, Object> list = service.searchMember(type,keyword,reqPage);
+		model.addAttribute("list", list.get("list"));
+		model.addAttribute("pageNavi", list.get("pageNavi"));
+		return "member/memberManage";
+	}
+	
 
 	// 판매자 > 주문관리
 	@RequestMapping(value = "market/orderManagementView")
