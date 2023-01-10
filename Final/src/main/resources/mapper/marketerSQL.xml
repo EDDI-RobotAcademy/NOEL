@@ -89,5 +89,42 @@
 		from noel_marketer
 		where marketer_id = #{marketerId} and marketer_tel = #{marketerTel}
 	</select>
+	
+		<!-- 판매자 검색 -->
+	<select id="searchMarketer" parameterType="map" resultType="mk">
+		select
+			marketer_id as marketerId,
+			marketer_pw as marketerPw,
+			marketer_name as marketerName,
+			marketer_tel as marketerTel,
+			marketer_regdate as marketer_Regdate,
+			marketer_level as marketerLevel,
+			marketer_email as marketerEmail,
+			marketer_auth as marketerAuth,
+			MARKETER_ADDR as marketerAddr
+		from(select rownum as rnum, n.* from (select * from noel_marketer order by marketer_regdate desc) n)
+		where rnum between #{start} and #{end}
+		<choose>
+			<when test="type.equals('id')">
+				and marketer_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('name')">
+				and marketer_name like '%'||#{keyword}||'%'
+			</when>			
+		</choose>
+	</select>
+	
+	<!-- 업주 검색 검색 전체 카운팅 -->
+	<select id="searchMarketerCount" parameterType="map" resultType="int">
+			select count(*) from noel_marketer
+		<choose>
+			<when test="type.equals('id')">
+			 where  marketer_id like '%'||#{keyword}||'%' 
+			</when>
+			<when test="type.equals('name')">
+			where marketer_name like '%'||#{keyword}||'%' 
+			</when>			
+		</choose>
+	</select>
 
 </mapper>
