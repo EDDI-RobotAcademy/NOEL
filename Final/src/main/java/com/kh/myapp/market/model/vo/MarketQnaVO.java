@@ -20,5 +20,6 @@ public class MarketQnaVO {
    private Date prdQnaregdate;
    private String prdQnareply;
    private String prdName;
+   private boolean secret;
    
 }

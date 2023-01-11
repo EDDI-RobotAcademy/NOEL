@@ -10,6 +10,8 @@
 </head>
 <link rel="stylesheet" href="/resources/css/member/owner.css">
 <link rel="stylesheet" href="/resources/css/member/updateOwner.css">
+<link rel="stylesheet"
+	href="/resources/css/product/marketDetailView.css">
 
 <body>
 <jsp:include page="/WEB-INF/views/layouts/header.jsp" />
@@ -60,10 +62,19 @@
                         <td scope="row" class="orderStatus">${orList.orderStatus }</td>
                         <c:choose>
                            <c:when test="${orList.orderStatus eq '배송완료' }">
+                              <td scope="row">
+								<%-- <a href="marketDetailView?prdNo=${orList.prdNo }&bookmarkId=${sessionScope.m.userId}&num=1&rnum=1&qnum=1#review-wrap"
+                              style="text-decoration:none;">
+                          			 구매평 작성
+                          		 </a>	 --%>
+                          		 <button type="button" class="orderReview btn-brand" data-bs-toggle="modal"
+									data-bs-target="#modal-review" value="${orList.prdNo}">구매평 작성</button>
+                              </td>
                            </c:when>
+                           
                            <c:otherwise>
                               <td scope="row">
-                                 <button type="button" class="cancleBtn">취소</button>
+                                 <button type="button" class="cancleBtn">주문취소</button>
                               </td>
                            </c:otherwise>
                         </c:choose>
@@ -77,6 +88,46 @@
       </div>
    </article>
 </div>
+
+<!-- 리뷰 모달 시작 -->
+<form name="reviewForm" id="reviewForm" method="post" action="/market/reviewInsert" >
+   <div class="modal fade" id="modal-review" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel" style="font-family: Gowun Dodum;">구매평 작성</h5>
+               <button type="button" class="btn-close btn btn-brand" data-bs-dismiss="modal"aria-label="Close"></button>
+            </div>
+            <div class="modal-body mb-3">
+               <h4>상품은 어떠셨나요?</h4>
+               <fieldset>
+                  <input type="hidden" name="userId" value="${sessionScope.m.userId}">
+                  <input type="hidden" name="prdNo" value="${list.prdNo}">
+                  <input type="hidden" name="prdName" value="${prd.prdName}">
+                  <input type="hidden" name="marketerId" value="${prd.marketerId}">
+                  <input type="radio" name="rating" value="5" id="rate1" checked>
+                  <label for="rate1">♥</label>
+                  <input type="radio" name="rating" value="4" id="rate2">
+                  <label for="rate2">♥</label>
+                  <input type="radio" name="rating" value="3" id="rate3">
+                  <label for="rate3">♥</label>
+                  <input type="radio" name="rating" value="2" id="rate4">
+                  <label for="rate4">♥</label>
+                  <input type="radio" name="rating" value="1" id="rate5">
+                  <label for="rate5">♥</label>
+               </fieldset>
+               <textarea name="prdReviewcontent" class="chk1 form-control" id="message-text" title="어떤점이 좋으셨나요?"
+                         style="height:20em; resize:none;" ></textarea>
+            </div>
+            <div class="modal-footer">
+               <button type="submit" class="reviewsave btn btn-brand">저장</button>
+               <button type="button" class="reviewcancel btn btn-brand" data-bs-dismiss="modal">취소</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</form>
+<!-- 리뷰 모달 끝 -->
 
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
@@ -94,6 +145,30 @@
           }
        }
     });
+   
+   //구매평 작성 클릭시
+   /* $("button[name='orderReview']").click(function(){
+	    action='orderReview';
+		type='???';
+		orderNo = this.value;
+		
+		//hidden 담기(prdNo, prdName, marketerId)
+		var row = $(this).parent().parent().parent();
+		var tr - row.children();
+		
+		var prdName = tr.eq(1).text();
+		
+		$("#prdName").val(prdName);
+		
+		$("#modal-review").modal();
+   
+   })
+   
+   $('input[name=prdNo]').attr('value', "");
+   $('input[name=prdName]').attr('value', "");
+   $('input[name=marketerId]').attr('value', ""); */
+   
+   
 </script>
 </body>
 </html>

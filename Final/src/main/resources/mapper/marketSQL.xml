@@ -58,7 +58,7 @@
       values(
                prd_review_seq.nextval,
                #{prdNo},
-               'marketer1',
+               #{marketerId},
                #{rating},
                #{prdReviewcontent},
                #{userId},
@@ -92,8 +92,8 @@
          prd_no as prdNo,
          prd_qna_content as prdQnacontent,
          user_id as userId,
-         prd_qna_regdate as prdQnaregdate
-
+         prd_qna_regdate as prdQnaregdate,
+		 prd_qna_status as prdQnastatus
       from(
              select
                 prd_qna_no,
@@ -101,6 +101,7 @@
                 prd_qna_content,
                 user_id,
                 prd_qna_regdate,
+                prd_qna_status,
                 row_number() over(order by prd_qna_no desc) as rNum
              from noel_product_qna where prd_no = #{prdNo})
          <![CDATA[where rNum > #{qnadisplayPost} and rNum <= #{qnapostNum}]]>
@@ -128,7 +129,7 @@
       values(
                prd_qna_seq.nextval,
                #{prdNo},
-               'marketer2',
+               #{marketerId},
                #{prdQnacontent},
                #{userId})
    </insert>
@@ -171,6 +172,15 @@
                #{writer},
                #{prdQnarcontent})
    </insert>
+   
+   <!-- 판매자의 QNA 댓글등록시 QNA 답변완료로 변경 -->
+   <update id="qnaStatus" parameterType="marketQnaVO">
+		update noel_product_qna set prd_qna_status = 1 
+		where prd_qna_no = 
+		(select distinct prd_qna_no as prdQnano
+		from noel_product_qnar 
+		where prd_qna_no = #{prdQnano} and writer = #{marketerId})
+   </update>
 
    <!-- QNA 댓글 조회 -->
    <select id="qnareplyDetail" resultType="marketQnaReplyVO">

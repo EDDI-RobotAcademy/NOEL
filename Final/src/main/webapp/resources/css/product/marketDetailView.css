@@ -371,6 +371,10 @@ button[name=reserveBtn]:hover{
     border-color: #dc3545;
 }
 
+.w3-circle{
+	border-radius: 50%;
+}
+
 .content-wrap4{
     font-family: Gowun Dodum;
     margin-top: 30px;
@@ -389,4 +393,21 @@ button[name=reserveBtn]:hover{
 
 .countNum, .peopleTd{
     width: 30px;
+}
+
+input[type="checkbox"]:hover {
+    border-color:  #dc3545;
+}
+
+input[type="checkbox"]:checked {
+    accent-color: #dc3545; 
+}
+
+input[type="checkbox"]:checked::before {
+    border-radius: 2px;
+    transform: scale(1) translate(-50%, -50%)
+}
+
+a{
+	text-decoration : none;
 }

@@ -484,6 +484,7 @@ public class MemberService {
 		ArrayList<OrderVO> uidCnt = dao.uidCnt(userId);
 		HashMap<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("list", list);
+		System.out.println(list);
 		searchMap.put("reqPage", reqPage);
 		searchMap.put("pageNavi", pageNavi);
 		searchMap.put("total", totalPage);

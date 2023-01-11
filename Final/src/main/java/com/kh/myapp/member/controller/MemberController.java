@@ -565,6 +565,9 @@ public class MemberController {
 		Member m = (Member) session.getAttribute("m");
 		String userId = m.getUserId();
 		HashMap<String, Object> map = service.selectMyOrderList(reqPage, userId);
+		/*
+		 * HashMap<String, Object> map = service.selectMyOrderList(reqPage, userId);
+		 */		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));
@@ -572,6 +575,8 @@ public class MemberController {
 		model.addAttribute("pageNo", map.get("pageNo"));
 		model.addAttribute("userId", userId);
 		model.addAttribute("uidCntList", map.get("uidCnt"));
+		/* model.addAttribute("prdNo", ???.get("prdNo")); */
+		
 		return "/member/userOrderList";
 
 	}
@@ -629,7 +634,5 @@ public class MemberController {
 		
 		return "market/orderAll";
 	}
-	
-	
-	
+
 }

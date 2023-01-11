@@ -7,10 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>bonjour noël</title>
-<link rel="stylesheet"
-	href="/resources/css/product/marketDetailView.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet"
+	href="/resources/css/product/marketDetailView.css">
 
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
@@ -44,11 +44,15 @@
 					<tr>
 						<th>수량 선택</th>
 						<td style="width: 30px;">
-							<button class="w3-button w3-circle" id="down">-</button>
+							<button class="w3-button w3-circle" id="down"
+							style="width: 35px; height: 35px; padding: 0; background-color: red; color:white;">
+							-</button>
 						</td>
 						<td class="peopleTd"><span class="countNum">1</span></td>
 						<td style="width: 30px;">
-							<button class="w3-button w3-circle" id="up">+</button>
+							<button class="w3-button w3-circle" id="up"
+							style="width: 35px; height: 35px; padding: 0; background-color: red; color:white;">
+							+</button>
 						</td>
 						<td></td>
 						<td></td>
@@ -205,6 +209,7 @@
                   <input type="hidden" name="userId" value="${sessionScope.m.userId}">
                   <input type="hidden" name="prdNo" value="${prd.prdNo}">
                   <input type="hidden" name="prdName" value="${prd.prdName}">
+                  <input type="hidden" name="marketerId" value="${prd.marketerId}">
                   <input type="radio" name="rating" value="5" id="rate1" checked>
                   <label for="rate1">♥</label>
                   <input type="radio" name="rating" value="4" id="rate2">
@@ -263,13 +268,14 @@
 							<c:forEach items="${qnalist}" var="qnalist">
 								<tr height="50">
 									<td><c:choose>
-											<c:when test="${qnalist.prdQnastatus == 1}">
-                              답변대기
-                           </c:when>
+											<c:when test="${qnalist.prdQnastatus == 0}">
+				                              답변대기
+				                            </c:when>
 											<c:otherwise>
-                              답변완료
-                           </c:otherwise>
-										</c:choose></td>
+				                              답변완료
+				                            </c:otherwise>
+										</c:choose>
+									</td>
 									<td><a
 										href="/market/qnaDetail?prdQnano=${qnalist.prdQnano}"> <c:out
 												value="${qnalist.prdQnacontent}" />
@@ -289,8 +295,8 @@
 	<div align="center">
 		<!-- qna 목록 페이지 번호 -->
 		<c:forEach begin="1" end="${qnapageNum}" var="qnum">
-			<span> <a
-				href="/marketDetailView?prdNo=${param.prdNo}&bookmarkId=mlolw2&num=1&qnum=${qnum}#qna-wrap">
+			<span> 
+				<a href="/marketDetailView?prdNo=${param.prdNo}&bookmarkId=mlolw2&num=1&qnum=${qnum}#qna-wrap">
 					${qnum} </a>
 			</span>
 		</c:forEach>
@@ -310,24 +316,23 @@
 							aria-label="Close"></button>
 					</div>
 					<div class="modal-body mb-3">
-						<input type="hidden" name="userId"
-							value="${sessionScope.m.userId}"> <input type="hidden"
-							name="prdNo" value="${prd.prdNo}"> <label
+						<input type="hidden" name="userId" value="${sessionScope.m.userId}"> 
+						<input type="hidden" name="prdNo" value="${prd.prdNo}"> 
+						<input type="hidden" name="marketerId" value="${prd.marketerId}"> 
+						<label
 							for="message-text" class="col-form-label">문의할 내용을 작성해주세요.</label>
 						<textarea name="prdQnacontent" class="chk2 form-control"
 							id="message-text" title="내용을 입력하세요"
 							style="height: 20em; resize: none;"></textarea>
 						<br>
 						<div>
-							<input class="form-check-input" type="checkbox" name="secret"
-								id="secret"> <label class="form-check-label">비밀글
-								설정</label>
+							<input class="checkbox" type="checkbox" name="secret" id="secret"> 
+							<label class="form-check-label">비밀글 설정</label>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="submit" class="qnasave btn btn-brand">저장</button>
-						<button type="button" class="qnacancel btn btn-brand"
-							data-bs-dismiss="modal">취소</button>
+						<button type="button" class="qnacancel btn btn-brand" data-bs-dismiss="modal">취소</button>
 					</div>
 				</div>
 			</div>
