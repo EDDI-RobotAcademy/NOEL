@@ -59,19 +59,53 @@
 	<delete id="dropout" parameterType="m">
 		delete from noel_user
 		where user_id=#{userId}
-	</delete>
-
+	</delete> 
+	
+	<!-- 회원 아이디 찾기  -->
 	<select id="searchMemberId" parameterType="m" resultType="string">
 		select
 			user_Id as userId
 		from noel_user
 		where user_name = #{userName} and user_tel = #{userTel}
 	</select>
-
+	
+	<!-- 회원 비밀번호 찾기(변경)  -->
 	<select id="searchNormalPw" parameterType="m" resultType="string">
 		select
 			user_id as userId
 		from noel_user
 		where user_Id = #{userId} and user_tel = #{userTel}
+	</select>
+	
+	<!-- 일반회원 검색 -->
+	<select id="searchMember" parameterType="map" resultType="m">
+		select
+			user_id as userId,
+			user_name as userName,
+			user_tel as userTel,
+			user_regdate as userRegdate
+		from(select rownum as rnum, n.* from (select * from noel_user order by user_regdate desc) n)
+		where rnum between #{start} and #{end}
+		<choose>
+			<when test="type.equals('id')">
+			 and user_id like '%'||#{keyword}||'%' 
+			</when>
+			<when test="type.equals('name')">
+			and user_name like '%'||#{keyword}||'%' 
+			</when>			
+		</choose>
+	</select>
+	
+	<!-- 일반회원 검색 전체 카운팅 -->
+	<select id="searchMemberCount" parameterType="map" resultType="int">
+		select count(*) from noel_user
+		<choose>
+			<when test="type.equals('id')">
+			 where user_id like '%'||#{keyword}||'%' 
+			</when>
+			<when test="type.equals('name')">
+			where user_name like '%'||#{keyword}||'%' 
+			</when>			
+		</choose>
 	</select>
 </mapper>

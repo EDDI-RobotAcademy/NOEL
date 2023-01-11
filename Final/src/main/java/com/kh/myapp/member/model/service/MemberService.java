@@ -13,7 +13,6 @@ import com.kh.myapp.member.model.vo.Member;
 import com.kh.myapp.order.model.vo.OrderVO;
 import com.kh.myapp.order.model.vo.OrderlistVO;
 
-
 @Service
 public class MemberService {
 	@Autowired
@@ -308,8 +307,7 @@ public class MemberService {
 			if (reqPage == pageNo) {
 				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
 			} else {
-				pageNavi += "<a href='/market/orderAll?reqPage=" + pageNo + "'><span>" + (pageNo)
-						+ "</span></a>";
+				pageNavi += "<a href='/market/orderAll?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
 			}
 			pageNo++;
 			if (pageNo > totalMan) {
@@ -383,8 +381,7 @@ public class MemberService {
 			if (reqPage == pageNo) {
 				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
 			} else {
-				pageNavi += "<a href='/market/orderPrd?reqPage=" + pageNo + "'><span>" + (pageNo)
-						+ "</span></a>";
+				pageNavi += "<a href='/market/orderPrd?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
 			}
 			pageNo++;
 			if (pageNo > totalMan) {
@@ -505,8 +502,8 @@ public class MemberService {
 	}
 
 	// 판매자 > 주문관리 > 검색
-	public HashMap<String, Object> searchOrderMarketerList( String marketerId, String type,
-			String keyword, int reqPage) {
+	public HashMap<String, Object> searchOrderMarketerList(String marketerId, String type, String keyword,
+			int reqPage) {
 		int numPerPage = 10;
 		int end = numPerPage * reqPage;
 		int start = (end - numPerPage) + 1;
@@ -534,10 +531,10 @@ public class MemberService {
 
 		// 페이지 내비 시작
 		String pageNavi = "";
-		if(pageNo != 1) {
-			pageNavi += "<a href='/searchOrderMarketerList?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
-					"            chevron_left\r\n" + 
-					"            </span></a>";
+		if (pageNo != 1) {
+			pageNavi += "<a href='/searchOrderMarketerList?reqPage=" + (pageNo - 1)
+					+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n"
+					+ "            chevron_left\r\n" + "            </span></a>";
 		}
 
 		for (int i = 0; i < pageNaviSize; i++) {
@@ -570,4 +567,133 @@ public class MemberService {
 			return orderMap;
 		}
 	}
+
+	// 최고관리자 > 업주관리 > 검색기능
+	public HashMap<String, Object> searchMarketer(String type, String keyword, int reqPage) {
+
+		int numPerPage = 7;
+		int end = numPerPage * reqPage;
+		int start = (end - numPerPage) + 1;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		map.put("start", start);
+		map.put("end", end);
+		ArrayList<Marketer> list = dao.searchMarketer(map);
+		int totalPage = dao.searchMarketerCount(map);
+		int totalMan = 0;
+		if (totalPage % numPerPage == 0) {
+			totalMan = totalPage / numPerPage;
+		} else {
+			totalMan = totalPage / numPerPage + 1;
+		}
+
+		// 페이지 네비 사이즈
+		int pageNaviSize = 5;
+
+		// 페이지 시작 번호
+		int pageNo = 1;
+
+		// 페이지 내비 시작
+		String pageNavi = "";
+		if (pageNo != 1) {
+			pageNavi += "<a href='/searchMarketer?reqPage=" + (pageNo - 1)
+					+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n"
+					+ "            chevron_left\r\n" + "            </span></a>";
+		}
+
+		for (int i = 0; i < pageNaviSize; i++) {
+			if (reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			} else {
+				pageNavi += "<a href='/searchMarketer?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if (pageNo > totalMan) {
+				break;
+			}
+		}
+
+		// 다음버튼
+		if (pageNo <= totalMan) {
+			pageNavi += "<a href='/searchMarketer?reqPage=" + (pageNo)
+					+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n"
+					+ "            chevron_right\r\n" + "            </span></a>";
+		}
+
+		HashMap<String, Object> ownerMap = new HashMap<String, Object>();
+		ownerMap.put("list", list);
+		ownerMap.put("pageNavi", pageNavi);
+
+		if (list == null) {
+			return null;
+		} else {
+			return ownerMap;
+		}
+	}
+
+	// 최고관리자 > 회원관리 > 검색기능
+	public HashMap<String, Object> searchMember(String type, String keyword, int reqPage) {
+
+		int numPerPage = 7;
+		int end = numPerPage * reqPage;
+		int start = (end - numPerPage) + 1;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		map.put("start", start);
+		map.put("end", end);
+		ArrayList<Member> list = dao.searchMember(map);
+		int totalPage = dao.searchMemberCount(map);
+		int totalMan = 0;
+		if (totalPage % numPerPage == 0) {
+			totalMan = totalPage / numPerPage;
+		} else {
+			totalMan = totalPage / numPerPage + 1;
+		}
+
+		// 페이지 네비 사이즈
+		int pageNaviSize = 5;
+
+		// 페이지 시작 번호
+		int pageNo = 1;
+
+		// 페이지 내비 시작
+		String pageNavi = "";
+		if (pageNo != 1) {
+			pageNavi += "<a href='/searchMember?reqPage=" + (pageNo - 1)
+					+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n"
+					+ "            chevron_left\r\n" + "            </span></a>";
+		}
+
+		for (int i = 0; i < pageNaviSize; i++) {
+			if (reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			} else {
+				pageNavi += "<a href='/searchMember?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if (pageNo > totalMan) {
+				break;
+			}
+		}
+
+		// 다음버튼
+		if (pageNo <= totalMan) {
+			pageNavi += "<a href='/searchMember?reqPage=" + (pageNo)
+					+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n"
+					+ "            chevron_right\r\n" + "            </span></a>";
+		}
+
+		HashMap<String, Object> memberMap = new HashMap<String, Object>();
+		memberMap.put("list", list);
+		memberMap.put("pageNavi", pageNavi);
+
+		if (list == null) {
+			return null;
+		} else {
+			return memberMap;
+		}
+	}
+
 }

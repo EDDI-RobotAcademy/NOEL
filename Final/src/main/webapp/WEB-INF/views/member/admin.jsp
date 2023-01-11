@@ -80,7 +80,7 @@
         <div class="contents">
             <h4 style="margin: 0;">업주관리</h4>
             <div class="searchWrap" style="width:800px; margin-top:10px; margin-bottom: 20px;">
-            	<form action="/searchOwner.do?reqPage=1" method="post">
+            	<form action="/searchMarketer?reqPage=1" method="post">
 					<select name="type" style="width:100px; height:32px;">
 						<option value="id">아이디</option>
 						<option value="name">이름</option>

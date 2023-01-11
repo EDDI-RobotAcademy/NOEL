@@ -194,7 +194,6 @@ public class MemberDao {
 		String result = sqlSession.selectOne("order.selectPrdName", prdNo);
 		return result;
 	}
-	
 	// 판매자 > 주문관리 > 검색
 	public ArrayList<OrderlistVO> searchMarketerList(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("order.searchOrderListMarketer",map);
@@ -206,4 +205,29 @@ public class MemberDao {
 		int result = sqlSession.selectOne("order.searchOrderMarketerListCount", map);
 		return result;
 	}
+	
+	//최고관리자 > 업주관리 > 검색기능
+	public ArrayList<Marketer> searchMarketer(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("marketer.searchMarketer",map);
+		return (ArrayList<Marketer>) list;
+	}
+	
+	//최고관리자 > 업주관리  > 검색기능 (글 개수 조회)
+	public int searchMarketerCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("marketer.searchMarketerCount", map);
+		return result;
+	}
+	
+	//최고관리자 > 회원관리 > 검색기능
+	public ArrayList<Member> searchMember(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("member.searchMember",map);
+		return (ArrayList<Member>) list;
+		}
+	
+	//최고관리자 > 회원관리 > 검색기능 (글 개수 조회)
+	public int searchMemberCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("member.searchMemberCount", map);
+		return result;
+	}
+	
 }
