@@ -134,8 +134,8 @@
 	<div class="content-wrap4">
 		<div class="testDiv">
 			<%-- 상세정보 --%>
-			<p class="menuTitle">CONTENT</p>
-			<p class="menuSubTitle">상품 설명</p>
+			<p class="menuTitle">&nbsp;</p>
+			<p class="menuSubTitle">&nbsp;</p>
 			<br>
 			<div class="contentWrap2">${prd.prdContent}</div>
 			<hr style="border: 1px">

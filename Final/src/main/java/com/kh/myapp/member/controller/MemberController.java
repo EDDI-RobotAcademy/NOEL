@@ -483,6 +483,25 @@ public class MemberController {
 	public String form() {
 		return "/member/marketerMypage";
 	}
+	
+	//최고관리자 > 판매자관리 > 업주검색기능
+	@RequestMapping(value="/searchMarketer")
+	public String searchOwner(String type, String keyword,int reqPage, Model model){
+		HashMap<String, Object> list = service.searchMarketer(type,keyword, reqPage);
+		model.addAttribute("list", list.get("list"));
+		model.addAttribute("pageNavi", list.get("pageNavi"));
+		return "member/admin";
+	}
+	
+	//최고관리자 > 회원관리 > 검색기능
+	@RequestMapping(value="/searchMember")
+	public String searchMember(String type, String keyword,int reqPage, Model model){
+		HashMap<String, Object> list = service.searchMember(type,keyword,reqPage);
+		model.addAttribute("list", list.get("list"));
+		model.addAttribute("pageNavi", list.get("pageNavi"));
+		return "member/memberManage";
+	}
+	
 
 	// 판매자 > 주문관리
 	@RequestMapping(value = "market/orderManagementView")
@@ -539,25 +558,6 @@ public class MemberController {
 		
 	}
 
-	
-	// 판매자 > 주문관리 > 배송상태 지정(상품별)
-	@RequestMapping(value = "/updateOrderLevel")
-	public String updateOrderLevel(OrderlistVO vo, int prdNo) {
-		System.out.println("주문번호" + vo);
-		int result = service.updateOrderLevel(vo);
-		return "redirect:/market/orderPrd?reqPage=1&prdNo=" + prdNo;
-	}
-
-	
-	
-	// 판매자 > 주문관리 > 배송상태 지정(모든 상품)
-		@RequestMapping(value = "/market/updateOrderAllLevel")
-		public String updateOrderAllLevel(OrderlistVO vo, int orderNo) {
-			vo.setOrderNo(orderNo);
-			int result = service.updateOrderLevel(vo);
-			return "redirect:/market/orderAll?reqPage=1";
-		}
-
 	// 회원 > 주문내역
 	@RequestMapping(value = "/userOrderList")
 	public String orderList(HttpSession session, int reqPage, Model model) {
@@ -581,6 +581,15 @@ public class MemberController {
 
 	}
 
+	// 판매자 > 주문관리 > 배송상태 지정(상품별)
+	@RequestMapping(value = "/market/updateOrderLevel")
+	public String updateOrderLevel(OrderlistVO vo, int orderNo) {
+		vo.setOrderNo(orderNo);
+		int result = service.updateOrderLevel(vo);
+		int prdNo = vo.getPrdNo();
+		return "redirect:/market/orderPrd?reqPage=1&prdNo=" + prdNo;
+	}
+
 	// 회원 > 주문 취소
 	@RequestMapping(value = "/cancleOrder")
 	public String cancleOrder(int orderNo, HttpServletRequest request) {
@@ -596,5 +605,34 @@ public class MemberController {
 			return "common/alert";
 		}
 	}
+	
+	// 판매자 > 주문관리 > 배송상태 지정(모든 상품)
+		@RequestMapping(value = "/market/updateOrderAllLevel")
+		public String updateOrderAllLevel(OrderlistVO vo, int orderNo) {
+			vo.setOrderNo(orderNo);
+			int result = service.updateOrderLevel(vo);
+			return "redirect:/market/orderAll?reqPage=1";
+		}
+		//판매자 > 주문관리 > 전체주문 >검색
+		@RequestMapping(value = "/searchPrdMarketerList")
+		public String searchPrdMarketerList(OrderlistVO vo, Model model,int reqPage, @SessionAttribute Marketer mk, String type, String keyword ) {
+			String marketerId = vo.getMarketerId();
+			HashMap<String, Object> map = service.searchOrderMarketerList(marketerId, type, keyword, reqPage);
+			model.addAttribute("list", map.get("list"));
+			model.addAttribute("pageNavi", map.get("pageNavi"));
+			
+			return "market/orderPrd";
+		}
+
+		//판매자 > 주문관리 > 전체주문 > 검색
+	@RequestMapping(value = "/searchOrderMarketerList")
+	public String searchOrderMarketerList(OrderlistVO vo, Model model,int reqPage, @SessionAttribute Marketer mk, String type, String keyword ) {
+		String marketerId = vo.getMarketerId();
+		HashMap<String, Object> map = service.searchOrderMarketerList(marketerId, type, keyword, reqPage);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("pageNavi", map.get("pageNavi"));
 		
+		return "market/orderAll";
+	}
+
 }
