@@ -45,7 +45,7 @@
                <tr height="40px">
                   <td colspan="2" style="text-align:center;">
                      <h3>구매평</h3>
-                     <hr>
+                     <hr  style="height:2px;">
                   </td>
                </tr>
                <tr height="40px">

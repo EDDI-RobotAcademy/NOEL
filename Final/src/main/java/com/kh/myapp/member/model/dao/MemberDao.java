@@ -174,7 +174,6 @@ public class MemberDao {
 	//회원 > 주문관리
 	public ArrayList<OrderVO> selectMyOrderList(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("order.selectMyOrderList", map);
-		System.out.println("memberdao list : " + list);
 		return (ArrayList<OrderVO>) list;
 	}
 	//회원 > 주문관리, 총 주문수량

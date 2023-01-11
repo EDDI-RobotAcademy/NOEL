@@ -10,7 +10,6 @@
    <link rel="stylesheet" href="/resources/css/index/owl.carousel.min.css">
    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
    <link rel="stylesheet" href="/resources/css/product/prd_add.css">
-
    <style type="text/css">
       div{
          font-family: 'Gowun Dodum';
@@ -33,6 +32,7 @@
          padding-right: 40px;
          width:700px;
          margin:0 auto;
+         
       }
 
    </style>
@@ -53,7 +53,7 @@
                <tr height="40px">
                   <td colspan="2" style="text-align:center;">
                      <h3>${qnadetail.userId} 님의 QnA</h3>
-                     <hr>
+                     <hr style="height:2px;">
                   </td>
                </tr>
                <tr height="40px">
@@ -107,21 +107,27 @@
 <!-- Q&A 댓글 시작 -->
 <div class="qna-reply-wrap">
    <hr>
-   <ul>
+   <ul style="padding-left:1rem;">
       <c:forEach items="${qnareply}" var="qnareply">
          <li>
             <div>
+               <br>
                <p>
                   <b>${qnareply.writer}</b> /
                   <fmt:formatDate value="${qnareply.prdQnarregdate}"
                                   pattern="yyyy-MM-dd" />
                </p>
                <p>${qnareply.prdQnarcontent}</p>
-               <p>
-                  <a href="">수정</a> /
-                  <a href="/market/qnareplyDelete?prdQnarno=${qnareply.prdQnarno}"
-                     onclick="return confirm('댓글을 삭제하시겠습니까?');">삭제</a>
-               </p>
+               <c:choose>
+				<c:when test="${sessionScope.m.userId eq qnareply.writer or sessionScope.mk.marketerId eq qnareply.writer}">               		
+	               <p>
+	                  <a href="/market/qnareplyDelete?prdQnarno=${qnareply.prdQnarno}"
+	                     onclick="return confirm('댓글을 삭제하시겠습니까?');">삭제</a>
+	               </p>
+	            </c:when>
+	            <c:otherwise>               		
+	            </c:otherwise>   
+               </c:choose>
                <br>
             </div>
          </li>
@@ -129,9 +135,8 @@
    </ul>
    <div>
       <c:choose>
-         <c:when test="${sessionScope.m.userId eq qnadetail.userId}">
+         <c:when test="${sessionScope.m.userId eq qnadetail.userId or sessionScope.mk.marketerId eq qnadetail.marketerId}">
             <form name="qnaReplyForm" method="post" action="/market/qnareply">
-
                <table>
                   <tbody>
                   <tr height="40px">
@@ -142,25 +147,33 @@
                   </tr>
                   <tr height="40px">
                      <td width="35%" style="text-align: center;">작성자</td>
-                     <td> &nbsp; <input type="text" name="writer"
-                                        value="${sessionScope.m.userId}" style="border:none;" readonly="readonly"/></td>
+                     <c:choose>
+	                     <c:when test="${not empty sessionScope.m.userId}">
+		                     <td> &nbsp; <input type="text" name="writer"
+		                                        value="${sessionScope.m.userId}" style="border:none;" readonly="readonly"/></td>
+	                     </c:when>
+	                     <c:otherwise>
+	                     	 <td> &nbsp; <input type="text" name="writer"
+		                                        value="${sessionScope.mk.marketerId}" style="border:none;" readonly="readonly"/></td>
+	                     </c:otherwise>
+                     </c:choose>                   
                   </tr>
                   <tr height="80px">
                      <td style="text-align: center;">내용</td>
                      <td><textarea rows="5" cols="50" name="prdQnarcontent"
                                    style="height: 10em; width: 500px; resize: none;"
-                                   placeholder=" 댓글을 남겨주세요." title="댓글을 입력해주세요"
+                                   placeholder="댓글을 남겨주세요." title="댓글을 남겨주세요."
                                    class="chk1 form-control"></textarea></td>
                   </tr>
                   <tr height="80px">
                      <td colspan="2" style="text-align: right;">
                         <input type="hidden" name="prdQnano" value="${qnadetail.prdQnano}">
+                        <input type="hidden" name="marketerId" value="${qnadetail.marketerId}">
                         <button type="submit" class="replysave btn btn-brand">등록</button>
                      </td>
                   </tr>
                   </tbody>
                </table>
-
             </form>
          </c:when>
          <c:otherwise>

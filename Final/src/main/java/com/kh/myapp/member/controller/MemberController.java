@@ -539,6 +539,25 @@ public class MemberController {
 		
 	}
 
+	
+	// 판매자 > 주문관리 > 배송상태 지정(상품별)
+	@RequestMapping(value = "/updateOrderLevel")
+	public String updateOrderLevel(OrderlistVO vo, int prdNo) {
+		System.out.println("주문번호" + vo);
+		int result = service.updateOrderLevel(vo);
+		return "redirect:/market/orderPrd?reqPage=1&prdNo=" + prdNo;
+	}
+
+	
+	
+	// 판매자 > 주문관리 > 배송상태 지정(모든 상품)
+		@RequestMapping(value = "/market/updateOrderAllLevel")
+		public String updateOrderAllLevel(OrderlistVO vo, int orderNo) {
+			vo.setOrderNo(orderNo);
+			int result = service.updateOrderLevel(vo);
+			return "redirect:/market/orderAll?reqPage=1";
+		}
+
 	// 회원 > 주문내역
 	@RequestMapping(value = "/userOrderList")
 	public String orderList(HttpSession session, int reqPage, Model model) {
@@ -546,6 +565,9 @@ public class MemberController {
 		Member m = (Member) session.getAttribute("m");
 		String userId = m.getUserId();
 		HashMap<String, Object> map = service.selectMyOrderList(reqPage, userId);
+		/*
+		 * HashMap<String, Object> map = service.selectMyOrderList(reqPage, userId);
+		 */		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));
@@ -553,16 +575,10 @@ public class MemberController {
 		model.addAttribute("pageNo", map.get("pageNo"));
 		model.addAttribute("userId", userId);
 		model.addAttribute("uidCntList", map.get("uidCnt"));
+		/* model.addAttribute("prdNo", ???.get("prdNo")); */
+		
 		return "/member/userOrderList";
 
-	}
-
-	// 판매자 > 주문관리 > 배송상태 지정(상품별)
-	@RequestMapping(value = "/updateOrderLevel")
-	public String updateOrderLevel(OrderlistVO vo, int prdNo) {
-		System.out.println("주문번호" + vo);
-		int result = service.updateOrderLevel(vo);
-		return "redirect:/market/orderPrd?reqPage=1&prdNo=" + prdNo;
 	}
 
 	// 회원 > 주문 취소
@@ -580,13 +596,5 @@ public class MemberController {
 			return "common/alert";
 		}
 	}
-	
-	// 판매자 > 주문관리 > 배송상태 지정(모든 상품)
-		@RequestMapping(value = "/market/updateOrderAllLevel")
-		public String updateOrderAllLevel(OrderlistVO vo, int orderNo) {
-			vo.setOrderNo(orderNo);
-			int result = service.updateOrderLevel(vo);
-			return "redirect:/market/orderAll?reqPage=1";
-		}
-
+		
 }

@@ -141,7 +141,8 @@
 			prd_note as prdNote,
 			prd_content as prdContent,
 			prd_regdate as regDate,
-			(select prd_Img_path from noel_product_img pi where pi.prd_no = np.prd_no) as prdthumNail
+			(select prd_Img_path from noel_product_img pi where pi.prd_no = np.prd_no) as prdthumNail,
+			marketer_id as marketerId
 		from noel_product np
 		where np.prd_no = #{_parameter}
 	</select>
