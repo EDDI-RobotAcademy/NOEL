@@ -577,10 +577,11 @@ public class MemberController {
 	}
 
 	// 판매자 > 주문관리 > 배송상태 지정(상품별)
-	@RequestMapping(value = "/updateOrderLevel")
-	public String updateOrderLevel(OrderlistVO vo, int prdNo) {
-		System.out.println("주문번호" + vo);
+	@RequestMapping(value = "/market/updateOrderLevel")
+	public String updateOrderLevel(OrderlistVO vo, int orderNo) {
+		vo.setOrderNo(orderNo);
 		int result = service.updateOrderLevel(vo);
+		int prdNo = vo.getPrdNo();
 		return "redirect:/market/orderPrd?reqPage=1&prdNo=" + prdNo;
 	}
 
@@ -607,5 +608,28 @@ public class MemberController {
 			int result = service.updateOrderLevel(vo);
 			return "redirect:/market/orderAll?reqPage=1";
 		}
+		//판매자 > 주문관리 > 전체주문 >검색
+		@RequestMapping(value = "/searchPrdMarketerList")
+		public String searchPrdMarketerList(OrderlistVO vo, Model model,int reqPage, @SessionAttribute Marketer mk, String type, String keyword ) {
+			String marketerId = vo.getMarketerId();
+			HashMap<String, Object> map = service.searchOrderMarketerList(marketerId, type, keyword, reqPage);
+			model.addAttribute("list", map.get("list"));
+			model.addAttribute("pageNavi", map.get("pageNavi"));
+			
+			return "market/orderPrd";
+		}
 
+		//판매자 > 주문관리 > 전체주문 > 검색
+	@RequestMapping(value = "/searchOrderMarketerList")
+	public String searchOrderMarketerList(OrderlistVO vo, Model model,int reqPage, @SessionAttribute Marketer mk, String type, String keyword ) {
+		String marketerId = vo.getMarketerId();
+		HashMap<String, Object> map = service.searchOrderMarketerList(marketerId, type, keyword, reqPage);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		
+		return "market/orderAll";
+	}
+	
+	
+	
 }

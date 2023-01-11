@@ -28,16 +28,15 @@
 	<!-- 판매자 > 주문관리 -->
 	<select id="selectAllOrderListPrd" parameterType="string"
 		resultType="OrderlistVO">
-		
-		 select 
-            (select prd_no from noel_product np where np.prd_no=no.prd_no) as prdNo,
-            (select prd_name from noel_product np where np.prd_no=no.prd_no) as prdName,
-            (select prd_stock from noel_product np where np.prd_no=no.prd_no) as prdAllStock,           
-            sum(order_quan) as prdStock
-		from noel_order no
+
+		select
+		(select prd_no from noel_product np where np.prd_no=no.prd_no) as prdNo,
+		(select prd_name from noel_product np where np.prd_no=no.prd_no) as	prdName,
+		(select prd_stock from noel_product np where np.prd_no=no.prd_no) as prdAllStock,
+		sum(order_quan) as prdStock	from noel_order no
 		where (select marketer_id from noel_product np where no.prd_no = np.prd_no)= #{marketerId}
-        group by prd_no
-		
+		group by prd_no
+
 	</select>
 
 	<!-- 판매자 > 주문관리 >상품 별 주문상세 -->
@@ -46,15 +45,20 @@
 		select
 		order_no as orderNo,
 		user_id as userId,
-		order_quan as orderQuan,
+		order_quan as
+		orderQuan,
 		to_char(order_date, 'yyyy-mm-dd') as orderDate,
-		order_status as orderStatus,
+		order_status
+		as orderStatus,
+		prd_no as prdNo,
 		order_price as orderPrice,
-		(select prd_name from noel_product np where ot.prd_no = np.prd_no) as prdName
+		(select
+		prd_name from noel_product np where ot.prd_no = np.prd_no) as prdName
 		from (select rownum as rnum, n.* from (select * from noel_order order
 		by
 		order_date desc) n )ot
-		where prd_no = #{prdNo} and rnum between #{start} and
+		where prd_no = #{prdNo} and rnum between
+		#{start} and
 		#{end}
 	</select>
 
@@ -71,9 +75,10 @@
 	<select id="AllOrderListMarketer" parameterType="map"
 		resultType="int">
 		select
-			count(*)
+		count(*)
 		from noel_order no
-		where (select marketer_id from noel_product np where no.prd_no = np.prd_no)
+		where (select marketer_id from noel_product np where
+		no.prd_no = np.prd_no)
 		=#{marketerId}
 	</select>
 
@@ -81,16 +86,18 @@
 	<select id="PrdOrderListMarketer" parameterType="map"
 		resultType="int">
 		select
-			count(*)
+		count(*)
 		from noel_order no
-		where (select prd_no from noel_product np where no.prd_no = np.prd_no)
-			=#{prdNo}
+		where (select prd_no from noel_product np where
+		no.prd_no = np.prd_no)
+		=#{prdNo}
 	</select>
 
 	<!-- 판매자 > 주문관리 > 배송상태 지정 -->
 	<update id="updateOrder" parameterType="OrderlistVO">
 		update noel_order no
-		set	order_status =#{orderStatus}
+		set
+		order_status =#{orderStatus}
 		where order_no =#{orderNo}
 	</update>
 
@@ -98,17 +105,23 @@
 	<select id="selectAllOrderList" parameterType="map"
 		resultType="OrderlistVO">
 		select
-			order_no as orderNo,
-			user_id as userId,
-			to_char(order_date, 'yyyy-mm-dd') as orderDate,
-			order_quan as orderQuan,
-			order_status as orderStatus,
-			(select prd_price from noel_product np where ot.prd_no = np.prd_no )*order_quan as orderPrice,
-			(select prd_name from noel_product np where ot.prd_no = np.prd_no ) as prdName,
-			(select prd_price from noel_product np where ot.prd_no = np.prd_no ) as prdPrice,
-			(select marketer_id from noel_product np where ot.prd_no = np.prd_no) as marketerId
-		from (select rownum as rnum, n.* from (select * from noel_order order by order_date desc) n )ot
-		where (select marketer_id from noel_product np where ot.prd_no = np.prd_no) = #{marketerId} 
+		order_no as orderNo,
+		user_id as userId,
+		to_char(order_date, 'yyyy-mm-dd') as orderDate,
+		order_quan as orderQuan,
+		order_status as orderStatus,
+		(select prd_price from noel_product np where ot.prd_no = np.prd_no
+		)*order_quan as orderPrice,
+		(select prd_name from noel_product np where ot.prd_no = np.prd_no ) as
+		prdName,
+		(select prd_price from noel_product np where ot.prd_no = np.prd_no ) as
+		prdPrice,
+		(select marketer_id from noel_product np where ot.prd_no = np.prd_no) as
+		marketerId
+		from (select rownum as rnum, n.* from (select * from
+		noel_order order by order_date desc) n )ot
+		where (select marketer_id
+		from noel_product np where ot.prd_no = np.prd_no) = #{marketerId}
 		and rnum between #{start} and #{end}
 
 	</select>
@@ -163,8 +176,55 @@
 	<!-- 판매자 > 주문관리 > 주문 상세 (상품명 조회) -->
 	<select id="selectPrdName" parameterType="int"
 		resultType="String">
-		select prd_name as prdName from noel_product where prd_no =#{prdNo}
+		select prd_name as prdName from noel_product where prd_no
+		=#{prdNo}
 	</select>
-	
-	
+
+	<!-- 판매자 > 주문관리 > 검색  -->
+	<select id="searchOrderListMarketer" parameterType="map" resultType="OrderlistVO">
+		select
+			order_no as orderNo,
+			user_id as userId,
+			to_char(order_date, 'yyyy-mm-dd') as orderDate,
+			order_quan as orderQuan,
+			order_status as orderStatus,
+			(select prd_price from noel_product np where ot.prd_no = np.prd_no
+			)*order_quan as orderPrice,
+			(select prd_name from noel_product np where ot.prd_no = np.prd_no ) as
+			prdName
+		from (select rownum as rnum, n.* from (select * from
+		noel_order order by order_date desc) n )ot
+		where rnum between #{start} and #{end}
+		<choose>
+			<when test="type.equals('orderStatus')">
+				and order_status like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('userId')">
+				and user_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('orderNo')">
+				and order_no like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+	</select>
+
+	<!-- 판매자 > 주문관리 > 검색 > 총개수 -->
+	<select id="searchOrderMarketerListCount" parameterType="map"
+		resultType="int">
+		select count(*) from noel_order no
+		where (select marketer_id from
+		noel_product np where no.prd_no = np.prd_no)
+		=#{marketerId}
+		<choose>
+			<when test="type.equals('orderStatus')">
+				and order_status like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('userId')">
+				and user_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('orderNo')">
+				and order_no like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+	</select>
 </mapper>

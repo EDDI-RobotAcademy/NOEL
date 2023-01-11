@@ -28,32 +28,32 @@
 								<h1>주문 상세</h1>
 								<h5>&nbsp;&nbsp;상품명 : ${prdName}</h5>
 								<div class="category1">
-									<a href="/market/orderManagementView?reqPage=1" class="category_orderPrd"
-										id="category_class">상품 별 주문</a>
-									<a	href="/market/orderAll?reqPage=1" id="category_market" class="category_orderPrd">전체
-										주문</a>
+									<a href="/market/orderManagementView?reqPage=1"
+										class="category_orderPrd" id="category_class">상품 별 주문</a> <a
+										href="/market/orderAll?reqPage=1" id="category_market"
+										class="category_orderPrd">전체 주문</a>
 								</div>
-										<div class="bookmark-content-list">
-											<form action="/searchOrderOwnerList.do?reqPage=1"
-												method="post">
-												<div id="type">
-													<select class="type" name="type">
-														<option value="orderNo">상품명</option>
-														<option value="id">아이디</option>
-													</select> <input type="text" name="keyword" class="keywork">
-													<input type="submit" value="조회" class="submitInput ">
-												</div>
-											</form>
-												<c:choose>
-									<c:when test="${empty list }">
-										<table class="table" style="width: 800px;">
-										<tr style="font-size: 50px;">주문내역이 없습니다. <tr>
-										
-										</table>
-									</c:when>
+								<div class="bookmark-content-list">
+									<form action="/searchPrdMarketerList?reqPage=1" method="post">
+										<div id="type">
+											<select class="type" name="type">
+												<option value="orderStatus">주문상태</option>
+												<option value="userId">아이디</option>
+												<option value="orderNo">주문번호</option>
+											</select> <input type="text" name="keyword" class="keywork"> <input
+												type="submit" value="조회" class="submitInput ">
+										</div>
+									</form>
+									<c:choose>
+										<c:when test="${empty list }">
+											<table class="table" style="width: 800px;">
+												<tr style="font-size: 50px;">주문내역이 없습니다.
+												<tr>
+											</table>
+										</c:when>
 
-									<c:otherwise>
-											
+										<c:otherwise>
+
 											<table class="table" style="width: 800px;">
 												<tr>
 													<th scope="col">주문번호</th>
@@ -72,53 +72,53 @@
 														<td>${ol.prdName}</td>
 														<td>${ol.orderDate}</td>
 														<td>${ol.orderQuan}</td>
-														<td><fmt:formatNumber value="${ol.orderPrice}" pattern="#,###"/></td>
+														<td><fmt:formatNumber value="${ol.orderPrice}"
+																pattern="#,###" /></td>
 
-														<form action="/market/updateOrderLevel" method="post">
-														<input type="hidden" value="${ol.orderNo}" name="orderNo">
-															<input type="hidden" name="orderNo" value="${ol.prdNo}">
-														<td class="orderStatusTd">
-															<c:choose>
-																<c:when test="${ol.orderStatus eq '배송준비중'}">
-																	<select name="orderStatus" class="selectbox">
-																		<option value="배송준비중" selected>배송준비중</option>
-																		<option value="배송중">배송중</option>
-																		<option value="배송완료">배송완료</option>
-																		<option value="주문취소">주문취소</option>
-																	</select>
-																</c:when>
-																<c:when test="${ol.orderStatus eq  '배송중'}">
-																	<select name="orderStatus" class="selectbox">
-																		<option value="배송준비중">배송준비중</option>
-																		<option value="배송중" selected>배송중</option>
-																		<option value="배송완료">배송완료</option>
-																		<option value="주문취소">주문취소</option>
-																	</select>
-																</c:when>
-																<c:when test="${ol.orderStatus eq '배송완료'}">
-																	<select name="orderStatus" class="selectbox">
-																		<option value="배송준비중">배송준비중</option>
-																		<option value="배송중">배송중</option>
-																		<option value="배송완료" selected>배송완료</option>
-																		<option value="주문취소">주문취소</option>
-																	</select>
-																</c:when>
-																<c:when test="${ol.orderStatus eq '주문취소'}">
-																	<select name="orderStatus" class="selectbox">
-																		<option value="배송준비중">배송준비중</option>
-																		<option value="배송중">배송중</option>
-																		<option value="배송완료">배송완료</option>
-																		<option value="주문취소" selected>주문취소</option>
-																	</select>
-																</c:when>
-															</c:choose></td>
-														<td><button class="saveBtn" type="submit">확정</button></td>
+														<form action="updateOrderLevel" method="post">
+															<input type="hidden" value="${ol.orderNo}" name="orderNo">
+															<input type="hidden" value="${ol.prdNo}" name="prdNo">
+															<td class="orderStatusTd"><c:choose>
+																	<c:when test="${ol.orderStatus eq '배송준비중'}">
+																		<select name="orderStatus" class="selectbox">
+																			<option value="배송준비중" selected>배송준비중</option>
+																			<option value="배송중">배송중</option>
+																			<option value="배송완료">배송완료</option>
+																			<option value="주문취소">주문취소</option>
+																		</select>
+																	</c:when>
+																	<c:when test="${ol.orderStatus eq  '배송중'}">
+																		<select name="orderStatus" class="selectbox">
+																			<option value="배송준비중">배송준비중</option>
+																			<option value="배송중" selected>배송중</option>
+																			<option value="배송완료">배송완료</option>
+																			<option value="주문취소">주문취소</option>
+																		</select>
+																	</c:when>
+																	<c:when test="${ol.orderStatus eq '배송완료'}">
+																		<select name="orderStatus" class="selectbox">
+																			<option value="배송준비중">배송준비중</option>
+																			<option value="배송중">배송중</option>
+																			<option value="배송완료" selected>배송완료</option>
+																			<option value="주문취소">주문취소</option>
+																		</select>
+																	</c:when>
+																	<c:when test="${ol.orderStatus eq '주문취소'}">
+																		<select name="orderStatus" class="selectbox">
+																			<option value="배송준비중">배송준비중</option>
+																			<option value="배송중">배송중</option>
+																			<option value="배송완료">배송완료</option>
+																			<option value="주문취소" selected>주문취소</option>
+																		</select>
+																	</c:when>
+																</c:choose></td>
+															<td><button class="saveBtn" type="submit">확정</button></td>
 														</form>
 													</tr>
 												</c:forEach>
 											</table>
-										</div>
-									</c:otherwise>
+								</div>
+								</c:otherwise>
 								</c:choose>
 
 								<div class="paging">
@@ -133,12 +133,12 @@
 		</article>
 	</div>
 	<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
-<script type="text/javascript">
-<script>
-$(".saveBtn").on("click",function(){
-	var selectValue= $(".selectbox").val();
-});
-</script>
-</script>
+	<script type="text/javascript">
+		<script>
+		$(".saveBtn").on("click", function() {
+			var selectValue = $(".selectbox").val();
+		});
+	</script>
+	</script>
 </body>
 </html>
