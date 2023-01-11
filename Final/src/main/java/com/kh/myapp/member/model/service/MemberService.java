@@ -1,6 +1,5 @@
 package com.kh.myapp.member.model.service;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,11 +13,11 @@ import com.kh.myapp.member.model.vo.Member;
 import com.kh.myapp.order.model.vo.OrderVO;
 import com.kh.myapp.order.model.vo.OrderlistVO;
 
+
 @Service
 public class MemberService {
 	@Autowired
 	private MemberDao dao;
-
 
 	public String checkId(String checkId) {
 		String userId = dao.checkId(checkId);
@@ -28,7 +27,6 @@ public class MemberService {
 	public Member pwChkMember(Member member) {
 		return dao.pwChkMember(member);
 	}
-
 
 	public int insertMember(Member m) {
 		return dao.insertMember(m);
@@ -55,12 +53,11 @@ public class MemberService {
 		return mk;
 	}
 
-
-	//최고관리자 > 회원관리
+	// 최고관리자 > 회원관리
 	public HashMap<String, Object> selectMemberList(int reqPage) {
 		int numPerPage = 7;
 		int end = numPerPage * reqPage;
-		int start = (end-numPerPage)+1;
+		int start = (end - numPerPage) + 1;
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
@@ -68,9 +65,9 @@ public class MemberService {
 		ArrayList<Member> list = dao.selectMemberList(map);
 		int totalPage = dao.countAllMember();
 		int totalMan = 0;
-		if(totalPage % numPerPage == 0) {
+		if (totalPage % numPerPage == 0) {
 			totalMan = totalPage / numPerPage;
-		}else {
+		} else {
 			totalMan = totalPage / numPerPage + 1;
 		}
 
@@ -80,37 +77,36 @@ public class MemberService {
 		// 페이지 시작 번호
 		int pageNo = 1;
 
-		if(reqPage > 3) {
+		if (reqPage > 3) {
 			pageNo = reqPage - 2;
 		}
 
 		// 페이지 내비 시작
 		String pageNavi = "";
-		if(pageNo != 1) {
-			pageNavi += "<a href='/memberManage.do?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" +
-					"            chevron_left\r\n" +
-					"            </span></a>";
+		if (pageNo != 1) {
+			pageNavi += "<a href='/memberManage.do?reqPage=" + (pageNo - 1)
+					+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n"
+					+ "            chevron_left\r\n" + "            </span></a>";
 		}
 
-		for(int i = 0; i < pageNaviSize; i++) {
-			if(reqPage == pageNo) {
+		for (int i = 0; i < pageNaviSize; i++) {
+			if (reqPage == pageNo) {
 				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
-			}else {
+			} else {
 				pageNavi += "<a href='/memberManage.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
 			}
 			pageNo++;
-			if(pageNo > totalMan) {
+			if (pageNo > totalMan) {
 				break;
 			}
 		}
 
 		// 다음버튼
-		if(pageNo <= totalMan) {
-			pageNavi += "<a href='/memberManage.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" +
-					"            chevron_right\r\n" +
-					"            </span></a>";
+		if (pageNo <= totalMan) {
+			pageNavi += "<a href='/memberManage.do?reqPage=" + (pageNo)
+					+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n"
+					+ "            chevron_right\r\n" + "            </span></a>";
 		}
-
 
 		HashMap<String, Object> memberMap = new HashMap<String, Object>();
 		memberMap.put("list", list);
@@ -119,23 +115,21 @@ public class MemberService {
 		memberMap.put("total", totalPage);
 		memberMap.put("pageNo", pageNo);
 
-		if(list == null) {
+		if (list == null) {
 			return null;
-		}else {
+		} else {
 			return memberMap;
 		}
 	}
 
-
-	//최고관리자 > 업주관리
+	// 최고관리자 > 업주관리
 	public HashMap<String, Object> selectMarketerList(int reqPage) {
-         /*
-         ArrayList<Owner> list = dao.selectOwnerList(o);
-         return list;
-         */
+		/*
+		 * ArrayList<Owner> list = dao.selectOwnerList(o); return list;
+		 */
 		int numPerPage = 7;
 		int end = numPerPage * reqPage;
-		int start = (end-numPerPage)+1;
+		int start = (end - numPerPage) + 1;
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
@@ -143,9 +137,9 @@ public class MemberService {
 		ArrayList<Marketer> list = dao.selectMarketerList(map);
 		int totalPage = dao.countAllMarketer();
 		int totalMan = 0;
-		if(totalPage % numPerPage == 0) {
+		if (totalPage % numPerPage == 0) {
 			totalMan = totalPage / numPerPage;
-		}else {
+		} else {
 			totalMan = totalPage / numPerPage + 1;
 		}
 
@@ -155,37 +149,36 @@ public class MemberService {
 		// 페이지 시작 번호
 		int pageNo = 1;
 
-		if(reqPage > 3) {
+		if (reqPage > 3) {
 			pageNo = reqPage - 2;
 		}
 
 		// 페이지 내비 시작
 		String pageNavi = "";
-		if(pageNo != 1) {
-			pageNavi += "<a href='/adminMemberManage.do?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" +
-					"            chevron_left\r\n" +
-					"            </span></a>";
+		if (pageNo != 1) {
+			pageNavi += "<a href='/adminMemberManage.do?reqPage=" + (pageNo - 1)
+					+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n"
+					+ "            chevron_left\r\n" + "            </span></a>";
 		}
 
-		for(int i = 0; i < pageNaviSize; i++) {
-			if(reqPage == pageNo) {
+		for (int i = 0; i < pageNaviSize; i++) {
+			if (reqPage == pageNo) {
 				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
-			}else {
+			} else {
 				pageNavi += "<a href='/adminMemberManage.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
 			}
 			pageNo++;
-			if(pageNo > totalMan) {
+			if (pageNo > totalMan) {
 				break;
 			}
 		}
 
 		// 다음버튼
-		if(pageNo <= totalMan) {
-			pageNavi += "<a href='/adminMemberManage.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" +
-					"            chevron_right\r\n" +
-					"            </span></a>";
+		if (pageNo <= totalMan) {
+			pageNavi += "<a href='/adminMemberManage.do?reqPage=" + (pageNo)
+					+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n"
+					+ "            chevron_right\r\n" + "            </span></a>";
 		}
-
 
 		HashMap<String, Object> ownerMap = new HashMap<String, Object>();
 		ownerMap.put("list", list);
@@ -194,27 +187,27 @@ public class MemberService {
 		ownerMap.put("total", totalPage);
 		ownerMap.put("pageNo", pageNo);
 
-		if(list == null) {
+		if (list == null) {
 			return null;
-		}else {
+		} else {
 			return ownerMap;
 		}
 
 	}
 
-	//최고관리자 > 업주관리 > 업주레벨 지정
+	// 최고관리자 > 업주관리 > 업주레벨 지정
 	public int updateMarketerLevel(String marketerId, Marketer mk) {
-		return dao.updateMarketerLevel(marketerId,mk);
+		return dao.updateMarketerLevel(marketerId, mk);
 	}
 
-	//최고관리자 > 회원관리 > 회원탈퇴
+	// 최고관리자 > 회원관리 > 회원탈퇴
 	public int dropoutMember(String userId, Member m) {
-		return dao.dropoutMember(userId,m);
+		return dao.dropoutMember(userId, m);
 	}
-	
-	//최고관리자 > 판매자관리 > 판매자탈퇴
+
+	// 최고관리자 > 판매자관리 > 판매자탈퇴
 	public int dropoutMarketer(String marketer, Marketer mk) {
-		return dao.dropoutMarketer(marketer,mk);
+		return dao.dropoutMarketer(marketer, mk);
 	}
 
 	public String searchMemberId(Member m) {
@@ -256,78 +249,79 @@ public class MemberService {
 	public int deleteMarketer(String marketerId) {
 		return dao.deleteMarketer(marketerId);
 	}
-	
-	//판매자 > 주문관리
+
+	// 판매자 > 주문관리
 	public List<OrderlistVO> selectAllOrderListPrd(String marketerId) {
 		List result = dao.selectAllOrderListPrd(marketerId);
 		return result;
 	}
-	
-	//총 주문수량
+
+	// 총 주문수량
 	public int orderQuanAll(int prdNo) {
 		return dao.orderQuanAll(prdNo);
 	}
-	
-	//판매자 > 주문관리 > 주문 상세내역(모든 주문 건)
+
+	// 판매자 > 주문관리 > 주문 상세내역(모든 주문 건)
 	public HashMap<String, Object> selectAllOrderListMarketer(int reqPage, String marketerId) {
 
-		//한 페이지 당 보여지는 주문건수
+		// 한 페이지 당 보여지는 주문건수
 		int numPerPage = 10;
 		// end = 10
-		int end = numPerPage *reqPage;
-		//start = 1
-		int start = (end-numPerPage)+1;
-		
+		int end = numPerPage * reqPage;
+		// start = 1
+		int start = (end - numPerPage) + 1;
+
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
 		map.put("marketerId", marketerId);
-		
+
 		ArrayList<OrderVO> list = dao.selectAllOrderList(map);
-		
+
 		int totalPage = dao.countAllOrder(marketerId);
 		int totalMan = 0;
-		if(totalPage % numPerPage == 0) {
+		if (totalPage % numPerPage == 0) {
 			totalMan = totalPage / numPerPage;
-		}else {
-			totalMan = totalPage / numPerPage +1;
-			
+		} else {
+			totalMan = totalPage / numPerPage + 1;
+
 		}
 		// 페이지 네비 사이즈
 		int pageNaviSize = 5;
-		
+
 		// 페이지 시작 번호
 		int pageNo = 1;
-		
-		if(reqPage > 3) {
+
+		if (reqPage > 3) {
 			pageNo = reqPage - 2;
 		}
-		
-		//이전 버튼 ownerOrderManageFrm
+
+		// 이전 버튼 ownerOrderManageFrm
 		String pageNavi = "";
-		if(pageNo != 1) {
-			pageNavi += "<a href='/market/orderManagement?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
-					"            chevron_left\r\n" + 
-					"            </span></a>";
+		if (pageNo != 1) {
+			pageNavi += "<a href='/market/orderAll?reqPage=" + (pageNo - 1)
+					+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n"
+					+ "            chevron_left\r\n" + "            </span></a>";
 		}
-		
-		for(int i = 0; i < pageNaviSize; i++) {
-			if(reqPage == pageNo) {
+
+		for (int i = 0; i < pageNaviSize; i++) {
+			if (reqPage == pageNo) {
 				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
-			}else {
-				pageNavi += "<a href='/market/orderManagement?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			} else {
+				pageNavi += "<a href='/market/orderAll?reqPage=" + pageNo + "'><span>" + (pageNo)
+						+ "</span></a>";
 			}
 			pageNo++;
-			if(pageNo > totalMan) {
+			if (pageNo > totalMan) {
 				break;
 			}
 		}
-		
+
 		// 다음버튼
-		if(pageNo <= totalMan) {
-			pageNavi += "<a href='/market/orderManagement?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
-					"            chevron_right\r\n" + 
-					"            </span></a>"; 
+		if (pageNo <= totalMan) {
+			pageNavi += "<a href='/market/orderAll?reqPage=" + (pageNo)
+					+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n"
+					+ "            chevron_right\r\n" + "            </span></a>";
 		}
 
 		HashMap<String, Object> orderMap = new HashMap<String, Object>();
@@ -336,24 +330,24 @@ public class MemberService {
 		orderMap.put("pageNavi", pageNavi);
 		orderMap.put("total", totalPage);
 		orderMap.put("pageNo", pageNo);
-		
-		if(list == null) {
+
+		if (list == null) {
 			return null;
-		}else {
+		} else {
 			return orderMap;
 		}
-		
+
 	}
 
-	////판매자 > 주문관리 > 주문 상세내역(상품 별)
+	//// 판매자 > 주문관리 > 주문 상세내역(상품 별)
 	public HashMap<String, Object> selectOrderPrdListMarketer(int reqPage, int prdNo) {
-		//한 페이지 당 보여지는 주문건수
+		// 한 페이지 당 보여지는 주문건수
 		int numPerPage = 10;
 		// end = 10
-		int end = numPerPage *reqPage;
-		//start = 1
-		int start = (end-numPerPage)+1;
-		
+		int end = numPerPage * reqPage;
+		// start = 1
+		int start = (end - numPerPage) + 1;
+
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
@@ -361,47 +355,48 @@ public class MemberService {
 		ArrayList<OrderVO> list = dao.selectOrderPrdList(map);
 		int totalPage = dao.countOrderPrd(prdNo);
 		int totalMan = 0;
-		if(totalPage % numPerPage == 0) {
+		if (totalPage % numPerPage == 0) {
 			totalMan = totalPage / numPerPage;
-		}else {
-			totalMan = totalPage / numPerPage +1;
-			
+		} else {
+			totalMan = totalPage / numPerPage + 1;
+
 		}
 		// 페이지 네비 사이즈
 		int pageNaviSize = 5;
-		
+
 		// 페이지 시작 번호
 		int pageNo = 1;
-		
-		if(reqPage > 3) {
+
+		if (reqPage > 3) {
 			pageNo = reqPage - 2;
 		}
-		
-		//이전 버튼 ownerOrderManageFrm
+
+		// 이전 버튼 ownerOrderManageFrm
 		String pageNavi = "";
-		if(pageNo != 1) {
-			pageNavi += "<a href='/market/orderManagement?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
-					"            chevron_left\r\n" + 
-					"            </span></a>";
+		if (pageNo != 1) {
+			pageNavi += "<a href='/market/orderPrd?reqPage=" + (pageNo - 1)
+					+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n"
+					+ "            chevron_left\r\n" + "            </span></a>";
 		}
-		
-		for(int i = 0; i < pageNaviSize; i++) {
-			if(reqPage == pageNo) {
+
+		for (int i = 0; i < pageNaviSize; i++) {
+			if (reqPage == pageNo) {
 				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
-			}else {
-				pageNavi += "<a href='/market/orderManagement?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			} else {
+				pageNavi += "<a href='/market/orderPrd?reqPage=" + pageNo + "'><span>" + (pageNo)
+						+ "</span></a>";
 			}
 			pageNo++;
-			if(pageNo > totalMan) {
+			if (pageNo > totalMan) {
 				break;
 			}
 		}
-		
+
 		// 다음버튼
-		if(pageNo <= totalMan) {
-			pageNavi += "<a href='/market/orderManagement?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
-					"            chevron_right\r\n" + 
-					"            </span></a>"; 
+		if (pageNo <= totalMan) {
+			pageNavi += "<a href='/market/orderPrd?reqPage=" + (pageNo)
+					+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n"
+					+ "            chevron_right\r\n" + "            </span></a>";
 		}
 
 		HashMap<String, Object> orderMap = new HashMap<String, Object>();
@@ -410,22 +405,22 @@ public class MemberService {
 		orderMap.put("pageNavi", pageNavi);
 		orderMap.put("total", totalPage);
 		orderMap.put("pageNo", pageNo);
-		
-		if(list == null) {
+
+		if (list == null) {
 			return null;
-		}else {
+		} else {
 			return orderMap;
 		}
-		
+
 	}
 
-	//판매자 > 주문관리 > 배송상태 지정
+	// 판매자 > 주문관리 > 배송상태 지정
 	public int updateOrderLevel(OrderlistVO vo) {
 		return dao.updateOrderLevel(vo);
 	}
 
-	//회원 > 주문관리 
-	public HashMap<String, Object> selectMyOrderList(int reqPage, String userId) {  
+	// 회원 > 주문관리
+	public HashMap<String, Object> selectMyOrderList(int reqPage, String userId) {
 		// 화면에 보여주는 게시물 수
 		int numPerPage = 10;
 
@@ -455,7 +450,8 @@ public class MemberService {
 		// 이전 버튼
 		if (pageNo != 1) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/memberManage.do?reqPage=" + (pageNo - 1) + "' style='text-decoration:none;'>";
+			pageNavi += "<a class='page-item' href='/memberManage.do?reqPage=" + (pageNo - 1)
+					+ "' style='text-decoration:none;'>";
 			pageNavi += "<span class='material-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
 		}
@@ -463,12 +459,14 @@ public class MemberService {
 		for (int i = 0; i < pageNaviSize; i++) {
 			if (pageNo == reqPage) {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item active-page' href='/userOrderList?reqPage=" + pageNo + "' style='text-decoration:none;'>";
+				pageNavi += "<a class='page-item active-page' href='/userOrderList?reqPage=" + pageNo
+						+ "' style='text-decoration:none;'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			} else {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' href='/userOrderList?reqPage=" + pageNo + "' style='text-decoration:none;'>";
+				pageNavi += "<a class='page-item' href='/userOrderList?reqPage=" + pageNo
+						+ "' style='text-decoration:none;'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}
@@ -495,14 +493,81 @@ public class MemberService {
 		searchMap.put("pageNo", pageNo);
 		searchMap.put("uidCnt", uidCnt);
 		return searchMap;
-		  
-	  }
+
+	}
 
 	public int cancleOrder(int orderNo) {
 		return dao.cancleOrder(orderNo);
 	}
-	 
+
 	public String selectPrdName(int prdNo) {
 		return dao.selectPrdName(prdNo);
+	}
+
+	// 판매자 > 주문관리 > 검색
+	public HashMap<String, Object> searchOrderMarketerList( String marketerId, String type,
+			String keyword, int reqPage) {
+		int numPerPage = 10;
+		int end = numPerPage * reqPage;
+		int start = (end - numPerPage) + 1;
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		map.put("start", start);
+		map.put("end", end);
+		map.put("marketerid", marketerId);
+
+		ArrayList<OrderlistVO> list = dao.searchMarketerList(map);
+		int totalPage = dao.searchOrderMarketerListCount(map);
+		int totalMan = 0;
+		if (totalPage % numPerPage == 0) {
+			totalMan = totalPage / numPerPage;
+		} else {
+			totalMan = totalPage / numPerPage + 1;
+		}
+		// 페이지 네비 사이즈
+		int pageNaviSize = 5;
+
+		// 페이지 시작 번호
+		int pageNo = 1;
+
+		// 페이지 내비 시작
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/searchOrderMarketerList?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+
+		for (int i = 0; i < pageNaviSize; i++) {
+			if (reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			} else {
+				pageNavi += "<a href='/searchOrderMarketerList?reqPage=" + pageNo + "'><span>" + (pageNo)
+						+ "</span></a>";
+			}
+			pageNo++;
+			if (pageNo > totalMan) {
+				break;
+			}
+		}
+
+		// 다음버튼
+		if (pageNo <= totalMan) {
+			pageNavi += "<a href='/searchOrderMarketerList?reqPage=" + (pageNo)
+					+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n"
+					+ "            chevron_right\r\n" + "            </span></a>";
+		}
+
+		HashMap<String, Object> orderMap = new HashMap<String, Object>();
+		orderMap.put("list", list);
+		orderMap.put("pageNavi", pageNavi);
+
+		if (list == null) {
+			return null;
+		} else {
+			return orderMap;
+		}
 	}
 }

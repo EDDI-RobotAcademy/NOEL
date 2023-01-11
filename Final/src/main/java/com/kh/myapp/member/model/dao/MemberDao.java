@@ -194,4 +194,16 @@ public class MemberDao {
 		String result = sqlSession.selectOne("order.selectPrdName", prdNo);
 		return result;
 	}
+	
+	// 판매자 > 주문관리 > 검색
+	public ArrayList<OrderlistVO> searchMarketerList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("order.searchOrderListMarketer",map);
+		return (ArrayList<OrderlistVO>) list;
+	}
+	
+	// 판매자 > 주문관리 > 검색 > 총개수
+	public int searchOrderMarketerListCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("order.searchOrderMarketerListCount", map);
+		return result;
+	}
 }
