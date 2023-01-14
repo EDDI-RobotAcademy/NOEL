@@ -502,7 +502,6 @@ public class MemberController {
 		return "member/memberManage";
 	}
 	
-
 	// 판매자 > 주문관리
 	@RequestMapping(value = "market/orderManagementView")
 	public String orderManagementView(Model model, OrderlistVO vo, int reqPage, @SessionAttribute Marketer mk)

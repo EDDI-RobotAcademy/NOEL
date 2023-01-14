@@ -142,10 +142,13 @@
 					<span class="comment"></span>
 				</div>
 				<div class="order-box">
-					<label for="shippingAddr2" class="order-label">상세 주소<span
-						class="comment"></span></label> <input type="text" name="shippingAddr2"
+					<label for="shippingAddr2" class="order-label">상세 주소
+						<span class="comment"></span>
+					</label>
+					<input type="text" name="shippingAddr2"
 						id="shippingAddr2" class="order-input llong"> <input
-						type="text" style="display: none;"> <span class="comment"></span>
+						type="text" style="display: none;"> 
+					<span class="comment"></span>
 				</div>
 			</div>
 
@@ -197,50 +200,46 @@
 			}
 		});
 
-		$("#payBtn")
-				.on(
-						"click",
-						function() {
-							const shipInfo = $(".shipping").find(
-									".view-order-info");
-							if (!$("#order-same").prop("checked")) {
-								for (let i = 0; i < shipInfo.length; i++) { // 배송정보 빈 칸인지 확인
-									if (shipInfo.eq(i).val() == "") {
-										shipInfo.eq(i).siblings(".comment")
-												.text("정보를 입력해주세요.");
+		$("#payBtn").on("click",function() {
+				const shipInfo = $(".shipping").find(".view-order-info");
+					if (!$("#order-same").prop("checked")) {
+						for (let i = 0; i < shipInfo.length; i++) { // 배송정보 빈 칸인지 확인
+								if (shipInfo.eq(i).val() == "") {
+									shipInfo.eq(i).siblings(".comment").text("정보를 입력해주세요.");
+											return;
+								} else {
+									shipInfo.eq(i).siblings(".comment").text("");
+								}
+	
+							if (i == 0) { // 수령인명 정규식
+								const nameReg = /^[가-힣]{2,4}$/;
+								const val0 = shipInfo.eq(0).val();
+									if (!(nameReg.test(val0))) {
+										shipInfo.eq(0).siblings(".comment").text("한글 2~4자로 입력");
+												//event.preventDefault();
+												return;
+									}
+							} else if (i == 1) { // 수령인 연락처 정규식
+								const phoneReg = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/;
+								const val1 = shipInfo.eq(1).val();
+									if (!(phoneReg.test(val1))) {
+										shipInfo.eq(1).siblings(".comment").text("010-0000-0000 형식으로 입력");
+												//event.preventDefault();
 										return;
-									} else {
-										shipInfo.eq(i).siblings(".comment")
-												.text("");
 									}
-
-									if (i == 0) { // 수령인명 정규식
-										const nameReg = /^[가-힣]{2,4}$/;
-										const val0 = shipInfo.eq(0).val();
-										if (!(nameReg.test(val0))) {
-											shipInfo.eq(0).siblings(".comment")
-													.text("한글 2~4자로 입력");
-											//event.preventDefault();
-											return;
-										}
-									} else if (i == 1) { // 수령인 연락처 정규식
-										const phoneReg = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/;
-										const val1 = shipInfo.eq(1).val();
-										if (!(phoneReg.test(val1))) {
-											shipInfo
-													.eq(1)
-													.siblings(".comment")
-													.text(
-															"010-0000-0000 형식으로 입력");
-											//event.preventDefault();
-											return;
-										}
-									}
-								} // 배송정보 빈 칸인지 확인 끝
-							} else {
-								shipInfo.siblings(".comment").text("");
 							}
-							if (!$("#info-agree").prop("checked")) {
+						} // 배송정보 빈 칸인지 확인 끝
+					}else {
+						shipInfo.siblings(".comment").text("");
+					}//주소 빈칸인지 확인
+					if($('#shippingAddr1').val().trim()=='' || $('#shippingAddr1')==null){
+						alert("주소를 입력해주세요");
+						return;
+					}else if($('#shippingAddr2').val().trim()=='' || $('#shippingAddr2')==null){
+						alert("상세주소를 입력해주세요");
+						return;
+					}
+					if (!$("#info-agree").prop("checked")) {
 								alert("정보 제공에 동의해주세요.");
 								return;
 							}
@@ -254,31 +253,22 @@
 									+ "" + d.getHours() + "" + d.getMinutes()
 									+ "" + d.getSeconds(); // 문자열덧셈을 위해 빈 문자열 넣음
 							IMP.init('imp87554320');
-							IMP
-									.request_pay(
-											{
+							IMP.request_pay({
 												pg : "html5_inicis",
 												merchat_uid : "bonjour" + date, // 거래ID
 												name : '봉쥬르노엘', // 결제 이름
 												amount : price, // 결제 금액
 												buyer_name : name,
-
-											// 구매자 이름
-											// buyer_tel : "010-1234-1234",          // 구매자 전화번호
-											// buyer_addr : "서울시 영등포구 당산동",         // 구매자 주소
-											// buyer_postcode : "12345"            // 구매자 우편번호
 											},
-											function(rsp) {
-												if (rsp.success) {
-													const input = $("<input type='hidden' name='impUid' value='"+rsp.imp_uid+"'>");
-													$("#order-form").append(
-															input);
-													$("#order-form").submit();
-												} else {
-													var msg = '결제에 실패하였습니다.';
-													msg += '에러내용 : '
-															+ rsp.error_msg;
-													alert(msg + " 결제 실패");
+					function(rsp) {
+						if (rsp.success) {
+							const input = $("<input type='hidden' name='impUid' value='"+rsp.imp_uid+"'>");
+										$("#order-form").append(input);
+										$("#order-form").submit();
+						} else {
+							var msg = '결제에 실패하였습니다.';
+							msg += '에러내용 : '+ rsp.error_msg;
+							alert(msg + " 결제 실패");
 												}
 											})
 						});

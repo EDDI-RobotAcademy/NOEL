@@ -139,6 +139,5 @@
 			var selectValue = $(".selectbox").val();
 		});
 	</script>
-	</script>
 </body>
 </html>

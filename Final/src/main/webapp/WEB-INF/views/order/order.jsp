@@ -218,7 +218,14 @@
               } // 배송정보 빈 칸인지 확인 끝
             } else {
               shipInfo.siblings(".comment").text("");
-            }
+            }//주소 빈칸인지 확인
+            if($('#shippingAddr1').val().trim()=='' || $('#shippingAddr1')==null){
+				alert("주소를 입력해주세요");
+				return;
+			}else if($('#shippingAddr2').val().trim()=='' || $('#shippingAddr2')==null){
+				alert("상세주소를 입력해주세요");
+				return;
+			}
             if (!$("#info-agree").prop("checked")) {
               alert("정보 제공에 동의해주세요.");
               return;
@@ -242,10 +249,6 @@
                       amount : price, // 결제 금액
                       buyer_name : name1,
 
-                      // 구매자 이름
-                      // buyer_tel : "010-1234-1234",          // 구매자 전화번호
-                      // buyer_addr : "서울시 영등포구 당산동",         // 구매자 주소
-                      // buyer_postcode : "12345"            // 구매자 우편번호
                     },
                     function(rsp) {
                       if (rsp.success) {

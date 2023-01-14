@@ -88,7 +88,7 @@
 							<br>
 							<div class="form-group">
 								<label for="textarea">상품 내용을 입력하세요</label> <br>
-								<textarea class="form-control" name="prdContent" id="textarea"
+								<textarea class="form-control" name="prdContent" id="summernote"
 									rows="4" required
 									oninvalid="this.setCustomValidity('상품 설명을 입력하세요')"
 									oninput="this.setCustomValidity('')" style="margin: 10px 0;"></textarea>
