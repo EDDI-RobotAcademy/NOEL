@@ -294,13 +294,19 @@ li {
 }
 
 .saveBtn {
-	background-color: rgb(51, 51, 51) !important;
-	border: 1px solid rgb(51, 51, 51) !important;
-	color: #fff !important;
-	padding: 0 10px 0 10px !important;
-	border-radius: 5px;
+		border: 1px solid #dc3545;
+    background-color: #dc3545;
+    border-radius: 5px;
+    height: 30px;
+    width: 50px;
+    cursor: pointer;
+    color: white;
 }
-
+.saveBtn:hover{
+   background-color: #212529;
+    color: white;
+    border: 1px solid #212529;
+}
 #pageNavi {
 	width: 800px;
 	text-align: center;
@@ -405,9 +411,18 @@ li {
 	text-align: center;	
 }
 .submitInput{
-	background-color: rgb(51, 51, 51); 
-	color: white; 
-	width: 40px;
+	border: 1px solid #dc3545;
+    background-color: #dc3545;
+    border-radius: 5px;
+    height: 30px;
+    width: 50px;
+    cursor: pointer;
+    color: white;
+}
+.submitInput:hover{
+   background-color: #212529;
+    color: white;
+    border: 1px solid #212529;
 }
 .keywork{
 	height: 32px;

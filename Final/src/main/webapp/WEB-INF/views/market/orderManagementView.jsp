@@ -43,17 +43,6 @@
 
 									<c:otherwise>
 										<div class="bookmark-content-list">
-											<!-- <form action="/searchPrdMarketerList?reqPage=1" method="post">
-											<input type="hidden" value=1 name="reqPage">
-												 <div id="type">
-													<select class="type" name="type">
-														<option value="prdName">상품명</option>
-														<option value="">------</option>
-													</select> 
-													<input type="text" name="keyword" class="keywork">
-													<input type="submit" value="조회" class="submitInput ">
-												</div>
-											</form> -->
 											<table class="table" style="width: 800px;">
 												<tr>
 													<th scope="col">상품명</th>

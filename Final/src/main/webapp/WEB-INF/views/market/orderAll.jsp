@@ -112,7 +112,7 @@
 																		</select>
 																	</c:when>
 																</c:choose></td>
-															<td><button class="saveBtn" type="submit">확정</button></td>
+															<td><button  id="font" class="saveBtn" type="submit">확정</button></td>
 														</form>
 													</tr>
 												</c:forEach>
