@@ -87,7 +87,7 @@
                </tr>
                <tr height="40px">
                   <td width="35%" style="text-align:center;"> 상품명 </td>
-                  <td> ${sessionScope.productVO.prdName}</td>
+                  <td> ${qnadetail.prdName}</td>
                </tr>
                <tr height="80px">
                   <td style="text-align:center;"> 내용 </td>
@@ -104,7 +104,7 @@
 
 
 
-<!-- Q&A 댓글 시작 -->
+<!-- Q&A 답변 시작 -->
 <div class="qna-reply-wrap">
    <hr>
    <ul style="padding-left:1rem;">
@@ -141,7 +141,7 @@
                   <tbody>
                   <tr height="40px">
                      <td colspan="2" style="text-align: center;">
-                        <h5>댓글작성</h5>
+                        <h5>답변작성</h5>
                         <hr>
                      </td>
                   </tr>

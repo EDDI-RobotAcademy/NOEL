@@ -17,7 +17,6 @@
     <div class="contents">
         <div class="wish-form">
             <div class="bookmarkList-wrap">
-                <!-- <h4 style="margin-top:10px; margin-left:10px;">위시리스트</h4> -->
                 <div class="category1">
                     <a href="#" id="category_class">Class</a>
                     <a href="/myPrdWishList?reqPage=1&bookmarkId=${sessionScope.m.userId}" id="category_market">Market</a>

@@ -93,7 +93,8 @@
          prd_qna_content as prdQnacontent,
          user_id as userId,
          prd_qna_regdate as prdQnaregdate,
-		 prd_qna_status as prdQnastatus
+		 prd_qna_status as prdQnastatus,
+		 secret
       from(
              select
                 prd_qna_no,
@@ -102,18 +103,20 @@
                 user_id,
                 prd_qna_regdate,
                 prd_qna_status,
+                secret,
                 row_number() over(order by prd_qna_no desc) as rNum
              from noel_product_qna where prd_no = #{prdNo})
          <![CDATA[where rNum > #{qnadisplayPost} and rNum <= #{qnapostNum}]]>
    </select>
 
-   <select id="qnaDetail" parameterType="int" resultType="marketQnaVO">
+   <select id="qnaDetail" parameterType="map" resultType="marketQnaVO">
       select
          prd_qna_no as prdQnano,
          prd_no as prdNo,
          marketer_id as marketerId,
          prd_qna_content as prdQnacontent,
          user_id as userId,
+         prd_qna_pw,
          (select prd_name from noel_product where prd_no =
          (select prd_no from noel_product_qna where prd_qna_no = #{prdQnano}))as prdName
       from noel_product_qna where prd_qna_no = #{prdQnano}
@@ -125,13 +128,17 @@
          prd_no,
          marketer_id,
          prd_qna_content,
-         user_id)
+         user_id,
+         secret,
+         prd_qna_pw)
       values(
                prd_qna_seq.nextval,
                #{prdNo},
                #{marketerId},
                #{prdQnacontent},
-               #{userId})
+               #{userId},
+               #{secret},
+               #{prdQnapw})
    </insert>
 
    <update id="qnaUpdate" parameterType="marketQnaVO">
