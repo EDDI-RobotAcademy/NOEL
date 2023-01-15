@@ -54,12 +54,12 @@ public class MarketWishListController {
     	
     	if(map == null) {
     		model.addAttribute("msg", "등록된 위시 상품이 없습니다.");
-    		System.out.println("null");
+			/* System.out.println("null"); */
     		return "market/myPrdWishList";
     	}else {
     		model.addAttribute("list", map.get("list"));
     		model.addAttribute("pageNavi", map.get("pageNavi"));
-    		System.out.println(map.get("list"));	
+			/* System.out.println(map.get("list")); */	
     		return "market/myPrdWishList";
     	}
     }

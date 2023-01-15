@@ -90,7 +90,7 @@
 </div>
 
 <!-- 리뷰 모달 시작 -->
-<form name="reviewForm" id="reviewForm" method="post" action="/market/reviewInsert" >
+<%-- <form name="reviewForm" id="reviewForm" method="post" action="/market/reviewInsert" >
    <div class="modal fade" id="modal-review" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
          <div class="modal-content">
@@ -126,7 +126,7 @@
          </div>
       </div>
    </div>
-</form>
+</form> --%>
 <!-- 리뷰 모달 끝 -->
 
 

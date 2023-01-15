@@ -411,3 +411,7 @@ input[type="checkbox"]:checked::before {
 a{
 	text-decoration : none;
 }
+
+.w3-display-topright:hover{
+	background-color: #fff!important;
+}

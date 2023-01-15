@@ -40,8 +40,8 @@ public class MarketQnaDAO {
 		return result;
 	}
 
-	public MarketQnaVO qnaDetail(int prdQnano) throws Exception {
-		return sqlSession.selectOne("marketMapper.qnaDetail", prdQnano);
+	public MarketQnaVO qnaDetail(HashMap<String, Object> map) throws Exception {
+		return sqlSession.selectOne("marketMapper.qnaDetail", map);
 	}
 
 	public void qnaUpdate(MarketQnaVO marketqnaVO) {
