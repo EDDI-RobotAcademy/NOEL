@@ -18,7 +18,7 @@
          prd_no as prdNo,
          prd_review_content as prdReviewcontent,
          rating,
-         user_id as userId,
+         substr(user_id,1,length(user_id)-3) || lpad('*',3,'*') as userId,
          prd_review_regdate as prdReviewregdate
       from(
              select
@@ -41,6 +41,7 @@
          rating as rating,
          prd_review_content as prdReviewcontent,
          user_id as userId,
+         substr(user_id,1,length(user_id)-3) || lpad('*',3,'*') as userId2,
          prd_name as prdName
       from noel_product_review
       where prd_review_no = #{prdReviewno}
@@ -91,10 +92,11 @@
          prd_qna_no as prdQnano,
          prd_no as prdNo,
          prd_qna_content as prdQnacontent,
-         user_id as userId,
+         substr(user_id,1,length(user_id)-3) || lpad('*',3,'*') as userId,
          prd_qna_regdate as prdQnaregdate,
 		 prd_qna_status as prdQnastatus,
-		 secret
+		 secret,
+		 prd_qna_pw as prdQnapw
       from(
              select
                 prd_qna_no,
@@ -104,22 +106,37 @@
                 prd_qna_regdate,
                 prd_qna_status,
                 secret,
+                prd_qna_pw,
                 row_number() over(order by prd_qna_no desc) as rNum
              from noel_product_qna where prd_no = #{prdNo})
          <![CDATA[where rNum > #{qnadisplayPost} and rNum <= #{qnapostNum}]]>
    </select>
 
-   <select id="qnaDetail" parameterType="map" resultType="marketQnaVO">
+   <select id="qnaDetail" parameterType="int" resultType="marketQnaVO">
       select
          prd_qna_no as prdQnano,
          prd_no as prdNo,
          marketer_id as marketerId,
          prd_qna_content as prdQnacontent,
          user_id as userId,
-         prd_qna_pw,
+         substr(user_id,1,length(user_id)-3) || lpad('*',3,'*') as userId2,
+         prd_qna_regdate as prdQnaregdate,
          (select prd_name from noel_product where prd_no =
          (select prd_no from noel_product_qna where prd_qna_no = #{prdQnano}))as prdName
       from noel_product_qna where prd_qna_no = #{prdQnano}
+   </select>	
+
+   <select id="qnaSecretDetail" parameterType="map" resultType="marketQnaVO">
+      select
+         prd_qna_no as prdQnano,
+         prd_no as prdNo,
+         marketer_id as marketerId,
+         prd_qna_content as prdQnacontent,
+         substr(user_id,1,length(user_id)-3) || lpad('*',3,'*') as userId,
+         prd_qna_pw as prdQnapw,
+         (select prd_name from noel_product where prd_no =
+         (select prd_no from noel_product_qna where prd_qna_no = #{prdQnano}))as prdName
+      from noel_product_qna where prd_qna_no = #{prdQnano} and prd_qna_pw = #{prdQnapw}
    </select>
 
    <insert id="qnaInsert">

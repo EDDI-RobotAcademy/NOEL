@@ -1,0 +1,15 @@
+div{
+   font-family: 'Gowun Dodum';
+}
+.review-detail-wrap{
+   padding-top:50px;
+   padding-left: 25px;
+   padding-right: 10px;
+   width:700px;
+   margin:0 auto;
+
+}
+
+.reviewDetail_btn{
+   float:right;
+}

@@ -2,11 +2,8 @@ package com.kh.myapp.market.model.service;
 
 import java.util.HashMap;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import org.springframework.stereotype.Service;
-
 import com.kh.myapp.market.model.dao.MarketQnaDAO;
 import com.kh.myapp.market.model.vo.MarketQnaReplyVO;
 import com.kh.myapp.market.model.vo.MarketQnaVO;
@@ -18,13 +15,9 @@ public class MarketQnaService {
 	private MarketQnaDAO dao;
 
 	// qna상세
-	public MarketQnaVO qnaDetail(int prdQnano, String prdQnapw) throws Exception {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("prdQnano", prdQnano);
-		map.put("prdQnapw", prdQnapw);
-		
-		dao.qnaDetail(map);
-		return dao.qnaDetail(map);
+	public MarketQnaVO qnaDetail(int prdQnano) throws Exception {
+		dao.qnaDetail(prdQnano);
+		return dao.qnaDetail(prdQnano);
 	}
 
 	public int qnaInsert(MarketQnaVO marketQnaVO) throws Exception {
@@ -80,5 +73,14 @@ public class MarketQnaService {
 	public void qnaStatusUptate(MarketQnaVO marketqnaVO) {
 		dao.qnaStatusUptate(marketqnaVO);
 
+	}
+
+	public MarketQnaVO qnaSecretDetail(int prdQnano, String prdQnapw) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("prdQnano", prdQnano);
+		map.put("prdQnapw", prdQnapw);
+		
+		MarketQnaVO result = dao.qnaSecretDetail(map);
+		return result;
 	}
 }

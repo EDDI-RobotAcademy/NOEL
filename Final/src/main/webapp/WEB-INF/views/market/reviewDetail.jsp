@@ -10,25 +10,8 @@
    <link rel="stylesheet" href="/resources/css/index/owl.carousel.min.css">
    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
    <link rel="stylesheet" href="/resources/css/product/prd_add.css">
+   <link rel="stylesheet" href="/resources/css/product/reviewDetail.css">
 
-   <style type="text/css">
-      div{
-         font-family: 'Gowun Dodum';
-      }
-      .review-detail-wrap{
-         padding-top:50px;
-         padding-left: 25px;
-         padding-right: 10px;
-         width:700px;
-         margin:0 auto;
-
-      }
-
-      .reviewDetail_btn{
-         float:right;
-      }
-
-   </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 
@@ -97,7 +80,7 @@
                </tr>
                <tr height="40px">
                   <td style="text-align:center;"> 작성자 </td>
-                  <td> ${reviewdetail.userId}</td>
+                  <td> ${reviewdetail.userId2}</td>
                </tr>
                <tr height="40px">
                   <td style="text-align:center;"> 평점 </td>

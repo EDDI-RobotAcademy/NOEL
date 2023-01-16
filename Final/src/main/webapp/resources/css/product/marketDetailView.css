@@ -9,7 +9,19 @@ div {
     margin: 0 auto;
     margin-top: 10px;
     padding-left: 10px;
+    padding-right: 10px;
+    position:relative;
+    width:1250px;
+    margin:0 auto;
 }
+.review-list{
+    width:100%;
+    padding : 10px;
+    margin:0 auto;
+    text-align: left;
+    border-spacing:10px;
+    /* border-top: 1px solid #444444; */
+    border-collapse: collapse;
 
 .content-wrap2-1{
     width: 1400px;
@@ -24,16 +36,6 @@ div {
 	position: relative;
 	width: 1250px;
 	margin: 0 auto;
-}
-
-.review-list {
-	width: 100%;
-	padding: 10px;
-	margin: 0 auto;
-	text-align: left;
-	border-spacing: 10px;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
 }
 
 #reviewForm {
@@ -80,23 +82,21 @@ div {
 	text-shadow: 0 0 0 rgba(255, 83, 86, 0.99);
 }
 
-.qna-wrap {
-	padding-top: 20px;
-	padding-left: 10px;
-	padding-right: 10px;
-	position: relative;
-	width: 1250px;
-	margin: 0 auto;
+.qna-wrap{
+    padding-top:20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    position:relative;
+    width:1250px;
+    margin:0 auto;
 }
-
-.qna-list {
-	width: 100%;
-	padding: 10px;
-	margin: 0 auto;
-	text-align: center;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
-}
+.qna-list{
+    width:100%;
+    padding : 10px;
+    margin:0 auto;
+    text-align: center;
+    /* border-bottom: 1px solid #a3a1a1; */
+    border-collapse: collapse;
 
 .titleDiv {
 	position: relative;
