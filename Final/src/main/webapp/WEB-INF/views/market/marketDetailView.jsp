@@ -6,23 +6,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" />
 <title>bonjour noël</title>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="/resources/css/product/marketDetailView.css">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">	
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet"
+	href="/resources/css/product/marketDetailView.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 
 	<jsp:include page="/WEB-INF/views/layouts/header.jsp" />
 
-	<div class="container text-left" id="product_wrap">
-		<div class="directoryDiv">home > market > detail</div>
-		<div class="infoDiv1">
-			<img src="/resources/upload/product/${prd.prdthumNail }" class="pImg">
-			<!-- ///////////////////////////////////////////////////////////////////// -->
+	<div class="content-wrap2" style="width: 1200px; margin: 0 auto;">
+		<div class="content-wrap2-1">
+			<div class="directoryDiv">home > market > detail</div>
+			<!-- 사진 슬라이드 영역  -->
+			<div class="photo-wrap">
+				<ul class="storeImgUl" style="height: 460px; width: 100%;">
+					<img src="/resources/upload/product/${prd.prdthumNail }">
+				</ul>
+			</div>
+
 			<div class="tableDiv">
-				<table class="productTable">
+				<table class="w3-table w3-bordered" id="productTable"
+					style="font-family: Gowun Dodum; width: 550px;">
 					<tr>
 						<th>상품명</th>
 						<td colspan="4">${prd.prdName }</td>
@@ -44,103 +54,114 @@
 						<th>수량 선택</th>
 						<td style="width: 30px;">
 							<button class="w3-button w3-circle" id="down"
-							style="width: 35px; height: 35px; padding: 0; background-color: red; color:white;">
-							-</button>
+								style="width: 35px; height: 35px; padding: 0; background-color: red; color: white;">
+								-</button>
 						</td>
 						<td class="peopleTd"><span class="countNum">1</span></td>
 						<td style="width: 30px;">
 							<button class="w3-button w3-circle" id="up"
-							style="width: 35px; height: 35px; padding: 0; background-color: red; color:white;">
-							+</button>
+								style="width: 35px; height: 35px; padding: 0; background-color: red; color: white;">
+								+</button>
 						</td>
 						<td></td>
 						<td></td>
 					</tr>
+					<tr>
+						<th>상품 총 금액</th>
+						<td colspan="4"><span class="priceSpan"></span> <span>원</span>
+						</td>
+					</tr>
 				</table>
-			</div>
-			<div class="priceDiv">
-				<div class="priceDiv1">
-					<span>총 금액: </span> <span class="priceSpan"></span> <span>원</span>
-				</div>
-			</div>
-			<div class="btnWrap">
-				<form action="/insertCart">
-					<c:choose>
-						<c:when test="${empty sessionScope.m}">
-							<button type="button" class="loginBtn" id="cartBtn"
-								onclick="loginCh()">장바구니</button>
-						</c:when>
-						<c:otherwise>
-							<button type="submit" class="cartBtn">장바구니</button>
-						</c:otherwise>
-					</c:choose>
-					<input type="hidden" name="prdPrice" class="allPrice" value="${prd.prdPrice }"> 
-					<input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }"> 
-					<input type="hidden" name="prdName" class="pNumber" value="${prd.prdName }">
-					<input type="hidden" name="cartQuan" class="count"> <input type="hidden" name="userId" value="${sessionScope.m.userId }">
-				</form>
-        
-         <form action="/insertOrder">
-            <c:choose>
-               <c:when test="${empty sessionScope.m}">
-                  <button type="button" class="loginBtn" id="cartBtn"
-                          onclick="loginCh()">구매하기</button>
-               </c:when>
-               <c:otherwise>
-                  <button type="submit" class="buyBtn">구매</button>
-               </c:otherwise>
-            </c:choose>
-            <input type="hidden" name="prdPrice" class="allPrice" value="${prd.prdPrice }">
-            <input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }">
-            <input type="hidden" name="prdName" value="${prd.prdName}">
-            <input type="hidden" name="cartQuan" class="count">
-            <input type="hidden" name="userId" value="${sessionScope.m.userId }">
-        </form>
-			<c:choose>
-				<c:when test="${empty sessionScope.m.userId}">
-					<button type="button" id="wishBtn" name="reserveBtn" onclick="wishCh()">
-						<img style="width: 21px;" src="/resources/img/index/heart.png">
-					</button>
-				</c:when>
-				<c:otherwise>
-					<c:choose>
-						<c:when test="${param.bookmarkId == marketwish.userId}">
-							<button type="button" name="reserveBtn" id="wishlist" style="display: none; "
-								onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-								<img style="width: 21px;" src="/resources/img/index/heart.png">
-							</button>
-							<button type="button" name="reserveBtn" id="wishlist1" 
-								onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-								<img style="width: 25px;" src="/resources/img/index/heart-fill.png">
-							</button>
-						</c:when>
-						<c:otherwise>
-							<button type="button" name="reserveBtn" id="wishlist"
-									onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-								<img style="width: 21px;" src="/resources/img/index/heart.png">
-							</button>
-							<button type="button" name="reserveBtn" id="wishlist1" style="display: none;"
-								onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-								<img style="width: 25px;" src="/resources/img/index/heart-fill.png">
-							</button>
+				<div class="btnWrap">
+					<form action="/insertCart">
+						<c:choose>
+							<c:when test="${empty sessionScope.m}">
+								<button type="button" class="loginBtn" id="cartBtn"
+									onclick="loginCh()">장바구니</button>
+							</c:when>
+							<c:otherwise>
+								<button type="submit" class="cartBtn">장바구니</button>
 							</c:otherwise>
 						</c:choose>
-					</c:otherwise>
-				</c:choose>
+						<input type="hidden" name="prdPrice" class="allPrice"
+							value="${prd.prdPrice }"> <input type="hidden"
+							name="prdNo" class="pNumber" value="${prd.prdNo }"> <input
+							type="hidden" name="prdName" class="pNumber"
+							value="${prd.prdName }"> <input type="hidden"
+							name="cartQuan" class="count"> <input type="hidden"
+							name="userId" value="${sessionScope.m.userId }">
+					</form>
+
+					<form action="/insertOrder">
+						<c:choose>
+							<c:when test="${empty sessionScope.m}">
+								<button type="button" class="loginBtn" id="cartBtn"
+									onclick="loginCh()">구매하기</button>
+							</c:when>
+							<c:otherwise>
+								<button type="submit" class="buyBtn">구매</button>
+							</c:otherwise>
+						</c:choose>
+						<input type="hidden" name="prdPrice" class="allPrice"
+							value="${prd.prdPrice }"> <input type="hidden"
+							name="prdNo" class="pNumber" value="${prd.prdNo }"> <input
+							type="hidden" name="prdName" value="${prd.prdName}"> <input
+							type="hidden" name="cartQuan" class="count"> <input
+							type="hidden" name="userId" value="${sessionScope.m.userId }">
+					</form>
+					<c:choose>
+						<c:when test="${empty sessionScope.m.userId}">
+							<button type="button" id="wishBtn" name="reserveBtn"
+								onclick="wishCh()">
+								<img style="width: 21px;" src="/resources/img/index/heart.png">
+							</button>
+						</c:when>
+						<c:otherwise>
+							<c:choose>
+								<c:when test="${param.bookmarkId == marketwish.userId}">
+									<button type="button" name="reserveBtn" id="wishlist"
+										style="display: none;"
+										onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+										<img style="width: 21px;" src="/resources/img/index/heart.png">
+									</button>
+									<button type="button" name="reserveBtn" id="wishlist1"
+										onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+										<img style="width: 25px;"
+											src="/resources/img/index/heart-fill.png">
+									</button>
+								</c:when>
+								<c:otherwise>
+									<button type="button" name="reserveBtn" id="wishlist"
+										onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+										<img style="width: 21px;" src="/resources/img/index/heart.png">
+									</button>
+									<button type="button" name="reserveBtn" id="wishlist1"
+										style="display: none;"
+										onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+										<img style="width: 25px;"
+											src="/resources/img/index/heart-fill.png">
+									</button>
+								</c:otherwise>
+							</c:choose>
+						</c:otherwise>
+					</c:choose>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="content-wrap4">
-		<div class="testDiv">
-			<%-- 상세정보 --%>
-			<p class="menuTitle">&nbsp;</p>
-			<p class="menuSubTitle">&nbsp;</p>
-			<br>
-			<div class="contentWrap2">${prd.prdContent}</div>
-			<hr style="border: 1px">
+	<%-- 상세정보 --%>
+	<div class="content-wrap4"
+		style="font-family: Gowun Dodum; margin-top: 30px; height: 100%; width: 1200px; margin-bottom: 100px; margin: 0 auto;">
+		<div class="testDiv" style="width: 1200px; margin: 0 auto;">
+			<div class="menuWrap" style="font-family: Gowun Dodum;">
+				<p class="menuTitle" style="margin-top: 20px;">PRODUCT DETAIL</p>
+				<br>
+				<div class="contentWrap2">${prd.prdContent}</div>
+				<!-- <hr style="border: 1px"> -->
+			</div>
 		</div>
-
 	</div>
+  
 	<!-- 리뷰 목록 -->
 	<div class="review-wrap" id="review-wrap">
 		<div class="review-title">
@@ -388,13 +409,15 @@
 </form>
 <!-- QNA 모달 끝 -->
 
+
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="/resources/js/index/jquery.min.js"></script>
 <script src="/resources/js/index/owl.carousel.min.js"></script>
 <script src="/resources/js/index/app.js"></script>
 
-<script type="text/javascript">
+
+	<script type="text/javascript">
 //리뷰 & qna 내용 미입력시 alert
 $(document).ready(function() {
    var formObj1 = $("form[name='prdreviewForm']");

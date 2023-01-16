@@ -10,13 +10,11 @@
                     <a href="/myPage">내 정보 수정</a>
                     <!-- <a href="/updateMemberFrm.do">내 정보 수정</a> -->
                 </div>
-                <div>
-                    <a href="#">예약 내역</a>
-                    <!-- <a href="/reserveList.do?reqPage=1">예약 내역</a> -->
+               <div>
+                    <a href="/reserveList?reqPage=1">예약 내역</a>
                 </div>
                 <div>
                     <a href="/userOrderList?&reqPage=1">주문 내역</a>
-                    <!-- <a href="/orderList.do?reqPage=1">주문 내역</a> -->
                 </div>
                 <div>
                     <a href="/myPrdWishList?bookmarkId=${sessionScope.m.userId }&reqPage=1">위시리스트</a>

@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>엄세연</title>
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+<title>bonjour noël</title>
 <link rel="stylesheet" href="/resources/css/index/owl.theme.default.min.css">
 <link rel="stylesheet" href="/resources/css/index/owl.carousel.min.css">
 
@@ -30,12 +31,6 @@
 						<h1 class="display-3 my-4"><br />Cooking & Bakery
 						</h1> <a href="#" class="btn btn-brand" id="font">Class</a>
 					</div>
-				
-					<!-- <div class="col-12 col-lg-10 offset-lg-1 text-white">
-						<h6 class="text-white text-uppercase" id="font">천연 식재료로 만들어 보는 건강</h6>
-						<h1 class="display-3 my-4">Cooking & Class <br />
-						</h1> <a href="#" class="btn btn-brand" id="font">Class</a>
-					</div> -->
 				</div>
 			</div>
 		</div>
