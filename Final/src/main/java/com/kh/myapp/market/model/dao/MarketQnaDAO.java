@@ -12,6 +12,7 @@ import com.kh.myapp.market.model.vo.MarketQnaReplyVO;
 import com.kh.myapp.market.model.vo.MarketQnaVO;
 
 
+
 @Repository
 public class MarketQnaDAO {
 
@@ -40,8 +41,8 @@ public class MarketQnaDAO {
 		return result;
 	}
 
-	public MarketQnaVO qnaDetail(HashMap<String, Object> map) throws Exception {
-		return sqlSession.selectOne("marketMapper.qnaDetail", map);
+	public MarketQnaVO qnaDetail(int prdQnano) throws Exception {
+		return sqlSession.selectOne("marketMapper.qnaDetail", prdQnano);
 	}
 
 	public void qnaUpdate(MarketQnaVO marketqnaVO) {
@@ -80,5 +81,10 @@ public class MarketQnaDAO {
 	// 판매자의 QNA 댓글등록시 QNA 답변완료로 변경
 	public void qnaStatusUptate(MarketQnaVO marketqnaVO) {
 		sqlSession.update("marketMapper.qnaStatus", marketqnaVO);
+	}
+
+	public MarketQnaVO qnaSecretDetail(HashMap<String, Object> map) {
+		MarketQnaVO result = sqlSession.selectOne("marketMapper.qnaSecretDetail", map);
+		return result;
 	}
 }

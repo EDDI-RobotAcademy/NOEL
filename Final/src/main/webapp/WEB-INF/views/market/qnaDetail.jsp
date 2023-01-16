@@ -10,32 +10,7 @@
    <link rel="stylesheet" href="/resources/css/index/owl.carousel.min.css">
    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
    <link rel="stylesheet" href="/resources/css/product/prd_add.css">
-   <style type="text/css">
-      div{
-         font-family: 'Gowun Dodum';
-      }
-      .qna-detail-wrap{
-         padding-top:50px;
-         padding-left: 40px;
-         padding-right: 40px;
-         width:700px;
-         margin:0 auto;
-      }
-
-      .qnaDetail_btn{
-         float:right;
-      }
-
-      .qna-reply-wrap{
-         padding-top:50px;
-         padding-left: 40px;
-         padding-right: 40px;
-         width:700px;
-         margin:0 auto;
-         
-      }
-
-   </style>
+   <link rel="stylesheet" href="/resources/css/product/qnaDetail.css">
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 
@@ -60,10 +35,14 @@
                   <td width="35%" style="text-align:center;"> 상품명 </td>
                   <td> ${qnadetail.prdName}</td>
                </tr>
+                <tr height="40px">
+                  <td width="35%" style="text-align:center;"> 작성일 </td>
+                  <td> <fmt:formatDate value="${qnadetail.prdQnaregdate}" pattern="yyyy-MM-dd" /></td>
+               </tr>
                <tr height="80px">
                   <td style="text-align:center;"> 내용 </td>
                   <td><textarea name="prdQnacontent" class="form-control" id="message-text"
-                                style="height: 10em; width: 500px; resize: none;" autofocus>${qnadetail.prdQnacontent}</textarea>
+                                style="height: 10em; width: 500px; resize: none;" autofocus="autofocus">${qnadetail.prdQnacontent}</textarea>
                   </td>
                </tr>
                </tbody>
@@ -81,13 +60,17 @@
                <tbody>
                <tr height="40px">
                   <td colspan="2" style="text-align:center;">
-                     <h3>${qnadetail.userId} 님의 QnA</h3>
+                     <h3>${qnadetail.userId2}님의 QnA</h3>
                      <hr>
                   </td>
                </tr>
                <tr height="40px">
                   <td width="35%" style="text-align:center;"> 상품명 </td>
                   <td> ${qnadetail.prdName}</td>
+               </tr>
+               <tr height="40px">
+                  <td width="35%" style="text-align:center;"> 작성일 </td>
+                  <td> <fmt:formatDate value="${qnadetail.prdQnaregdate}" pattern="yyyy-MM-dd" /></td>
                </tr>
                <tr height="80px">
                   <td style="text-align:center;"> 내용 </td>

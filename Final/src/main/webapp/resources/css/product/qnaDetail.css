@@ -1,0 +1,23 @@
+div{
+   font-family: 'Gowun Dodum';
+}
+.qna-detail-wrap{
+   padding-top:50px;
+   padding-left: 40px;
+   padding-right: 40px;
+   width:700px;
+   margin:0 auto;
+}
+
+.qnaDetail_btn{
+   float:right;
+}
+
+.qna-reply-wrap{
+   padding-top:50px;
+   padding-left: 40px;
+   padding-right: 40px;
+   width:700px;
+   margin:0 auto;
+   
+}

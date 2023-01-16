@@ -145,18 +145,19 @@
 	<div class="review-wrap" id="review-wrap">
 		<div class="review-title">
 			<div>
-				<b>구매평</b><br><br>
+				<b>구매평</b>
 			</div>
 		<c:choose>
 			<c:when test="${empty sessionScope.m}"></c:when>
 			<c:otherwise>
+				<br><br>
 				<button type="button" class="btn btn-brand" data-bs-toggle="modal"
 				data-bs-target="#modal-review">구매평 작성</button>
 			</c:otherwise>
 		</c:choose>
-		
 		</div>
 		<section>
+		<hr>
 			<table class="review-list">
 				<tbody>
 					<c:choose>
@@ -246,92 +247,92 @@
 		<div>
 			<b>QnA</b><br>
 		</div>
-		구매하시려는 상품에 대한 궁금점이 있으면 문의주세요.<br><br>
+		구매하시려는 상품에 대한 궁금점이 있으면 문의주세요.
 		<c:choose>
 			<c:when test="${empty sessionScope.m}"></c:when>
 			<c:otherwise>
+				<br><br>
 				<button type="button" class="btn btn-brand" data-bs-toggle="modal"
 					data-bs-target="#modal-qna">상품문의</button>
 			</c:otherwise>
 		</c:choose>
 	</div>
-	<section>
-	<c:forEach items="${qnalist}" var="qnalist">
 	
-		<table class="qna-list">
-		<tbody>
-			<c:choose>
-				<c:when test="${empty qnalist}">
-					<p>" 등록된 QNA가 없습니다. "</p>
-				</c:when>
-				<c:otherwise>
-					<!-- <tr height="50">
-						<th width="15%">상태</th>
-						<th width="55%">제목</th>
-						<th width="15%">작성자</th>
-						<th width="15%">등록일</th>
-					</tr> -->
-					<tr height="50">
-						<td width="15%">
-							<c:choose>
-								<c:when test="${qnalist.prdQnastatus == 0}">
-	                              답변대기
-	                            </c:when>
-								<c:otherwise>
-	                              답변완료
-	                            </c:otherwise>
-							</c:choose>
-						</td>
-						<td width="55%">
-							<c:choose>
-								<c:when test="${qnalist.secret == 1}">
-									<p class="material-symbols-outlined">
-					                    lock
-					                </p>
-									<span onclick="modalMan(this)" style="cursor:pointer"> 
-										비밀글입니다.
-									</span>
-								</c:when>	
-								<c:otherwise>
-									<a href="/market/qnaDetail?prdQnano=${qnalist.prdQnano}"> 
-										<c:out value="${qnalist.prdQnacontent}" />
-									</a>
-								</c:otherwise>				
-							</c:choose>
-						</td>
-						<td width="15%">
-							<c:out value="${qnalist.userId}" />
-						</td>
-						<td >
-							<fmt:formatDate value="${qnalist.prdQnaregdate}" pattern="yyyy-MM-dd" />
-						</td>
-					</tr>
-				</c:otherwise>
-			</c:choose>
-		</tbody>
-		</table>
-		<!-- 비밀번호확인 모달 시작-->
-		<div id="id01" class="w3-modal w3-animate-opacity">
-		    <div class="w3-modal-content w3-card-4" style="top: 15%; width: 300px;">
-		      <header class="w3-container w3-teal" style="background-color: #fff!important;"> 
-		        <span onclick="delModal(this);" style="overflow:visible; color:black;"
-		        	class="w3-button w3-large w3-display-topright" >X</span>
-		        <h5 style="margin-top:13px;">비밀번호 확인</h5>
-		      </header>
-		      <div class="w3-container" style="margin-top: 15px; height: 120px;">
-		        <form action="/market/qnaDetail" method="get" class="pwFrm">
-		        	<input type="hidden" name="prdNo" value="${prd.prdNo}">
-		        	<input type="hidden" name="prdQnano" value="${qnalist.prdQnano}">
-			        <input class="w3-input w3-border w3-round-large" type="password" name="prdQnapw" 
-			        		style="width: 250px; margin-left: 10px;"><br>
-			        <button class="btn btn-brand" style="margin-left: 10px; 
-			        		color:white; float:right;" onclick="pwChk(this)">확인</button>
-		        </form>
-		      </div>
-		    </div>
-		</div>
-		<!-- 비밀번호확인 모달 끝-->
-	</c:forEach>
+	<section><hr>
+		<c:choose>
+			<c:when test="${empty qnalist}">
+				<p>" 등록된 QNA가 없습니다. "</p>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${qnalist}" var="qnalist" varStatus="i">
+					<table class="qna-list">
+					<tbody>						
+						<!-- <tr height="50">
+							<th width="15%">상태</th>
+							<th width="55%">제목</th>
+							<th width="15%">작성자</th>
+							<th width="15%">등록일</th>
+						</tr> -->
+						
+						<tr height="60px">
+							<td width="15%">
+								<c:choose>
+									<c:when test="${qnalist.prdQnastatus == 0}">
+		                              답변대기
+		                            </c:when>
+									<c:otherwise>
+		                              답변완료
+		                            </c:otherwise>
+								</c:choose>
+							</td>
+							<td width="55%">
+								<c:choose>
+									<c:when test="${qnalist.secret == 1}">
+										<p class="material-symbols-outlined">
+						                    lock
+						                </p>
+										<span onclick="modalMan(this)" style="cursor:pointer"> 
+											비밀글입니다.
+										</span>
+									</c:when>	
+									<c:otherwise>
+										<a href="/market/qnaDetail?prdQnano=${qnalist.prdQnano}"> 
+											<c:out value="${qnalist.prdQnacontent}" />
+										</a>
+									</c:otherwise>				
+								</c:choose>
+							</td>
+							<td width="15%">
+								<c:out value="${qnalist.userId}" />
+							</td>
+							<td >
+								<fmt:formatDate value="${qnalist.prdQnaregdate}" pattern="yyyy-MM-dd" />
+							</td>
+						</tr>					
+					</tbody>
+					</table>
+					<!-- 비밀번호확인 모달 시작-->
+					<div id="id01" class="w3-modal w3-animate-opacity">
+					    <div class="w3-modal-content w3-card-4" style="top: 15%; width: 300px;">
+					      <header class="w3-container w3-teal" style="background-color: #fff!important;"> 
+					        <span onclick="delModal(this);" style="overflow:visible; color:black;"
+					        	class="w3-button w3-large w3-display-topright" >X</span>
+					        <h5 style="margin-top:13px;">비밀번호 확인</h5>
+					      </header>
+					      <div class="w3-container" style="margin-top: 15px; height: 120px;">
+					        <form action="/market/qnaSecretDetail" method="post" class="pwFrm">
+					        	<input type="hidden" name="prdNo" value="${prd.prdNo}">
+					        	<input type="hidden" name="prdQnano" value="${qnalist.prdQnano}">
+						        <input class="w3-input w3-border w3-round-large" type="password" name="prdQnapw" style="width: 250px; margin-left: 10px;"><br>
+						        <button class="btn btn-brand" style="margin-left: 10px; color:white; float:right;" onclick="pwChk(this)">확인</button>
+					        </form>
+					      </div>
+					    </div>
+					</div>
+					<!-- 비밀번호확인 모달 끝-->
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
 	</section>
 </div>
 
@@ -347,7 +348,7 @@
 <!-- QnA 목록 끝 -->
 
 <!-- QnA 모달 시작 -->
-<form name="prdqnaForm" method="post" action="/market/pqnawrite">
+<form name="prdqnaForm" method="post" action="/market/qnaInsert">
 	<div class="modal fade" id="modal-qna" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
@@ -388,7 +389,6 @@
 <!-- QNA 모달 끝 -->
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
-
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="/resources/js/index/jquery.min.js"></script>
 <script src="/resources/js/index/owl.carousel.min.js"></script>
@@ -419,34 +419,38 @@ $(document).ready(function() {
    });
 })
 function fn_valiChk1() {
-   var regForm = $("form[name='prdreviewForm'] .chk1").length;
-
    if ($(".chk1").val() == "" || $(".chk1").val() == null) {
       alert($(".chk1").attr("title"));
       return true;
    }
 }
-function fn_valiChk2() {
-   var regForm = $("form[name='prdqnaForm'] .chk2").length;
 
-   if($("[name=secret]").prop("checked")){
+function fn_valiChk2() {
+	if($("[name=secret]").prop("checked")){
        $("[name=secret]").attr("value", 1);
-       console.log($("[name=secret]").val());
+       if ($(".chk3").val() == "" || $(".chk3").val() == null) {
+    	      alert($(".chk3").attr("title"));
+    	      return true;
+    		}
    }else{
        $("[name=secret]").attr("value", 0);
-       console.log($("[name=secret]").val());
    }
    
    if ($(".chk2").val() == "" || $(".chk2").val() == null) {
       alert($(".chk2").attr("title"));
       return true;
    }
-   
-   if ($(".chk3").val() == "" || $(".chk2").val() == null) {
-	      alert($(".chk3").attr("title"));
-	      return true;
-	   }
 }
+
+//qna 모달 > 비밀글 체크 > 비밀번호입력폼
+$("[name=secret]").on("click", function(){
+	
+	if($("[name=secret]").prop("checked")){
+    	$(".secretPw").slideDown();
+    }else{
+    	$(".secretPw").slideUp();
+    }
+});
 
 //장바구니,구매하기 클릭시 로그인 체크
 var login = $("button[class='loginBtn']");
@@ -461,7 +465,6 @@ function loginCh() {
 	   login.attr("location.href", "login-modal");
 	}
 }
-
 
 //---------- 수량 늘리기
 var countNumVal = $(".peopleTd").text();
@@ -499,7 +502,6 @@ $(".buyBtn").on("click", function() {
    $(".count").attr("value", count);
 });
 
-
 //비회원 상품 위시 > 로그인모달
 var wishBtn = $("button[id='wishBtn']");
 function wishCh() {
@@ -507,6 +509,7 @@ function wishCh() {
 	wishBtn.attr("data-bs-target", "#login-modal");
 	wishBtn.attr("location.href", "login-modal");
 }
+
 //상품 위시
 function addWishlist(obj, prdNo, userId){
     $("#wishlist").hide();
@@ -521,6 +524,7 @@ function addWishlist(obj, prdNo, userId){
         }
     })
 }
+
 //상품 위시 취소
 function deleteWishlist(obj, prdNo, userId){
     $("#wishlist1").hide();
@@ -536,16 +540,6 @@ function deleteWishlist(obj, prdNo, userId){
     })
 }
 
-//qna 모달 > 비밀글 체크 > 비밀번호입력폼
-$("[name=secret]").on("click", function(){
-	console.log("비밀글 체크");
-	if($("[name=secret]").prop("checked")){
-    	$(".secretPw").slideDown();
-    }else{
-    	$(".secretPw").slideUp();
-    }
-});
-
 //qna 비밀글 비밀번호 확인
 function modalMan(obj){
 	$(obj).parents(".qna-list").next().css("display", "block");
@@ -557,15 +551,13 @@ function delModal(obj){
 }
 
 function pwChk(obj){
-	if($("[name=prdQnapw]").val().trim() == ''){
+	if($("[name=prdQnapw]").eq(obj).val().trim() == ""){
 		alert("비밀번호를 입력해주세요.");
 		$(obj).attr("type", "button");
-		
 	}else{
 		$(this).attr("type", "submit");
 	}
 }
-
 </script>
 </body>
 </html>

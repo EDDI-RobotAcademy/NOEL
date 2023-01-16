@@ -26,18 +26,27 @@ public class MarketQnaController {
 
     // QnA 상세 & 댓글 상세
     @RequestMapping(value = "/market/qnaDetail", method = RequestMethod.GET)
-    public String qnaDetail(int prdQnano, String prdQnapw, MarketQnaVO marketQnaVO, Model model) throws Exception {
-    	MarketQnaVO qnaPw = qnaService.qnaDetail(prdQnano, prdQnapw);
-    	logger.info("qnaDetail qnaPw : " + qnaPw);
-        model.addAttribute("qnadetail", qnaService.qnaDetail(prdQnano, prdQnapw));
+    public String qnaDetail(MarketQnaVO marketQnaVO, Model model, int prdQnano) throws Exception {
+        qnaService.qnaDetail(marketQnaVO.getPrdQnano());
+        model.addAttribute("qnadetail", qnaService.qnaDetail(marketQnaVO.getPrdQnano()));
         List<MarketQnaReplyVO> qnareply = null;
-        
         qnareply = qnaService.qnarList(prdQnano);
         model.addAttribute("qnareply", qnareply);
 
         return "/market/qnaDetail";
-
     }
+    
+    // QnA 비밀글 상세 & 댓글 상세
+	@RequestMapping(value = "/market/qnaSecretDetail")
+	public String qnaSecretDetail(int prdQnano, String prdQnapw, Model model, int prdNo) throws Exception {
+		MarketQnaVO qnaPw = qnaService.qnaSecretDetail(prdQnano, prdQnapw);
+		if(qnaPw != null) {
+			return "redirect:/market/qnaDetail?prdQnano=" + prdQnano;
+		}else {
+			return "redirect:/marketDetailView?reqPage=1&prdNo=" + prdNo + "&rnum=1&qnum=1";
+		}
+	}
+	 
 
     // QnA 작성
     @RequestMapping(value = "/market/qnaInsert", method = RequestMethod.POST)

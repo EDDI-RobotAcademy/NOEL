@@ -17,6 +17,7 @@ public class MarketQnaVO {
    private String prdQnacontent;
    private int prdQnastatus;
    private String userId;
+   private String userId2;
    private Date prdQnaregdate;
    private String prdQnareply;
    private String prdName;
