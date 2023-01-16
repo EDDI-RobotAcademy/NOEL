@@ -45,6 +45,7 @@
 
 <div class="content-wrap2" style="width:1200px; margin: 0 auto; background-color: rgba(255, 255, 255, 0.06);">
     <div class="content-wrap2-1">
+    <div class="directoryDiv">home > class > detail</div>
         <!-- 사진 슬라이드 영역 -->
         <div class="photo-wrap">
             <ul class="storeImgUl" style="height: 460px; width: 100%;">

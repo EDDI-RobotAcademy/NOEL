@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" />
 <title>bonjour noël</title>
 <link rel="stylesheet" href="/resources/css/product/prd_add.css">
 <link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
@@ -97,7 +98,8 @@
 								<input type="file" name="file" class="file-upload" id="file"
 									style="display: none;"
 									accept="image/gif, image/jpg, image/jpeg, image/png">
-								<button class="inputPhoto" type="button" id="inputPhoto">썸네일 첨부하기</button>
+								<button class="inputPhoto" type="button" id="inputPhoto">썸네일
+									첨부하기</button>
 							</div>
 
 							<div class="submitBtn1">
@@ -112,76 +114,66 @@
 		</article>
 	</div>
 	<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
-<script src="/resources/summernote/summernote-lite.js"></script>
-<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
-<script type="text/javascript">
-(function($) 
-		   {
-		      'use strict';
-		      $(function() 
-		      {
-		         $('.inputPhoto').on('click', function() 
-		         {
-		            var file = $(this).parent().find('.file-upload');
-		            file.trigger('click');
-		         });
-		            
-		         $('.file-upload').on('change', function() 
-		         {
-		            if ($(this).val() == '') 
-		            {
-		               $(this).parent().find('.inputPhoto').text('썸네일 첨부하기');
-		            } 
-		            else 
-		            {
-		               $(this).parent().find('.inputPhoto').text($(this).val().replace(/C:\\fakepath\\/i, ''));
-		            }
-		         });
-		      });
-		   })(jQuery);
+	<script src="/resources/summernote/summernote-lite.js"></script>
+	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
+	<script type="text/javascript">
+		(function($) {
+			'use strict';
+			$(function() {
+				$('.inputPhoto').on('click', function() {
+					var file = $(this).parent().find('.file-upload');
+					file.trigger('click');
+				});
 
-		   $("#submitBtn1").on('click', function(event) 
-		   {
-		      const fileValue = $('.inputPhoto').text();
-		      if (fileValue == '사진 첨부하기') 
-		      {
-		         event.preventDefault();
-		         alert("사진을 첨부해주세요.");
-		      }
-		   });
+				$('.file-upload').on(
+						'change',
+						function() {
+							if ($(this).val() == '') {
+								$(this).parent().find('.inputPhoto').text(
+										'썸네일 첨부하기');
+							} else {
+								$(this).parent().find('.inputPhoto').text(
+										$(this).val().replace(
+												/C:\\fakepath\\/i, ''));
+							}
+						});
+			});
+		})(jQuery);
 
-		   $("[name=prdContent]").summernote(
-		   {
-		      height : 400,
-		      lang : "ko-KR",
-		      callbacks : 
-		      {
-		         onImageUpload : function(files) 
-		         {
-		            uploadImage(files[0], this);
-		         }
-		      }
-		   });
+		$("#submitBtn1").on('click', function(event) {
+			const fileValue = $('.inputPhoto').text();
+			if (fileValue == '사진 첨부하기') {
+				event.preventDefault();
+				alert("사진을 첨부해주세요.");
+			}
+		});
 
-		   function uploadImage(files, editor) 
-		   {
-		      const form = new FormData();
-		      form.append("files", files);
+		$("[name=prdContent]").summernote({
+			height : 400,
+			lang : "ko-KR",
+			callbacks : {
+				onImageUpload : function(files) {
+					uploadImage(files[0], this);
+				}
+			}
+		});
 
-		      $.ajax(
-		      {
-		         url : "/prdEditorUpload",
-		         type : "post",
-		         data : form,
-		         processData : false,
-		         contentType : false,
-		         success : function(data) 
-		         {
-		            $(editor).summernote("insertImage", data);
-		         }
-		      });
-		   }
-</script>
+		function uploadImage(files, editor) {
+			const form = new FormData();
+			form.append("files", files);
+
+			$.ajax({
+				url : "/prdEditorUpload",
+				type : "post",
+				data : form,
+				processData : false,
+				contentType : false,
+				success : function(data) {
+					$(editor).summernote("insertImage", data);
+				}
+			});
+		}
+	</script>
 
 </body>
 

@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" />
 <title>bonjour noël</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"
@@ -142,21 +143,21 @@
 					<span class="comment"></span>
 				</div>
 				<div class="order-box">
-					<label for="shippingAddr2" class="order-label">상세 주소
-						<span class="comment"></span>
-					</label>
-					<input type="text" name="shippingAddr2"
-						id="shippingAddr2" class="order-input llong"> <input
-						type="text" style="display: none;"> 
-					<span class="comment"></span>
+					<label for="shippingAddr2" class="order-label">상세 주소 <span
+						class="comment"></span>
+					</label> <input type="text" name="shippingAddr2" id="shippingAddr2"
+						class="order-input llong"> <input type="text"
+						style="display: none;"> <span class="comment"></span>
 				</div>
 			</div>
 
 			<div class="order-info" style="padding-top: 80px;">
 				<div id="agree-box">
-					 <label for="info-agree" id="font">
-        	<input type="checkbox" id="info-agree" class="info-agree">&nbsp;주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</label>
-      </div>
+					<label for="info-agree" id="font"> <input type="checkbox"
+						id="info-agree" class="info-agree">&nbsp;주문 내용을 확인하였으며, 정보
+						제공 등에 동의합니다.
+					</label>
+				</div>
 				<div class="order-btn" id="font">
 					<button type="button" id="payBtn">결제하기</button>
 				</div>
@@ -200,46 +201,59 @@
 			}
 		});
 
-		$("#payBtn").on("click",function() {
-				const shipInfo = $(".shipping").find(".view-order-info");
-					if (!$("#order-same").prop("checked")) {
-						for (let i = 0; i < shipInfo.length; i++) { // 배송정보 빈 칸인지 확인
-								if (shipInfo.eq(i).val() == "") {
-									shipInfo.eq(i).siblings(".comment").text("정보를 입력해주세요.");
-											return;
-								} else {
-									shipInfo.eq(i).siblings(".comment").text("");
-								}
-	
-							if (i == 0) { // 수령인명 정규식
-								const nameReg = /^[가-힣]{2,4}$/;
-								const val0 = shipInfo.eq(0).val();
-									if (!(nameReg.test(val0))) {
-										shipInfo.eq(0).siblings(".comment").text("한글 2~4자로 입력");
-												//event.preventDefault();
-												return;
-									}
-							} else if (i == 1) { // 수령인 연락처 정규식
-								const phoneReg = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/;
-								const val1 = shipInfo.eq(1).val();
-									if (!(phoneReg.test(val1))) {
-										shipInfo.eq(1).siblings(".comment").text("010-0000-0000 형식으로 입력");
-												//event.preventDefault();
+		$("#payBtn")
+				.on(
+						"click",
+						function() {
+							const shipInfo = $(".shipping").find(
+									".view-order-info");
+							if (!$("#order-same").prop("checked")) {
+								for (let i = 0; i < shipInfo.length; i++) { // 배송정보 빈 칸인지 확인
+									if (shipInfo.eq(i).val() == "") {
+										shipInfo.eq(i).siblings(".comment")
+												.text("정보를 입력해주세요.");
 										return;
+									} else {
+										shipInfo.eq(i).siblings(".comment")
+												.text("");
 									}
+
+									if (i == 0) { // 수령인명 정규식
+										const nameReg = /^[가-힣]{2,4}$/;
+										const val0 = shipInfo.eq(0).val();
+										if (!(nameReg.test(val0))) {
+											shipInfo.eq(0).siblings(".comment")
+													.text("한글 2~4자로 입력");
+											//event.preventDefault();
+											return;
+										}
+									} else if (i == 1) { // 수령인 연락처 정규식
+										const phoneReg = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/;
+										const val1 = shipInfo.eq(1).val();
+										if (!(phoneReg.test(val1))) {
+											shipInfo
+													.eq(1)
+													.siblings(".comment")
+													.text(
+															"010-0000-0000 형식으로 입력");
+											//event.preventDefault();
+											return;
+										}
+									}
+								} // 배송정보 빈 칸인지 확인 끝
+							} else {
+								shipInfo.siblings(".comment").text("");
+							}//주소 빈칸인지 확인
+							if ($('#shippingAddr1').val().trim() == ''
+									|| $('#shippingAddr1') == null) {
+								alert("주소를 입력해주세요");
+								return;
+							} else if ($('#shippingAddr2').val().trim() == ''
+									|| $('#shippingAddr2') == null) {
+								alert("상세주소를 입력해주세요");
+								return;
 							}
-						} // 배송정보 빈 칸인지 확인 끝
-					}else {
-						shipInfo.siblings(".comment").text("");
-					}//주소 빈칸인지 확인
-					if($('#shippingAddr1').val().trim()=='' || $('#shippingAddr1')==null){
-						alert("주소를 입력해주세요");
-						return;
-					}else if($('#shippingAddr2').val().trim()=='' || $('#shippingAddr2')==null){
-						alert("상세주소를 입력해주세요");
-						return;
-					}
-					if (!$("#info-agree").prop("checked")) {
+							if (!$("#info-agree").prop("checked")) {
 								alert("정보 제공에 동의해주세요.");
 								return;
 							}
@@ -253,22 +267,26 @@
 									+ "" + d.getHours() + "" + d.getMinutes()
 									+ "" + d.getSeconds(); // 문자열덧셈을 위해 빈 문자열 넣음
 							IMP.init('imp87554320');
-							IMP.request_pay({
+							IMP
+									.request_pay(
+											{
 												pg : "html5_inicis",
 												merchat_uid : "bonjour" + date, // 거래ID
 												name : '봉쥬르노엘', // 결제 이름
 												amount : price, // 결제 금액
 												buyer_name : name,
 											},
-					function(rsp) {
-						if (rsp.success) {
-							const input = $("<input type='hidden' name='impUid' value='"+rsp.imp_uid+"'>");
-										$("#order-form").append(input);
-										$("#order-form").submit();
-						} else {
-							var msg = '결제에 실패하였습니다.';
-							msg += '에러내용 : '+ rsp.error_msg;
-							alert(msg + " 결제 실패");
+											function(rsp) {
+												if (rsp.success) {
+													const input = $("<input type='hidden' name='impUid' value='"+rsp.imp_uid+"'>");
+													$("#order-form").append(
+															input);
+													$("#order-form").submit();
+												} else {
+													var msg = '결제에 실패하였습니다.';
+													msg += '에러내용 : '
+															+ rsp.error_msg;
+													alert(msg + " 결제 실패");
 												}
 											})
 						});

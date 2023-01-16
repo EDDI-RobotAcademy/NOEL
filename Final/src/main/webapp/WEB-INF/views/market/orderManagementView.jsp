@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" />
+<title>bonjour noël</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet"
@@ -38,7 +39,7 @@
 										<div class="warningMark">
 											<span class="material-symbols-outlined"
 												style="font-size: 30px;"> 주문내역이 없습니다. </span>
-											</div>
+										</div>
 									</c:when>
 
 									<c:otherwise>
@@ -52,8 +53,8 @@
 												</tr>
 												<c:forEach items="${list }" var="ol">
 													<tr>
-														<td>
-															<a href="/market/orderPrd?reqPage=1&prdNo=${ol.prdNo}">${ol.prdName}</a></td>
+														<td><a
+															href="/market/orderPrd?reqPage=1&prdNo=${ol.prdNo}">${ol.prdName}</a></td>
 														<td>${ol.prdAllStock}</td>
 														<td>${ol.prdStock}</td>
 														<td>${ol.prdAllStock - ol.prdStock}</td>

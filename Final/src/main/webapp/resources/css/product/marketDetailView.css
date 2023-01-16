@@ -1,417 +1,416 @@
 @charset "UTF-8";
-div{
-    font-family: 'Gowun Dodum';
+
+div {
+	font-family: 'Gowun Dodum';
 }
-#product_wrap{
-    width:1250px;
-    margin:0 auto;
-    flex-direction:column;
-}
-.review-wrap{
-    padding-top:20px;
-    padding-left: 10px;
-    padding-right: 10px;
-    position:relative;
-    width:1250px;
-    margin:0 auto;
-}
-.review-list{
-    width:100%;
-    padding : 10px;
-    margin:0 auto;
-    text-align: left;
-    border-spacing:10px;
-    border-top: 1px solid #444444;
-    border-collapse: collapse;
-}
-#reviewForm {
-    text-align: center;
-    width: 480px;
+.content-wrap2{
+    width: 80vw;
+    height:500px;
     margin: 0 auto;
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+.content-wrap2-1{
+    width: 1400px;
+    height:500px;
+    margin: 0 auto;
+}
+
+.review-wrap {
+	padding-top: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	position: relative;
+	width: 1250px;
+	margin: 0 auto;
+}
+
+.review-list {
+	width: 100%;
+	padding: 10px;
+	margin: 0 auto;
+	text-align: left;
+	border-spacing: 10px;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+#reviewForm {
+	text-align: center;
+	width: 480px;
+	margin: 0 auto;
 }
 
 #reviewForm fieldset {
-    display: inline-block;
-    direction: rtl;
-    border: 0;
-    padding-top: 0;
+	display: inline-block;
+	direction: rtl;
+	border: 0;
+	padding-top: 0;
 }
+
 #reviewForm fieldset legend {
-    text-align: right;
+	text-align: right;
 }
+
 #reviewForm fieldset label input {
-    height: 48px;
+	height: 48px;
 }
+
 #reviewForm input[type=radio] {
-    display: none;
+	display: none;
 }
 
 #reviewForm label {
-    font-size: 3em;
-    color: transparent;
-    text-shadow: 0 0 0 #f0f0f0;
+	font-size: 3em;
+	color: transparent;
+	text-shadow: 0 0 0 #f0f0f0;
 }
+
 #reviewForm label:hover {
-    cursor: pointer;
-    text-shadow: 0 0 0 rgba(255, 83, 86, 0.99);
+	cursor: pointer;
+	text-shadow: 0 0 0 rgba(255, 83, 86, 0.99);
 }
+
 #reviewForm label:hover ~label {
-    text-shadow: 0 0 0 rgba(255, 83, 86, 0.99);
+	text-shadow: 0 0 0 rgba(255, 83, 86, 0.99);
 }
+
 #reviewForm  input[type=radio]:checked ~label {
-    text-shadow: 0 0 0 rgba(255, 83, 86, 0.99);
-}
-.qna-wrap{
-    padding-top:20px;
-    padding-left: 10px;
-    padding-right: 10px;
-    position:relative;
-    width:1250px;
-    margin:0 auto;
-}
-.qna-list{
-    width:100%;
-    padding : 10px;
-    margin:0 auto;
-    text-align: center;
-    border-top: 1px solid #444444;
-    border-collapse: collapse;
-}
-.titleDiv{
-    position: relative;
+	text-shadow: 0 0 0 rgba(255, 83, 86, 0.99);
 }
 
-.titleDiv>#bookMark{
-    position: absolute;
-    right : 40px;
-    font-size: 33px;
-    height: 50px;
-    line-height: 50px;
+.qna-wrap {
+	padding-top: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	position: relative;
+	width: 1250px;
+	margin: 0 auto;
 }
 
-.titleDiv>#bookMark1{
-    position: absolute;
-    right : 40px;
-    font-size: 33px;
-    height: 50px;
-    line-height: 50px;
+.qna-list {
+	width: 100%;
+	padding: 10px;
+	margin: 0 auto;
+	text-align: center;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
 }
 
-.titleDiv>#bookMark:hover{
-    cursor: pointer;
-    color: gold;
-    transition-duration : 0.4s;
+.titleDiv {
+	position: relative;
+}
+
+.titleDiv>#bookMark {
+	position: absolute;
+	right: 40px;
+	font-size: 33px;
+	height: 50px;
+	line-height: 50px;
+}
+
+.titleDiv>#bookMark1 {
+	position: absolute;
+	right: 40px;
+	font-size: 33px;
+	height: 50px;
+	line-height: 50px;
+}
+
+.titleDiv>#bookMark:hover {
+	cursor: pointer;
+	color: gold;
+	transition-duration: 0.4s;
 }
 
 .titleDiv>span:first-child, .titleDiv>span:nth-child(2) {
-    padding-bottom: 10px;
+	padding-bottom: 10px;
 }
 
-.toggleMan{
-    color : rgb(255, 215, 0);
+.toggleMan {
+	color: rgb(255, 215, 0);
 }
+
 @charset "UTF-8";
 
-.contentWrap{
-    width: 1250px;
-    height: 550px;
-    margin: 0 auto;
-    margin-top:70px;
+.contentWrap {
+	width: 1250px;
+	height: 550px;
+	margin: 0 auto;
+	margin-top: 70px;
 }
 
-.directoryDiv{
-    width: 1250px;
-    height: 30px;
-    line-height: 30px;
-    font-size: 15px;
-    padding-left: 1%;
-    margin-bottom: 10px;
+.directoryDiv {
+	width: 1250px;
+	height: 30px;
 }
-
-
 
 /*----- 공유하기 버튼*/
-#share{
-    text-decoration: none;
-    line-height: 50px;
-    float: right;
-    margin-right: 2%;
+#share {
+	text-decoration: none;
+	line-height: 50px;
+	float: right;
+	margin-right: 2%;
 }
 
-#share:hover{
-    cursor: pointer;
+#share:hover {
+	cursor: pointer;
 }
 
 /*--- 상품 중간 타이틀 ---*/
-.infoDiv{
-    width: 1250px;
-    height: 500px;
+.photo-wrap{
+    width:600px;
+    height:460px;
+    border: 0.5px solid gainsboro;
+    float: left;
+    position: relative;
+    overflow: hidden;
+}
+.photo-wrap>ul{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    overflow: hidden;
 }
 
-.infoDiv1{
-    width: 1250px;
-    height: 500px;
-    display:inline;
-    float:left;
-}
-
-.infoDiv1>img{
-    width:500px;
-    height: 100%;
-    display:inline;
-    float:left;
+.photo-wrap>ul>li{
+    width:600px;
+    float: left;
 }
 
 /*--- 상품 타이틀 ---*/
-.titleDiv{
-    width: 605px;
-    height:50px;
-    display:inline;
-    float:left;
-    margin-left: 20px;
-    border-bottom: 0.5px solid black;
+.titleDiv {
+	width: 605px;
+	height: 50px;
+	display: inline;
+	float: left;
+	margin-left: 20px;
+	border-bottom: 0.5px solid black;
 }
 
-.categorySpan{
-    height:50px;
-
-    font-size: 18px;
-    font-weight: bolder;
-    margin-left: 2%;
-    color:black;
+.categorySpan {
+	height: 50px;
+	font-size: 18px;
+	font-weight: bolder;
+	margin-left: 2%;
+	color: black;
 }
 
-.storeNameSpan{
-    height:50px;
-    line-height: 50px;
-    font-size: 18px;
-    font-weight: bolder;
-    color:black;
+.storeNameSpan {
+	height: 50px;
+	line-height: 50px;
+	font-size: 18px;
+	font-weight: bolder;
+	color: black;
 }
 
 /*--- 테이블 디브 ---*/
-.tableDiv{
-    display:inline;
-    float:left;
-    width: 625px;
-    margin-top: 20px;
-    vertical-align: middle;
-    padding-left:50px;
-    padding-right:10px;
+.tableDiv {
+	width: 580px;
+	height: 500px;
+	float: left;
+	margin: 0 auto;
+	margin-left: 2%;
 }
 
-.productTable>tbody>tr{
-    height:50px;
-    color:black;
+#productTable>tbody>tr>th {
+		width: 120px;
+		height: 50px;
+}
+#productTable>tbody>tr>td {
+text-indent: 10px;
 }
 
-.productTable>tbody>tr>th{
-    width: 150px;
-    text-align: left;
-    color:black;
+.productTable>tbody>tr {
+	height: 50px;
+	color: black;
 }
 
-.productTable>tbody>tr>td{
-    padding-left: 15px;
-    color:black;
+.productTable>tbody>tr>th {
+	width: 150px;
+	text-align: left;
+	color: black;
 }
 
-.priceDiv{
-    width: 605px;
-    height:50px;
-    display:inline;
-    float:left;
-    line-height: 50px;
-    margin-left: 50px;
-    margin-top:20px;
-    border-top: 0.5px solid black;
+.productTable>tbody>tr>td {
+	padding-left: 15px;
+	color: black;
 }
 
-.priceDiv1{
-    width: 200px;
-    float:right;
+.priceDiv {
+	width: 605px;
+	height: 50px;
+	display: inline;
+	float: left;
+	line-height: 50px;
+	margin-left: 50px;
+	margin-top: 20px;
+	border-top: 0.5px solid black;
 }
 
-.priceSpan{
-    font-weight: bolder;
-    font-size:25px;
-    color:red;
+.priceDiv1 {
+	width: 200px;
+	float: right;
 }
 
-.btnWrap{
-    width: 620px;
-    height:50px;
-    display:inline;
-    float:left;
-    margin-top:30px;
-    margin-left:50px;
+.priceSpan {
+	font-weight: bolder;
+	font-size: 25px;
+	color: red;
 }
 
-.cartBtn, .wishBtn, .buyBtn, .loginBtn {
-    background-color: #fff;
-    border-color:#dc3545;
-    width: 160px;
-    height:44px;
-    line-height: 40px;
-    margin-left: 5%;
-    margin-top:10px;
-    color:#dc3545;
-    border-radius: 15px;
-    display:inline;
-    float:left;
-    padding:0;
+.btnWrap {
+	width: 600px;
+	height: 50px;
+	display: inline;
+	float: left;
+	margin-top: 30px;
 }
+
+
+ .cartBtn, .wishBtn, .buyBtn, .loginBtn {
+	background-color: #fff;
+	border-color: #dc3545;
+	width: 140px;
+	height: 44px;
+	line-height: 40px;
+	margin-left: 5%;
+	margin-top: 10px;
+	color: #dc3545;
+	border-radius: 15px;
+	display: inline;
+	float: left;
+	padding: 0;
+} 
+
 .cartBtn:hover, .wishBtn:hover, .buyBtn:hover, .loginBtn:hover {
-    background-color:#dc3545;
-    border-color: #d15662;
-    width: 160px;
-    height:44px;
-    line-height: 40px;
-    margin-left: 5%;
-    margin-top:10px;
-    color: rgb(255, 255, 255);
-    border-radius: 15px;
-    display:inline;
-    float:left;
-    padding:0;
+	background-color: #dc3545;
+	border-color: #d15662;
+	width: 140px;
+	height: 44px;
+	line-height: 40px;
+	margin-left: 5%;
+	margin-top: 10px;
+	color: rgb(255, 255, 255);
+	border-radius: 15px;
+	display: inline;
+	float: left;
+	padding: 0;
 }
 
-button[name=reserveBtn]{
-    margin-top: 10px;
-    width:160px; 
-    height:44px; 
-    border-radius: 15px; 
-    background-color: white; 
-    border-color: #dc3545; 
-    margin-left: 5%;
+button[name=reserveBtn] {
+	margin-top: 10px;
+	width: 140px;
+	height: 44px;
+	border-radius: 15px;
+	background-color: white;
+	border-color: #dc3545;
+	margin-left: 5%;
 }
 
-button[name=reserveBtn]:hover{
-    /* background-color: #dc3545; */
-    cursor: pointer;
+button[name=reserveBtn]:hover {
+	/* background-color: #dc3545; */
+	cursor: pointer;
 }
 
-/* .buyBtn{
-   width: 160px;
-   height:44px;
-   line-height: 40px;
-   margin-left: 7%;
-   margin-top:10px;
-   background-color: rgb(51,51,51);
-   color:white;
-   border-radius: 15px;
-   display:inline;
-   float:left;
-   padding:0;
+#loginMarketBtn {
+	width: 550px;
+	height: 44px;
+	line-height: 40px;
+	margin-left: 4%;
+	margin-top: 10px;
+	background-color: rgb(51, 51, 51);
+	color: white;
+	border-radius: 15px;
+	display: inline;
+	float: left;
+	padding: 0;
 }
 
-.buyBtn:hover{
-   width: 250px;
-   height:44px;
-   line-height: 40px;
-   margin-left: 7%;
-   margin-top:10px;
-   background-color:white;
-   color:rgb(51,51,51);
-   border-radius: 15px;
-   display:inline;
-   float:left;
-   padding:0;
-} */
-
-#loginMarketBtn{
-    width: 550px;
-    height:44px;
-    line-height: 40px;
-    margin-left: 4%;
-    margin-top:10px;
-    background-color: rgb(51,51,51);
-    color:white;
-    border-radius: 15px;
-    display:inline;
-    float:left;
-    padding:0;
+#loginMarketBtn:hover {
+	width: 550px;
+	height: 44px;
+	line-height: 40px;
+	margin-left: 4%;
+	margin-top: 10px;
+	background-color: white;
+	color: rgb(51, 51, 51);
+	border-radius: 15px;
+	display: inline;
+	float: left;
+	padding: 0;
 }
 
-
-
-#loginMarketBtn:hover{
-    width: 550px;
-    height:44px;
-    line-height: 40px;
-    margin-left: 4%;
-    margin-top:10px;
-    background-color:white;
-    color:rgb(51,51,51);
-    border-radius: 15px;
-    display:inline;
-    float:left;
-    padding:0;
+.contentWrap2 {
+	background-color: white;
+	padding-top: 50px;
+	padding-left: 50px;
+	padding-right: 50px;
+	width: 1250px;
+	height: 2000px;
+	margin: 0 auto;
+	display: block;
+	/* border-top: 2px solid black; */
+	margin-bottom: 50px;
+}
+.menuTitle {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
 }
 
-
-.contentWrap2{
-    background-color: white;
-    padding-top:50px;
-    padding-left:50px;
-    padding-right:50px;
-    width: 1250px;
-    height: 2000px;
-    margin: 0 auto;
-    display:block;
-    border-top: 2px solid black;
-    margin-bottom: 50px;
-}
-.w3-button{
-    width: 35px;
-    height: 35px;
-    padding: 0;
-    background-color: #dc3545;
-    color: white;
-    border-color: #dc3545;
+.w3-button {
+	width: 35px;
+	height: 35px;
+	padding: 0;
+	background-color: #dc3545;
+	color: white;
+	border-color: #dc3545;
 }
 
-.w3-circle{
+.w3-circle {
 	border-radius: 50%;
 }
 
-.content-wrap4{
-    font-family: Gowun Dodum;
-    margin-top: 30px;
-    height: 100%;
-    width: 1250px;
-    margin-bottom: 100px;
+.content-wrap4 {
+	  width: 80vw;
+    height: 3800px;
     margin: 0 auto;
-}
-.testDiv{
-    width: 1250px;
-    margin: 0 auto;
-}
-.menuTitle{
-    margin-top: 20px;
+     border-top: 1px solid black; 
 }
 
-.countNum, .peopleTd{
-    width: 30px;
+.testDiv {
+	width: 1250px;
+	margin: 0 auto;
+}
+
+.menuTitle {
+	margin-top: 20px;
+}
+
+.countNum, .peopleTd {
+	width: 30px;
 }
 
 input[type="checkbox"]:hover {
-    border-color:  #dc3545;
+	border-color: #dc3545;
 }
 
 input[type="checkbox"]:checked {
-    accent-color: #dc3545; 
+	accent-color: #dc3545;
 }
 
 input[type="checkbox"]:checked::before {
-    border-radius: 2px;
-    transform: scale(1) translate(-50%, -50%)
+	border-radius: 2px;
+	transform: scale(1) translate(-50%, -50%)
 }
 
-a{
-	text-decoration : none;
+a {
+	text-decoration: none;
 }
 
-.w3-display-topright:hover{
-	background-color: #fff!important;
+.w3-display-topright:hover {
+	background-color: #fff !important;
 }

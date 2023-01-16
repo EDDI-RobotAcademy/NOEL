@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-  <link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
 <title>bonjour noël</title>
 <link rel="stylesheet" href="/resources/css/index/owl.theme.default.min.css">
 <link rel="stylesheet" href="/resources/css/index/owl.carousel.min.css">
