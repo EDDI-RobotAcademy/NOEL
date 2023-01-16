@@ -1,100 +1,99 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>bonjour noël</title>
-    <link rel="stylesheet" href="/resources/css/cart/cart.css">
-    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<meta charset="UTF-8">
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" />
+<title>bonjour noël</title>
+<link rel="stylesheet" href="/resources/css/cart/cart.css">
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
-<jsp:include page="/WEB-INF/views/layouts/header.jsp" />
-<section id="services" class="text-center">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="intro" id="font">
-                    <h1 id="font">My Cart</h1>
-                    <h2 id="font">장바구니</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<div class="page-content">
-    <div class="cart">
-        <div class="cart-table">
-            <table>
-                <tr id="font">
-                    <th style="width: 5%;">
-                        <label></label>
-                        <input type="checkbox" name="productCheck" onclick="selectAll(this)" style="width: 15px; height: 15px;"></th>
-                    <th style="width: 20%;">이미지</th>
-                    <th style="width: 20%;" class="cart-product-title">상품명</th>
-                    <th style="width: 15%;">가격</th>
-                    <th style="width: 10%;">수량</th>
-                    <th style="width: 15%;">배송비</th>
-                    <th style="width: 15%;">총 금액</th>
-                </tr>
-                <tbody>
-                <c:forEach items="${list }" var="Cart">
-                    <tr class="showCartList" id="font">
-                        <td style="text-align: center">
-                            <input type="checkbox" name="productCheck" class="deleteBtn">
-                            <input type="hidden" name="useId" value="${sessionScope.m.userId }" >
-                            <input type="hidden" name="cartNo" value="${Cart.cartNo }" >
-                            <input class="pNo" type="hidden" name="prdNo" value="${Cart.prdNo }">
-                        </td>
-                        <td class="pImg" style="text-align: center">
-                        	<img src="resources/upload/product/${Cart.prdthumNail }" ></td>
-                        <td style="text-align: center">
-                            <input type="hidden" name="prdName" value="${Cart.prdName }">
-                                ${Cart.prdName }
-                        </td>
-                        <td class="pPrice" style="text-align: center">
-                            <fmt:formatNumber value="${Cart.prdPrice }" pattern="#,###" />
-                        </td>
-                        <td style="text-align: center">${Cart.cartQuan }</td>
-                        <td class="shipping" style="text-align: center">무료</td>
-                        <td style="text-align: center; display: none;"
-                            class="cartTotalPrice">${Cart.prdPrice*Cart.cartQuan }</td>
-                        <td style="text-align: center;">
-                            <fmt:formatNumber value="${Cart.prdPrice*Cart.cartQuan }" pattern="#,###" />
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </div>
-    </div>
+	<jsp:include page="/WEB-INF/views/layouts/header.jsp" />
+	<section id="services" class="text-center">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="intro" id="font">
+						<h1 id="font">My Cart</h1>
+						<h2 id="font">장바구니</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="page-content">
+		<div class="cart">
+			<div class="cart-table">
+				<table>
+					<tr id="font">
+						<th style="width: 5%;"><label></label> <input type="checkbox"
+							name="productCheck" onclick="selectAll(this)"
+							style="width: 15px; height: 15px;"></th>
+						<th style="width: 20%;">이미지</th>
+						<th style="width: 20%;" class="cart-product-title">상품명</th>
+						<th style="width: 15%;">가격</th>
+						<th style="width: 10%;">수량</th>
+						<th style="width: 15%;">배송비</th>
+						<th style="width: 15%;">총 금액</th>
+					</tr>
+					<tbody>
+						<c:forEach items="${list }" var="Cart">
+							<tr class="showCartList" id="font">
+								<td style="text-align: center"><input type="checkbox"
+									name="productCheck" class="deleteBtn"> <input
+									type="hidden" name="useId" value="${sessionScope.m.userId }">
+									<input type="hidden" name="cartNo" value="${Cart.cartNo }">
+									<input class="pNo" type="hidden" name="prdNo"
+									value="${Cart.prdNo }"></td>
+								<td class="pImg" style="text-align: center"><img
+									src="resources/upload/product/${Cart.prdthumNail }"></td>
+								<td style="text-align: center"><input type="hidden"
+									name="prdName" value="${Cart.prdName }"> ${Cart.prdName }
+								</td>
+								<td class="pPrice" style="text-align: center"><fmt:formatNumber
+										value="${Cart.prdPrice }" pattern="#,###" /></td>
+								<td style="text-align: center">${Cart.cartQuan }</td>
+								<td class="shipping" style="text-align: center">무료</td>
+								<td style="text-align: center; display: none;"
+									class="cartTotalPrice">${Cart.prdPrice*Cart.cartQuan }</td>
+								<td style="text-align: center;"><fmt:formatNumber
+										value="${Cart.prdPrice*Cart.cartQuan }" pattern="#,###" /></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
 
-    <table id="priceTb" >
-        <tr>
-            <td>
-                <div class="cart-checks-btn">
-                    <button type="button" class="deleteCheck" id="font">선택 삭제</button>
-                </div>
-            </td>
-            <td colspan="6"> 
-            	<input type="hidden" style="border: none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
-            </td>
-            <td id="Last">
-            	총 합계 : <span id="font" class="lastPrice"></span>원
-            </td>
-        </tr>
-    </table>
-    <br><br>
-    <div class="cart-btn">
-        <button type="button" id="font"
-                onclick="location.href='/marketListFrm?reqPage=1'">계속 쇼핑하기</button>
-        <button type="button" class="payBtn"
-                onclick="goToOrder('${sessionScope.m.userId }');">주문하러가기</button>
-    </div>
-</div>
-<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
-<script>
+		<table id="priceTb">
+			<tr>
+				<td>
+					<div class="cart-checks-btn">
+						<button type="button" class="deleteCheck" id="font">선택 삭제</button>
+					</div>
+				</td>
+				<td colspan="6"><input type="hidden" style="border: none;"
+					class="hiddenPayPrice payPrice" name="productsPrice" readonly>
+				</td>
+				<td id="Last">총 합계 : <span id="font" class="lastPrice"></span>원
+				</td>
+			</tr>
+		</table>
+		<br>
+		<br>
+		<div class="cart-btn">
+			<button type="button" id="font"
+				onclick="location.href='/marketListFrm?reqPage=1'">계속 쇼핑하기</button>
+			<button type="button" class="payBtn"
+				onclick="goToOrder('${sessionScope.m.userId }');">주문하러가기</button>
+		</div>
+	</div>
+	<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
+	<script>
     function selectAll(selectAll)  { // 전체선택
         const checkboxes
             = document.getElementsByName("productCheck");
