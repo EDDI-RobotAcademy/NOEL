@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>주문 내역</title>
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+<title>bonjour noël</title>
 </head>
 <link rel="stylesheet" href="/resources/css/member/owner.css">
 <link rel="stylesheet" href="/resources/css/member/updateOwner.css">

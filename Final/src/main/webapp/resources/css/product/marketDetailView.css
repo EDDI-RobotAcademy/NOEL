@@ -23,11 +23,12 @@ div {
     /* border-top: 1px solid #444444; */
     border-collapse: collapse;
 
+}
 .content-wrap2-1{
     width: 1400px;
     height:500px;
     margin: 0 auto;
-}
+}    
 
 .review-wrap {
 	padding-top: 20px;
@@ -97,6 +98,7 @@ div {
     text-align: center;
     /* border-bottom: 1px solid #a3a1a1; */
     border-collapse: collapse;
+}    
 
 .titleDiv {
 	position: relative;

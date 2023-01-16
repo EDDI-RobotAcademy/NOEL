@@ -5,7 +5,8 @@
 <html>
 <head>
    <meta charset="UTF-8">
-   <title>reviewDetail</title>
+   <link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+   <title>bonjour noël</title>
    <link rel="stylesheet" href="/resources/css/index/owl.theme.default.min.css">
    <link rel="stylesheet" href="/resources/css/index/owl.carousel.min.css">
    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
