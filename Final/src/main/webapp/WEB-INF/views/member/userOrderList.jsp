@@ -132,7 +132,7 @@
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
 <script>
-   $(".cancleBtn").on("click", function(e) {
+   $(".ordercancleBtn").on("click", function(e) {
       const orderStatus = $(this).parent().parent().children().eq(6).text();
        if(orderStatus == "배송중") {
          alert("발송중인 상품입니다. 업체에 문의해주세요.");
