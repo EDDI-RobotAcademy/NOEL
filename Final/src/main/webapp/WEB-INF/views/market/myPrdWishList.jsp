@@ -12,7 +12,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/layouts/header.jsp" />
-	<div class="content-wrap" style="height: 900px;">
+	<div class="content-wrap" style="height: 1030px;">
 		<jsp:include page="/WEB-INF/views/common/memberHeader.jsp" />
 		<article id="content" class="content">
 			<div class="contents">

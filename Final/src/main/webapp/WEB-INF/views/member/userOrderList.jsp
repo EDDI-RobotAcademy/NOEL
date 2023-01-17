@@ -6,18 +6,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+<link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" /> 
 <title>bonjour noël</title>
 </head>
 <link rel="stylesheet" href="/resources/css/member/owner.css">
 <link rel="stylesheet" href="/resources/css/member/updateOwner.css">
-<link rel="stylesheet"
-	href="/resources/css/product/marketDetailView.css">
+<link rel="stylesheet" href="/resources/css/product/marketDetailView.css">
 
 <body>
 <jsp:include page="/WEB-INF/views/layouts/header.jsp" />
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<div class="content-wrap">
+<div class="content-wrap" style="height: 1030px;">
    <jsp:include page="/WEB-INF/views/common/memberHeader.jsp" />
    <article id="content" class="content">
       <div class="contents">
@@ -57,7 +56,7 @@
                         
                         <td scope="row">${orList.orderQuan }</td>
                         <td scope="row">
-                           <fmt:formatNumber value="${orList.prdPrice}" pattern="#,###"/>   
+                           <fmt:formatNumber value="${orList.prdPrice}" pattern="#,###"/> <span>원</span> 
                         </td>
                         <td scope="row">${orList.orderDate }</td>
                         <td scope="row" class="orderStatus">${orList.orderStatus }</td>
@@ -68,14 +67,14 @@
                               style="text-decoration:none;">
                           			 구매평 작성
                           		 </a>	 --%>
-                          		 <button type="button" class="orderReview btn-brand" data-bs-toggle="modal"
-									data-bs-target="#modal-review" value="${orList.prdNo}">구매평 작성</button>
+                          		 <button type="button" class="orderReviewBtn" data-bs-toggle="modal"
+									data-bs-target="#modal-review" value="${orList.prdNo}">구매평작성</button>
                               </td>
                            </c:when>
                            
                            <c:otherwise>
                               <td scope="row">
-                                 <button type="button" class="cancleBtn">주문취소</button>
+                                 <button type="button" class="ordercancleBtn">주문취소</button>
                               </td>
                            </c:otherwise>
                         </c:choose>
