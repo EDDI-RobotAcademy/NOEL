@@ -416,3 +416,23 @@ a {
 .w3-display-topright:hover {
 	background-color: #fff !important;
 }
+
+.ordercancleBtn {
+	border: 1px solid #dc3545;
+    background-color: #dc3545;
+    border-radius: 5px;
+    height: 30px;
+    width: 80px;
+    cursor: pointer;
+    color: white;
+}
+
+.orderReviewBtn{
+	border: 1px solid #dc3545;
+    background-color: #dc3545;
+    border-radius: 5px;
+    height: 30px;
+    width: 80px;
+    cursor: pointer;
+    color: white;
+}

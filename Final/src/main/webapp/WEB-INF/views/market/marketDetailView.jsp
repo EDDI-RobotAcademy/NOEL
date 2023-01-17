@@ -48,7 +48,7 @@
 					<tr>
 						<th>금액</th>
 						<td colspan="4"><fmt:formatNumber value="${prd.prdPrice}"
-								pattern="#,###" /></td>
+								pattern="#,###" /> <span>원</span></td>
 					</tr>
 					<tr>
 						<th>수량 선택</th>
