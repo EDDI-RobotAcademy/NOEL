@@ -14,10 +14,44 @@ div{
 }
 
 .qna-reply-wrap{
-   padding-top:50px;
+   padding-top:10px;
    padding-left: 40px;
    padding-right: 40px;
    width:700px;
    margin:0 auto;
-   
 }
+
+.qna-reply-btn-wrap{
+   padding-top:30px;
+   padding-bottom:30px;
+   padding-left: 40px;
+   padding-right: 0;
+   width:620px;
+   height:100px;
+   margin:0 auto;  
+}
+
+.reply-btn{
+	float: right;
+	
+}
+
+.replyBtn{
+	border: 1px solid #dc3545;
+    background-color: #dc3545;
+    border-radius: 5px;
+    height: 40px;
+    width: 100px;
+    cursor: pointer;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+

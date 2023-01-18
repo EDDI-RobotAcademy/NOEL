@@ -54,13 +54,13 @@ public class MarketQnaDAO {
 	}
 
 	// QNA 댓글 조회
-	public List<MarketQnaReplyVO> qnarList(int prdQnano) throws Exception {
+	public List<MarketQnaVO> qnarList(int prdQnano) throws Exception {
 		return sqlSession.selectList("marketMapper.qnareplyList", prdQnano);
 	}
 
 	// QNA 댓글 작성
-	public void qnarInsert(MarketQnaReplyVO marketqnarVO) throws Exception {
-		sqlSession.insert("marketMapper.qnareplyWrite", marketqnarVO);
+	public void qnarInsert(MarketQnaVO marketqnaVO) throws Exception {
+		sqlSession.update("marketMapper.qnareplyWrite", marketqnaVO);
 	}
 
 	// QNA 댓글 수정
@@ -69,8 +69,8 @@ public class MarketQnaDAO {
 	}
 
 	// QNA 댓글 삭제
-	public void qnarDelete(int prdQnarno) throws Exception {
-		sqlSession.delete("marketMapper.qnareplyDelete", prdQnarno);
+	public void qnarDelete(int prdQnano) throws Exception {
+		sqlSession.update("marketMapper.qnareplyDelete", prdQnano);
 	}
 
 	// QNA 댓글 개수
