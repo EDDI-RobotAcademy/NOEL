@@ -3,6 +3,161 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="class">
 
+	<select id="selectlist" resultType="cv" parameterType="string">
+		select
+			cl_no as classNo,
+			cl_name as className,
+			cl_price as classPrice,
+			cl_content as classContent,
+			cl_date as classDate,
+			cl_res_date as classResDate,
+			cl_res_time as classResTime,
+			cl_addr as classAddr,
+			closed_day as closedDay,
+			max_num as maxNum,
+			(select Img_path from noel_CLASS_img ci where ci.cl_no = nc.cl_no) as thumNail
+		from noel_class nc
+		where marketer_id = #{marketerId}
+		order by cl_date desc, cl_no desc
+	</select>
+	
+	
+	
+    <insert id="addClass" parameterType="cv">
+        insert into noel_class
+        values
+            (class_seq.nextval,
+             #{marketerId},
+             #{className},
+             #{classPrice},
+             #{classContent},
+             to_char(sysdate,'yyyy-mm-dd'),
+             #{classResDate},
+             #{classResTime},
+             #{classAddr},
+             #{closedDay},
+             #{maxNum}
+            )
+    </insert>
+    
+    <select id="selectClassNo" resultType="_int">
+        select max (cl_no) as
+                   classNo
+        from noel_class
+    </select>
+    
+    <!-- 시퀀스 만듦 -->
+    <insert id="insertImg" parameterType="ci">
+        insert into noel_class_img
+        values
+            (classimg_seq.nextval,
+             #{classNo},
+             #{imgPath}
+            )
+    </insert>
+
+
+
+    <select id="selectImg" parameterType="int" resultType="ci">
+		select
+			cl_num as classNum,
+			cl_no as classNo,
+			img_path as imgPath
+		from noel_class_img
+		where cl_no = #{classNo}
+	</select>
+
+	<select id="read" parameterType="int" resultType="cv">
+		select
+            cl_no as classNo,
+            marketer_id as marketerId,
+            cl_name as className,
+            cl_price as classPrice,
+            cl_content as classContent,
+            cl_date as classDate,
+            cl_res_date as classResDate,
+            cl_res_time as classResTime,
+            cl_addr as classAddr
+		from noel_class
+		where cl_no  =#{classNo}
+	</select>
+
+    <update id="updateClass" parameterType="cv">
+		update noel_class
+		set 
+			cl_name = #{className},
+			cl_price = #{classPrice},
+			cl_content = #{classContent},
+			max_num = #{maxNum},
+			cl_res_date = #{classResDate},
+			cl_res_time = #{classResTime},
+			closed_day = #{closedDay},
+			cl_addr = #{classAddr}
+		where cl_no = #{classNo}
+	</update>
+	
+	<delete id="deleteClassImg" parameterType="int">
+		delete from noel_class_img
+		where cl_num = #{imgNo}
+	</delete>
+    
+
+
+    <!-- 메뉴 리스트 출력 -->
+    <select id="menuList" parameterType="string" resultType="me">
+		select
+		menu_no as menuNo,
+		menu_name as menuName,
+		menu_price as menuPrice,
+		menu_img as menuImg,
+		marketer_id as marketerId
+		from noel_menu
+		where marketer_id = #{marketerId}
+		order by menu_no DESC
+	</select>
+
+	<insert id="addMenu" parameterType="com.kh.myapp.cl.model.vo.Menu">
+		insert into noel_menu values
+		(menu_seq.nextval,
+		#{classNo},
+		#{menuName},
+		#{menuPrice},
+		#{menuImg},
+		#{marketerId}
+		)
+	</insert>
+
+	<select id="readMenu" parameterType="int" resultType="me">
+		select
+		menu_no as menuNo,
+		cl_no as classNo,
+		menu_name as menuName,
+		menu_price as menuPrice,
+		menu_img as menuImg,
+		marketer_id as marketerId
+		from noel_menu
+		where menu_No = #{menuNo}
+	</select>
+	
+	<update id="updateMenu" parameterType="me">
+		update noel_menu
+		set
+		menu_name =
+		#{menuName},
+		menu_price = #{menuPrice},
+		menu_img = #{menuImg}
+		where menu_no = #{menuNo}
+	</update>
+	
+	<delete id="deleteMenu" parameterType="int">
+		delete from noel_menu
+		where
+		menu_No = #{menuNo}
+	</delete>
+
+
+
+
     <select id="classList" parameterType="map" resultType="com.kh.myapp.cl.model.vo.Class">
         SELECT *
         from
@@ -30,6 +185,11 @@
              ORDER BY
                  classno ASC)
         where rnum between #{start} and #{end}
+    </select>
+    
+    <select id="countAllList" resultType="int">
+        select count(*)
+        from noel_class
     </select>
 
     <select id="selectOneClass" parameterType="_int" resultType="com.kh.myapp.cl.model.vo.Class">
@@ -76,12 +236,6 @@
         order by cl_no DESC
     </select>
 
-
-    <select id="countAllList" resultType="int">
-        select count(*)
-        from noel_class
-    </select>
-
     <!-- 예약한 건 확인 -->
     <select id="checkReserve" resultType="com.kh.myapp.cl.model.vo.Reserve" parameterType="com.kh.myapp.cl.model.vo.Reserve">
         SELECT
@@ -111,40 +265,4 @@
         insert into noel_book
         values(noel_book_seq.NEXTVAL, #{classNo}, #{bookName},  #{userId}, #{bookTel}, 1, #{bookDate}, #{bookTime}, #{bookNum}, #{impUid})
     </insert>
-
-
-    <insert id="addClass" parameterType="Class">
-        insert into noel_class
-        values
-            (class_seq.nextval,
-             #{marketerId},
-             #{className},
-             #{classPrice},
-             #{classContent},
-             to_char(sysdate,'yyyy-mm-dd'),
-             #{classResDate},
-             #{classResTime},
-             #{classAddr},
-             #{closedDay},
-             #{maxNum}
-            )
-    </insert>
-
-    <!-- storeSQL 참고 -->
-    <select id="selectClassNo" resultType="_int">
-        select max (cl_no) as
-                   classNo
-        from noel_class
-    </select>
-
-    <!-- 시퀀스 만듦 -->
-    <insert id="insertImg" parameterType="ci">
-        insert into noel_class_img
-        values
-            (classimg_seq.nextval,
-             #{classNo},
-             #{imgPath}
-            )
-    </insert>
-
 </mapper>
