@@ -2,6 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="reserve">
 
+
+	<select id="searchReserve" parameterType="map" resultType="Reserve">
+      select * from 
+          (select rownum as rnum, r.* from 
+              (select 
+                  book_no as bookNo,
+    			user_id as userId,
+    			book_date as bookDate,
+    			coupon_no as couponNo,
+    			book_time as bookTime,
+    			book_num as bookNum,
+    			coupon_no as couponNo,
+                  (select user_name from noel_user nu where user_id = nb.user_id) as reserverName
+              from noel_book nb
+              where cl_no = #{classNo} and (select user_name from noel_user nu where user_id = nb.user_id) = #{keyword} 
+              order by 5 desc) r)
+        where rnum between #{start} and #{end}
+   </select>
+
     <select id="selectReserveList" parameterType="map" resultType="com.kh.myapp.cl.model.vo.Reserve">
         select book_no      as bookNo,
                cl_no        as classNo,
@@ -18,6 +37,43 @@
         delete from noel_book
         where book_no = #{_parameter}
     </delete>
+    
+    
+    
+    
+    <!-- 판매자 > 예약관리 리스트 출력 -->
+	<select id="selectAllReserveList" parameterType="map" resultType="Reserve">
 
+		select 
+    		book_no as bookNo,
+    		user_id as userId,
+    		book_date as bookDate,
+    		coupon_no as couponNo,
+    		book_time as bookTime,
+    		book_num as bookNum,
+    		coupon_no as couponNo,
+    		(select cl_name from noel_class nc where ot.cl_no = nc.cl_no ) as className,
+    		(select cl_price from noel_class nc where ot.cl_no = nc.cl_no ) as classPrice,
+    		(select marketer_id from noel_class nc where ot.cl_no = nc.cl_no) as marketerId
+    	from (select rownum as rnum, n.* from (select * from noel_book order by book_date desc) n )ot
+    	<!-- where (select marketer_id from noel_product np where ot.prd_no = np.prd_no) = #{marketerId} -->
+    	where rnum between #{start} and #{end}
+        
+	</select>
+
+    <!--  판매자 > 예약관리 > 예약 총개수 -->
+    <select id="AllReserveListMarketer" parameterType="map" resultType="int" >
+    	select 
+    		count(*)
+    	from noel_book nb
+    	where (select marketer_id from noel_class nc where nb.cl_no = nc.cl_no) =#{marketerId}
+    </select>
+
+	<!-- 판매자 > 예약관리> 예약상태 지정  -->
+	<update id="updateReserve" parameterType="Reserve">
+		update noel_book nb
+		set coupon_no =#{couponNo}
+		where book_no = #{bookNo}
+	</update>
 
 </mapper>
