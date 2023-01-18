@@ -92,7 +92,8 @@ body{
 
 .content-wrap{
     width: 80vw;
-    height:100%;
+    height:auto;
+    overflow: hidden;
     margin: 0 auto;
 }
 

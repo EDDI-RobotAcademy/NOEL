@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,7 +89,8 @@
                                     <div style="display: none">${s.classNo }</div>
                                     <div id = "class_content" style="text-align: center"> ${s.className }</div>
                                     <div style="text-align: center">
-                                        <span>${s.classPrice }</span>
+                                        <span><fmt:formatNumber value="${s.classPrice}"
+                                                 pattern="#,###" />원</span>
                                         <span id="sale_pay">86,000원</span>
                                     </div>
                                     <div style="text-align: center">
