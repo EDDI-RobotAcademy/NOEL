@@ -14,14 +14,16 @@ public class MarketQnaVO {
    private int prdQnano;
    private int prdNo;
    private String marketerId;
-   private String prdQnacontent;
-   private int prdQnastatus;
    private String userId;
    private String userId2;
+   private String prdQnacontent;
    private Date prdQnaregdate;
-   private String prdQnareply;
-   private String prdName;
    private String secret;
    private String prdQnapw;
+   private String pqnaReply;
+   private String pqnaReplywriter;
+   private Date pqnaReplydate;
+   private int prdQnastatus;
+   private String prdName;
    
 }

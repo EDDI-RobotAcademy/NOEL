@@ -171,51 +171,35 @@
    </delete>
 
    <!-- QNA 댓글 조회 -->
-   <select id="qnareplyList" parameterType="int" resultType="marketQnaReplyVO">
+   <select id="qnareplyList" parameterType="int" resultType="marketQnaVO">
       select
-         prd_qnar_no as prdQnarno,
          prd_qna_no as prdQnano,
-         writer as writer,
-         prd_qnar_content as prdQnarcontent,
-         prd_qnar_regdate as prdQnarregdate
-      from noel_product_qnar
+         pqna_reply_writer as pqnaReplywriter,
+         pqna_reply as pqnaReply,
+         pqna_reply_date as pqnaReplydate
+      from noel_product_qna
       where prd_qna_no = #{prdQnano}
 
    </select>
 
-   <!-- QNA 댓글 작성 -->
-   <insert id="qnareplyWrite" parameterType="marketQnaReplyVO">
-      insert into noel_product_qnar(
-         prd_qnar_no,
-         prd_qna_no,
-         writer,
-         prd_qnar_content)
-      values(
-               prd_qnar_seq.nextval,
-               #{prdQnano},
-               #{writer},
-               #{prdQnarcontent})
-   </insert>
-   
-   <!-- 판매자의 QNA 댓글등록시 QNA 답변완료로 변경 -->
-   <update id="qnaStatus" parameterType="marketQnaVO">
-		update noel_product_qna set prd_qna_status = 1 
-		where prd_qna_no = 
-		(select distinct prd_qna_no as prdQnano
-		from noel_product_qnar 
-		where prd_qna_no = #{prdQnano} and writer = #{marketerId})
+   <!-- 1. QNA 댓글 작성 -->
+   <update id="qnareplyWrite" parameterType="marketQnaVO">
+      update noel_product_qna set
+      	 pqna_reply = #{pqnaReply},	
+		 pqna_reply_writer = #{pqnaReplywriter},	
+		 pqna_reply_date = sysdate,	
+         prd_qna_status = 1
+      where prd_qna_no = #{prdQnano}   
    </update>
 
    <!-- QNA 댓글 조회 -->
-   <select id="qnareplyDetail" resultType="marketQnaReplyVO">
+   <select id="qnareplyDetail" resultType="marketQnaVO">
       select
-         prd_qnar_no as prdQnarno,
-         prd_qna_no as prdQnano,
-         writer as writer,
-         prd_qnar_content as prdQnarcontent,
-         prd_qnar_regdate as prdQnarregdate
-      from noel_product_qnar
-      where prd_qnar_no = #{prdQnarno}
+         pqna_reply_writer as pqnaReplywiter,
+         pqna_reply as pqnaReply,
+         pqna_reply_date as pqnaReplydate
+      from noel_product_qna
+      where prd_qna_no = #{prdQnano}
    </select>
 
    <!-- QNA 댓글 수정 -->
@@ -227,10 +211,13 @@
    </update>
 
    <!-- QNA 댓글 삭제 -->
-   <delete id="qnareplyDelete" parameterType="int">
-      delete from noel_product_qnar
-      where prd_qnar_no = #{prdQnarno}
-   </delete>
+   <update id="qnareplyDelete" parameterType="int">
+      update noel_product_qna set 
+        pqna_reply_writer = null, 
+        pqna_reply = null, 
+        pqna_reply_date = null, 
+  		prd_qna_status = 0 where prd_qna_no = #{prdQnano}
+   </update>
 
    <!-- QNA 댓글 개수 -->
    <select id="qnareplyCount">

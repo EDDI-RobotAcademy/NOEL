@@ -29,7 +29,7 @@ public class MarketQnaController {
     public String qnaDetail(MarketQnaVO marketQnaVO, Model model, int prdQnano) throws Exception {
         qnaService.qnaDetail(marketQnaVO.getPrdQnano());
         model.addAttribute("qnadetail", qnaService.qnaDetail(marketQnaVO.getPrdQnano()));
-        List<MarketQnaReplyVO> qnareply = null;
+        List<MarketQnaVO> qnareply = null;
         qnareply = qnaService.qnarList(prdQnano);
         model.addAttribute("qnareply", qnareply);
 
@@ -77,16 +77,16 @@ public class MarketQnaController {
 
     // QnA 리플 작성
     @RequestMapping(value = "/market/qnareply", method = RequestMethod.POST)
-    public String qnarInsert(MarketQnaReplyVO marketQnaReplyVO, MarketQnaVO marketqnaVO) throws Exception {
-        qnaService.qnarInsert(marketQnaReplyVO);
-        qnaService.qnaStatusUptate(marketqnaVO);
-        return "redirect:/market/qnaDetail?prdQnano=" + marketQnaReplyVO.getPrdQnano();
+    public String qnarInsert(MarketQnaVO marketqnaVO) throws Exception {
+        qnaService.qnarInsert(marketqnaVO);
+		/* qnaService.qnaStatusUptate(marketqnaVO); */
+        return "redirect:/market/qnaDetail?prdQnano=" + marketqnaVO.getPrdQnano();
     }
 
     // QnA 리플 삭제
     @RequestMapping(value = "/market/qnareplyDelete", method = RequestMethod.GET)
-    public String replyDelete(MarketQnaReplyVO marketQnaReplyVO, int prdQnarno, int prdQnano) throws Exception {
-        qnaService.qnarDelete(marketQnaReplyVO.getPrdQnarno());
+    public String replyDelete(int prdQnano) throws Exception {
+        qnaService.qnarDelete(prdQnano);
         return "redirect:/market/qnaDetail?prdQnano=" + prdQnano;
     }
 

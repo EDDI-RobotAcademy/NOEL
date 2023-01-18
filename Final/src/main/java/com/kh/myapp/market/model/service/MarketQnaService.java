@@ -44,13 +44,13 @@ public class MarketQnaService {
 	}
 
 	// QNA 댓글 조회
-	public List<MarketQnaReplyVO> qnarList(int prdQnano) throws Exception {
+	public List<MarketQnaVO> qnarList(int prdQnano) throws Exception {
 		return dao.qnarList(prdQnano);
 	}
 
 	// QNA 댓글 작성
-	public void qnarInsert(MarketQnaReplyVO marketqnarVO) throws Exception {
-		dao.qnarInsert(marketqnarVO);
+	public void qnarInsert(MarketQnaVO marketqnaVO) throws Exception {
+		dao.qnarInsert(marketqnaVO);
 	}
 
 	// QNA 댓글 수정
@@ -59,8 +59,8 @@ public class MarketQnaService {
 	}
 
 	// QNA 댓글 삭제
-	public void qnarDelete(int prdQnarno) throws Exception {
-		dao.qnarDelete(prdQnarno);
+	public void qnarDelete(int prdQnano) throws Exception {
+		dao.qnarDelete(prdQnano);
 	}
 
 	// QNA 댓글 개수
