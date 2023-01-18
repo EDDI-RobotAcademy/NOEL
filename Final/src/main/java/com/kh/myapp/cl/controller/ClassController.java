@@ -1,30 +1,37 @@
 package com.kh.myapp.cl.controller;
 
-import com.google.gson.Gson;
-import com.kh.myapp.cl.model.service.ClassService;
-import com.kh.myapp.cl.model.vo.Class;
-import com.kh.myapp.commom.FileRename;
-import com.kh.myapp.member.model.vo.Member;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.multipart.MultipartFile;
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
+import com.kh.myapp.cl.model.service.ClassService;
+import com.kh.myapp.cl.model.vo.Class;
 import com.kh.myapp.cl.model.vo.ClassImg;
 import com.kh.myapp.cl.model.vo.Menu;
 import com.kh.myapp.cl.model.vo.Reserve;
 import com.kh.myapp.cl.model.vo.Review;
+import com.kh.myapp.commom.FileRename;
+import com.kh.myapp.market.model.vo.ProductImgVO;
+import com.kh.myapp.market.model.vo.ProductVO;
+import com.kh.myapp.member.model.vo.Marketer;
+import com.kh.myapp.member.model.vo.Member;
 
 @Controller
 public class ClassController {
@@ -32,7 +39,7 @@ public class ClassController {
     @Autowired
     private ClassService service;
 
-    @Autowired(required=false)
+    @Autowired
     private FileRename fileRename;
 
 
@@ -40,6 +47,278 @@ public class ClassController {
     public ClassController(){
         super();
     }
+
+
+	// 판매자 > 클래스 관리 > 클래스 출력
+	@RequestMapping(value = "/class/marketerClassMypage", method = RequestMethod.GET)
+	public void getMarketer(Model model, @SessionAttribute Marketer mk) throws Exception {
+		List<Class> list = service.list(mk.getMarketerId());
+		model.addAttribute("classlist", list);
+	}
+	
+	// 판매자 > 클래스 관리 > 클래스 등록 폼
+	@RequestMapping(value = "/class/classAdd", method = RequestMethod.GET)
+	public void getClassAdd() throws Exception {
+		System.out.println("classAdd.jsp로 이동");
+	}
+	
+    // 판매자 > 클래스 관리 > 클래스 등록
+    @RequestMapping(value = "/class/addClass")
+    public String addClass(Class cv, MultipartFile[] file, HttpServletRequest request, String zipCode,
+                           String detailAddress, String closedHour)
+    {
+        // 첨부이미지 목록 저장할 리스트 생성
+        ArrayList<ClassImg> classImgList = new ArrayList<ClassImg>();
+
+        if (!file[0].isEmpty())
+        {
+            String savePath = request.getSession().getServletContext().getRealPath("resources/upload/class/");
+
+            for (MultipartFile file2 : file)
+            {
+                String filename = file2.getOriginalFilename();
+                String imgpath = fileRename.fileRename(savePath, filename);
+                try
+                {
+                    FileOutputStream fos = new FileOutputStream(new File(savePath + imgpath));
+                    BufferedOutputStream bos = new BufferedOutputStream(fos);
+                    byte[] bytes = file2.getBytes();
+                    bos.write(bytes);
+                    bos.close();
+                }
+                catch (FileNotFoundException e)
+                {
+                    e.printStackTrace();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+                ClassImg classImg = new ClassImg();
+                classImg.setImgPath(imgpath);
+                classImgList.add(classImg);
+            }
+        }
+        cv.setClassImgList(classImgList);
+        cv.setClassAddr(zipCode + "*" + cv.getClassAddr() + "*" + detailAddress);
+        cv.setClassResTime(cv.getClassResTime() + "~" + closedHour);
+        int result = service.addClass(cv);
+
+        return "/member/marketerMypage";
+    }
+
+    // 판매자 > 클래스 관리 > 클래스 등록 시 content 내에 이미지를 삽입하기 위한 메소드
+    @ResponseBody
+    @RequestMapping(value = "/classEditorUpload", produces = "application/json;charset=utf-8")
+    public String classEditorUpload(MultipartFile[] files, HttpServletRequest request)
+    {
+        String filepath = null;
+
+        if (!files[0].isEmpty())
+        {
+            // 파일 경로 설정
+            String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/class/editor/");
+            // 파일 중복처리
+            for (MultipartFile fileList : files)
+            {
+                String filename = fileList.getOriginalFilename();
+                filepath = fileRename.fileRename(savePath, filename);
+                try
+                {
+                    FileOutputStream fos = new FileOutputStream(savePath + filepath);
+                    BufferedOutputStream bos = new BufferedOutputStream(fos);
+                    byte[] bytes = fileList.getBytes();
+
+                    bos.write(bytes);
+                    bos.close();
+                }
+                catch (FileNotFoundException e)
+                {
+                    e.printStackTrace();
+                }
+                catch (IOException e)
+                {
+
+                    e.printStackTrace();
+                }
+            }
+        }
+        Gson gson = new Gson();
+        String result = gson.toJson("/resources/upload/class/editor/" + filepath);
+        return result;
+    }
+    
+	// 판매자 > 클래스 관리 > 클래스 수정 폼
+	@RequestMapping(value = "/class/classUpdate", method = RequestMethod.GET)
+	public String updateClass(Class cv, Model model) throws Exception {
+		ArrayList<ClassImg> classImgList = service.selectClassImg(cv.getClassNo());
+		Class read = service.read(cv.getClassNo());
+		model.addAttribute("classlist", read);
+		model.addAttribute("classImgList", classImgList);
+		return "/class/classUpdate";
+	}
+	
+	// 판매자 > 클래스 관리 > 클래스 수정
+	@RequestMapping(value = "/class/updateClass", method = RequestMethod.POST)
+	public String updateClass(int[] imgNoList, Class cv, String[] imgpathList, MultipartFile[] file,
+			HttpServletRequest request, String zipCode, String detailAddress, String closedHour) throws Exception 
+	{
+		ArrayList<ClassImg> classImgList = new ArrayList<ClassImg>();
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/class/");
+		if (!file[0].isEmpty()) {
+			for (MultipartFile File : file) {
+				String filename = File.getOriginalFilename();
+				String imgpath = fileRename.fileRename(savePath, filename);
+				File upFile = new File(savePath + imgpath);
+				try {
+					FileOutputStream fos = new FileOutputStream(upFile);
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = File.getBytes();
+					bos.write(bytes);
+					bos.close();
+					ClassImg ci = new ClassImg();
+					ci.setImgPath(imgpath);
+					classImgList.add(ci);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		cv.setClassImgList(classImgList);
+		cv.setClassAddr(zipCode + "*" + cv.getClassAddr() + "*" + detailAddress);
+		cv.setClassResTime(cv.getClassResTime() + "~" + closedHour);
+		int result = service.updateClass(cv, imgNoList);
+		if (imgNoList != null && (result == (classImgList.size() + imgNoList.length + 1))) {
+			if (imgpathList != null) {
+				for (String filepath : imgpathList) {
+					File delFile = new File(savePath + filepath);
+					delFile.delete();
+				}
+			}
+		}
+		return "redirect:/class/marketerClassMypage";
+	}
+
+ 		
+
+    // 판매자 > 클래스 > 메뉴 리스트 페이지
+	@RequestMapping(value = "/class/menuFrm", method = RequestMethod.GET)
+	public String getMarketer2(Model model, @SessionAttribute Marketer mk, HttpServletRequest request) throws Exception {
+		int classNo = Integer.parseInt(request.getParameter("classNo"));
+		List<Menu> menuList = service.menuList(mk.getMarketerId());
+		model.addAttribute("classNo", classNo);
+		model.addAttribute("menuList", menuList);
+		return "/class/menuFrm";
+	}
+	
+	// 판매자 > 클래스 > 메뉴 등록 폼
+	@RequestMapping(value = "/class/addMenuFrm", method = RequestMethod.GET)
+	public String getAddMenuFrm(HttpServletRequest request, Model model) throws Exception {
+		int classNo = Integer.parseInt(request.getParameter("classNo"));
+		model.addAttribute("classNo", classNo);
+		return "/class/addMenuFrm";
+			
+	}
+		
+	// 판매자 > 메뉴 등록
+	@RequestMapping(value = "/addMenu", method = RequestMethod.POST)
+	public String addMenu(Menu me, MultipartFile file, HttpServletRequest request) throws Exception {
+		if (!file.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/menu/");
+			String imgName = file.getOriginalFilename();
+			String menuPath = fileRename.fileRename(savePath, imgName);
+
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath + menuPath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = file.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			me.setMenuImg(menuPath);
+		}
+		int result = service.addMenu(me);
+		return "redirect:/class/marketerClassMypage";
+	}
+		
+		
+	// 판매자 > 클래스 > 메뉴 수정폼으로 이동
+	@RequestMapping(value = "/class/updateMenuFrm", method = RequestMethod.GET)
+	public String updateMenuFrm(Model model, Menu me) throws Exception {
+		Menu readMenu = service.readMenu(me.getMenuNo());
+		model.addAttribute("menulist", readMenu);
+		return "/class/updateMenuFrm";
+	}
+
+	// 판매자 > 클래스 > 메뉴 수정
+	@RequestMapping(value = "/class/updateMenu", method = RequestMethod.POST)
+	public String updateMenu(Menu me, MultipartFile file, HttpServletRequest request) throws Exception  {
+		if (!file.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/menu/");
+			String imgName = file.getOriginalFilename();
+			String menuPath = fileRename.fileRename(savePath, imgName);
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath + menuPath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = file.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			me.setMenuImg(menuPath);
+		}
+		int result = service.updateMenu(me);
+		return "redirect:/class/marketerClassMypage";
+	}
+		
+
+	// 메뉴 삭제
+	@RequestMapping(value = "/deleteMenu", method = RequestMethod.GET)
+	public String deleteMenu(int menuNo) throws Exception {
+		service.deleteMenu(menuNo);
+		return "redirect:/class/marketerClassMypage";
+	}
+	
+	
+    // 판매자 > 예약 관리
+ 	@RequestMapping(value = "class/reserveManagement", method = RequestMethod.GET)
+ 	public void reserveManagement(Model model, Reserve re, @SessionAttribute Marketer mk, int reqPage) throws Exception {
+
+ 		String marketerId = mk.getMarketerId();
+ 		HashMap<String, Object> map = service.selectAllReserveListMarketer(reqPage, marketerId);
+ 		model.addAttribute("list", map.get("list"));
+ 		model.addAttribute("reqPage",map.get("reqPage"));
+		model.addAttribute("pageNavi",map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("marketerNo", marketerId);
+ 		System.out.println("public void reserveManagement 이상없음");
+ 	}
+ 	
+ 	//판매자 > 예약관리> 예약상태 지정
+ 	@RequestMapping(value="/class/updateReserveLevel", method = RequestMethod.POST)
+ 	public String updateReserveLevel(Reserve Reserve) {
+ 		System.out.println("예약" + Reserve);
+ 		int result = service.updateReserveLevel(Reserve);
+ 		return "redirect:/class/reserveManagement?reqPage=1";
+ 	}
+	
+	
+	
+	
 
     // 업체 리스트출력
     @RequestMapping(value = "/classList")
@@ -116,102 +395,6 @@ public class ClassController {
         }
     }
 
-
-
-    // 클래스 추가 jsp로 이동
-    @RequestMapping(value = "/class/addClassFrm")
-    public void addClassFrm() throws Exception
-    {
-        System.out.println("addClassFrm.jsp로 이동");
-    }
-
-    // 클래스 추가 메소드
-    @RequestMapping(value = "/class/addClass")
-    public String addClass(Class cv, MultipartFile[] file, HttpServletRequest request, String zipCode,
-                           String detailAddress, String closedHour)
-    {
-
-        System.out.println("addClass 넘어옴");
-        // 첨부이미지 목록 저장할 리스트 생성
-        ArrayList<ClassImg> classImgList = new ArrayList<ClassImg>();
-
-        if (!file[0].isEmpty())
-        {
-            String savePath = request.getSession().getServletContext().getRealPath("resources/upload/class/");
-
-            for (MultipartFile file2 : file)
-            {
-                String filename = file2.getOriginalFilename();
-                String imgpath = fileRename.fileRename(savePath, filename);
-                try
-                {
-                    FileOutputStream fos = new FileOutputStream(new File(savePath + imgpath));
-                    BufferedOutputStream bos = new BufferedOutputStream(fos);
-                    byte[] bytes = file2.getBytes();
-                    bos.write(bytes);
-                    bos.close();
-                }
-                catch (FileNotFoundException e)
-                {
-                    e.printStackTrace();
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-                ClassImg classImg = new ClassImg();
-                classImg.setImgPath(imgpath);
-                classImgList.add(classImg);
-            }
-        }
-        cv.setClassImgList(classImgList);
-        cv.setClassAddr(zipCode + "*" + cv.getClassAddr() + "*" + detailAddress);
-        cv.setClassResTime(cv.getClassResTime() + "~" + closedHour);
-        int result = service.addClass(cv);
-
-        return "/class/marketerMypage";
-    }
-
-    // class content내에 이미지를 삽입하기 위한 메소드
-    @ResponseBody
-    @RequestMapping(value = "/classEditorUpload", produces = "application/json;charset=utf-8")
-    public String classEditorUpload(MultipartFile[] files, HttpServletRequest request)
-    {
-        String filepath = null;
-
-        if (!files[0].isEmpty())
-        {
-            // 파일 경로 설정
-            String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/class/editor/");
-            // 파일 중복처리
-            for (MultipartFile fileList : files)
-            {
-                String filename = fileList.getOriginalFilename();
-                filepath = fileRename.fileRename(savePath, filename);
-                try
-                {
-                    FileOutputStream fos = new FileOutputStream(savePath + filepath);
-                    BufferedOutputStream bos = new BufferedOutputStream(fos);
-                    byte[] bytes = fileList.getBytes();
-
-                    bos.write(bytes);
-                    bos.close();
-                }
-                catch (FileNotFoundException e)
-                {
-                    e.printStackTrace();
-                }
-                catch (IOException e)
-                {
-
-                    e.printStackTrace();
-                }
-            }
-        }
-        Gson gson = new Gson();
-        String result = gson.toJson("/resources/upload/class/editor/" + filepath);
-        return result;
-    }
     
   //예약관리
     @RequestMapping(value="/reserveList")
@@ -242,4 +425,8 @@ public class ClassController {
             return "layouts/alert";
         }
     }
+    
+
+	
+	
 }

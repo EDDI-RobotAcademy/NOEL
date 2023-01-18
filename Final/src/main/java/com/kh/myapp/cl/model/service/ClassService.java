@@ -1,13 +1,19 @@
 package com.kh.myapp.cl.model.service;
 
-import com.kh.myapp.cl.model.dao.ClassDao;
-import com.kh.myapp.cl.model.vo.*;
-import com.kh.myapp.cl.model.vo.Class;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.kh.myapp.cl.model.dao.ClassDao;
+import com.kh.myapp.cl.model.vo.Class;
+import com.kh.myapp.cl.model.vo.ClassImg;
+import com.kh.myapp.cl.model.vo.Menu;
+import com.kh.myapp.cl.model.vo.Reserve;
+import com.kh.myapp.cl.model.vo.Review;
+import com.kh.myapp.cl.model.vo.Wishlist;
 
 @Service
 public class ClassService {
@@ -18,6 +24,172 @@ public class ClassService {
     public ClassService() {
         super();
     }
+    
+	// 클래스 관리 페이지에 클래스를 출력하기 위해 조회
+	public List<Class> list(String marketerId) throws Exception {
+		List result = dao.list(marketerId);
+		return result;
+	}
+    
+    // 클래스 등록
+    public int addClass(Class cv)
+    {
+
+        int result = dao.addClass(cv);
+        if (result > 0) {
+            int classNo = dao.selectClassNo();
+            for (ClassImg ci : cv.getClassImgList()) {
+                ci.setClassNo(classNo);
+                result += dao.insertImg(ci);
+            }
+        }
+        return result;
+    }
+	
+    // 클래스 수정을 위한 이미지 조회
+	public ArrayList<ClassImg> selectClassImg(int classNo) {
+		return dao.selectImg(classNo);
+	}
+	
+	// 클래스 수정을 위한 클래스 조회
+	public Class read(int classNo) throws Exception {
+		Class result = dao.read(classNo);
+		return result;
+	}
+	
+
+	// 클래스 수정
+	public int updateClass(Class cv, int[] imgNoList) {
+		int result = dao.updateClass(cv);
+		if(result > 0) {
+			for(ClassImg ci : cv.getClassImgList()) {
+				ci.setClassNo(cv.getClassNo());
+				result += dao.insertImg(ci);
+			}
+			if(imgNoList != null) {
+				for(int imgNo : imgNoList) {
+					result += dao.deleteImg(imgNo);
+				}
+			}
+		}
+		return result;
+	}
+	
+    // 클래스 메뉴 리스트
+	public List<Menu> menuList(String marketerId) throws Exception  {
+		List result = dao.menuList(marketerId);
+		return result;
+	}
+	
+	// 클래스 메뉴 추가
+	public int addMenu(Menu me) {
+		return dao.addMenu(me);
+	}
+	
+	// 클래스 메뉴 수정을 위해 메뉴 조회
+	public Menu readMenu(int menuNo) throws Exception {
+		Menu result = dao.readMenu(menuNo);
+		return result;
+	}
+	
+	// 클래스 메뉴 수정
+	public int updateMenu(Menu menu) {
+		return dao.updateMenu(menu);
+	}
+	
+	// 클래스 메뉴 삭제
+	public int deleteMenu(int menuNo) {
+		int result = dao.deleteMenu(menuNo);
+		return result;
+	} 
+    
+  	// 판매자 > 예약관리
+  	public HashMap<String, Object> selectAllReserveListMarketer(int reqPage, String marketerId) {
+
+  		//한 페이지 당 보여지는 주문건수
+  		int numPerPage = 10;
+  		// end = 10
+  		int end = numPerPage *reqPage;
+  		//start = 1
+  		int start = (end-numPerPage)+1;
+
+  		HashMap<String, Object> map = new HashMap<String, Object>();
+  		map.put("start", start);
+  		map.put("end", end);
+  		map.put("marketerId", marketerId);
+
+  		ArrayList<Reserve> list = dao.selectAllReserveList(map);
+
+  		int totalPage = dao.countAllReserve(marketerId);
+  		int totalMan = 0;
+  		if(totalPage % numPerPage == 0) {
+  			totalMan = totalPage / numPerPage;
+  		}else {
+  			totalMan = totalPage / numPerPage +1;
+
+  		}
+  		// 페이지 네비 사이즈
+  		int pageNaviSize = 5;
+
+  		// 페이지 시작 번호
+  		int pageNo = 1;
+
+  		if(reqPage > 3) {
+  			pageNo = reqPage - 2;
+  		}
+
+  		//이전 버튼
+  		String pageNavi = "";
+  		if(pageNo != 1) {
+  			pageNavi += "<a href='/class/reserveManagement?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+  					"            chevron_left\r\n" + 
+  					"            </span></a>";
+  		}
+
+  		for(int i = 0; i < pageNaviSize; i++) {
+  			if(reqPage == pageNo) {
+  				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+  			}else {
+  				pageNavi += "<a href='/class/reserveManagement?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+  			}
+  			pageNo++;
+  			if(pageNo > totalMan) {
+  				break;
+  			}
+  		}
+
+  		// 다음버튼
+  		if(pageNo <= totalMan) {
+  			pageNavi += "<a href='/class/reserveManagement?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+  					"            chevron_right\r\n" + 
+  					"            </span></a>"; 
+  		}
+
+  		HashMap<String, Object> reserveMap = new HashMap<String, Object>();
+  		System.out.println("서비스 reserveMap : "+reserveMap);
+  		reserveMap.put("list", list);
+  		reserveMap.put("reqPage", reqPage);
+  		reserveMap.put("pageNavi", pageNavi);
+  		reserveMap.put("total", totalPage);
+  		reserveMap.put("pageNo", pageNo);
+
+  		if(list == null) {
+  			return null;
+  		}else {
+  			return reserveMap;
+  		}
+
+  	}
+  	
+    //판매자 > 예약관리> 예약상태 지정
+	public int updateReserveLevel(Reserve Reserve) {
+		return dao.updateReserveLevel(Reserve);
+	}
+    
+  	
+  	
+	
+    
 
     public HashMap<String, Object> classList(int reqPage) {
         //한페이지당 게시물 지정
@@ -111,6 +283,7 @@ public class ClassService {
         return dao.selectReviewList(classNo);
     }
 
+    
     //맛집 상세 - 메뉴 조회
     public ArrayList<Menu> selectMenuList(int classNo) {
         ArrayList<Menu> list = dao.selectMenuList(classNo);
@@ -133,20 +306,6 @@ public class ClassService {
         return list;
     }
 
-    // 클래스 등록
-    public int addClass(Class cv)
-    {
-
-        int result = dao.addClass(cv);
-        if (result > 0) {
-            int classNo = dao.selectClassNo();
-            for (ClassImg ci : cv.getClassImgList()) {
-                ci.setClassNo(classNo);
-                result += dao.insertImg(ci);
-            }
-        }
-        return result;
-    }
 
     //예약하기
     public int reserve(Reserve r) {
@@ -169,6 +328,5 @@ public class ClassService {
     public int cancleReserve(int reserveNo) {
         return dao.cancleReserve(reserveNo);
     }
-
 
 }

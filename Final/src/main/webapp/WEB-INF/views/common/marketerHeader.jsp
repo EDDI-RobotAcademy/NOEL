@@ -6,7 +6,7 @@
 	<div class="sidebar-1">
 		<ul class="category">
 			<li>
-				<c:if test="${sessionScope.mk.marketerAuth eq 1}">
+			<c:if test="${sessionScope.mk.marketerAuth eq 1}">
 				<div>
 					<a href="/marketerMypage">내 정보 수정</a>
 				</div>
@@ -14,16 +14,18 @@
 					<a href="/deleteMarketer?marketerId=${sessionScope.mk.marketerId }" class="delMember">회원 탈퇴</a>
 				</div>
 				<div>
-					<a href="/class/addClassFrm">클래스 등록</a>
-				</div>
+					<a href="/class/marketerClassMypage">클래스 관리</a>
+				</div>				
 				<div>
 					<a href="/market/marketerProductMypage">상품 관리</a>
 				</div>
 				<div>
 					<a href="/market/orderManagementView?reqPage=1">주문 관리</a>
 				</div>
-				</c:if>
-
+				<div>
+					<a href="/class/reserveManagement?reqPage=1">예약 관리</a>
+				</div>
+			</c:if>
 			</li>
 		</ul>
 	</div>
