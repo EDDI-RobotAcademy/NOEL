@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 public class Menu {
 
     private int menuNo;
-    private int clNo;
+    private int classNo;
+    private String marketerId;
     private String menuName;
     private String menuPrice;
     private String menuImg;
