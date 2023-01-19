@@ -43,32 +43,32 @@
                         <th class="th" scope="col">주문상태</th>
                         <th class="th" scope="col">처리</th>
                      </tr>
-                     <c:forEach items="${list }" var="orList" varStatus="i">
+                     
+                     <c:forEach items="${list}" var="list" varStatus="i">
                      <tr>
-                        <td scope="row">${orList.orderNo }</td>
-                        
+                        <td scope="row">${list.orderNo }</td>
                         <td scope="row">
-                           <a href="marketDetailView?prdNo=${orList.prdNo }&bookmarkId=${sessionScope.m.userId}&num=1&rnum=1&qnum=1"
+                           <a href="marketDetailView?prdNo=${list.prdNo}&bookmarkId=${sessionScope.m.userId}&num=1&rnum=1&qnum=1"
                               style="text-decoration:none;">
-                           ${orList.prdName}
+                           ${list.prdName}
                            </a>
                         </td>
                         
-                        <td scope="row">${orList.orderQuan }</td>
+                        <td scope="row">${list.orderQuan }</td>
                         <td scope="row">
-                           <fmt:formatNumber value="${orList.prdPrice}" pattern="#,###"/> <span>원</span> 
+                           <fmt:formatNumber value="${list.prdPrice}" pattern="#,###"/> <span>원</span> 
                         </td>
-                        <td scope="row">${orList.orderDate }</td>
-                        <td scope="row" class="orderStatus">${orList.orderStatus }</td>
+                        <td scope="row">${list.orderDate }</td>
+                        <td scope="row" class="orderStatus">${list.orderStatus }</td>
                         <c:choose>
-                           <c:when test="${orList.orderStatus eq '배송완료' }">
+                           <c:when test="${list.orderStatus eq '배송완료' }">
                               <td scope="row">
 								<%-- <a href="marketDetailView?prdNo=${orList.prdNo }&bookmarkId=${sessionScope.m.userId}&num=1&rnum=1&qnum=1#review-wrap"
                               style="text-decoration:none;">
                           			 구매평 작성
                           		 </a>	 --%>
                           		 <button type="button" class="orderReviewBtn" data-bs-toggle="modal"
-									data-bs-target="#modal-review" value="${orList.prdNo}">구매평작성</button>
+									data-bs-target="#modal-review" value="${list.prdNo}">구매평작성</button>
                               </td>
                            </c:when>
                            
@@ -90,7 +90,8 @@
 </div>
 
 <!-- 리뷰 모달 시작 -->
-<%-- <form name="reviewForm" id="reviewForm" method="post" action="/market/reviewInsert" >
+<c:forEach items="${list}" var="list" varStatus="i">
+<form name="reviewForm" id="reviewForm" method="post" action="/market/reviewInsert" >
    <div class="modal fade" id="modal-review" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
          <div class="modal-content">
@@ -126,7 +127,8 @@
          </div>
       </div>
    </div>
-</form> --%>
+</form> 
+</c:forEach>
 <!-- 리뷰 모달 끝 -->
 
 

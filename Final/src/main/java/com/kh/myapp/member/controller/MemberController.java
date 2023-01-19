@@ -574,7 +574,6 @@ public class MemberController {
 		model.addAttribute("pageNo", map.get("pageNo"));
 		model.addAttribute("userId", userId);
 		model.addAttribute("uidCntList", map.get("uidCnt"));
-		/* model.addAttribute("prdNo", ???.get("prdNo")); */
 		
 		return "/member/userOrderList";
 
