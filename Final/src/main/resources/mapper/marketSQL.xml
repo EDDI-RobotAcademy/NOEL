@@ -123,6 +123,7 @@
          prd_qna_regdate as prdQnaregdate,
          (select prd_name from noel_product where prd_no =
          (select prd_no from noel_product_qna where prd_qna_no = #{prdQnano}))as prdName
+
       from noel_product_qna where prd_qna_no = #{prdQnano}
    </select>	
 
