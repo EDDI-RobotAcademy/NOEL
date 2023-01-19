@@ -308,14 +308,31 @@
 							</td>
 							<td width="55%">
 								<c:choose>
-									<c:when test="${qnalist.secret == 1}">
+									<c:when test="${qnalist.secret == 1 and empty sessionScope.mk}">
 										<p class="material-symbols-outlined">
 						                    lock
 						                </p>
 										<span onclick="modalMan(this)" style="cursor:pointer"> 
 											비밀글입니다.
 										</span>
-									</c:when>	
+									</c:when>
+									<c:when test="${qnalist.secret == 1 and sessionScope.mk.marketerId ne prd.marketerId}">
+										<p class="material-symbols-outlined">
+						                    lock
+						                </p>
+										<span onclick="modalMan(this)" style="cursor:pointer"> 
+											비밀글입니다. 
+										</span>
+									</c:when>
+									<c:when test="${qnalist.secret == 1 and sessionScope.mk.marketerId eq prd.marketerId}">
+										<p class="material-symbols-outlined">
+						                    lock
+						                </p>
+										<span onclick="location.href='/market/qnaDetail?prdQnano=${qnalist.prdQnano}'" style="cursor:pointer"> 
+											비밀글입니다. 
+										</span>
+									</c:when>
+										
 									<c:otherwise>
 										<a href="/market/qnaDetail?prdQnano=${qnalist.prdQnano}"> 
 											<c:out value="${qnalist.prdQnacontent}" />
@@ -465,15 +482,19 @@ function fn_valiChk2() {
    }
 }
 
+
 //qna 모달 > 비밀글 체크 > 비밀번호입력폼
+
+var marketer = "${sessionScope.mk}";
+
 $("[name=secret]").on("click", function(){
-	
 	if($("[name=secret]").prop("checked")){
     	$(".secretPw").slideDown();
     }else{
     	$(".secretPw").slideUp();
     }
 });
+
 
 //장바구니,구매하기 클릭시 로그인 체크
 var login = $("button[class='loginBtn']");
@@ -568,6 +589,7 @@ function modalMan(obj){
 	$(obj).parents(".qna-list").next().css("display", "block");
 }
 
+//qna 비밀글 비밀번호 확인 모달창 끄기
 function delModal(obj){
 	$("[name=prdQnapw]").val('');
 	$(".w3-animate-opacity").css("display", "none");
