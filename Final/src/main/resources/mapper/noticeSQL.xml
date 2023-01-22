@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="notice">
+    <select id="selectAllNotice" parameterType="map" resultType="com.kh.myapp.notice.model.vo.Notice">
+        select *
+        from NOEL_NOTICE
+
+    </select>
+
+    <select id="selectNoticeCount" resultType="int">
+        select count(*) from NOEL_NOTICE
+    </select>
+
+    <update id="updateReadCount" parameterType="int">
+        update NOEL_NOTICE
+        set read_cnt = read_cnt + 1 where notice_no = #{noticeNo}
+    </update>
+
+    <select id="selectOneNotice" parameterType="int" resultType="com.kh.myapp.notice.model.vo.Notice">
+        select
+            notice_no as noticeNo,
+            notice_title as noticeTitle,
+            notice_writer as noticeWriter,
+            notice_content as noticeContent,
+            read_cnt as readCnt,
+            notice_date as noticeDate
+        from NOEL_NOTICE where notice_no = #{noticeNo}
+    </select>
+
+    <select id="insertNotice" parameterType="com.kh.myapp.notice.model.vo.Notice">
+        insert into
+            NOEL_NOTICE values(notice_seq.nextval, #{noticeTitle}, #{noticeWriter}, #{noticeContent}, 0, to_char(sysdate, 'yyyy-mm-dd'))
+    </select>
+
+    <delete id="deleteNotice" parameterType="int">
+        delete from noel_notice where notice_no = #{noticeNo}
+    </delete>
+
+    <update id="updateNotice" parameterType="com.kh.myapp.notice.model.vo.Notice">
+        update noel_notice
+        set notice_title = #{noticeTitle}, notice_content = #{noticeContent} where notice_no = #{noticeNo}
+    </update>
+
+</mapper>
