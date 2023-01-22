@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" />
 <title>bonjour noël</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"
@@ -142,18 +143,21 @@
 					<span class="comment"></span>
 				</div>
 				<div class="order-box">
-					<label for="shippingAddr2" class="order-label">상세 주소<span
-						class="comment"></span></label> <input type="text" name="shippingAddr2"
-						id="shippingAddr2" class="order-input llong"> <input
-						type="text" style="display: none;"> <span class="comment"></span>
+					<label for="shippingAddr2" class="order-label">상세 주소 <span
+						class="comment"></span>
+					</label> <input type="text" name="shippingAddr2" id="shippingAddr2"
+						class="order-input llong"> <input type="text"
+						style="display: none;"> <span class="comment"></span>
 				</div>
 			</div>
 
 			<div class="order-info" style="padding-top: 80px;">
 				<div id="agree-box">
-					 <label for="info-agree" id="font">
-        	<input type="checkbox" id="info-agree" class="info-agree">&nbsp;주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</label>
-      </div>
+					<label for="info-agree" id="font"> <input type="checkbox"
+						id="info-agree" class="info-agree">&nbsp;주문 내용을 확인하였으며, 정보
+						제공 등에 동의합니다.
+					</label>
+				</div>
 				<div class="order-btn" id="font">
 					<button type="button" id="payBtn">결제하기</button>
 				</div>
@@ -239,6 +243,15 @@
 								} // 배송정보 빈 칸인지 확인 끝
 							} else {
 								shipInfo.siblings(".comment").text("");
+							}//주소 빈칸인지 확인
+							if ($('#shippingAddr1').val().trim() == ''
+									|| $('#shippingAddr1') == null) {
+								alert("주소를 입력해주세요");
+								return;
+							} else if ($('#shippingAddr2').val().trim() == ''
+									|| $('#shippingAddr2') == null) {
+								alert("상세주소를 입력해주세요");
+								return;
 							}
 							if (!$("#info-agree").prop("checked")) {
 								alert("정보 제공에 동의해주세요.");
@@ -262,11 +275,6 @@
 												name : '봉쥬르노엘', // 결제 이름
 												amount : price, // 결제 금액
 												buyer_name : name,
-
-											// 구매자 이름
-											// buyer_tel : "010-1234-1234",          // 구매자 전화번호
-											// buyer_addr : "서울시 영등포구 당산동",         // 구매자 주소
-											// buyer_postcode : "12345"            // 구매자 우편번호
 											},
 											function(rsp) {
 												if (rsp.success) {

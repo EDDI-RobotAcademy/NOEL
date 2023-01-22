@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" />
+<title>bonjour noël</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet"
@@ -44,14 +45,14 @@
 
 									<c:otherwise>
 										<div class="bookmark-content-list">
-											<form action="/searchOrderMarketerList?reqPage=1" method="post">
+											<form action="/searchOrderMarketerList?reqPage=1"
+												method="post">
 												<div id="type">
 													<select class="type" name="type">
 														<option value="orderStatus">주문상태</option>
 														<option value="userId">아이디</option>
 														<option value="orderNo">주문번호</option>
-													</select> 
-													<input type="text" name="keyword" class="keywork">
+													</select> <input type="text" name="keyword" class="keywork">
 													<input type="submit" value="조회" class="submitInput ">
 												</div>
 											</form>
@@ -112,7 +113,7 @@
 																		</select>
 																	</c:when>
 																</c:choose></td>
-															<td><button class="saveBtn" type="submit">확정</button></td>
+															<td><button id="font" class="saveBtn" type="submit">확정</button></td>
 														</form>
 													</tr>
 												</c:forEach>

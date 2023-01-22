@@ -1,11 +1,9 @@
 package com.kh.myapp.market.model.service;
 
+import java.util.HashMap;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import org.springframework.stereotype.Service;
-
 import com.kh.myapp.market.model.dao.MarketQnaDAO;
 import com.kh.myapp.market.model.vo.MarketQnaReplyVO;
 import com.kh.myapp.market.model.vo.MarketQnaVO;
@@ -13,72 +11,76 @@ import com.kh.myapp.market.model.vo.MarketQnaVO;
 @Service
 public class MarketQnaService {
 
-   @Inject
-   private MarketQnaDAO dao;
+	@Inject
+	private MarketQnaDAO dao;
 
-   /*
-    * public String prdQnaWrite(int regPage) throws Exception { return
-    * dao.prdQnaWrite(regPage); }
-    */
+	// qna상세
+	public MarketQnaVO qnaDetail(int prdQnano) throws Exception {
+		dao.qnaDetail(prdQnano);
+		return dao.qnaDetail(prdQnano);
+	}
 
-   /*
-    * public ArrayList<MarketQnaVO> qnaList(int prdNo) { ArrayList<MarketQnaVO>
-    * list = dao.qnaList(prdNo); return list; }
-    */
+	public int qnaInsert(MarketQnaVO marketQnaVO) throws Exception {
+		return dao.qnaInsert(marketQnaVO);
+	}
 
-   //qna상세
-   public MarketQnaVO qnaDetail(int prdQnano) throws Exception{
-      dao.qnaDetail(prdQnano);
-      return dao.qnaDetail(prdQnano);
-   }
+	// qna수정
+	public void qnaUpdate(MarketQnaVO marketqnaVO) {
+		dao.qnaUpdate(marketqnaVO);
+	}
 
-   public int qnaInsert(MarketQnaVO marketQnaVO) throws Exception {
-      return dao.qnaInsert(marketQnaVO);
-   }
+	public void qnaDelete(int prdQnano) throws Exception {
+		dao.qnaDelete(prdQnano);
+	}
 
-   //qna수정
-   public void qnaUpdate(MarketQnaVO marketqnaVO) {
-      dao.qnaUpdate(marketqnaVO);
-   }
+	// qna 게시물 총개수
+	public int qnaCount(int prdNo) throws Exception {
+		return dao.qnaCount(prdNo);
+	}
 
-   public void qnaDelete(int prdQnano) throws Exception{
-      dao.qnaDelete(prdQnano);
-   }
+	// qna 게시물 목록+페이징
+	public List<MarketQnaVO> qnaList(int prdNo, int qnadisplayPost, int qnapostNum) throws Exception {
+		return dao.qnaList(prdNo, qnadisplayPost, qnapostNum);
+	}
 
-   //qna 게시물 총개수
-   public int qnaCount(int prdNo) throws Exception {
-      return dao.qnaCount(prdNo);
-   }
+	// QNA 댓글 조회
+	public List<MarketQnaVO> qnarList(int prdQnano) throws Exception {
+		return dao.qnarList(prdQnano);
+	}
 
-   //qna 게시물 목록+페이징
-   public List<MarketQnaVO> qnaList(int prdNo, int qnadisplayPost, int qnapostNum) throws Exception {
-      return dao.qnaList(prdNo, qnadisplayPost, qnapostNum);
-   }
+	// QNA 댓글 작성
+	public void qnarInsert(MarketQnaVO marketqnaVO) throws Exception {
+		dao.qnarInsert(marketqnaVO);
+	}
 
+	// QNA 댓글 수정
+	public void qnarUpdate(MarketQnaReplyVO marketqnarVO) throws Exception {
+		dao.qnarUpdate(marketqnarVO);
+	}
 
-   // QNA 댓글 조회
-   public List<MarketQnaReplyVO> qnarList(int prdQnano) throws Exception {
-      return dao.qnarList(prdQnano);
-   }
+	// QNA 댓글 삭제
+	public void qnarDelete(int prdQnano) throws Exception {
+		dao.qnarDelete(prdQnano);
+	}
 
-   // QNA 댓글 작성
-   public void qnarInsert(MarketQnaReplyVO marketqnarVO) throws Exception {
-      dao.qnarInsert(marketqnarVO);
-   }
+	// QNA 댓글 개수
+	public void qnarCount(int prdQnano) throws Exception {
+		dao.qnarCount(prdQnano);
+		System.out.println("prdqnano service" + prdQnano);
+	}
 
-   // QNA 댓글 수정
-   public void qnarUpdate(MarketQnaReplyVO marketqnarVO) throws Exception {
-      dao.qnarUpdate(marketqnarVO);
-   }
+	// 판매자의 QNA 댓글등록시 QNA 답변완료로 변경
+	public void qnaStatusUptate(MarketQnaVO marketqnaVO) {
+		dao.qnaStatusUptate(marketqnaVO);
 
-   // QNA 댓글 삭제
-   public void qnarDelete(int prdQnarno) throws Exception {
-      dao.qnarDelete(prdQnarno);
-   }
+	}
 
-   // QNA 댓글 개수
-   public void qnarCount(int prdQnano) throws Exception {
-      dao.qnarCount(prdQnano);
-      System.out.println("prdqnano service"+prdQnano);
-   }
+	public MarketQnaVO qnaSecretDetail(int prdQnano, String prdQnapw) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("prdQnano", prdQnano);
+		map.put("prdQnapw", prdQnapw);
+		
+		MarketQnaVO result = dao.qnaSecretDetail(map);
+		return result;
+	}
 }

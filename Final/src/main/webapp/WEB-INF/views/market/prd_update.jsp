@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" />
 <title>bonjour noël</title>
 <link rel="stylesheet" href="/resources/css/product/prd_add.css">
 <link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
@@ -14,7 +15,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/layouts/header.jsp" />
-	<div class="content-wrap1" >
+	<div class="content-wrap1">
 		<jsp:include page="/WEB-INF/views/common/marketerHeader.jsp" />
 		<article id="content" class="content">
 			<div class="contents">

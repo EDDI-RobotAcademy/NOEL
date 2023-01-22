@@ -27,8 +27,6 @@ public class MarketReviewController {
     @RequestMapping(value = "/market/reviewInsert", method = RequestMethod.POST)
     public String reviewInsert(MarketReviewVO marketreviewVO, Model model, int prdNo, HttpServletRequest request)
             throws Exception {
-        logger.info("리뷰 작성");
-
         int result = reviewService.reviewInsert(marketreviewVO);
 
         if (result > 0) {
@@ -40,7 +38,6 @@ public class MarketReviewController {
     // 리뷰 상세
     @RequestMapping(value = "/market/reviewDetail", method = RequestMethod.GET)
     public String reivewDetail(MarketReviewVO marketReviewVO, Model model, int prdReviewno) throws Exception {
-        logger.info("리뷰 상세조회");
         reviewService.reviewDetail(marketReviewVO.getPrdReviewno());
         model.addAttribute("reviewdetail", reviewService.reviewDetail(marketReviewVO.getPrdReviewno()));
         return "/market/reviewDetail";
@@ -49,7 +46,6 @@ public class MarketReviewController {
     // 리뷰 수정
     @RequestMapping(value = "/market/reviewUpdate", method = RequestMethod.POST)
     public String reviewUpdate(MarketReviewVO marketReviewVO, int prdNo) throws Exception {
-        logger.info("리뷰 수정");
         reviewService.reviewUpdate(marketReviewVO);
         return "redirect:/marketDetailView?reqPage=1&prdNo=" + prdNo + "&rnum=1&qnum=1";
     }
@@ -57,7 +53,6 @@ public class MarketReviewController {
     // 리뷰 삭제
     @RequestMapping(value = "/market/reviewDelete")
     public String reviewDelete(MarketReviewVO marketReviewVO, int prdNo) throws Exception {
-        logger.info("리뷰 삭제");
         reviewService.reviewDelete(marketReviewVO.getPrdReviewno());
         return "redirect:/marketDetailView?reqPage=1&prdNo=" + prdNo + "&rnum=1&qnum=1";
     }

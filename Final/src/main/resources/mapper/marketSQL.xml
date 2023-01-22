@@ -18,7 +18,7 @@
          prd_no as prdNo,
          prd_review_content as prdReviewcontent,
          rating,
-         user_id as userId,
+         substr(user_id,1,length(user_id)-3) || lpad('*',3,'*') as userId,
          prd_review_regdate as prdReviewregdate
       from(
              select
@@ -41,6 +41,7 @@
          rating as rating,
          prd_review_content as prdReviewcontent,
          user_id as userId,
+         substr(user_id,1,length(user_id)-3) || lpad('*',3,'*') as userId2,
          prd_name as prdName
       from noel_product_review
       where prd_review_no = #{prdReviewno}
@@ -58,7 +59,7 @@
       values(
                prd_review_seq.nextval,
                #{prdNo},
-               'marketer1',
+               #{marketerId},
                #{rating},
                #{prdReviewcontent},
                #{userId},
@@ -91,9 +92,11 @@
          prd_qna_no as prdQnano,
          prd_no as prdNo,
          prd_qna_content as prdQnacontent,
-         user_id as userId,
-         prd_qna_regdate as prdQnaregdate
-
+         substr(user_id,1,length(user_id)-3) || lpad('*',3,'*') as userId,
+         prd_qna_regdate as prdQnaregdate,
+		 prd_qna_status as prdQnastatus,
+		 secret,
+		 prd_qna_pw as prdQnapw
       from(
              select
                 prd_qna_no,
@@ -101,6 +104,9 @@
                 prd_qna_content,
                 user_id,
                 prd_qna_regdate,
+                prd_qna_status,
+                secret,
+                prd_qna_pw,
                 row_number() over(order by prd_qna_no desc) as rNum
              from noel_product_qna where prd_no = #{prdNo})
          <![CDATA[where rNum > #{qnadisplayPost} and rNum <= #{qnapostNum}]]>
@@ -113,9 +119,25 @@
          marketer_id as marketerId,
          prd_qna_content as prdQnacontent,
          user_id as userId,
+         substr(user_id,1,length(user_id)-3) || lpad('*',3,'*') as userId2,
+         prd_qna_regdate as prdQnaregdate,
          (select prd_name from noel_product where prd_no =
          (select prd_no from noel_product_qna where prd_qna_no = #{prdQnano}))as prdName
+
       from noel_product_qna where prd_qna_no = #{prdQnano}
+   </select>	
+
+   <select id="qnaSecretDetail" parameterType="map" resultType="marketQnaVO">
+      select
+         prd_qna_no as prdQnano,
+         prd_no as prdNo,
+         marketer_id as marketerId,
+         prd_qna_content as prdQnacontent,
+         substr(user_id,1,length(user_id)-3) || lpad('*',3,'*') as userId,
+         prd_qna_pw as prdQnapw,
+         (select prd_name from noel_product where prd_no =
+         (select prd_no from noel_product_qna where prd_qna_no = #{prdQnano}))as prdName
+      from noel_product_qna where prd_qna_no = #{prdQnano} and prd_qna_pw = #{prdQnapw}
    </select>
 
    <insert id="qnaInsert">
@@ -124,13 +146,17 @@
          prd_no,
          marketer_id,
          prd_qna_content,
-         user_id)
+         user_id,
+         secret,
+         prd_qna_pw)
       values(
                prd_qna_seq.nextval,
                #{prdNo},
-               'marketer2',
+               #{marketerId},
                #{prdQnacontent},
-               #{userId})
+               #{userId},
+               #{secret},
+               #{prdQnapw})
    </insert>
 
    <update id="qnaUpdate" parameterType="marketQnaVO">
@@ -146,42 +172,35 @@
    </delete>
 
    <!-- QNA 댓글 조회 -->
-   <select id="qnareplyList" parameterType="int" resultType="marketQnaReplyVO">
+   <select id="qnareplyList" parameterType="int" resultType="marketQnaVO">
       select
-         prd_qnar_no as prdQnarno,
          prd_qna_no as prdQnano,
-         writer as writer,
-         prd_qnar_content as prdQnarcontent,
-         prd_qnar_regdate as prdQnarregdate
-      from noel_product_qnar
+         pqna_reply_writer as pqnaReplywriter,
+         pqna_reply as pqnaReply,
+         pqna_reply_date as pqnaReplydate
+      from noel_product_qna
       where prd_qna_no = #{prdQnano}
 
    </select>
 
-   <!-- QNA 댓글 작성 -->
-   <insert id="qnareplyWrite" parameterType="marketQnaReplyVO">
-      insert into noel_product_qnar(
-         prd_qnar_no,
-         prd_qna_no,
-         writer,
-         prd_qnar_content)
-      values(
-               prd_qnar_seq.nextval,
-               #{prdQnano},
-               #{writer},
-               #{prdQnarcontent})
-   </insert>
+   <!-- 1. QNA 댓글 작성 -->
+   <update id="qnareplyWrite" parameterType="marketQnaVO">
+      update noel_product_qna set
+      	 pqna_reply = #{pqnaReply},	
+		 pqna_reply_writer = #{pqnaReplywriter},	
+		 pqna_reply_date = sysdate,	
+         prd_qna_status = 1
+      where prd_qna_no = #{prdQnano}   
+   </update>
 
    <!-- QNA 댓글 조회 -->
-   <select id="qnareplyDetail" resultType="marketQnaReplyVO">
+   <select id="qnareplyDetail" resultType="marketQnaVO">
       select
-         prd_qnar_no as prdQnarno,
-         prd_qna_no as prdQnano,
-         writer as writer,
-         prd_qnar_content as prdQnarcontent,
-         prd_qnar_regdate as prdQnarregdate
-      from noel_product_qnar
-      where prd_qnar_no = #{prdQnarno}
+         pqna_reply_writer as pqnaReplywiter,
+         pqna_reply as pqnaReply,
+         pqna_reply_date as pqnaReplydate
+      from noel_product_qna
+      where prd_qna_no = #{prdQnano}
    </select>
 
    <!-- QNA 댓글 수정 -->
@@ -193,10 +212,13 @@
    </update>
 
    <!-- QNA 댓글 삭제 -->
-   <delete id="qnareplyDelete" parameterType="int">
-      delete from noel_product_qnar
-      where prd_qnar_no = #{prdQnarno}
-   </delete>
+   <update id="qnareplyDelete" parameterType="int">
+      update noel_product_qna set 
+        pqna_reply_writer = null, 
+        pqna_reply = null, 
+        pqna_reply_date = null, 
+  		prd_qna_status = 0 where prd_qna_no = #{prdQnano}
+   </update>
 
    <!-- QNA 댓글 개수 -->
    <select id="qnareplyCount">

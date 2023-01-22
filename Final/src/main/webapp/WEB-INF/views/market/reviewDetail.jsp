@@ -5,30 +5,14 @@
 <html>
 <head>
    <meta charset="UTF-8">
-   <title>reviewDetail</title>
+   <link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+   <title>bonjour noël</title>
    <link rel="stylesheet" href="/resources/css/index/owl.theme.default.min.css">
    <link rel="stylesheet" href="/resources/css/index/owl.carousel.min.css">
    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
    <link rel="stylesheet" href="/resources/css/product/prd_add.css">
+   <link rel="stylesheet" href="/resources/css/product/reviewDetail.css">
 
-   <style type="text/css">
-      div{
-         font-family: 'Gowun Dodum';
-      }
-      .review-detail-wrap{
-         padding-top:50px;
-         padding-left: 25px;
-         padding-right: 10px;
-         width:700px;
-         margin:0 auto;
-
-      }
-
-      .reviewDetail_btn{
-         float:right;
-      }
-
-   </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 
@@ -45,7 +29,7 @@
                <tr height="40px">
                   <td colspan="2" style="text-align:center;">
                      <h3>구매평</h3>
-                     <hr>
+                     <hr  style="height:2px;">
                   </td>
                </tr>
                <tr height="40px">
@@ -68,8 +52,8 @@
                <tr height="80px">
                   <td style="text-align:center;"> 구매평 </td>
                   <td>
-                              <textarea name="prdReviewcontent" class="form-control" id="message-text"
-                                        style="height:10em; width:500px; resize:none;" >${reviewdetail.prdReviewcontent}</textarea>
+                      <textarea name="prdReviewcontent" class="form-control" id="message-text"
+                                style="height:10em; width:500px; resize:none;" autofocus>${reviewdetail.prdReviewcontent}</textarea>
                   </td>
                </tr>
                </tbody>
@@ -97,7 +81,7 @@
                </tr>
                <tr height="40px">
                   <td style="text-align:center;"> 작성자 </td>
-                  <td> ${reviewdetail.userId}</td>
+                  <td> ${reviewdetail.userId2}</td>
                </tr>
                <tr height="40px">
                   <td style="text-align:center;"> 평점 </td>

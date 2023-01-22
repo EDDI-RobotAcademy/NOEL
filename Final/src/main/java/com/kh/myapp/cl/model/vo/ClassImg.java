@@ -13,6 +13,6 @@ public class ClassImg {
     private String classNum;
     private int classNo;
     private String imgPath;
-    private ArrayList<ClassImg> storeImgList;
+    private ArrayList<ClassImg> classImgList;
 
 }

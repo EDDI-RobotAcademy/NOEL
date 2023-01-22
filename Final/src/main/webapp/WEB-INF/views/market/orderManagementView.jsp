@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" />
+<title>bonjour noël</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet"
@@ -38,22 +39,11 @@
 										<div class="warningMark">
 											<span class="material-symbols-outlined"
 												style="font-size: 30px;"> 주문내역이 없습니다. </span>
-											</div>
+										</div>
 									</c:when>
 
 									<c:otherwise>
 										<div class="bookmark-content-list">
-											<!-- <form action="/searchPrdMarketerList?reqPage=1" method="post">
-											<input type="hidden" value=1 name="reqPage">
-												 <div id="type">
-													<select class="type" name="type">
-														<option value="prdName">상품명</option>
-														<option value="">------</option>
-													</select> 
-													<input type="text" name="keyword" class="keywork">
-													<input type="submit" value="조회" class="submitInput ">
-												</div>
-											</form> -->
 											<table class="table" style="width: 800px;">
 												<tr>
 													<th scope="col">상품명</th>
@@ -63,8 +53,8 @@
 												</tr>
 												<c:forEach items="${list }" var="ol">
 													<tr>
-														<td>
-															<a href="/market/orderPrd?reqPage=1&prdNo=${ol.prdNo}">${ol.prdName}</a></td>
+														<td><a
+															href="/market/orderPrd?reqPage=1&prdNo=${ol.prdNo}">${ol.prdName}</a></td>
 														<td>${ol.prdAllStock}</td>
 														<td>${ol.prdStock}</td>
 														<td>${ol.prdAllStock - ol.prdStock}</td>

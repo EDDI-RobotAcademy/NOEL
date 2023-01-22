@@ -16,6 +16,7 @@ public class MarketReviewVO {
    private String marketerId;
    private String prdReviewcontent;
    private String userId;
+   private String userId2;
    private Date prdReviewregdate;
    private int rating;
    private String prdName;

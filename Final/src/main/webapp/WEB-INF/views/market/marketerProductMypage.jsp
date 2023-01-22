@@ -8,6 +8,7 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" /> 
 <title>bonjour noël</title>
 </head>
 

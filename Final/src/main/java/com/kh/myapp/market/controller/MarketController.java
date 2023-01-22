@@ -33,6 +33,7 @@ import com.kh.myapp.market.model.vo.MarketReviewVO;
 import com.kh.myapp.market.model.vo.ProductImgVO;
 import com.kh.myapp.market.model.vo.ProductVO;
 import com.kh.myapp.member.model.vo.Marketer;
+import com.kh.myapp.order.model.service.OrderService;
 
 @Controller
 public class MarketController {
@@ -50,6 +51,9 @@ public class MarketController {
 
 	@Autowired
 	private MarketQnaService qnaService;
+	
+	@Autowired
+	private OrderService orderService;
 
 	// 생성자
 	public MarketController() {
@@ -200,7 +204,7 @@ public class MarketController {
 		return "redirect:/market/marketerProductMypage";
 	}
 
-	// 마켓 상품 리스트 페이지 000
+	// 마켓 상품 리스트 페이지
 	@RequestMapping(value = "/marketListFrm")
 	public String getmarketListFrm(int reqPage, Model model) {
 		HashMap<String, Object> map = productService.marketList(reqPage);
@@ -218,7 +222,7 @@ public class MarketController {
 		}
 	}
 
-	// 마켓 상품 리스트 페이지 카테고리(전체 뺀 나머지) 000
+	// 마켓 상품 리스트 페이지 카테고리(전체 뺀 나머지)
 	@RequestMapping(value = "/selectTag")
 	public String selectTag(String category, int reqPage, Model model) {
 		HashMap<String, Object> map = productService.selectTag(category, reqPage);

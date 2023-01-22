@@ -14,10 +14,13 @@ public class Reserve {
     private String bookName;
     private String userId;
     private String bookTel;
-    private String couponNo;
+    private int couponNo;
     private String bookDate;
     private String bookNum;
     private String bookTime;
     private String impUid;
-
+    private String marketerId;
+    private String reserverName;
+    
+    
 }

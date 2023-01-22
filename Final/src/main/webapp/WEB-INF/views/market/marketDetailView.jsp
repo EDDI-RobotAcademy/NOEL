@@ -6,24 +6,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" />
 <title>bonjour noël</title>
-<link rel="stylesheet"
-	href="/resources/css/product/marketDetailView.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-
+<link rel="stylesheet"
+	href="/resources/css/product/marketDetailView.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 
 	<jsp:include page="/WEB-INF/views/layouts/header.jsp" />
 
-	<div class="container text-left" id="product_wrap">
-		<div class="directoryDiv">home > market > detail</div>
-		<div class="infoDiv1">
-			<img src="/resources/upload/product/${prd.prdthumNail }" class="pImg">
-			<!-- ///////////////////////////////////////////////////////////////////// -->
+	<div class="content-wrap2" style="width: 1200px; margin: 0 auto;">
+		<div class="content-wrap2-1">
+			<div class="directoryDiv">home > market > detail</div>
+			<!-- 사진 슬라이드 영역  -->
+			<div class="photo-wrap">
+				<ul class="storeImgUl" style="height: 460px; width: 100%;">
+					<img src="/resources/upload/product/${prd.prdthumNail }">
+				</ul>
+			</div>
+
 			<div class="tableDiv">
-				<table class="productTable">
+				<table class="w3-table w3-bordered" id="productTable"
+					style="font-family: Gowun Dodum; width: 550px;">
 					<tr>
 						<th>상품명</th>
 						<td colspan="4">${prd.prdName }</td>
@@ -39,116 +48,137 @@
 					<tr>
 						<th>금액</th>
 						<td colspan="4"><fmt:formatNumber value="${prd.prdPrice}"
-								pattern="#,###" /></td>
+								pattern="#,###" /> <span>원</span></td>
 					</tr>
 					<tr>
 						<th>수량 선택</th>
 						<td style="width: 30px;">
-							<button class="w3-button w3-circle" id="down">-</button>
+							<button class="w3-button w3-circle" id="down"
+								style="width: 35px; height: 35px; padding: 0; background-color: red; color: white;">
+								-</button>
 						</td>
 						<td class="peopleTd"><span class="countNum">1</span></td>
 						<td style="width: 30px;">
-							<button class="w3-button w3-circle" id="up">+</button>
+							<button class="w3-button w3-circle" id="up"
+								style="width: 35px; height: 35px; padding: 0; background-color: red; color: white;">
+								+</button>
 						</td>
 						<td></td>
 						<td></td>
 					</tr>
+					<tr>
+						<th>상품 총 금액</th>
+						<td colspan="4"><span class="priceSpan"></span> <span>원</span>
+						</td>
+					</tr>
 				</table>
-			</div>
-			<div class="priceDiv">
-				<div class="priceDiv1">
-					<span>총 금액: </span> <span class="priceSpan"></span> <span>원</span>
-				</div>
-			</div>
-			<div class="btnWrap">
-				<form action="/insertCart">
-					<c:choose>
-						<c:when test="${empty sessionScope.m}">
-							<button type="button" class="loginBtn" id="cartBtn"
-								onclick="loginCh()">장바구니</button>
-						</c:when>
-						<c:otherwise>
-							<button type="submit" class="cartBtn">장바구니</button>
-						</c:otherwise>
-					</c:choose>
-					<input type="hidden" name="prdPrice" class="allPrice" value="${prd.prdPrice }"> 
-					<input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }"> 
-					<input type="hidden" name="prdName" class="pNumber" value="${prd.prdName }">
-					<input type="hidden" name="cartQuan" class="count"> <input type="hidden" name="userId" value="${sessionScope.m.userId }">
-				</form>
-        
-         <form action="/insertOrder">
-            <c:choose>
-               <c:when test="${empty sessionScope.m}">
-                  <button type="button" class="loginBtn" id="cartBtn"
-                          onclick="loginCh()">구매하기</button>
-               </c:when>
-               <c:otherwise>
-                  <button type="submit" class="buyBtn">구매</button>
-               </c:otherwise>
-            </c:choose>
-            <input type="hidden" name="prdPrice" class="allPrice" value="${prd.prdPrice }">
-            <input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }">
-            <input type="hidden" name="prdName" value="${prd.prdName}">
-            <input type="hidden" name="cartQuan" class="count">
-            <input type="hidden" name="userId" value="${sessionScope.m.userId }">
-        </form>
-			<c:choose>
-				<c:when test="${empty sessionScope.m.userId}">
-					<button type="button" id="wishBtn" name="reserveBtn" onclick="wishCh()">
-						<img style="width: 21px;" src="/resources/img/index/heart.png">
-					</button>
-				</c:when>
-				<c:otherwise>
-					<c:choose>
-						<c:when test="${param.bookmarkId == marketwish.userId}">
-							<button type="button" name="reserveBtn" id="wishlist" style="display: none; "
-								onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-								<img style="width: 21px;" src="/resources/img/index/heart.png">
-							</button>
-							<button type="button" name="reserveBtn" id="wishlist1" 
-								onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-								<img style="width: 25px;" src="/resources/img/index/heart-fill.png">
-							</button>
-						</c:when>
-						<c:otherwise>
-							<button type="button" name="reserveBtn" id="wishlist"
-									onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-								<img style="width: 21px;" src="/resources/img/index/heart.png">
-							</button>
-							<button type="button" name="reserveBtn" id="wishlist1" style="display: none;"
-								onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-								<img style="width: 25px;" src="/resources/img/index/heart-fill.png">
-							</button>
+				<div class="btnWrap">
+					<form action="/insertCart">
+						<c:choose>
+							<c:when test="${empty sessionScope.m}">
+								<button type="button" class="loginBtn" id="cartBtn"
+									onclick="loginCh()">장바구니</button>
+							</c:when>
+							<c:otherwise>
+								<button type="submit" class="cartBtn">장바구니</button>
 							</c:otherwise>
 						</c:choose>
-					</c:otherwise>
-				</c:choose>
+						<input type="hidden" name="prdPrice" class="allPrice"
+							value="${prd.prdPrice }"> <input type="hidden"
+							name="prdNo" class="pNumber" value="${prd.prdNo }"> <input
+							type="hidden" name="prdName" class="pNumber"
+							value="${prd.prdName }"> <input type="hidden"
+							name="cartQuan" class="count"> <input type="hidden"
+							name="userId" value="${sessionScope.m.userId }">
+					</form>
+
+					<form action="/insertOrder">
+						<c:choose>
+							<c:when test="${empty sessionScope.m}">
+								<button type="button" class="loginBtn" id="cartBtn"
+									onclick="loginCh()">구매하기</button>
+							</c:when>
+							<c:otherwise>
+								<button type="submit" class="buyBtn">구매</button>
+							</c:otherwise>
+						</c:choose>
+						<input type="hidden" name="prdPrice" class="allPrice"
+							value="${prd.prdPrice }"> <input type="hidden"
+							name="prdNo" class="pNumber" value="${prd.prdNo }"> <input
+							type="hidden" name="prdName" value="${prd.prdName}"> <input
+							type="hidden" name="cartQuan" class="count"> <input
+							type="hidden" name="userId" value="${sessionScope.m.userId }">
+					</form>
+					<c:choose>
+						<c:when test="${empty sessionScope.m.userId}">
+							<button type="button" id="wishBtn" name="reserveBtn"
+								onclick="wishCh()">
+								<img style="width: 21px;" src="/resources/img/index/heart.png">
+							</button>
+						</c:when>
+						<c:otherwise>
+							<c:choose>
+								<c:when test="${param.bookmarkId == marketwish.userId}">
+									<button type="button" name="reserveBtn" id="wishlist"
+										style="display: none;"
+										onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+										<img style="width: 21px;" src="/resources/img/index/heart.png">
+									</button>
+									<button type="button" name="reserveBtn" id="wishlist1"
+										onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+										<img style="width: 25px;"
+											src="/resources/img/index/heart-fill.png">
+									</button>
+								</c:when>
+								<c:otherwise>
+									<button type="button" name="reserveBtn" id="wishlist"
+										onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+										<img style="width: 21px;" src="/resources/img/index/heart.png">
+									</button>
+									<button type="button" name="reserveBtn" id="wishlist1"
+										style="display: none;"
+										onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+										<img style="width: 25px;"
+											src="/resources/img/index/heart-fill.png">
+									</button>
+								</c:otherwise>
+							</c:choose>
+						</c:otherwise>
+					</c:choose>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="content-wrap4">
-		<div class="testDiv">
-			<%-- 상세정보 --%>
-			<p class="menuTitle">&nbsp;</p>
-			<p class="menuSubTitle">&nbsp;</p>
-			<br>
-			<div class="contentWrap2">${prd.prdContent}</div>
-			<hr style="border: 1px">
+	<%-- 상세정보 --%>
+	<div class="content-wrap4"
+		style="font-family: Gowun Dodum; margin-top: 30px; height: 100%; width: 1200px; margin-bottom: 100px; margin: 0 auto;">
+		<div class="testDiv" style="width: 1200px; margin: 0 auto;">
+			<div class="menuWrap" style="font-family: Gowun Dodum;">
+				<p class="menuTitle" style="margin-top: 20px;">PRODUCT DETAIL</p>
+				<br>
+				<div class="contentWrap2">${prd.prdContent}</div>
+				<!-- <hr style="border: 1px"> -->
+			</div>
 		</div>
-
 	</div>
+  
 	<!-- 리뷰 목록 -->
 	<div class="review-wrap" id="review-wrap">
 		<div class="review-title">
 			<div>
 				<b>구매평</b>
 			</div>
-			<br>
-			<button type="button" class="btn btn-brand" data-bs-toggle="modal"
+		<c:choose>
+			<c:when test="${empty sessionScope.m}"></c:when>
+			<c:otherwise>
+				<br><br>
+				<button type="button" class="btn btn-brand" data-bs-toggle="modal"
 				data-bs-target="#modal-review">구매평 작성</button>
+			</c:otherwise>
+		</c:choose>
 		</div>
 		<section>
+		<hr>
 			<table class="review-list">
 				<tbody>
 					<c:choose>
@@ -184,7 +214,7 @@
 		<!-- 리뷰 목록 페이지 번호 -->
 		<c:forEach begin="1" end="${reviewpageNum}" var="rnum">
 			<span> <a
-				href="/marketDetailView?prdNo=${param.prdNo}&bookmarkId=mlolw2&rnum=${rnum}&qnum=1#review-wrap">
+				href="/marketDetailView?prdNo=${param.prdNo}&rnum=${rnum}&qnum=1#review-wrap">
 					${rnum} </a>
 			</span>
 		</c:forEach>
@@ -205,6 +235,7 @@
                   <input type="hidden" name="userId" value="${sessionScope.m.userId}">
                   <input type="hidden" name="prdNo" value="${prd.prdNo}">
                   <input type="hidden" name="prdName" value="${prd.prdName}">
+                  <input type="hidden" name="marketerId" value="${prd.marketerId}">
                   <input type="radio" name="rating" value="5" id="rate1" checked>
                   <label for="rate1">♥</label>
                   <input type="radio" name="rating" value="4" id="rate2">
@@ -217,7 +248,7 @@
                   <label for="rate5">♥</label>
                </fieldset>
                <textarea name="prdReviewcontent" class="chk1 form-control" id="message-text" title="어떤점이 좋으셨나요?"
-                         style="height:20em; resize:none;" ></textarea>
+                         style="height:15em; resize:none;" ></textarea>
             </div>
             <div class="modal-footer">
                <button type="submit" class="reviewsave btn btn-brand">저장</button>
@@ -229,118 +260,179 @@
 </form>
 <!-- 리뷰 모달 끝 -->
 
-	<!-- QNA 목록 시작 -->
-	<%-- <c:if test="${user != null}"></c:if> //유저일때 모달창 오픈--%>
-	<div class="qna-wrap" id="qna-wrap">
-		<div class="qna-title">
-			<br> <br> <br>
-			<div>
-				<b>QnA</b>
-			</div>
-			구매하시려는 상품에 대한 궁금점이 있으면 문의주세요.<br> <br>
-			<c:choose>
-				<c:when test="${empty sessionScope.m}"></c:when>
-				<c:otherwise>
-					<button type="button" class="btn btn-brand" data-bs-toggle="modal"
-						data-bs-target="#modal-qna">상품문의</button>
-				</c:otherwise>
-			</c:choose>
+<!-- QNA 목록 시작 -->
+<%-- <c:if test="${user != null}"></c:if> //유저일때 모달창 오픈--%>
+<div class="qna-wrap" id="qna-wrap">
+	<div class="qna-title">
+		<br> <br> <br>
+		<div>
+			<b>QnA</b><br>
 		</div>
-		<section>
-			<table class="qna-list">
-				<tbody>
-					<c:choose>
-						<c:when test="${empty qnalist}">
-							<p>" 등록된 QNA가 없습니다. "</p>
-						</c:when>
-						<c:otherwise>
-							<tr height="50">
-								<th width="10%">상태</th>
-								<th width="60%">제목</th>
-								<th width="15%">작성자</th>
-								<th width="15%">등록일</th>
-							</tr>
-							<c:forEach items="${qnalist}" var="qnalist">
-								<tr height="50">
-									<td><c:choose>
-											<c:when test="${qnalist.prdQnastatus == 1}">
-                              답변대기
-                           </c:when>
-											<c:otherwise>
-                              답변완료
-                           </c:otherwise>
-										</c:choose></td>
-									<td><a
-										href="/market/qnaDetail?prdQnano=${qnalist.prdQnano}"> <c:out
-												value="${qnalist.prdQnacontent}" />
-									</a></td>
-									<td><c:out value="${qnalist.userId}" /></td>
-									<td><fmt:formatDate value="${qnalist.prdQnaregdate}"
-											pattern="yyyy-MM-dd" /></td>
-								</tr>
-
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</tbody>
-			</table>
-		</section>
+		구매하시려는 상품에 대한 궁금점이 있으면 문의주세요.
+		<c:choose>
+			<c:when test="${empty sessionScope.m}"></c:when>
+			<c:otherwise>
+				<br><br>
+				<button type="button" class="btn btn-brand" data-bs-toggle="modal"
+					data-bs-target="#modal-qna">상품문의</button>
+			</c:otherwise>
+		</c:choose>
 	</div>
-	<div align="center">
-		<!-- qna 목록 페이지 번호 -->
-		<c:forEach begin="1" end="${qnapageNum}" var="qnum">
-			<span> <a
-				href="/marketDetailView?prdNo=${param.prdNo}&bookmarkId=mlolw2&num=1&qnum=${qnum}#qna-wrap">
-					${qnum} </a>
-			</span>
-		</c:forEach>
-	</div>
-	<!-- QnA 목록 끝 -->
+	
+	<section><hr>
+		<c:choose>
+			<c:when test="${empty qnalist}">
+				<p>" 등록된 QNA가 없습니다. "</p>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${qnalist}" var="qnalist" varStatus="i">
+					<table class="qna-list">
+					<tbody>						
+						<!-- <tr height="50">
+							<th width="15%">상태</th>
+							<th width="55%">제목</th>
+							<th width="15%">작성자</th>
+							<th width="15%">등록일</th>
+						</tr> -->
+						
+						<tr height="60px">
+							<td width="15%">
+								<c:choose>
+									<c:when test="${qnalist.prdQnastatus == 0}">
+		                              답변대기
+		                            </c:when>
+									<c:otherwise>
+		                              답변완료
+		                            </c:otherwise>
+								</c:choose>
+							</td>
+							<td width="55%">
+								<c:choose>
+									<c:when test="${qnalist.secret == 1 and empty sessionScope.mk}">
+										<p class="material-symbols-outlined">
+						                    lock
+						                </p>
+										<span onclick="modalMan(this)" style="cursor:pointer"> 
+											비밀글입니다.
+										</span>
+									</c:when>
+									<c:when test="${qnalist.secret == 1 and sessionScope.mk.marketerId ne prd.marketerId}">
+										<p class="material-symbols-outlined">
+						                    lock
+						                </p>
+										<span onclick="modalMan(this)" style="cursor:pointer"> 
+											비밀글입니다. 
+										</span>
+									</c:when>
+									<c:when test="${qnalist.secret == 1 and sessionScope.mk.marketerId eq prd.marketerId}">
+										<p class="material-symbols-outlined">
+						                    lock
+						                </p>
+										<span onclick="location.href='/market/qnaDetail?prdQnano=${qnalist.prdQnano}'" style="cursor:pointer"> 
+											비밀글입니다. 
+										</span>
+									</c:when>
+										
+									<c:otherwise>
+										<a href="/market/qnaDetail?prdQnano=${qnalist.prdQnano}"> 
+											<c:out value="${qnalist.prdQnacontent}" />
+										</a>
+									</c:otherwise>				
+								</c:choose>
+							</td>
+							<td width="15%">
+								<c:out value="${qnalist.userId}" />
+							</td>
+							<td >
+								<fmt:formatDate value="${qnalist.prdQnaregdate}" pattern="yyyy-MM-dd" />
+							</td>
+						</tr>					
+					</tbody>
+					</table>
+					<!-- 비밀번호확인 모달 시작-->
+					<div id="id01" class="w3-modal w3-animate-opacity">
+					    <div class="w3-modal-content w3-card-4" style="top: 15%; width: 300px;">
+					      <header class="w3-container w3-teal" style="background-color: #fff!important;"> 
+					        <span onclick="delModal(this);" style="overflow:visible; color:black;"
+					        	class="w3-button w3-large w3-display-topright" >X</span>
+					        <h5 style="margin-top:13px;">비밀번호 확인</h5>
+					      </header>
+					      <div class="w3-container" style="margin-top: 15px; height: 120px;">
+					        <form action="/market/qnaSecretDetail" method="post" class="pwFrm">
+					        	<input type="hidden" name="prdNo" value="${prd.prdNo}">
+					        	<input type="hidden" name="prdQnano" value="${qnalist.prdQnano}">
+						        <input class="w3-input w3-border w3-round-large" type="password" name="prdQnapw" style="width: 250px; margin-left: 10px;"><br>
+						        <button class="btn btn-brand" style="margin-left: 10px; color:white; float:right;" onclick="pwChk(this)">확인</button>
+					        </form>
+					      </div>
+					    </div>
+					</div>
+					<!-- 비밀번호확인 모달 끝-->
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
+	</section>
+</div>
 
-	<!-- QnA 모달 시작 -->
-	<form name="prdqnaForm" method="post" action="/market/pqnawrite">
-		<div class="modal fade" id="modal-qna" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel"
-							style="font-family: Gowun Dodum;">Q&A</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
+<div align="center">
+	<!-- qna 목록 페이지 번호 -->
+	<c:forEach begin="1" end="${qnapageNum}" var="qnum">
+		<span> 
+			<a href="/marketDetailView?prdNo=${param.prdNo}&rnum=1&qnum=${qnum}#qna-wrap">
+				${qnum} </a>
+		</span>
+	</c:forEach>
+</div>
+<!-- QnA 목록 끝 -->
+
+<!-- QnA 모달 시작 -->
+<form name="prdqnaForm" method="post" action="/market/qnaInsert">
+	<div class="modal fade" id="modal-qna" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"
+						style="font-family: Gowun Dodum;">Q&A</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body mb-3">
+					<input type="hidden" name="userId" value="${sessionScope.m.userId}"> 
+					<input type="hidden" name="prdNo" value="${prd.prdNo}"> 
+					<input type="hidden" name="marketerId" value="${prd.marketerId}"> 
+					<label
+						for="message-text" class="col-form-label">문의할 내용을 작성해주세요.</label>
+					<textarea name="prdQnacontent" class="chk2 form-control" id="message-text" 
+							style="height: 15em; resize: none;" autofocus="autofocus" title="문의할 내용을 작성해주세요."></textarea>
+					<br>
+					<div>
+						<input class="checkbox" type="checkbox" name="secret" id="secret"> 
+						<label class="form-check-label">비밀글 </label>
 					</div>
-					<div class="modal-body mb-3">
-						<input type="hidden" name="userId"
-							value="${sessionScope.m.userId}"> <input type="hidden"
-							name="prdNo" value="${prd.prdNo}"> <label
-							for="message-text" class="col-form-label">문의할 내용을 작성해주세요.</label>
-						<textarea name="prdQnacontent" class="chk2 form-control"
-							id="message-text" title="내용을 입력하세요"
-							style="height: 20em; resize: none;"></textarea>
-						<br>
-						<div>
-							<input class="form-check-input" type="checkbox" name="secret"
-								id="secret"> <label class="form-check-label">비밀글
-								설정</label>
-						</div>
+					<div style="display:none; float:left;" class="secretPw">
+						<input class="chk3 w3-input w3-border w3-round-large" id="prdQnapw" name="prdQnapw" 
+								type="text" style="width: 100px; margin: 0 auto;" placeholder=" 비밀번호"
+								title="비밀번호를 입력해주세요.">
 					</div>
-					<div class="modal-footer">
-						<button type="submit" class="qnasave btn btn-brand">저장</button>
-						<button type="button" class="qnacancel btn btn-brand"
-							data-bs-dismiss="modal">취소</button>
-					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="qnasave btn btn-brand">저장</button>
+					<button type="button" class="qnacancel btn btn-brand" data-bs-dismiss="modal">취소</button>
 				</div>
 			</div>
 		</div>
-	</form>
-	<!-- QNA 모달 끝 -->
+	</div>
+</form>
+<!-- QNA 모달 끝 -->
 
-	<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
 
-	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-	<script src="/resources/js/index/jquery.min.js"></script>
-	<script src="/resources/js/index/owl.carousel.min.js"></script>
-	<script src="/resources/js/index/app.js"></script>
+<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="/resources/js/index/jquery.min.js"></script>
+<script src="/resources/js/index/owl.carousel.min.js"></script>
+<script src="/resources/js/index/app.js"></script>
+
 
 	<script type="text/javascript">
 //리뷰 & qna 내용 미입력시 alert
@@ -367,21 +459,42 @@ $(document).ready(function() {
    });
 })
 function fn_valiChk1() {
-   var regForm = $("form[name='prdreviewForm'] .chk1").length;
-
    if ($(".chk1").val() == "" || $(".chk1").val() == null) {
       alert($(".chk1").attr("title"));
       return true;
    }
 }
-function fn_valiChk2() {
-   var regForm = $("form[name='prdqnaForm'] .chk2").length;
 
+function fn_valiChk2() {
+	if($("[name=secret]").prop("checked")){
+       $("[name=secret]").attr("value", 1);
+       if ($(".chk3").val() == "" || $(".chk3").val() == null) {
+    	      alert($(".chk3").attr("title"));
+    	      return true;
+    		}
+   }else{
+       $("[name=secret]").attr("value", 0);
+   }
+   
    if ($(".chk2").val() == "" || $(".chk2").val() == null) {
       alert($(".chk2").attr("title"));
       return true;
    }
 }
+
+
+//qna 모달 > 비밀글 체크 > 비밀번호입력폼
+
+var marketer = "${sessionScope.mk}";
+
+$("[name=secret]").on("click", function(){
+	if($("[name=secret]").prop("checked")){
+    	$(".secretPw").slideDown();
+    }else{
+    	$(".secretPw").slideUp();
+    }
+});
+
 
 //장바구니,구매하기 클릭시 로그인 체크
 var login = $("button[class='loginBtn']");
@@ -396,7 +509,6 @@ function loginCh() {
 	   login.attr("location.href", "login-modal");
 	}
 }
-
 
 //---------- 수량 늘리기
 var countNumVal = $(".peopleTd").text();
@@ -434,7 +546,6 @@ $(".buyBtn").on("click", function() {
    $(".count").attr("value", count);
 });
 
-
 //비회원 상품 위시 > 로그인모달
 var wishBtn = $("button[id='wishBtn']");
 function wishCh() {
@@ -442,6 +553,7 @@ function wishCh() {
 	wishBtn.attr("data-bs-target", "#login-modal");
 	wishBtn.attr("location.href", "login-modal");
 }
+
 //상품 위시
 function addWishlist(obj, prdNo, userId){
     $("#wishlist").hide();
@@ -456,6 +568,7 @@ function addWishlist(obj, prdNo, userId){
         }
     })
 }
+
 //상품 위시 취소
 function deleteWishlist(obj, prdNo, userId){
     $("#wishlist1").hide();
@@ -471,6 +584,25 @@ function deleteWishlist(obj, prdNo, userId){
     })
 }
 
+//qna 비밀글 비밀번호 확인
+function modalMan(obj){
+	$(obj).parents(".qna-list").next().css("display", "block");
+}
+
+//qna 비밀글 비밀번호 확인 모달창 끄기
+function delModal(obj){
+	$("[name=prdQnapw]").val('');
+	$(".w3-animate-opacity").css("display", "none");
+}
+
+function pwChk(obj){
+	if($("[name=prdQnapw]").eq(obj).val().trim() == ""){
+		alert("비밀번호를 입력해주세요.");
+		$(obj).attr("type", "button");
+	}else{
+		$(this).attr("type", "submit");
+	}
+}
 </script>
 </body>
 </html>

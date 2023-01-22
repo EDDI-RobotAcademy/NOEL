@@ -13,8 +13,10 @@
 	<typeAliases>
 		<typeAlias type="com.kh.myapp.member.model.vo.Member" alias="m"/>
 		<typeAlias type="com.kh.myapp.member.model.vo.Marketer" alias="mk" />
-		<typeAlias type="com.kh.myapp.cl.model.vo.Class" alias="Class"/>
+		<typeAlias type="com.kh.myapp.cl.model.vo.Class" alias="cv"/>
 		<typeAlias type="com.kh.myapp.cl.model.vo.ClassImg" alias="ci" />
+		<typeAlias type="com.kh.myapp.cl.model.vo.Menu" alias="me"/>
+		<typeAlias type="com.kh.myapp.cl.model.vo.Reserve" alias="Reserve"/>
 		<typeAlias type="com.kh.myapp.market.model.vo.ProductVO" alias="productVO"/>
 		<typeAlias type="com.kh.myapp.market.model.vo.ProductImgVO" alias="prdimgVO"/>
 		<typeAlias type="com.kh.myapp.market.model.vo.MarketReviewVO" alias="marketReviewVO"/>
