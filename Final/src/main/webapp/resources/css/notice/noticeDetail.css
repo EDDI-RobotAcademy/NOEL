@@ -1,0 +1,49 @@
+.btn-update, .btn-delete, .btn-list {
+	width: 100px;
+	height: 40px;
+	text-decoration: none;
+	background-color: #dc3545;
+	border: none;
+	color: white;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 5px;
+}
+
+.btn-update:hover, .btn-delete:hover, .btn-list:hover {
+	color: white;
+	background-color: #092032;
+}
+
+.noticeDetail-wrap {
+	width: 800px;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
+.notice-title-wrap {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.notice-enrollDate {
+	text-align: right;
+	border-bottom: 1px solid gray;
+	padding-bottom: 7px;
+}
+
+.notice-detail-content {
+	border-bottom: 1px solid gray;
+	padding-bottom: 20px;
+}
+
+.notice-detail-content>img {
+	border-radius: 0px;
+}
+
+.notice-detail-btn {
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}

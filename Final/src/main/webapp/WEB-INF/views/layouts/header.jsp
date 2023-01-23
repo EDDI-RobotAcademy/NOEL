@@ -33,7 +33,7 @@
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link" href="#">Contact us</a>
+					<a class="nav-link" href="/selectNoticeList?reqPage=1">Contact us</a>
 				</li>
 			</ul>
 
