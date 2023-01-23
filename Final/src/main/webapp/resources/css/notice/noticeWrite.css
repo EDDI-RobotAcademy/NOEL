@@ -1,0 +1,100 @@
+.btn-cancle, .btn-write {
+	width: 100px;
+	height: 40px;
+	text-decoration: none;
+	background-color: #dc3545;
+	border: none;
+	color: white;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 5px;
+}
+
+.btn-cancle:hover, .btn-write:hover {
+	color: white;
+	background-color: #092032;
+}
+
+.fileList>div {
+	width: 500px;
+	margin: 0 auto;
+	text-align: left;
+	position: relative;
+}
+
+.deleteBtn {
+	position: absolute;
+	right: 20px;
+}
+
+.note-modal-content {
+	height: 370px
+}
+
+.note-modal-footer {
+	margin-top: 50px;
+	margin-right: 15px;
+}
+
+.notice-write-wrap {
+	margin: auto;
+	margin-top: 50px;
+	width: 900px;
+}
+
+.notice-write-title {
+	margin-bottom: 25px;
+}
+
+.notice-write-title>h1 {
+	text-align: center;
+}
+
+.require-sign {
+	text-align: right;
+}
+
+.notice-tbl {
+	width: 900px;
+	text-align: center;
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	padding-bottom: 20px;
+}
+
+table>tr {
+	height: 70px;
+}
+
+.notice-tbl>tr>th {
+	text-align: center;
+}
+
+.notice-write-btn {
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 60px;
+}
+
+.btn-upload {
+	width: 150px;
+	height: 30px;
+	background: #fff;
+	border: 1px solid rgb(77, 77, 77);
+	border-radius: 10px;
+	font-weight: 500;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-upload:hover {
+	background: rgb(77, 77, 77);
+	color: #fff;
+}
+
+#file {
+	display: none;
+}
