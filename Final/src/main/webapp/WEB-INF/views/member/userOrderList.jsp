@@ -73,10 +73,12 @@
                            </c:when>
                            
                            <c:otherwise>
-                              <td scope="row">
-                                 <button type="button" class="ordercancleBtn">주문취소</button>
-                              </td>
-                           </c:otherwise>
+								<td scope="row">
+									<c:if test="${list.orderStatus eq '배송준비중' }">
+										<button type="button" class="ordercancleBtn">주문취소</button>
+									</c:if>
+								</td>
+						   </c:otherwise>
                         </c:choose>
                      </tr>
                      </c:forEach>
