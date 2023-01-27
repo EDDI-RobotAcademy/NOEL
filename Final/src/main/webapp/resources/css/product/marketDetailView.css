@@ -423,7 +423,6 @@ a {
     border-radius: 5px;
     height: 30px;
     width: 80px;
-    cursor: pointer;
     color: white;
 }
 
@@ -433,6 +432,11 @@ a {
     border-radius: 5px;
     height: 30px;
     width: 80px;
-    cursor: pointer;
     color: white;
+}
+
+.ordercancleBtn:hover, .orderReviewBtn:hover{
+	border: 1px solid #333333;
+	background-color: #333333;
+	cursor: pointer;
 }
