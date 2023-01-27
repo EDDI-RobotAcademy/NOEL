@@ -24,4 +24,8 @@ public class OrderService {
 		return dao.deleteCart(userId);
 	}
 
+	//마켓상세 > 배송완료 상품의 구매평 작성버튼 활성화
+	public List<OrderVO> orderlist(Integer prdNo, String bookmarkId) throws Exception {
+		return dao.orderlist(prdNo, bookmarkId);
+	}
 }

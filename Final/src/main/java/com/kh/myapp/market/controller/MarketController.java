@@ -34,6 +34,7 @@ import com.kh.myapp.market.model.vo.ProductImgVO;
 import com.kh.myapp.market.model.vo.ProductVO;
 import com.kh.myapp.member.model.vo.Marketer;
 import com.kh.myapp.order.model.service.OrderService;
+import com.kh.myapp.order.model.vo.OrderVO;
 
 @Controller
 public class MarketController {
@@ -271,8 +272,11 @@ public class MarketController {
 		model.addAttribute("reviewlist", reviewlist);
 
 		List<MarketQnaVO> qnalist = qnaService.qnaList(prdNo, qnadisplayPost, qnapostNum);
-		/* qnalist += qnaService.qnarCount(prdQnano); */
 		model.addAttribute("qnalist", qnalist);
+		
+		//마켓상세 > 배송완료 상품의 구매평 작성버튼 활성화
+		List<OrderVO> orderlist = orderService.orderlist(prdNo, bookmarkId);
+		model.addAttribute("orderlist", orderlist);
 
 		return "/market/marketDetailView";
 	}

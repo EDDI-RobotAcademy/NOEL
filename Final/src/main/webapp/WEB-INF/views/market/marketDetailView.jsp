@@ -170,10 +170,11 @@
 			</div>
 		<c:choose>
 			<c:when test="${empty sessionScope.m}"></c:when>
-			<c:otherwise>
-				<br><br>
-				<button type="button" class="btn btn-brand" data-bs-toggle="modal"
-				data-bs-target="#modal-review">구매평 작성</button>
+			<c:otherwise><br><br>
+				<c:if test="${!empty orderlist}">
+					<button type="button" class="btn btn-brand" 
+							data-bs-toggle="modal" data-bs-target="#modal-review">구매평 작성</button>
+				</c:if>
 			</c:otherwise>
 		</c:choose>
 		</div>

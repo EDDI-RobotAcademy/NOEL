@@ -232,4 +232,21 @@
 			</when>
 		</choose>
 	</select>
+	
+	<!-- 마켓상세 > 배송완료 상품의 구매평 작성버튼 활성화 -->
+	<select id="selectOrder" parameterType="hashmap" resultType="OrderVO">
+		select 
+			order_no as orderNo,
+			user_id as userId,
+			order_date as orderDate,
+			order_quan as orderQuan,
+			shipping_name as shippingName,
+			shipping_addr as shippingAddr,
+			shipping_phone as shippingPhone,
+			imp_uid as impUid,
+			prd_no as prdNo,
+			order_price as orderPrice
+		from noel_order
+		where prd_no = #{prdNo} and user_id = #{bookmarkId} and order_status = '배송완료'
+	</select>
 </mapper>
