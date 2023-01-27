@@ -301,8 +301,8 @@
 */
 .showList>a>div>img {
 	width: 340px;
-	height: 300px;
-	padding: 5px;
+	height: 350px;
+	padding: 0px;
 }
 /*========================page*/
 .page{
