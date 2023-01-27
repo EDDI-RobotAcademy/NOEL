@@ -1,6 +1,5 @@
 package com.kh.myapp.member.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -564,9 +563,7 @@ public class MemberController {
 		Member m = (Member) session.getAttribute("m");
 		String userId = m.getUserId();
 		HashMap<String, Object> map = service.selectMyOrderList(reqPage, userId);
-		/*
-		 * HashMap<String, Object> map = service.selectMyOrderList(reqPage, userId);
-		 */		
+	
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));
@@ -632,5 +629,22 @@ public class MemberController {
 		
 		return "market/orderAll";
 	}
+	
+	// 회원 > QnA
+	@RequestMapping(value = "/memberQna")
+	public String memberQna(HttpSession session, int reqPage, Model model) {
 
+		Member m = (Member) session.getAttribute("m");
+		String userId = m.getUserId();
+		HashMap<String, Object> map = service.memberQna(reqPage, userId);
+
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("userId", userId);
+		
+		return "/member/memberQna";
+	}
 }

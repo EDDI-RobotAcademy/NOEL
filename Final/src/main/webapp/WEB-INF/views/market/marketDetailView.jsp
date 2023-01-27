@@ -401,6 +401,7 @@
 					<input type="hidden" name="userId" value="${sessionScope.m.userId}"> 
 					<input type="hidden" name="prdNo" value="${prd.prdNo}"> 
 					<input type="hidden" name="marketerId" value="${prd.marketerId}"> 
+					<input type="hidden" name="prdName" value="${prd.prdName}"> 
 					<label
 						for="message-text" class="col-form-label">문의할 내용을 작성해주세요.</label>
 					<textarea name="prdQnacontent" class="chk2 form-control" id="message-text" 
