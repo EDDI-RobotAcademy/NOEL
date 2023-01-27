@@ -25,14 +25,11 @@ public class MarketReviewController {
 
     // 리뷰 작성
     @RequestMapping(value = "/market/reviewInsert", method = RequestMethod.POST)
-    public String reviewInsert(MarketReviewVO marketreviewVO, Model model, int prdNo, HttpServletRequest request)
-            throws Exception {
+    public String reviewInsert(MarketReviewVO marketreviewVO, Model model, int prdNo, HttpServletRequest request
+    						,String userId)throws Exception {
         int result = reviewService.reviewInsert(marketreviewVO);
 
-        if (result > 0) {
-            return "redirect:/marketDetailView?reqPage=1&prdNo=" + prdNo + "&rnum=1&qnum=1";
-        }
-        return "redirect:/marketDetailView?reqPage=1&prdNo=" + prdNo + "&rnum=1&qnum=1";
+        return "redirect:/marketDetailView?prdNo="+prdNo+"&bookmarkId="+userId+"&num=1&rnum=1&qnum=1";
     }
 
     // 리뷰 상세
