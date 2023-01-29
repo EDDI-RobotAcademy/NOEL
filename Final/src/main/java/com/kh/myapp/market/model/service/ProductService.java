@@ -11,6 +11,7 @@ import com.kh.myapp.market.model.dao.ProductDAO;
 import com.kh.myapp.market.model.vo.MarketWishVO;
 import com.kh.myapp.market.model.vo.ProductImgVO;
 import com.kh.myapp.market.model.vo.ProductVO;
+import com.kh.myapp.order.model.vo.OrderVO;
 
 @Service
 public class ProductService {
@@ -270,6 +271,86 @@ public class ProductService {
 		searchMap.put("total", totalPage);
 		searchMap.put("pageNo", pageNo);
 		return searchMap;
+	}
+	
+	/*
+	 * //상품관리 페이징을 위한 갯수 조회 public int countMarketerPrd(String marketerId) { return
+	 * dao.countMarketerPrd(marketerId); }
+	 */
+
+	public HashMap<String, Object> selectMarketerPrd(int reqPage, String marketerId) throws Exception {
+		// 한 페이지 당 보여지는 주문건수
+		int numPerPage = 6;
+		
+		int end = numPerPage * reqPage;
+		
+		int start = (end - numPerPage) + 1;
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("marketerId", marketerId);
+
+		ArrayList <ProductVO> list = dao.selectMarketerPrd(map);
+
+		int totalPage = dao.countMarketerPrd(marketerId);
+		int totalMan = 0;
+		if (totalPage % numPerPage == 0) {
+			totalMan = totalPage / numPerPage;
+		} else {
+			totalMan = totalPage / numPerPage + 1;
+
+		}
+		// 페이지 네비 사이즈
+		int pageNaviSize = 5;
+
+		// 페이지 시작 번호
+		int pageNo = 1;
+
+		if (reqPage > 3) {
+			pageNo = reqPage - 2;
+		}
+
+		// 이전 버튼 
+		String pageNavi = "";
+		if (pageNo != 1) {
+			pageNavi += "<a href='/market/marketerProductMypage?reqPage=" + (pageNo - 1)
+					+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n"
+					+ "            chevron_left\r\n" + "            </span></a>";
+		}
+
+		for (int i = 0; i < pageNaviSize; i++) {
+			if (reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			} else {
+				pageNavi += "<a href='/market/marketerProductMypage?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if (pageNo > totalMan) {
+				break;
+			}
+		}
+
+		// 다음버튼
+		if (pageNo <= totalMan) {
+			pageNavi += "<a href='/market/marketerProductMypage?reqPage=" + (pageNo)
+					+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n"
+					+ "            chevron_right\r\n" + "            </span></a>";
+		}
+
+		HashMap<String, Object> prdMap = new HashMap<String, Object>();
+		prdMap.put("list", list);
+		prdMap.put("reqPage", reqPage);
+		prdMap.put("pageNavi", pageNavi);
+		prdMap.put("total", totalPage);
+		prdMap.put("pageNo", pageNo);
+
+		if (list == null) {
+			return null;
+		} else {
+			return prdMap;
+		}
+
 	}
 
 }

@@ -116,4 +116,15 @@ public class ProductDAO {
 	public int countTagList(HashMap<String, Object> map) {
 		return sql.selectOne("productMapper.countTagList",map);
 	}
+	
+	//상품관리 페이징을 위한 갯수 조회
+	public int countMarketerPrd(String marketerId) {
+		return sql.selectOne("productMapper.countMarketerPrd", marketerId);
+	}
+
+	public ArrayList<ProductVO> selectMarketerPrd(HashMap<String, Object> map) {
+		List list = sql.selectList("productMapper.selectMarketerPrd", map);
+		return (ArrayList<ProductVO>) list;
+	}
+
 }

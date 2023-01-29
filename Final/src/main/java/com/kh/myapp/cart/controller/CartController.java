@@ -53,7 +53,6 @@ public class CartController {
     //장바구니에서 구매하기
     @RequestMapping(value = "/ordercart")
     public String ordercart(Model model, String userId) {
-        System.out.println(userId);
         ArrayList<CartVO> list = service.ordercart(userId);
         model.addAttribute("list", list);
         return "order/ordercart";
