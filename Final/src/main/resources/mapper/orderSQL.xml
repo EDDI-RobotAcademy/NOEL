@@ -118,10 +118,10 @@
 		prdPrice,
 		(select marketer_id from noel_product np where ot.prd_no = np.prd_no) as
 		marketerId
+		
 		from (select rownum as rnum, n.* from (select * from
 		noel_order order by order_date desc) n )ot
-		where (select marketer_id
-		from noel_product np where ot.prd_no = np.prd_no) = #{marketerId}
+		where (select marketer_id from noel_product np where ot.prd_no = np.prd_no) = #{marketerId}
 		and rnum between #{start} and #{end}
 
 	</select>

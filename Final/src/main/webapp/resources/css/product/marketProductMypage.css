@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 #list-tb{
     width: 900px;
     margin: auto;
@@ -263,6 +264,8 @@
 .prdList-tag-content>ul>li>a:hover{
     color: #dc3545;
 }
+
+
 /* =====================================sort */
 .prdList-sort {
     display: flex;
@@ -385,10 +388,41 @@
     width: 30px;
     text-decoration: none;
     font-size: 20px;
-    color: #ffc107;
+    color: #dc3545;
     font-size: 1.7em;
 }
 .page>a>span{
     display: flex;
     justify-content: center;
+}
+
+#pageNavi {
+	width: 800px;
+	text-align: center;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+#pageNavi>a {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	text-decoration: none;
+	font-size: 20px;
+}
+
+#pageNavi>a:hover {
+	color: #212529;
+}
+
+#pageNavi>span {
+	color: #dc3545;
+	display: inline-block;
+	width: 30px;
+	line-height: 30px;
+	text-decoration: none;
+	font-size: 20px;
 }

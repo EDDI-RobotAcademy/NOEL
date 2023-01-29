@@ -34,7 +34,6 @@ import com.kh.myapp.market.model.vo.ProductImgVO;
 import com.kh.myapp.market.model.vo.ProductVO;
 import com.kh.myapp.member.model.vo.Marketer;
 import com.kh.myapp.order.model.service.OrderService;
-import com.kh.myapp.order.model.vo.OrderVO;
 
 @Controller
 public class MarketController {
@@ -63,9 +62,21 @@ public class MarketController {
 
 	// 판매자 관리화면 출력, 판매자 상품등록 리스트 출력
 	@RequestMapping(value = "market/marketerProductMypage", method = RequestMethod.GET)
-	public void getMarketer(Model model, @SessionAttribute Marketer mk) throws Exception {
-		List<ProductVO> list = productService.list(mk.getMarketerId());
-		model.addAttribute("prdlist", list);
+	public void getMarketer(Model model, @SessionAttribute Marketer mk, int reqPage) throws Exception {
+		/*
+		 * List<ProductVO> list = productService.list(mk.getMarketerId());
+		 * model.addAttribute("prdlist", list);
+		 */
+		
+		String marketerId = mk.getMarketerId();
+		HashMap<String, Object> map = productService.selectMarketerPrd(reqPage, marketerId);
+		model.addAttribute("prdlist", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("marketerId", marketerId);
+
 	}
 
 	// 판매자 상품 등록폼
@@ -109,11 +120,11 @@ public class MarketController {
 		vo.setPrdImgList(prdImgList);
 		vo.setMarketerId(mk.getMarketerId());
 		int result = productService.add(vo);
-		return "redirect:/market/marketerProductMypage";
+		return "redirect:/market/marketerProductMypage?reqPage=1";
 
 	}
 
-	// prd content내에 이미지를 삽입하기 위한 메소드
+	// prd_add에서 prdContent내에 이미지를 삽입하기 위한 메소드
 	@ResponseBody
 	@RequestMapping(value = "/prdEditorUpload", produces = "application/json;charset=utf-8")
 	public String prdEditorUpload(MultipartFile[] files, HttpServletRequest request) {
@@ -156,7 +167,7 @@ public class MarketController {
 		return "/market/prd_update";
 	}
 
-	// 판매자 상품 수정하기
+	// 판매자 상품 수정폼 썸네일 
 	@RequestMapping(value = "/market/prd_update", method = RequestMethod.POST)
 	public String updatePrd(int[] imgNoList, ProductVO vo, String[] imgpathList, MultipartFile[] file,
 			HttpServletRequest request) throws Exception {
@@ -195,14 +206,14 @@ public class MarketController {
 				}
 			}
 		}
-		return "redirect:/market/marketerProductMypage";
+		return "redirect:/market/marketerProductMypage?reqPage=1";
 	}
 
 	// 판매자 상품 삭제하기
 	@RequestMapping(value = "/market/prd_delete", method = RequestMethod.GET)
 	public String deletePrd(int prdNo) throws Exception {
 		productService.delete(prdNo);
-		return "redirect:/market/marketerProductMypage";
+		return "redirect:/market/marketerProductMypage?reqPage=1";
 	}
 
 	// 마켓 상품 리스트 페이지
@@ -272,11 +283,8 @@ public class MarketController {
 		model.addAttribute("reviewlist", reviewlist);
 
 		List<MarketQnaVO> qnalist = qnaService.qnaList(prdNo, qnadisplayPost, qnapostNum);
+		/* qnalist += qnaService.qnarCount(prdQnano); */
 		model.addAttribute("qnalist", qnalist);
-		
-		//마켓상세 > 배송완료 상품의 구매평 작성버튼 활성화
-		List<OrderVO> orderlist = orderService.orderlist(prdNo, bookmarkId);
-		model.addAttribute("orderlist", orderlist);
 
 		return "/market/marketDetailView";
 	}

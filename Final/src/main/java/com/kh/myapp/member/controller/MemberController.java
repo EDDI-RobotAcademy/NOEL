@@ -519,6 +519,7 @@ public class MemberController {
 		 * model.addAttribute("total", map.get("total")); model.addAttribute("pageNo",
 		 * map.get("pageNo")); model.addAttribute("marketerNo", marketerNo);
 		 */
+		System.out.println("여기까지");
 		return "market/orderManagementView";
 
 	}

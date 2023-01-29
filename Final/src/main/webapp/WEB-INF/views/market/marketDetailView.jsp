@@ -57,7 +57,7 @@
 								style="width: 35px; height: 35px; padding: 0; background-color: red; color: white;">
 								-</button>
 						</td>
-						<td class="peopleTd"><span class="countNum">1</span></td>
+						<td class="peopleTd"  ><span class="countNum" style=" text-align: center;">1</span></td>
 						<td style="width: 30px;">
 							<button class="w3-button w3-circle" id="up"
 								style="width: 35px; height: 35px; padding: 0; background-color: red; color: white;">
@@ -84,12 +84,11 @@
 							</c:otherwise>
 						</c:choose>
 						<input type="hidden" name="prdPrice" class="allPrice"
-							value="${prd.prdPrice }"> <input type="hidden"
-							name="prdNo" class="pNumber" value="${prd.prdNo }"> <input
-							type="hidden" name="prdName" class="pNumber"
-							value="${prd.prdName }"> <input type="hidden"
-							name="cartQuan" class="count"> <input type="hidden"
-							name="userId" value="${sessionScope.m.userId }">
+							value="${prd.prdPrice }"> 
+						<input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }"> 
+						<input type="hidden" name="prdName" class="pNumber"	value="${prd.prdName }">
+						<input type="hidden" name="cartQuan" class="count"> 
+						<input type="hidden" name="userId" value="${sessionScope.m.userId }">
 					</form>
 
 					<form action="/insertOrder">
@@ -103,10 +102,12 @@
 							</c:otherwise>
 						</c:choose>
 						<input type="hidden" name="prdPrice" class="allPrice"
-							value="${prd.prdPrice }"> <input type="hidden"
-							name="prdNo" class="pNumber" value="${prd.prdNo }"> <input
-							type="hidden" name="prdName" value="${prd.prdName}"> <input
-							type="hidden" name="cartQuan" class="count"> <input
+							value="${prd.prdPrice }"> 
+						<input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }">
+						<input type="hidden" name="prdthumNail" class="prdthumNail" value="${prd.prdthumNail }">
+						 <input type="hidden" name="prdName" value="${prd.prdName}"> 
+						<input type="hidden" name="cartQuan" class="count"> 
+						<input
 							type="hidden" name="userId" value="${sessionScope.m.userId }">
 					</form>
 					<c:choose>
@@ -503,7 +504,7 @@ var login = $("button[class='loginBtn']");
 var marketer = "${sessionScope.mk}";
 function loginCh() {
 	if(marketer){
-		alert('판매자는 사용 할 수 없습니다. 일반회원으로 로그인해주세요');
+		alert('판매자는 사용 할 수 없습니다. 일반회원으로 로그인해주세요.');
 	}
 	else{
 	   login.attr("data-bs-toggle", "modal");
