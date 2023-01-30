@@ -32,12 +32,6 @@ public class ProductService {
 		return result;
 	}
 
-	// 상품 등록리스트
-	public List<ProductVO> list(String marketerId) throws Exception {
-		List result = dao.list(marketerId);
-		return result;
-	}
-
 	// 상품no에 맞는 img 조회
 	public ArrayList<ProductImgVO> selectPrdImg(int prdNo) {
 		return dao.selectImg(prdNo);

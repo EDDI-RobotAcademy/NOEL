@@ -505,21 +505,8 @@ public class MemberController {
 	@RequestMapping(value = "market/orderManagementView")
 	public String orderManagementView(Model model, OrderlistVO vo, int reqPage, @SessionAttribute Marketer mk)
 			throws Exception {
-
 		List<OrderlistVO> list = service.selectAllOrderListPrd(mk.getMarketerId());
 		model.addAttribute("list", list);
-
-		/*
-		 * String marketerNo = mk.getMarketerId(); HashMap<String, Object> map =
-		 * service.selectAllOrderListPrd(reqPage, marketerNo);
-		 * 
-		 * model.addAttribute("list", map.get("list"));
-		 * model.addAttribute("reqPage",reqPage);
-		 * model.addAttribute("pageNavi",map.get("pageNavi"));
-		 * model.addAttribute("total", map.get("total")); model.addAttribute("pageNo",
-		 * map.get("pageNo")); model.addAttribute("marketerNo", marketerNo);
-		 */
-		System.out.println("여기까지");
 		return "market/orderManagementView";
 
 	}
@@ -647,5 +634,14 @@ public class MemberController {
 		model.addAttribute("userId", userId);
 		
 		return "/member/memberQna";
+	}
+	
+	//판매자 > 주문관리 > 주문상세 > 배송상세
+	@RequestMapping(value = "market/shippingDetail" )
+	public void shippingDetail(OrderlistVO vo,Model model, int orderNo) throws Exception {
+		vo.setOrderNo(orderNo);
+		List list = service.shippingDetail(orderNo);
+		model.addAttribute("list",list);
+		model.addAttribute("orderNo",orderNo);
 	}
 }

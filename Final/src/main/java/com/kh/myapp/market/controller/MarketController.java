@@ -63,10 +63,6 @@ public class MarketController {
 	// 판매자 관리화면 출력, 판매자 상품등록 리스트 출력
 	@RequestMapping(value = "market/marketerProductMypage", method = RequestMethod.GET)
 	public void getMarketer(Model model, @SessionAttribute Marketer mk, int reqPage) throws Exception {
-		/*
-		 * List<ProductVO> list = productService.list(mk.getMarketerId());
-		 * model.addAttribute("prdlist", list);
-		 */
 		
 		String marketerId = mk.getMarketerId();
 		HashMap<String, Object> map = productService.selectMarketerPrd(reqPage, marketerId);
@@ -82,14 +78,12 @@ public class MarketController {
 	// 판매자 상품 등록폼
 	@RequestMapping(value = "/market/prd_add", method = RequestMethod.GET)
 	public void getPrdadd() throws Exception {
-		logger.info("판매자 상품등록화면으로 이동");
 	}
 
 	// 판매자 상품 등록하기(다중 이미지)
 	@RequestMapping(value = "/prd_add", method = RequestMethod.POST)
 	public String addPrd(ProductVO vo, MultipartFile[] file, HttpServletRequest request,
 			@SessionAttribute Marketer mk) {
-		logger.info("판매자 상품등록 하기");
 
 		// 첨부이미지 목록 저장할 리스트 생성
 		ArrayList<ProductImgVO> prdImgList = new ArrayList<ProductImgVO>();

@@ -27,26 +27,6 @@
 		from noel_product
 	</select>
 
-	<!-- 판매자 상품 리스트로 조회 -->
-	<select id="selectlist" resultType="productVO"
-		parameterType="string">
-		select
-		prd_no as prdNo,
-		prd_category as cateGory,
-		prd_name as prdName,
-		prd_price as prdPrice,
-		prd_stock as prdStock,
-		prd_note as prdNote,
-		prd_content as prdContent,
-		prd_regdate as regDate,
-		(select prd_Img_path from noel_product_img pi where pi.prd_no = np.prd_no) as
-		prdthumNail
-		from noel_product np
-		where marketer_id = #{marketerId}
-		order
-		by prd_regdate desc, prd_no desc
-	</select>
-
 	<!-- 상품 조회 -->
 	<select id="read" parameterType="int" resultType="productVO">
 		select

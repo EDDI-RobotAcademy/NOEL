@@ -11,7 +11,7 @@ pageContext.setAttribute("newLine", "\n");
 <meta charset="UTF-8">
 <link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" />
 <title>bonjour noël</title>
-<link rel="stylesheet" href="/resources/css/header.css">
+<!-- <link rel="stylesheet" href="/resources/css/header.css"> -->
 <link rel="stylesheet" href="/resources/css/notice/noticeList.css">
 <!-- CSS only -->
 <link
