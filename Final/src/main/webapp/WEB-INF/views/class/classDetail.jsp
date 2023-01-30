@@ -54,7 +54,7 @@
         </div>
 
         <div class="info-reserve-wrap">
-            <table class="w3-table w3-bordered" id="infoTable" style="font-family:Gowun Dodum; width: 550px;">
+            <table class="w3-table w3-bordered" id="infoTable" style="font-family:Gowun Dodum; width: 600px;">
                 <tr>
                     <th style="width:120px;">주소</th>
                     <td colspan="3" class="addressTd" style="color:black;">${s.classAddr }</td>
