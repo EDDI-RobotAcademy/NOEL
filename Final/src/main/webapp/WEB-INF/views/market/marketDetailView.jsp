@@ -25,14 +25,14 @@
 			<div class="directoryDiv">home > market > detail</div>
 			<!-- 사진 슬라이드 영역  -->
 			<div class="photo-wrap">
-				<ul class="storeImgUl" style="height: 460px; width: 100%;">
+				<ul class="storeImgUl" style="height: 450px; width: 450px;">
 					<img src="/resources/upload/product/${prd.prdthumNail }">
 				</ul>
 			</div>
 
 			<div class="tableDiv">
 				<table class="w3-table w3-bordered" id="productTable"
-					style="font-family: Gowun Dodum; width: 550px;">
+					style="font-family: Gowun Dodum; width: 600px;">
 					<tr>
 						<th>상품명</th>
 						<td colspan="4">${prd.prdName }</td>
@@ -549,12 +549,20 @@ $(".buyBtn").on("click", function() {
    $(".count").attr("value", count);
 });
 
-//비회원 상품 위시 > 로그인모달
+//비회원이 상품 위시 클릭시 로그인모달창, 판매자가 상품위시 클릭시 일반회원 로그인 alert창
 var wishBtn = $("button[id='wishBtn']");
+var marketer = "${sessionScope.mk}";
+
 function wishCh() {
+	if(marketer){
+		alert('판매자는 사용 할 수 없습니다. 일반회원으로 로그인해주세요');
+	}
+	else{
 	wishBtn.attr("data-bs-toggle", "modal");
 	wishBtn.attr("data-bs-target", "#login-modal");
 	wishBtn.attr("location.href", "login-modal");
+
+	}
 }
 
 //상품 위시
