@@ -249,4 +249,26 @@
 		from noel_order
 		where prd_no = #{prdNo} and user_id = #{bookmarkId} and order_status = '배송완료'
 	</select>
+	
+	<!--판매자 > 주문관리 > 주문상세 > 배송상세  -->
+	<select id="shippingDetail" parameterType="int" resultType="OrderlistVO">
+		select
+			order_no as orderNo,
+			user_id as userId,
+			to_char(order_date, 'yyyy-mm-dd') as orderDate,
+			order_quan as orderQuan,
+			order_status as orderStatus,
+			shipping_name as shippingName,
+			shipping_addr as shippingAddr,
+			shipping_phone as shippingPhone,
+			(select prd_price from noel_product np where ot.prd_no = np.prd_no
+			)*order_quan as orderPrice,
+			(select prd_name from noel_product np where ot.prd_no = np.prd_no ) as
+			prdName,
+			(select prd_price from noel_product np where ot.prd_no = np.prd_no ) as
+			prdPrice
+		from noel_order ot
+		where order_no = #{orderNo}
+		
+	</select>
 </mapper>

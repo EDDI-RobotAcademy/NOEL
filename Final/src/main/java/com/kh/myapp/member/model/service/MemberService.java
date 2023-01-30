@@ -773,5 +773,10 @@ public class MemberService {
 		return searchMap;
 
 	}
+	
+	//판매자 > 주문관리 > 주문상세 > 배송상세
+	public List shippingDetail(int orderNo) {
+		return dao.shippingDetail(orderNo);
+	}
 
 }

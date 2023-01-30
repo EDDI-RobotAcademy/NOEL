@@ -30,9 +30,11 @@
 								<h5>&nbsp;&nbsp;상품명 : ${prdName}</h5>
 								<div class="category1">
 									<a href="/market/orderManagementView?reqPage=1"
-										class="category_orderPrd" id="category_class">상품 별 주문</a> <a
-										href="/market/orderAll?reqPage=1" id="category_market"
-										class="category_orderPrd">전체 주문</a>
+										class="category_orderPrd" id="category_class">
+										<span>상품 별 주문</span></a> 
+									<a href="/market/orderAll?reqPage=1" id="category_market"
+										class="category_orderPrd"><span>전체 주문</span>
+										</a>
 								</div>
 								<div class="bookmark-content-list">
 									<form action="/searchPrdMarketerList?reqPage=1" method="post">
@@ -65,6 +67,7 @@
 													<th scope="col">주문총금액</th>
 													<th scope="col">주문상태</th>
 													<th scope="col">처리</th>
+													<th scope="col">배송상세</th>
 												</tr>
 												<c:forEach items="${list }" var="ol">
 													<tr>
@@ -115,6 +118,10 @@
 																</c:choose></td>
 															<td><button class="saveBtn" type="submit">확정</button></td>
 														</form>
+														<form action="/market/shippingDetail?orderNo=${ol.orderNo }">
+														<input type="hidden" value="${ol.orderNo}" name="orderNo">
+														<td><button class="saveBtn shippingBtn" type="submit">조회</button></td>
+													</form>
 													</tr>
 												</c:forEach>
 											</table>
@@ -135,10 +142,10 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
 	<script type="text/javascript">
-		<script>
 		$(".saveBtn").on("click", function() {
 			var selectValue = $(".selectbox").val();
 		});
+		
 	</script>
 </body>
 </html>

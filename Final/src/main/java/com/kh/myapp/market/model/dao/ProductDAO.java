@@ -35,12 +35,6 @@ public class ProductDAO {
 		return result;
 	}
 
-	// 상품 등록 목록 조회
-	public List<ProductVO> list(String marketerId) throws Exception {
-		List result = sql.selectList("productMapper.selectlist", marketerId);
-		return result;
-	}
-
 	// 상품 등록된것 조회
 	public ProductVO read(int prdNo) {
 		ProductVO result = sql.selectOne("productMapper.read", prdNo);

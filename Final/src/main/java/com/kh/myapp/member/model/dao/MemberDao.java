@@ -239,6 +239,11 @@ public class MemberDao {
 	public int countmemberQna(String userId) {
 		return sqlSession.selectOne("marketMapper.countmemberQna", userId) ;
 	}
+	
+	//판매자 > 주문관리 > 주문상세 > 배송상세
+	public List shippingDetail(int orderNo) {
+		return sqlSession.selectList("order.shippingDetail", orderNo);
+	}
 
 	
 }
