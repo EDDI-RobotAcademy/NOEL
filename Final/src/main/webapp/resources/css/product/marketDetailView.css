@@ -216,8 +216,8 @@ div {
 }
 
 #productTable>tbody>tr>th {
-		width: 180px;
-		height: 55px;
+		width: 120px;
+		height: 40px;
 }
 #productTable>tbody>tr>td {
 text-indent: 10px;
@@ -257,7 +257,6 @@ text-indent: 10px;
 
 .priceSpan {
 	font-weight: bolder;
-	font-size: 25px;
 	color: red;
 }
 

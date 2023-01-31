@@ -1,322 +1,334 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
-    <title>classDetail</title>
-    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-    <script src ="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-</head>
-
-<style>
-    /*datepicer 버튼 롤오버 시 손가락 모양 표시*/
-    .ui-datepicker-trigger {
-        cursor: pointer;
-    }
-
-    /*datepicer input 롤오버 시 손가락 모양 표시*/
-    .hasDatepicker {
-        cursor: pointer;
-    }
-
-    .hidden{
-        display:none;
-    }
-
-
-</style>
-<body>
-<jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
+<meta charset="UTF-8">
+<link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" />
+<title>bonjour noël</title>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"
+	type="text/javascript"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,200"/>
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,200" />
 <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-<link rel="stylesheet" href="/resources/demos/store/style.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/css/class/classDetail.css">
 <link rel="stylesheet" href="/resources/css/map.css">
+</head>
+<body>
+	<jsp:include page="/WEB-INF/views/layouts/header.jsp" />
 
+	<div class="content-wrap2"
+		style="width: 1200px; margin: 0 auto; background-color: rgba(255, 255, 255, 0.06);">
+		<div class="content-wrap2-1">
+			<div class="directoryDiv">home > class > detail</div>
+			<!-- 사진 슬라이드 영역 -->
+			<div class="photo-wrap">
+				<ul class="storeImgUl" style="height: 460px; width: 100%;">
+					<img src="resources/upload/class/${s.thumNail }">
+				</ul>
+			</div>
 
-<div class="content-wrap2" style="width:1200px; margin: 0 auto; background-color: rgba(255, 255, 255, 0.06);">
-    <div class="content-wrap2-1">
-    <div class="directoryDiv">home > class > detail</div>
-        <!-- 사진 슬라이드 영역 -->
-        <div class="photo-wrap">
-            <ul class="storeImgUl" style="height: 460px; width: 100%;">
-                <img src="resources/upload/class/${s.thumNail }">
-            </ul>
-        </div>
+			<div class="info-reserve-wrap">
+				<table class="w3-table w3-bordered" id="infoTable"
+					style="font-family: Gowun Dodum; width: 600px;">
+					<tr>
+						<th style="width: 120px;">주소</th>
+						<td colspan="3" class="addressTd" style="color: black;">${s.classAddr }</td>
+					</tr>
+					
+					<tr>
+						<th>운영시간</th>
+						<td colspan="3" class="openHourTd" style="color: black;">${s.classResTime }</td>
+					</tr>
+					<tr>
+						<th>금액</th>
+						<td colspan="3" class="closedDayTd" style="color: black;"><fmt:formatNumber value="${s.classPrice }"
+								pattern="#,###" />원</td>
+					</tr>
 
-        <div class="info-reserve-wrap">
-            <table class="w3-table w3-bordered" id="infoTable" style="font-family:Gowun Dodum; width: 600px;">
-                <tr>
-                    <th style="width:120px;">주소</th>
-                    <td colspan="3" class="addressTd" style="color:black;">${s.classAddr }</td>
-                </tr>
-                <tr>
-                    <th>전화번호</th>
-                    <td colspan="3" class="phoneTd" style="color:black;">010-2278-2357</td>
-                </tr>
-                <tr>
-                    <th>운영시간</th>
-                    <td colspan="3" class="openHourTd" style="color:black;">${s.classResTime }</td>
-                </tr>
-                <tr>
-                    <th>휴일</th>
-                    <td colspan="3" class="closedDayTd" style="color:black;">목</td>
-                </tr>
-
-                <tr style="height: 47px;">
-                    <th style="height: 47px;">일자</th>
-                    <td class="calTd">
-                        <div style="height: fit-content;">
-                            <label for="datePicker">
-                                <span class="material-symbols-outlined pointer"
-                                      style="height: fit-content; line-height: 1.2;">calendar_month</span>
-                            </label>
-                        </div>
-                    </td>
-                    <td colspan="2">
-                        <input type="text" id="datePicker" style="border:none;" placeholder="예약날짜선택">
-                    </td>
-                </tr>
-                <tr style="height: 47px;">
-                    <th>인원</th>
-                    <td>
-                        <button class="w3-button w3-circle" id="down"
-                                style="width: 35px; height: 35px; padding: 0; background-color: red; color:white;">-
-                        </button>
-                    </td>
-                    <td class="peopleTd" style="width:30px; text-align: center;">
-                        <span class="people">1</span>
-                    </td>
-                    <td>
-                        <button class="w3-button w3-circle" id="up"
-                                style="width: 35px; height: 35px; padding: 0; background-color: red; color:white;">+
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <th>예약가능시간</th>
-                    <td colspan="3" class="buttonTd">
-
-                    </td>
-                </tr>
-            </table>
-
-
-
-            <c:choose>
-                <c:when test="${empty sbm}">
-                    <c:choose>
-                        <c:when test="${empty sessionScope.m}">
-                            <button name="reserveBtn" class="loginBtn" style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: rgb(51,51,51); color: white;
-                                 margin-top: 10px;" onclick="loginCh()">예약하기
-                            </button>
-                        </c:when>
-                        <c:otherwise>
-                        	<button name="reserveBtn" class="reserveBtn2" style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: rgb(51,51,51); color: white;
-                                 margin-top: 10px;">예약하기
-                            </button>
-                            <button  name="reserveBtn" id="wishlist"   style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: white; color: black;
-                                 margin-top: 10px; padding: 17.3px;"  onclick="addWishlist(this, ${s.classNo}, '${m.userId}')">
-                                <img  style = "width: 15px;" src="/resources/img/index/heart.svg">
-                            </button>
-                            <button  name="reserveBtn" id="wishlist1"   style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: white; color: black;
-                                 margin-top: 10px; padding: 17.3px; display: none;"  onclick="deleteWishlist(this, ${s.classNo}, '${m.userId}')">
-                                <img  style = "width: 15px;" src="/resources/img/index/heart-fill.svg">
-                           </button>
-                        </c:otherwise>
-                    </c:choose>
-                </c:when>
-
-                <c:otherwise>
-                    <c:choose>
-                        <c:when test="${!empty sessionScope.m}">
-                            <button name="reserveBtn" class="reserveBtn2" style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: rgb(51,51,51); color: white;
-                                 margin-top: 10px;">예약하기
-                            </button>
-                            <button  name="reserveBtn" id="wishlist1"   style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: white; color: black;
-                                 margin-top: 10px; padding: 17.3px;"  onclick="deleteWishlist(this, ${s.classNo}, '${m.userId}')">
-                                <img  style = "width: 15px;" src="/resources/img/index/heart-fill.svg">
-                            </button>
-
-                            <button  name="reserveBtn" id="wishlist"   style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: white; color: black;
-                                 margin-top: 10px; padding: 17.3px; display: none;"   onclick="addWishlist(this, ${s.classNo}, '${m.userId}')">
-                                <img  style = "width: 15px;" src="/resources/img/index/heart.svg">
-                            </button>
-                        </c:when>
-                        
-                        <c:otherwise>
-                        	<button name="reserveBtn" class="loginBtn" style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: rgb(51,51,51); color: white;
-                                 margin-top: 10px;" onclick="loginCh()">예약하기
-                            </button>    
-                        </c:otherwise>
-                    </c:choose>
-                </c:otherwise>
-            </c:choose>
-        </div>
-    </div>
-</div>
+					<tr style="height: 47px;">
+						<th style="height: 47px;">일자</th>
+						<td class="calTd">
+							<div style="height: fit-content;">
+								<label for="datePicker"> <span
+									class="material-symbols-outlined pointer"
+									style="height: fit-content; line-height: 1.2;">calendar_month</span>
+								</label>
+							</div>
+						</td>
+						<td colspan="2"><input type="text" id="datePicker"
+							style="border: none;" placeholder="예약날짜선택"></td>
+					</tr>
+					<tr style="height: 47px;">
+						<th>인원</th>
+						<td>
+							<button class="w3-button w3-circle" id="down"
+								style="width: 35px; height: 35px; padding: 0; background-color: red; color: white;">-
+							</button>
+						</td>
+						<td class="peopleTd" style="width: 30px; text-align: center;">
+							<span class="countNum">1</span>
+						</td>
+						<td>
+							<button class="w3-button w3-circle" id="up"
+								style="width: 35px; height: 35px; padding: 0; background-color: red; color: white;">+
+							</button>
+						</td>
+					</tr>
+					<tr>
+						<th>예약가능시간</th>
+						<td colspan="3" class="buttonTd"></td>
+					</tr>
+					<tr>
+						<th>이용 총 금액</th>
+						<td colspan="3" class="phoneTd" style="color: black;"><span class="price" style="color: red; font-weight: bolder;"></span>원</td>
+					</tr>
+				</table>
 
 
 
+				<c:choose>
+					<c:when test="${empty sbm}">
+						<c:choose>
+							<c:when test="${empty sessionScope.m}">
+								<button name="reserveBtn" class="loginBtn"
+									style="font-family: Gowun Dodum; width: 280px; height: 50px; background-color: rgb(51, 51, 51); color: white; margin-top: 10px;"
+									onclick="loginCh()">예약하기</button>
+							</c:when>
+							<c:otherwise>
+								<button name="reserveBtn" class="reserveBtn2"
+									style="font-family: Gowun Dodum; width: 280px; height: 50px; background-color: rgb(51, 51, 51); color: white; margin-top: 10px;">예약하기
+								</button>
+								<button name="reserveBtn" id="wishlist"
+									style="font-family: Gowun Dodum; width: 280px; height: 50px; background-color: white; color: black; margin-top: 10px; padding: 17.3px;"
+									onclick="addWishlist(this, ${s.classNo}, '${m.userId}')">
+									<img style="width: 15px;" src="/resources/img/index/heart.svg">
+								</button>
+								<button name="reserveBtn" id="wishlist1"
+									style="font-family: Gowun Dodum; width: 280px; height: 50px; background-color: white; color: black; margin-top: 10px; padding: 17.3px; display: none;"
+									onclick="deleteWishlist(this, ${s.classNo}, '${m.userId}')">
+									<img style="width: 15px;"
+										src="/resources/img/index/heart-fill.svg">
+								</button>
+							</c:otherwise>
+						</c:choose>
+					</c:when>
 
-<%-- 클래스 활동 --%>
+					<c:otherwise>
+						<c:choose>
+							<c:when test="${!empty sessionScope.m}">
+								<button name="reserveBtn" class="reserveBtn2"
+									style="font-family: Gowun Dodum; width: 280px; height: 50px; background-color: rgb(51, 51, 51); color: white; margin-top: 10px;">예약하기
+								</button>
+								<button name="reserveBtn" id="wishlist1"
+									style="font-family: Gowun Dodum; width: 280px; height: 50px; background-color: white; color: black; margin-top: 10px; padding: 17.3px;"
+									onclick="deleteWishlist(this, ${s.classNo}, '${m.userId}')">
+									<img style="width: 15px;"
+										src="/resources/img/index/heart-fill.svg">
+								</button>
 
-<div class="content-wrap4"
-     style="font-family:Gowun Dodum; margin-top:30px; height:100%; width:1200px; margin-bottom:100px; margin:0 auto;">
-    <div class="testDiv" style="width: 1200px; margin:0 auto;">
-        <!----- 메뉴판 부분 ----->
-        <div class="menuWrap" style="font-family:Gowun Dodum;">
-            <p class="menuTitle" style="margin-top: 20px;">CLASS</p>
-            <p class="menuSubTitle">대표 클래스</p>
-            <table class="w3-table w3-bordered" id="menuTable">
-                <c:forEach items="${list }" var="me">
-                    <tr>
-                        <td style="text-align:left;">${me.menuName }</td>
-                        <td style="text-align:right;">${me.menuPrice }</td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
+								<button name="reserveBtn" id="wishlist"
+									style="font-family: Gowun Dodum; width: 280px; height: 50px; background-color: white; color: black; margin-top: 10px; padding: 17.3px; display: none;"
+									onclick="addWishlist(this, ${s.classNo}, '${m.userId}')">
+									<img style="width: 15px;" src="/resources/img/index/heart.svg">
+								</button>
+							</c:when>
 
-
-        <!----- 메뉴 부분 ----->
-        <div class="food-wrap"
-             style="width:1200px; overflow:hidden; height:400px; margin: 0 auto; text-align:center; margin:50px 0;">
-            <c:forEach items="${list }" var="me">
-                <div class="w3-card" id="photoWrap"
-                     style="font-family:Gowun Dodum; width:350px; height:300px; margin: 10px 25px;">
-                    <img src=/resources/upload/menu/${me.menuImg} style='width: 100%; height: 200px;'>
-                    <div class="w3-container" style="font-family:Gowun Dodum;">
-                        <p style="font-weight: bolder; font-size: 20px; margin-top:10px;">${me.menuName}</p>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
-
-
-        <hr style="border: 1px">
-
-        <%-- 상세정보 --%>
-        <p class="menuTitle" style="margin-top: 20px;">CONTENT</p>
-        <p class="menuSubTitle">클래스 설명</p><br><br>
-        <div class="contentWrap2" style="font-family:Gowun Dodum;">
-            ${s.classContent}
-        </div>
-
-        <hr style="border: 1px">
-
-
-        <%-- 리뷰 --%>
-        <c:choose>
-        <c:when test="${!empty rList }">
-        <div class="review-wrap" style="margin:50px 0;">
-            <p class="menuTitle" style="margin-top: 20px;">REVIEW</p>
-            <p class="menuSubTitle">클래스 리뷰</p><br><br>
-            <ul class="w3-ul w3-card-4" id="reviewWrapUl" style="height:content-fit;">
-                <c:forEach items="${rList }" var="r">
-                    <li class="w3-bar" style="height:content-fit;">
-                        <div class="w3-bar-1" style="margin:0; height: content-fit;">
-                            <img src="/resources/upload/review/${r.clReviewImg }" class="w3-hide-small"
-                                 style="float: left; width:35%; height:100%;">
-                            <div class="w3-bar-item" id="w3-bar-item"
-                                 style="width:60%; height: content-fit; padding:0; margin-left:5%; position: relative;">
-                                <div style="color: rgb(255, 83, 86); float:left;"><c:forEach begin="1" step="1" end="${r.clReviewRating }" varStatus="i">★</c:forEach></div>
-                                <div>${r.clReviewRating }</div>
-                                <div class="w3-large" style="font-weight: 700;">${r.marketerId }</div>
-                                <div class="reviewContent" style="display: inline; float: left; height:150px; overflow: auto;">${r.clReviewContent}</div>
-                                <div class="regDate" style="position: absolute; bottom: 0px; right: 0px;">${r.clReviewDate }</div>
-                            </div>
-                        </div>
-                    </li>
-                </c:forEach>
-            </ul>
-        </div>
-        </c:when>
-        </c:choose>
-    </div>
-    <jsp:include page="/WEB-INF/views/layouts/footer.jsp"/>
-</div>
-
-<!-- 모달 부분 -->
-<div class="modal-wrap hidden" id="modal">
-    <div class="modal-box">
-        <div class="modal-title">예약 정보</div>
-        <div class="modal-content">
-            <form id="order-form" action="/reserve?userId='mlolw'&classNo=${s.classNo}">
-                <table class="w3-table w3-bordered" id="reserveCheckTbl">
-                    <tr>
-                        <th>클래스명</th>
-                        <td class="storeNameTd">${s.className}</td>
-                    </tr>
-                    <tr>
-                        <th>일자</th>
-                        <td class="dateTd"></td>
-                    </tr>
-                    <tr>
-                        <th>시간</th>
-                        <td class="timeTd"></td>
-                    </tr>
-
-                    <tr>
-                        <th>인원</th>
-                        <td class="peopleNumTd"></td>
-                    </tr>
-                    <tr>
-                        <th>가격</th>
-                        <td class="price"></td>
-                    </tr>
-                </table>
-
-                <input type="hidden" name="userId" value="${m.userId }">
-                <input type="hidden" name="classNo" value="${s.classNo}">
-                <input type="hidden" name="bookName" value="${s.className}">
-                <input type="hidden" name="bookDate" class="bookDate">
-                <input type="hidden" name="bookTime" class="bookTime">
-                <input type="hidden" name="bookNum" class="bookNum">
-                <input type="hidden" name="bookTel" class="bookTel">
-                <div class="explanation">* 가게에서 최종 확정 시 예약이 확정됩니다.</div>
-                <button class="closeModal pointer" onclick="hideModal();" type="button" >닫기</button>
-                <button class="reserveBtn pointer" id="reserveBtn" type="button">예약하기</button>
-
-
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- 시간 날짜 미입력 모달 -->
-<div class="w3-container" style="font-family:Gowun Dodum;">
-    <div id="timeDateModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
-        <div class="w3-modal-content w3-animate-top w3-card-4" style="width:30%; height: 40%;">
-            <header class="w3-container" style="height:10%; background-color: #ffc107;">
-                 <span onclick="document.getElementById('timeDateModal').style.display='none'"
-                       class="w3-button w3-display-topright" style="width:5%; height:10%;">&times;</span>
-            </header>
-            <p style="width:100%; height:100%;padding:0; margin:0;display:flex; justify-content: center; align-items: center; color:black;">예약하실 날짜와 시간을 선택해주세요.</p>
-        </div>
-    </div>
-</div>
+							<c:otherwise>
+								<button name="reserveBtn" class="loginBtn"
+									style="font-family: Gowun Dodum; width: 280px; height: 50px; background-color: rgb(51, 51, 51); color: white; margin-top: 10px;"
+									onclick="loginCh()">예약하기</button>
+							</c:otherwise>
+						</c:choose>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</div>
+	</div>
 
 
 
 
-            <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-            <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<%-- 클래스 활동 --%>
 
-            <%-- dateficker --%>
-            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<div class="content-wrap4"
+		style="font-family: Gowun Dodum; margin-top: 30px; height: 100%; width: 1200px; margin-bottom: 100px; margin: 0 auto;">
+		<div class="testDiv" style="width: 1200px; margin: 0 auto;">
+			<!----- 메뉴판 부분 ----->
+			<div class="menuWrap" style="font-family: Gowun Dodum;">
+				<p class="menuTitle" style="margin-top: 20px;">CLASS</p>
+				<p class="menuSubTitle">대표 클래스</p>
+				<table class="w3-table w3-bordered" id="menuTable">
+					<c:forEach items="${list }" var="me">
+						<tr>
+							<td style="text-align: left;">${me.menuName }</td>
+							<td style="text-align: right;">${me.menuPrice }</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
 
-            <script>
+
+			<!----- 메뉴 부분 ----->
+			<div class="food-wrap"
+				style="width: 1200px; overflow: hidden; height: 400px; margin: 0 auto; text-align: center; margin: 50px 0;">
+				<c:forEach items="${list }" var="me">
+					<div class="w3-card" id="photoWrap"
+						style="font-family: Gowun Dodum; width: 350px; height: 300px; margin: 10px 25px;">
+						<img src=/resources/upload/menu/${me.menuImg}
+							style='width: 100%; height: 200px;'>
+						<div class="w3-container" style="font-family: Gowun Dodum;">
+							<p
+								style="font-weight: bolder; font-size: 20px; margin-top: 10px;">${me.menuName}</p>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+
+
+			<hr style="border: 1px">
+
+			<%-- 상세정보 --%>
+			<p class="menuTitle" style="margin-top: 20px;">CONTENT</p>
+			<p class="menuSubTitle">클래스 설명</p>
+			<br> <br>
+			<div class="contentWrap2" style="font-family: Gowun Dodum;">
+				${s.classContent}</div>
+
+			<hr style="border: 1px">
+
+
+			<%-- 리뷰 --%>
+			<c:choose>
+				<c:when test="${!empty rList }">
+					<div class="review-wrap" style="margin: 50px 0;">
+						<p class="menuTitle" style="margin-top: 20px;">REVIEW</p>
+						<p class="menuSubTitle">클래스 리뷰</p>
+						<br> <br>
+						<ul class="w3-ul w3-card-4" id="reviewWrapUl"
+							style="height: content-fit;">
+							<c:forEach items="${rList }" var="r">
+								<li class="w3-bar" style="height: content-fit;">
+									<div class="w3-bar-1" style="margin: 0; height: content-fit;">
+										<img src="/resources/upload/review/${r.clReviewImg }"
+											class="w3-hide-small"
+											style="float: left; width: 35%; height: 100%;">
+										<div class="w3-bar-item" id="w3-bar-item"
+											style="width: 60%; height: content-fit; padding: 0; margin-left: 5%; position: relative;">
+											<div style="color: rgb(255, 83, 86); float: left;">
+												<c:forEach begin="1" step="1" end="${r.clReviewRating }"
+													varStatus="i">★</c:forEach>
+											</div>
+											<div>${r.clReviewRating }</div>
+											<div class="w3-large" style="font-weight: 700;">${r.marketerId }</div>
+											<div class="reviewContent"
+												style="display: inline; float: left; height: 150px; overflow: auto;">${r.clReviewContent}</div>
+											<div class="regDate"
+												style="position: absolute; bottom: 0px; right: 0px;">${r.clReviewDate }</div>
+										</div>
+									</div>
+								</li>
+							</c:forEach>
+						</ul>
+					</div>
+				</c:when>
+			</c:choose>
+		</div>
+		<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
+	</div>
+
+	<!-- 모달 부분 -->
+	<div class="modal-wrap hidden" id="modal">
+		<div class="modal-box">
+			<div class="modal-title">예약 정보</div>
+			<div class="modal-content">
+				<form id="order-form"
+					action="/reserve?userId='mlolw'&classNo=${s.classNo}">
+					<table class="w3-table w3-bordered" id="reserveCheckTbl">
+						<tr>
+							<th>클래스명</th>
+							<td class="storeNameTd">${s.className}</td>
+						</tr>
+						<tr>
+							<th>일자</th>
+							<td class="dateTd"></td>
+						</tr>
+						<tr>
+							<th>시간</th>
+							<td class="timeTd"></td>
+						</tr>
+
+						<tr>
+							<th>인원</th>
+							<td class="peopleNumTd"></td>
+						</tr>
+						<tr>
+							<th>가격</th>
+							<td class="price"></td>
+							
+						</tr>
+					</table>
+
+					<input type="hidden" name="userId" value="${m.userId }"> <input
+						type="hidden" name="classNo" value="${s.classNo}"> <input
+						type="hidden" name="bookName" value="${s.className}"> <input
+						type="hidden" name="bookDate" class="bookDate"> <input
+						type="hidden" name="bookTime" class="bookTime"> <input
+						type="hidden" name="bookNum" class="bookNum"> <input
+						type="hidden" name="bookTel" class="bookTel">
+					<div class="explanation">* 가게에서 최종 확정 시 예약이 확정됩니다.</div>
+					<button class="closeModal pointer" onclick="hideModal();"
+						type="button">닫기</button>
+					<button class="reserveBtn pointer" id="reserveBtn" type="button">예약하기</button>
+
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- 시간 날짜 미입력 모달 -->
+	<div class="w3-container" style="font-family: Gowun Dodum;">
+		<div id="timeDateModal" class="w3-modal"
+			style="font-family: Gowun Dodum; z-index: 2000;">
+			<div class="w3-modal-content w3-animate-top w3-card-4"
+				style="width: 30%; height: 40%;">
+				<header class="w3-container"
+					style="height: 10%; background-color: #ffc107;">
+					<span
+						onclick="document.getElementById('timeDateModal').style.display='none'"
+						class="w3-button w3-display-topright"
+						style="width: 5%; height: 10%;">&times;</span>
+				</header>
+				<p
+					style="width: 100%; height: 100%; padding: 0; margin: 0; display: flex; justify-content: center; align-items: center; color: black;">예약하실
+					날짜와 시간을 선택해주세요.</p>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+	<%-- dateficker --%>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<script>
 
                 <%-- dateficker --%>
                 $.datepicker.setDefaults({
@@ -476,13 +488,20 @@
 
 
                 <%-- 인원수 늘리기 --%>
+                var countNumVal = $(".peopleTd").text();
+                var price = "${s.classPrice }";
+                $(".price").text((countNumVal * price).toLocaleString('ko-KR'));
                 let count = 1;
                 $("#up").on("click", function (e) {
                     if (count == 4) {
+                    	alert('한번에 최대 4명 예약만 가능합니다.');
                         return false;
                     }
                     count++;
-                    $(".people").text(count);
+                    $(".peopleTd").text(count);
+                    var countNumVal = $(".peopleTd").text();
+                    const sumPrice = (countNumVal * price).toLocaleString('ko-KR');
+                    $(".price").text(sumPrice);
                 });
 
                 $("#down").on("click", function (e) {
@@ -490,7 +509,10 @@
                         return false;
                     }
                     count--;
-                    $(".people").text(count);
+                    $(".peopleTd").text(count);
+                    var countNumVal = $(".peopleTd").text();
+                    const sumPrice = (countNumVal * price).toLocaleString('ko-KR');
+                    $(".price").text(sumPrice);
                 });
 
                 const modal = document.querySelector(".modal-wrap");
@@ -503,9 +525,9 @@
                 //예약하기 모달 열기
                 $(".reserveBtn2").on("click",function(){
 
-                    var price = count * Number(100);
-                    let tel = "010-2278-2357";
-                    const name = "전민우";
+                    var price = count * "${s.classPrice }";
+                    let tel = "${sessionScope.m.userTel}";
+                    const name = "${sessionScope.m.userName}";
                     const d = new Date();
                     const date = d.getFullYear() +""+ (d.getMonth()+1) +""+ d.getDate() +""+ d.getHours() +""+ d.getMinutes() +""+ d.getSeconds(); // 문자열덧셈을 위해 빈 문자열 넣음
 
@@ -535,7 +557,7 @@
                             pg: "html5_inicis",
                             merchat_uid : "bonjour"+date, 			// 거래ID
                             name : "봉쥬르노엘",						// 결제 이름
-                            amount : 100,							// 결제 금액
+                            amount : price,							// 결제 금액
                             buyer_name : name					// 구매자 이름
                             // buyer_tel : "010-1234-1234", 			// 구매자 전화번호
                             // buyer_addr : "서울시 영등포구 당산동",			// 구매자 주소
@@ -594,15 +616,14 @@
                     })
                 }
                 
-                var login = $("button[class='loginBtn']");
-                
+                var marketer = "${sessionScope.mk}";
                 function loginCh() {
-                    login.attr("data-bs-toggle", "modal");
-                    login.attr("data-bs-target", "#login-modal");
-                    login.attr("location.href", "login-modal");
-                    /* buy.attr("data-bs-toggle", "modal");
-                    buy.attr("data-bs-target", "#login-modal");
-                    buy.attr("location.href", "login-modal"); */
+                	if(marketer){
+                		alert('판매자는 사용 할 수 없습니다. 일반회원으로 로그인해주세요.');
+                	}
+                	else{
+                		alert('비회원은 사용 할 수 없습니다. 로그인해주세요.');
+                	}
                  }
 
             </script>

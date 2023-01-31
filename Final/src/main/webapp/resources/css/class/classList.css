@@ -5,6 +5,50 @@
 		overflow-x:hidden
 	}
 }
+
+.prod_icon.new {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #4f4f4f;
+}
+
+#sale_pay {
+	font-size: 9.1px;
+	text-decoration: line-through;
+}
+
+.ns-icon {
+	margin-bottom: 20px;
+	align-content: center;
+}
+
+.prod_icon.new {
+	background: #4f4f4f;
+	text-align: center;
+	align-content: center;
+}
+
+.prod_icon {
+	padding: 2px 8px;
+	font-family: Helvetica, Arial, Sans-Serif;
+	display: inline-block;
+	text-align: center;
+	color: #fff;
+	font-size: 11px;
+	vertical-align: middle;
+	text-rendering: optimizeLegibility;
+}
+
+.prod_icon.sale, .prod_icon.timesale {
+	background: #fe5356;
+	border: 1px solid #fe5356;
+}
+
+#class_content {
+	text-align: center;
+	font-size: 17px;
+	font-weight: normal;
+}
 .storeList-content-wrap {
 	width: 100vw;
 	

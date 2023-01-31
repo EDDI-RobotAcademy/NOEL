@@ -347,7 +347,6 @@ public class ClassController {
         model.addAttribute("s", map.get("s"));
         model.addAttribute("sbm", map.get("sbm"));
 
-        System.out.println("ArrayList 출발힙니다. Controller" + classNo);
         ArrayList<Review> reviewList = service.selectReviewList(classNo);
         model.addAttribute("rList", reviewList);
 
