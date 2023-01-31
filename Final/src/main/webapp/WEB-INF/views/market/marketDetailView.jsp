@@ -500,16 +500,13 @@ $("[name=secret]").on("click", function(){
 
 
 //장바구니,구매하기 클릭시 로그인 체크
-var login = $("button[class='loginBtn']");
 var marketer = "${sessionScope.mk}";
 function loginCh() {
 	if(marketer){
 		alert('판매자는 사용 할 수 없습니다. 일반회원으로 로그인해주세요.');
 	}
 	else{
-	   login.attr("data-bs-toggle", "modal");
-	   login.attr("data-bs-target", "#login-modal");
-	   login.attr("location.href", "login-modal");
+		alert('비회원은 사용 할 수 없습니다. 로그인해주세요.');
 	}
 }
 
@@ -558,10 +555,7 @@ function wishCh() {
 		alert('판매자는 사용 할 수 없습니다. 일반회원으로 로그인해주세요');
 	}
 	else{
-	wishBtn.attr("data-bs-toggle", "modal");
-	wishBtn.attr("data-bs-target", "#login-modal");
-	wishBtn.attr("location.href", "login-modal");
-
+		alert('비회원은 사용 할 수 없습니다. 로그인해주세요.');
 	}
 }
 
