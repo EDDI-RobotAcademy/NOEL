@@ -103,7 +103,6 @@
         $(".login-btn").on("mouseover",function(){
 			$(this).css("background-color","rgb(97, 76, 76)");
 			
-			$(".login-btn").css("color","#ffc107");
 		});
 		$(".login-btn").on("mouseleave",function(){
 			$(this).css("background-color","");
