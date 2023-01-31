@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="classReview">
+
+ 
+   <!-- 클래스 리뷰 리스트 -->
+       <select id="classReviewList" parameterType="map" resultType="Review">
+        SELECT *
+        from
+            (SELECT
+                 rownum as rnum,
+                 nr.cl_review_no as classReviewNo,
+                 nr.cl_no as classNo,
+                 (select cl_name from noel_CLASS nc where nc.cl_no = nr.cl_no) as className,
+                 nr.marketer_id as marketerId,
+                 nr.user_id as userId,
+                 nr.cl_review_content as classReviewContent,
+                 nr.cl_review_regdate as classReviewRegdate,
+                 nr.cl_review_name as classReviewName,
+                 (
+                     SELECT
+                         img_path
+                     FROM
+                         noel_review_img ri
+                     WHERE
+                         ri.cl_review_no = nr.cl_review_no
+                 ) AS thumnail
+             FROM
+                 noel_class_review nr
+             ORDER BY
+                 classReviewNo ASC)
+        where rnum between #{start} and #{end}
+    </select>
+   
+    <insert id="addClassReview" parameterType="Review">
+        insert into noel_class_review
+        values
+            (cl_review_seq.nextval,
+            #{classNo},
+             #{className},
+             #{marketerId},
+             #{userId},
+             #{classReviewContent},
+             to_char(sysdate,'yyyy-mm-dd'),
+             #{classReviewName}
+            )
+    </insert>
+    
+    <select id="selectClassReviewNo" resultType="_int">
+        select max (cl_review_no) as
+                   classReview_No
+        from noel_class_review
+    </select>
+    
+    <!-- 시퀀스 만듦 -->
+    <insert id="insertReviewImg" parameterType="ReviewImg">
+        insert into noel_review_img
+        values
+            (cl_review_img_seq.nextval,
+             #{classReviewNo},
+             #{imgPath}
+            )
+    </insert>
+
+       <select id="selectOneClassReview" parameterType="_int" resultType="Review">
+        select
+            cl_review_no as classReviewNo,
+            cl_no as classNo,
+            cl_name as className,
+            marketer_id as marketerId,
+            user_id as userId,
+            cl_review_content as classReviewContent,
+            cl_review_regdate as classReviewRegdate,
+            cl_review_name as classReviewName,
+            (select img_path from noel_review_img ri where ri.cl_review_no = nr.cl_review_no) as thumNail
+        from noel_class_review nr
+        where nr.cl_review_no = #{_parameter}
+
+    </select>
+   
+   
+       <select id="selectReviewImg" parameterType="int" resultType="ReviewImg">
+		select
+			cl_review_num as classReviewNum,
+			cl_review_no as classReviewNo,
+			img_path as imgPath
+		from noel_review_img
+		where cl_review_no = #{classReviewNo}
+	</select>
+
+	<select id="reviewRead" parameterType="int" resultType="Review">
+		select
+			cl_review_no as classReviewNo,
+            cl_no as classNo,
+			cl_name as className,
+			marketer_id as marketerId,
+			user_id as userId,
+			cl_review_content as classReviewContent,
+			cl_review_regdate as classReviewRegdate,
+			cl_review_name as classReviewName
+		from noel_class_review
+		where cl_review_no  =#{classReviewNo}
+	</select>
+
+    <update id="updateClassReview" parameterType="Review">
+		update noel_class_review
+		set 
+			cl_no = #{classNo},
+			cl_name = #{className},
+			marketer_id = #{marketerId},
+			user_id = #{userId},
+			cl_review_content = #{classReviewContent},
+			cl_review_regdate = #{classReviewRegdate},
+			cl_review_name = #{classReviewName}
+		where cl_review_no = #{classReviewNo}
+	</update>
+	
+	<delete id="deleteClassReviewImg" parameterType="int">
+		delete from noel_review_img
+		where cl_review_num = #{imgNo}
+	</delete>
+   
+   
+</mapper>

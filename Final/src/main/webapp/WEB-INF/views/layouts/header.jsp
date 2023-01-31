@@ -29,7 +29,7 @@
 				</li>
 
 				<li class="nav-item">
-					<a class="nav-link" href="#">Review</a>
+					<a class="nav-link" href="/classReviewListFrm?reqPage=1">Review</a>
 				</li>
 
 				<li class="nav-item">

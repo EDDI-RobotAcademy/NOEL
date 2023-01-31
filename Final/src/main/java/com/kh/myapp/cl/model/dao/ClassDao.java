@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.myapp.cl.model.vo.Class;
 import com.kh.myapp.cl.model.vo.ClassImg;
+import com.kh.myapp.cl.model.vo.ClassReviewImg;
 import com.kh.myapp.cl.model.vo.Menu;
 import com.kh.myapp.cl.model.vo.Reserve;
 import com.kh.myapp.cl.model.vo.Review;
 import com.kh.myapp.cl.model.vo.Wishlist;
-import com.kh.myapp.market.model.vo.ProductVO;
 
 @Repository
 public class ClassDao {
@@ -28,7 +28,7 @@ public class ClassDao {
         super();
     }
     
-	
+
     // 클래스 관리 페이지에 클래스를 출력하기 위해 조회
 	public List<Class> list(String marketerId) throws Exception {
 		List result = sqlSession.selectList("class.selectlist", marketerId);
@@ -66,6 +66,14 @@ public class ClassDao {
 		return sqlSession.delete("class.deleteClassImg", imgNo);
 	}
 	
+	// 클래스 삭제
+	public int classDelete(int classNo) {
+		int result = sqlSession.delete("class.classDelete", classNo);
+		return result;
+	}
+	
+	
+	
     // 클래스 메뉴
 	public List<Menu> menuList(String marketerId) throws Exception {
 		List result = sqlSession.selectList("class.menuList", marketerId);
@@ -92,13 +100,70 @@ public class ClassDao {
 		return result;
 	}
 	
+	// 메뉴 리스트
+    public ArrayList<Menu> selectMenuList(int classNo) {
+        List list = sqlSession.selectList("class.selectMenuList", classNo);
+        return (ArrayList<Menu>)list;
+    }
+	
+  	
+  	
+    // 클래스 리뷰 등록
+    public int addClassReview(Review review)
+    {
+        return sqlSession.insert("classReview.addClassReview", review);
+    }
+    public int selectClassReviewNo()
+    {
+        return sqlSession.selectOne("classReview.selectClassReviewNo");
+    }
+    public int insertReviewImg(ClassReviewImg ri)
+    {
+        return sqlSession.insert("classReview.insertReviewImg", ri);
+    }
+    
+    // 클래스 리뷰 상세
+    public Review selectOneClassReview(int classReviewNo) {
+        Review review = sqlSession.selectOne("classReview.selectOneClassReview", classReviewNo);
+        return review;
+    }
+    
+    // 클래스 리뷰 수정
+	public ArrayList<ClassReviewImg> selectReviewImg(int classReviewNo) {
+		List list = sqlSession.selectList("classReview.selectReviewImg",classReviewNo);
+		return (ArrayList<ClassReviewImg>) list;
+	}
+	public Review reviewRead(int classReviewNo) 
+	{
+		Review result = sqlSession.selectOne("classReview.reviewRead", classReviewNo);
+		return result;
+	}
+	public int updateClassReview(Review review) {
+		return sqlSession.update("classReview.updateClassReview", review);
+	}
+	
+	// 클래스 리뷰 삭제
+	public int deleteReviewImg(int imgNo) {
+		return sqlSession.delete("classReview.deleteClassReviewImg", imgNo);
+	}
+	
+	// 클래스 리뷰 리스트
+    public ArrayList<Review> classReviewList(HashMap<String, Object> map) {
+        List list = sqlSession.selectList("classReview.classReviewList",map);
+        if(list.isEmpty()) {
+            return null;
+        }else {
+            return (ArrayList<Review>) list;
+        }
+    }
+	
+  	
   	// 클래스 예약 관리
   	public ArrayList<Reserve> selectAllReserveList(HashMap<String, Object> map) {
   		List list = sqlSession.selectList("reserve.selectAllReserveList",map);
-  		System.out.println("dao 예약 출력  : " + list);
   		return (ArrayList<Reserve>) list;
   	}
-  	
+
   	//  예약 총개수
   	public int countAllReserve(String marketerId) {
   		return sqlSession.selectOne("reserve.AllReserveListMarketer",marketerId);
@@ -109,10 +174,19 @@ public class ClassDao {
 		int result = sqlSession.update("reserve.updateReserve", Reserve);
 		return result;
 	}
+	// 판매자 > 예약관리 > 검색
+	public ArrayList<Reserve> searchReserve(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("reserve.searchReserve",map);
+		return (ArrayList<Reserve>) list;
+	}
+	
+	// 판매자 > 예약관리 > 검색 > 총개수
+	public int searchReserveCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("reserve.searchReserveCount", map);
+		return result;
+	}
     
     
-
-
     public ArrayList<Class> classList(HashMap<String, Object> map) {
         List list = sqlSession.selectList("class.classList",map);
         if(list.isEmpty()) {
@@ -126,38 +200,28 @@ public class ClassDao {
         return sqlSession.selectOne("class.countAllList");
     }
 
-    //맛집 상세
+    // 클래스 상세
     public Class selectOneClass(int classNo) {
         Class c = sqlSession.selectOne("class.selectOneClass", classNo);
         return c;
     }
-
-    public ArrayList<Review> selectReviewList(int classNo) {
-        List list = sqlSession.selectList("selectReviewList", classNo);
-        return (ArrayList<Review>) list;
-    }
-
-    //맛집 상세 - 메뉴조회
-    public ArrayList<Menu> selectMenuList(int classNo) {
-        List list = sqlSession.selectList("class.selectMenuList", classNo);
-        return (ArrayList<Menu>)list;
-    }
+    
 
     // 예약 확인
     public ArrayList<Reserve> checkReserve(Reserve r) {
-        List list = sqlSession.selectList("class.checkReserve", r);
+        List list = sqlSession.selectList("reserve.checkReserve", r);
         return (ArrayList<Reserve>)list;
     }
 
     //비활성화 시간 확인하기
     public ArrayList<Reserve> ajaxCheckReserveTime(HashMap<String, Object> map) {
-        List list = sqlSession.selectList("class.ajaxCheckReserveTime", map);
+        List list = sqlSession.selectList("reserve.ajaxCheckReserveTime", map);
         return (ArrayList<Reserve>)list;
     }
 
     //예약하기
     public int reserve(Reserve r) {
-        int result = sqlSession.insert("class.insertReserve",r);
+        int result = sqlSession.insert("reserve.insertReserve",r);
         return result;
     }
 
@@ -166,14 +230,14 @@ public class ClassDao {
         return sbm;
     }
     
-  //예약관리
+   //예약관리
     public ArrayList<Reserve> selectReserveList(HashMap<String, Object> map) {
         List list = sqlSession.selectList("reserve.selectReserveList",map);
         return (ArrayList<Reserve>) list;
     }
 
     public int cancleReserve(int reserveNo) {
-        return sqlSession.delete("cancleReserve", reserveNo);
+        return sqlSession.delete("reservce.cancleReserve", reserveNo);
     }
 	
 }
