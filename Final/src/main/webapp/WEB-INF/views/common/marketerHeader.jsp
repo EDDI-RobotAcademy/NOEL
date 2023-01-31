@@ -17,7 +17,7 @@
 					<a href="/class/marketerClassMypage">클래스 관리</a>
 				</div>				
 				<div>
-					<a href="/market/marketerProductMypage">상품 관리</a>
+					<a href="/market/marketerProductMypage?reqPage=1">상품 관리</a>
 				</div>
 				<div>
 					<a href="/market/orderManagementView?reqPage=1">주문 관리</a>

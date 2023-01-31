@@ -7,7 +7,8 @@
 <head>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+<title>bonjour noël</title>
 <link rel="stylesheet" href="/resources/css/loginFrm.css">
 </head>
 <body>
@@ -35,15 +36,15 @@
                         <li>         
                             <div class="Linput01">
                                 <div>
-                                    <label class="Llabel" for="userId">아이디</label>
-                                    <input type="text" name="userId" id="userId">
+                                    <label class="Llabel" for="memberId">아이디</label>
+                                    <input type="text" name="userId" id="memberId">
                                 </div>
                             </div>                
                         </li>
                         <li>
                             <div class="Linput01">
-                                <label class="Llabel" for="userPw">비밀번호</label>
-                                <input type="password" name="userPw" id="userPw">
+                                <label class="Llabel" for="memberPw">비밀번호</label>
+                                <input type="password" name="userPw" id="memberPw">
                             </div>
                         </li>
                         <button class="login-btn" type="submit">로그인</button>
@@ -103,7 +104,6 @@
         $(".login-btn").on("mouseover",function(){
 			$(this).css("background-color","rgb(97, 76, 76)");
 			
-			$(".login-btn").css("color","#ffc107");
 		});
 		$(".login-btn").on("mouseleave",function(){
 			$(this).css("background-color","");

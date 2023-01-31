@@ -25,14 +25,14 @@
 			<div class="directoryDiv">home > market > detail</div>
 			<!-- 사진 슬라이드 영역  -->
 			<div class="photo-wrap">
-				<ul class="storeImgUl" style="height: 460px; width: 100%;">
+				<ul class="storeImgUl" style="height: 450px; width: 450px;">
 					<img src="/resources/upload/product/${prd.prdthumNail }">
 				</ul>
 			</div>
 
 			<div class="tableDiv">
 				<table class="w3-table w3-bordered" id="productTable"
-					style="font-family: Gowun Dodum; width: 550px;">
+					style="font-family: Gowun Dodum; width: 600px;">
 					<tr>
 						<th>상품명</th>
 						<td colspan="4">${prd.prdName }</td>
@@ -57,7 +57,7 @@
 								style="width: 35px; height: 35px; padding: 0; background-color: red; color: white;">
 								-</button>
 						</td>
-						<td class="peopleTd"><span class="countNum">1</span></td>
+						<td class="peopleTd"  ><span class="countNum" style=" text-align: center;">1</span></td>
 						<td style="width: 30px;">
 							<button class="w3-button w3-circle" id="up"
 								style="width: 35px; height: 35px; padding: 0; background-color: red; color: white;">
@@ -84,12 +84,11 @@
 							</c:otherwise>
 						</c:choose>
 						<input type="hidden" name="prdPrice" class="allPrice"
-							value="${prd.prdPrice }"> <input type="hidden"
-							name="prdNo" class="pNumber" value="${prd.prdNo }"> <input
-							type="hidden" name="prdName" class="pNumber"
-							value="${prd.prdName }"> <input type="hidden"
-							name="cartQuan" class="count"> <input type="hidden"
-							name="userId" value="${sessionScope.m.userId }">
+							value="${prd.prdPrice }"> 
+						<input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }"> 
+						<input type="hidden" name="prdName" class="pNumber"	value="${prd.prdName }">
+						<input type="hidden" name="cartQuan" class="count"> 
+						<input type="hidden" name="userId" value="${sessionScope.m.userId }">
 					</form>
 
 					<form action="/insertOrder">
@@ -103,10 +102,12 @@
 							</c:otherwise>
 						</c:choose>
 						<input type="hidden" name="prdPrice" class="allPrice"
-							value="${prd.prdPrice }"> <input type="hidden"
-							name="prdNo" class="pNumber" value="${prd.prdNo }"> <input
-							type="hidden" name="prdName" value="${prd.prdName}"> <input
-							type="hidden" name="cartQuan" class="count"> <input
+							value="${prd.prdPrice }"> 
+						<input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }">
+						<input type="hidden" name="prdthumNail" class="prdthumNail" value="${prd.prdthumNail }">
+						 <input type="hidden" name="prdName" value="${prd.prdName}"> 
+						<input type="hidden" name="cartQuan" class="count"> 
+						<input
 							type="hidden" name="userId" value="${sessionScope.m.userId }">
 					</form>
 					<c:choose>
@@ -170,10 +171,11 @@
 			</div>
 		<c:choose>
 			<c:when test="${empty sessionScope.m}"></c:when>
-			<c:otherwise>
-				<br><br>
-				<button type="button" class="btn btn-brand" data-bs-toggle="modal"
-				data-bs-target="#modal-review">구매평 작성</button>
+			<c:otherwise><br><br>
+				<c:if test="${!empty orderlist}">
+					<button type="button" class="btn btn-brand" 
+							data-bs-toggle="modal" data-bs-target="#modal-review">구매평 작성</button>
+				</c:if>
 			</c:otherwise>
 		</c:choose>
 		</div>
@@ -401,6 +403,7 @@
 					<input type="hidden" name="userId" value="${sessionScope.m.userId}"> 
 					<input type="hidden" name="prdNo" value="${prd.prdNo}"> 
 					<input type="hidden" name="marketerId" value="${prd.marketerId}"> 
+					<input type="hidden" name="prdName" value="${prd.prdName}"> 
 					<label
 						for="message-text" class="col-form-label">문의할 내용을 작성해주세요.</label>
 					<textarea name="prdQnacontent" class="chk2 form-control" id="message-text" 
@@ -497,16 +500,13 @@ $("[name=secret]").on("click", function(){
 
 
 //장바구니,구매하기 클릭시 로그인 체크
-var login = $("button[class='loginBtn']");
 var marketer = "${sessionScope.mk}";
 function loginCh() {
 	if(marketer){
-		alert('판매자는 사용 할 수 없습니다. 일반회원으로 로그인해주세요');
+		alert('판매자는 사용 할 수 없습니다. 일반회원으로 로그인해주세요.');
 	}
 	else{
-	   login.attr("data-bs-toggle", "modal");
-	   login.attr("data-bs-target", "#login-modal");
-	   login.attr("location.href", "login-modal");
+		alert('비회원은 사용 할 수 없습니다. 로그인해주세요.');
 	}
 }
 
@@ -546,12 +546,17 @@ $(".buyBtn").on("click", function() {
    $(".count").attr("value", count);
 });
 
-//비회원 상품 위시 > 로그인모달
+//비회원이 상품 위시 클릭시 로그인모달창, 판매자가 상품위시 클릭시 일반회원 로그인 alert창
 var wishBtn = $("button[id='wishBtn']");
+var marketer = "${sessionScope.mk}";
+
 function wishCh() {
-	wishBtn.attr("data-bs-toggle", "modal");
-	wishBtn.attr("data-bs-target", "#login-modal");
-	wishBtn.attr("location.href", "login-modal");
+	if(marketer){
+		alert('판매자는 사용 할 수 없습니다. 일반회원으로 로그인해주세요');
+	}
+	else{
+		alert('비회원은 사용 할 수 없습니다. 로그인해주세요.');
+	}
 }
 
 //상품 위시

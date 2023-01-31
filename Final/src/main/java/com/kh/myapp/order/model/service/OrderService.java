@@ -1,5 +1,6 @@
 package com.kh.myapp.order.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,11 @@ public class OrderService {
 	// 결제 성공 시 장바구니에서 삭제
 	public int deleteCart(String userId) {
 		return dao.deleteCart(userId);
+	}
+
+	//마켓상세 > 배송완료 상품의 구매평 작성버튼 활성화
+	public List<OrderVO> orderlist(Integer prdNo, String bookmarkId) throws Exception {
+		return dao.orderlist(prdNo, bookmarkId);
 	}
 
 }

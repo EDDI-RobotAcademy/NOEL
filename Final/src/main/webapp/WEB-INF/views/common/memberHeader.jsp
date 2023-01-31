@@ -20,7 +20,7 @@
                     <a href="/myPrdWishList?bookmarkId=${sessionScope.m.userId }&reqPage=1">위시리스트</a>
                 </div>
                 <div>
-                    <a href="#">Q&A</a>
+                    <a href="/memberQna?&reqPage=1">Q&A</a>
                 </div>
                 <div>
                     <a href="/deleteMember?userId=${sessionScope.m.userId }" class="delMember">회원 탈퇴</a>

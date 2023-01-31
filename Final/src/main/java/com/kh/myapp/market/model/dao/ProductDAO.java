@@ -35,12 +35,6 @@ public class ProductDAO {
 		return result;
 	}
 
-	// 상품 등록 목록 조회
-	public List<ProductVO> list(String marketerId) throws Exception {
-		List result = sql.selectList("productMapper.selectlist", marketerId);
-		return result;
-	}
-
 	// 상품 등록된것 조회
 	public ProductVO read(int prdNo) {
 		ProductVO result = sql.selectOne("productMapper.read", prdNo);
@@ -116,4 +110,15 @@ public class ProductDAO {
 	public int countTagList(HashMap<String, Object> map) {
 		return sql.selectOne("productMapper.countTagList",map);
 	}
+	
+	//상품관리 페이징을 위한 갯수 조회
+	public int countMarketerPrd(String marketerId) {
+		return sql.selectOne("productMapper.countMarketerPrd", marketerId);
+	}
+
+	public ArrayList<ProductVO> selectMarketerPrd(HashMap<String, Object> map) {
+		List list = sql.selectList("productMapper.selectMarketerPrd", map);
+		return (ArrayList<ProductVO>) list;
+	}
+
 }

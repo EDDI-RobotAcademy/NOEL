@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.myapp.market.model.vo.MarketQnaVO;
 import com.kh.myapp.member.model.vo.Marketer;
 import com.kh.myapp.member.model.vo.Member;
 import com.kh.myapp.order.model.vo.OrderVO;
@@ -228,5 +229,21 @@ public class MemberDao {
 		int result = sqlSession.selectOne("member.searchMemberCount", map);
 		return result;
 	}
+	
+	// 회원 > QnA
+	public ArrayList<MarketQnaVO> memberQna(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("marketMapper.memberQna", map);
+		return (ArrayList<MarketQnaVO>) list;
+	}
+	// 회원 > QnA 개수
+	public int countmemberQna(String userId) {
+		return sqlSession.selectOne("marketMapper.countmemberQna", userId) ;
+	}
+	
+	//판매자 > 주문관리 > 주문상세 > 배송상세
+	public List shippingDetail(int orderNo) {
+		return sqlSession.selectList("order.shippingDetail", orderNo);
+	}
+
 	
 }

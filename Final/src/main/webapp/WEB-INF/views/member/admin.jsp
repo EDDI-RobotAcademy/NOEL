@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 페이지</title>
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+<title>bonjour noël</title>
 </head>
 <body>
 <style type="text/css">
@@ -70,7 +71,7 @@
             <ul class="category">
                 <li>
                     <div><a href="/memberManage?reqPage=1" style="color:black;">회원관리</a></div>
-                    <div><a href="/adminMemberManage?reqPage=1" style="color:black;">업주관리</a></div>
+                    <div><a href="/adminMemberManage?reqPage=1" style="color:black;">판매자관리</a></div>
                 </li>
             </ul>
         </div>
@@ -78,15 +79,15 @@
     </aside>
     <article id="content" class="content">
         <div class="contents">
-            <h4 style="margin: 0;">업주관리</h4>
-            <div class="searchWrap" style="width:800px; margin-top:10px; margin-bottom: 20px;">
+            <h4 style="margin: 0;">판매자관리</h4>
+            <div class="searchWrap" style="width:800px; margin-top:10px; margin-bottom: 20px;" align="center">
             	<form action="/searchMarketer?reqPage=1" method="post">
 					<select name="type" style="width:100px; height:32px;">
 						<option value="id">아이디</option>
 						<option value="name">이름</option>
 					</select>
 					<input type="text" name="keyword" style="height:32px;">
-					<input type="submit" value="검색" style="background-color: rgb(51,51,51); color:white; width:40px; border-radius: 5px;">
+					<input type="submit" value="검색" style="background-color: #dc3534; color:white; width:40px; border-radius: 5px; border-color: #dc3534 ">
             	</form>
             </div>
 	            <table class="tablewrap" style="text-align: center; vertical-align: middle;">

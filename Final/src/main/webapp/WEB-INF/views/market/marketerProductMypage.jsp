@@ -14,7 +14,7 @@
 
 <body>
 	<jsp:include page="/WEB-INF/views/layouts/header.jsp" />
-	<div class="content-wrap" style="height: 900px;">
+	<div class="content-wrap">
 		<jsp:include page="/WEB-INF/views/common/marketerHeader.jsp" />
 		<article id="content" class="content">
 			<div class="contents">
@@ -40,9 +40,10 @@
 										<div style="display: none">${prdlist.prdNo }</div>
 										<div id="prd_name">${prdlist.prdName }</div>
 										<div style="text-align: center">
-											<span>${prdlist.prdPrice }원</span>
+											<span><fmt:formatNumber value="${prdlist.prdPrice }"
+																pattern="#,###" />원</span>
 										</div>
-										<div style="text-align: center">총 재고 : ${prdlist.prdStock}</div>
+										<div style="text-align: center">총 재고 : ${prdlist.prdStock}개</div>
 										<div style="text-align: center">  
 											등록일 :
 											<fmt:formatDate value="${prdlist.regDate }"
@@ -57,6 +58,8 @@
 								</c:forEach>
 							</p>
 						</div>
+							<div class="paging">
+									<div id="pageNavi">${pageNavi }</div>
 					</div>
 				</div>
 			</div>

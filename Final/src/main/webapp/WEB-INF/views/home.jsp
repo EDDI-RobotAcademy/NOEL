@@ -19,7 +19,7 @@
 				<div class="row">
 					<div class="col-12 text-center text-white">
 						<h1 class="display-3 my-4">bonjour noël<br />For Sweet & Healthy Life
-						</h1> <a href="#" class="btn btn-brand" id="font">Market</a>
+						</h1> <a href="/marketListFrm?reqPage=1" class="btn btn-brand" id="font">Market</a>
 					</div>
 				</div>
 			</div>
@@ -29,7 +29,7 @@
 				<div class="row">
 					<div class="col-12 text-center text-white">
 						<h1 class="display-3 my-4"><br />Cooking & Bakery
-						</h1> <a href="#" class="btn btn-brand" id="font">Class</a>
+						</h1> <a href="/classList.do?reqPage=1" class="btn btn-brand" id="font">Class</a>
 					</div>
 				</div>
 			</div>
