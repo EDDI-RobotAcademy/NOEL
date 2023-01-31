@@ -62,7 +62,7 @@ li{
 #check-container{
 	text-align: center;
 	margin-top: 50px;
-	border: 2px solid #ffc107;
+	border: 2px solid #dc3545;
 	margin-left: 8px;
 	margin-right: 8px;
 	border-radius: 8px;
@@ -75,7 +75,7 @@ li{
 	width: 60px;
 	height: 35px;
 	border-style: none;
-	background-color: rgb(51,51,51);
+	background-color: #dc3545;
 	color: #fff;
 	transition: 0.5s;
 	cursor:pointer;
@@ -94,7 +94,7 @@ li{
 	height: 35px;
 	margin-top: 10px;
 	border-style: none;
-	background-color: rgb(51,51,51);
+	background-color: #dc3545;
 	color: #fff;
 	transition: 0.5s;
 	cursor:pointer;

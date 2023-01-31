@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+<title>bonjour noël</title>
 </head>
     
 <body>
@@ -158,9 +159,8 @@
 		});
 
 		$("#updateBtn").on("mouseover", function() {
-			$(this).css("background-color", "#fff");
+			$(this).css("background-color","rgb(97, 76, 76)");
 			$(this).css("border", "1px solid black");
-			$(this).css("color", "#000000");
 		})
 		$("#updateBtn").on("mouseleave", function() {
 			$(this).css("background-color", "");
