@@ -20,7 +20,7 @@
 	text-decoration: none;
 	border-radius: 6px;
 	cursor: pointer;
-	background-color: rgb(51,51,51);
+	background-color: #dc3545;
 	color: #fff;
 	border: none;
 	transition: 0.5s;
@@ -35,7 +35,7 @@
 	text-decoration: none;
 	border-radius: 6px;
 	cursor: pointer;
-	background-color: rgb(51,51,51);
+	background-color: #dc3545;
 	color: #fff;
 	border: none;
 	transition: 0.5s;
@@ -81,7 +81,7 @@
 	width: 70px;
 	height: 30px;
 	cursor: pointer;
-	background-color: rgb(51,51,51);
+	background-color: #dc3545;
 	color: #fff;
 	border: none;
 	transition: 0.5s;
@@ -92,7 +92,7 @@
 	width: 70px;
 	height: 30px;
 	cursor: pointer;
-	background-color: rgb(51,51,51);
+	background-color: #dc3545;
 	color: #fff;
 	border: none;
 	transition: 0.5s;
@@ -118,7 +118,7 @@
 	width: 70px;
 	height: 30px;
 	cursor: pointer;
-	background-color: rgb(51,51,51);
+	background-color: #dc3545;
 	color: #fff;
 	border: none;
 	transition: 0.5s;
@@ -151,7 +151,7 @@
 .phoneChkSendBtn1,
 .phoneChkSendBtn2{
 	cursor: pointer;
-	background-color: rgb(51,51,51);
+	background-color: #dc3545;
 	color: #fff;
 	border: none;
 	transition: 0.5s;
@@ -161,7 +161,7 @@
 }
 .phoneChkBtn1{
 	cursor: pointer;
-	background-color: rgb(51,51,51);
+	background-color: #dc3545;
 	color: #fff;
 	border: none;
 	transition: 0.5s;
@@ -171,7 +171,7 @@
 }
 .phoneChkBtn2{
 	cursor: pointer;
-	background-color: rgb(51,51,51);
+	background-color: #dc3545;
 	color: #fff;
 	border: none;
 	transition: 0.5s;
@@ -197,7 +197,7 @@
 	width: 120px;
 	height: 40px;
 	cursor: pointer;
-	background-color: rgb(51,51,51);
+	background-color: #dc3545;
 	color: #fff;
 	border: none;
 	transition: 0.5s;
