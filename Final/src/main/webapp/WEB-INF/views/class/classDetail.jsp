@@ -3,10 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
-    <title>classDetail</title>
-    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-    <script src ="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+	<title>bonjour noël</title>
 </head>
 
 <style>
@@ -28,19 +26,14 @@
 </style>
 <body>
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
-<link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,200"/>
-<link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
-<link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+
+
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,200"/>
+<link rel="stylesheet" href="/resources/css/class/classDetail.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-<link rel="stylesheet" href="/resources/demos/store/style.css">
-<link rel="stylesheet" href="/resources/css/class/classDetail.css">
-<link rel="stylesheet" href="/resources/css/map.css">
 
 
 <div class="content-wrap2" style="width:1200px; margin: 0 auto; background-color: rgba(255, 255, 255, 0.06);">
@@ -55,21 +48,23 @@
 
         <div class="info-reserve-wrap">
             <table class="w3-table w3-bordered" id="infoTable" style="font-family:Gowun Dodum; width: 550px;">
+               <tr>
+                    <th>클래스명</th>
+                    <td colspan="3" class="nameTd" style="color:black;">${s.className }</td>
+                </tr>
+                <tr>
+                    <th>가격</th>
+                    <td colspan="3" class="priceTd" style="color:black;">
+					<fmt:formatNumber value="${s.classPrice }" pattern="##,###" />원
+					</td>
+                </tr>
                 <tr>
                     <th style="width:120px;">주소</th>
                     <td colspan="3" class="addressTd" style="color:black;">${s.classAddr }</td>
                 </tr>
                 <tr>
-                    <th>전화번호</th>
-                    <td colspan="3" class="phoneTd" style="color:black;">010-2278-2357</td>
-                </tr>
-                <tr>
                     <th>운영시간</th>
                     <td colspan="3" class="openHourTd" style="color:black;">${s.classResTime }</td>
-                </tr>
-                <tr>
-                    <th>휴일</th>
-                    <td colspan="3" class="closedDayTd" style="color:black;">목</td>
                 </tr>
 
                 <tr style="height: 47px;">
@@ -173,75 +168,218 @@
 <div class="content-wrap4"
      style="font-family:Gowun Dodum; margin-top:30px; height:100%; width:1200px; margin-bottom:100px; margin:0 auto;">
     <div class="testDiv" style="width: 1200px; margin:0 auto;">
-        <!----- 메뉴판 부분 ----->
-        <div class="menuWrap" style="font-family:Gowun Dodum;">
-            <p class="menuTitle" style="margin-top: 20px;">CLASS</p>
-            <p class="menuSubTitle">대표 클래스</p>
-            <table class="w3-table w3-bordered" id="menuTable">
-                <c:forEach items="${list }" var="me">
-                    <tr>
-                        <td style="text-align:left;">${me.menuName }</td>
-                        <td style="text-align:right;">${me.menuPrice }</td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
-
-
         <!----- 메뉴 부분 ----->
+        <div class="menuWrap" style="font-family:Gowun Dodum;">
+            <p class="menuTitle" style="margin-top: 20px;">대표 클래스</p>
+        </div>
         <div class="food-wrap"
-             style="width:1200px; overflow:hidden; height:400px; margin: 0 auto; text-align:center; margin:50px 0;">
-            <c:forEach items="${list }" var="me">
+             style="width:1200px; overflow:hidden; height:auto; margin: 0 auto; text-align:center; margin:50px 80;">
+            <c:forEach items="${ menuList}" var="me">
+            <input type="hidden" name="marketerId" value="${me.marketerId}">
                 <div class="w3-card" id="photoWrap"
-                     style="font-family:Gowun Dodum; width:350px; height:300px; margin: 10px 25px;">
-                    <img src=/resources/upload/menu/${me.menuImg} style='width: 100%; height: 200px;'>
+                     style="font-family:Gowun Dodum; width:300px; height:300px; margin: 10px 25px;">
+                    <img src=/resources/upload/menu/${me.menuImg} style='width: 100%; height: 250px;'>
                     <div class="w3-container" style="font-family:Gowun Dodum;">
-                        <p style="font-weight: bolder; font-size: 20px; margin-top:10px;">${me.menuName}</p>
+                        <p style="font-weight: bold; font-size: 18px; margin-top:10px;">${me.menuName}</p>
                     </div>
                 </div>
             </c:forEach>
         </div>
 
-
         <hr style="border: 1px">
 
         <%-- 상세정보 --%>
         <p class="menuTitle" style="margin-top: 20px;">CONTENT</p>
-        <p class="menuSubTitle">클래스 설명</p><br><br>
         <div class="contentWrap2" style="font-family:Gowun Dodum;">
             ${s.classContent}
         </div>
 
         <hr style="border: 1px">
 
+	<!-- 리뷰 목록 -->
+	<div class="review-wrap" id="review-wrap">
+		<div class="review-title">
+			<div>
+				<b>구매평</b>
+			</div>
+		<c:choose>
+			<c:when test="${empty sessionScope.m}"></c:when>
+			<c:otherwise>
+				<br><br>
+				<a href="/class/classReviewAdd?classNo=${s.classNo}" class="btn btn-brand" id="font1">클래스 리뷰 등록</a>
+			</c:otherwise>
+		</c:choose>
+		</div>
+	</div>
 
-        <%-- 리뷰 --%>
-        <c:choose>
-        <c:when test="${!empty rList }">
-        <div class="review-wrap" style="margin:50px 0;">
-            <p class="menuTitle" style="margin-top: 20px;">REVIEW</p>
-            <p class="menuSubTitle">클래스 리뷰</p><br><br>
-            <ul class="w3-ul w3-card-4" id="reviewWrapUl" style="height:content-fit;">
-                <c:forEach items="${rList }" var="r">
-                    <li class="w3-bar" style="height:content-fit;">
-                        <div class="w3-bar-1" style="margin:0; height: content-fit;">
-                            <img src="/resources/upload/review/${r.clReviewImg }" class="w3-hide-small"
-                                 style="float: left; width:35%; height:100%;">
-                            <div class="w3-bar-item" id="w3-bar-item"
-                                 style="width:60%; height: content-fit; padding:0; margin-left:5%; position: relative;">
-                                <div style="color: rgb(255, 83, 86); float:left;"><c:forEach begin="1" step="1" end="${r.clReviewRating }" varStatus="i">★</c:forEach></div>
-                                <div>${r.clReviewRating }</div>
-                                <div class="w3-large" style="font-weight: 700;">${r.marketerId }</div>
-                                <div class="reviewContent" style="display: inline; float: left; height:150px; overflow: auto;">${r.clReviewContent}</div>
-                                <div class="regDate" style="position: absolute; bottom: 0px; right: 0px;">${r.clReviewDate }</div>
-                            </div>
-                        </div>
-                    </li>
-                </c:forEach>
-            </ul>
-        </div>
-        </c:when>
-        </c:choose>
+
+
+<!-- QNA 목록 시작 -->
+<%-- <c:if test="${user != null}"></c:if> //유저일때 모달창 오픈--%>
+<div class="qna-wrap" id="qna-wrap">
+	<div class="qna-title">
+		<br> <br> <br>
+		<div>
+			<b>QnA</b><br>
+		</div>
+		구매하시려는 상품에 대한 궁금점이 있으면 문의주세요.
+		<c:choose>
+			<c:when test="${empty sessionScope.m}"></c:when>
+			<c:otherwise>
+				<br><br>
+				<button type="button" class="btn btn-brand" data-bs-toggle="modal"
+					data-bs-target="#modal-qna">상품문의</button>
+			</c:otherwise>
+		</c:choose>
+	</div>
+	
+	<section><hr>
+		<c:choose>
+			<c:when test="${empty qnalist}">
+				<p>" 등록된 QNA가 없습니다. "</p>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${qnalist}" var="qnalist" varStatus="i">
+					<table class="qna-list">
+					<tbody>						
+						<!-- <tr height="50">
+							<th width="15%">상태</th>
+							<th width="55%">제목</th>
+							<th width="15%">작성자</th>
+							<th width="15%">등록일</th>
+						</tr> -->
+						
+						<tr height="60px">
+							<td width="15%">
+								<c:choose>
+									<c:when test="${qnalist.classQnaStatus == '0'}">
+		                              답변대기
+		                            </c:when>
+									<c:otherwise>
+		                              답변완료
+		                            </c:otherwise>
+								</c:choose>
+							</td>
+							<td width="55%">
+								<c:choose>
+									<c:when test="${qnalist.classSecret == 'on' and empty sessionScope.mk}">
+										<p class="material-symbols-outlined">
+						                    lock
+						                </p>
+										<span onclick="modalMan(this)" style="cursor:pointer"> 
+											비밀글입니다.
+										</span>
+									</c:when>
+									<c:when test="${qnalist.classSecret == 'on' and sessionScope.mk.marketerId ne s.marketerId}">
+										<p class="material-symbols-outlined">
+						                    lock
+						                </p>
+										<span onclick="modalMan(this)" style="cursor:pointer"> 
+											비밀글입니다. 
+										</span>
+									</c:when>
+									<c:when test="${qnalist.classSecret == 'on' and sessionScope.mk.marketerId eq s.marketerId}">
+										<p class="material-symbols-outlined">
+						                    lock
+						                </p>
+										<span onclick="location.href='/class/qnaDetail?classQnaNo=${qnalist.classQnaNo}'" style="cursor:pointer"> 
+											비밀글입니다. 
+										</span>
+									</c:when>
+										
+									<c:otherwise>
+										<a href="/class/qnaDetail?classQnaNo=${qnalist.classQnaNo}"> 
+											<c:out value="${qnalist.classQnaContent}" />
+										</a>
+									</c:otherwise>				
+								</c:choose>
+							</td>
+							<td width="15%">
+								<c:out value="${qnalist.userId}" />
+							</td>
+							<td >
+								<fmt:formatDate value="${qnalist.classQnaRegdate}" pattern="yyyy-MM-dd" />
+							</td>
+						</tr>					
+					</tbody>
+					</table>
+					<!-- 비밀번호확인 모달 시작-->
+					<div id="id01" class="w3-modal w3-animate-opacity">
+					    <div class="w3-modal-content w3-card-4" style="top: 15%; width: 300px;">
+					      <header class="w3-container w3-teal" style="background-color: #fff!important;"> 
+					        <span onclick="delModal(this);" style="overflow:visible; color:black;"
+					        	class="w3-button w3-large w3-display-topright" >X</span>
+					        <h5 style="margin-top:13px;">비밀번호 확인</h5>
+					      </header>
+					      <div class="w3-container" style="margin-top: 15px; height: 120px;">
+					        <form action="/class/qnaSecretDetail" method="post" class="pwFrm">
+					        	<input type="hidden" name="classNo" value="${qnalist.classNo}">
+					        	<input type="hidden" name="classQnaNo" value="${qnalist.classQnaNo}">
+						        <input class="w3-input w3-border w3-round-large" type="password" name="classQnaPw" style="width: 250px; margin-left: 10px;"><br>
+						        <button class="btn btn-brand" style="margin-left: 10px; color:white; float:right;" onclick="pwChk(this)">확인</button>
+					        </form>
+					      </div>
+					    </div>
+					</div>
+					<!-- 비밀번호확인 모달 끝-->
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
+	</section>
+</div>
+
+<div align="center">
+	<!-- qna 목록 페이지 번호 -->
+	<c:forEach begin="1" end="${qnapageNum}" var="qnum">
+		<span> 
+			<a href="/classDetail?classNo=${param.classNo}&rnum=1&qnum=${qnum}#qna-wrap">
+				${qnum} </a>
+		</span>
+	</c:forEach>
+</div>
+<!-- QnA 목록 끝 -->
+
+<!-- QnA 모달 시작 -->
+<form name="classqnaForm" id="classqnaForm" method="post" action="/class/qnaInsert">
+	<div class="modal fade" id="modal-qna" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"
+						style="font-family: Gowun Dodum;">Q&A</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body mb-3">
+					<input type="hidden" name="userId" value="${sessionScope.m.userId}"> 
+					<input type="hidden" name="classNo" value="${s.classNo}"> 
+					<input type="hidden" name="marketerId" value="${s.marketerId}"> 
+					<label
+						for="message-text" class="col-form-label">문의할 내용을 작성해주세요.</label>
+					<textarea name="classQnaContent" class="chk2 form-control" id="message-text" 
+							style="height: 15em; resize: none;" autofocus="autofocus" title="문의할 내용을 작성해주세요."></textarea>
+					<br>
+					<div>
+						<input class="checkbox" type="checkbox" name="classSecret" id="classSecret"> 
+						<label class="form-check-label">비밀글 </label>
+					</div>
+					<div style="display:none; float:left;" class="secretPw">
+						<input class="chk3 w3-input w3-border w3-round-large" id="classQnaPw" name="classQnaPw" 
+								type="text" style="width: 100px; margin: 0 auto;" placeholder=" 비밀번호"
+								title="비밀번호를 입력해주세요.">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="qnasave btn btn-brand">저장</button>
+					<button type="button" class="qnacancel btn btn-brand" data-bs-dismiss="modal">취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<!-- QNA 모달 끝 -->
+
     </div>
     <jsp:include page="/WEB-INF/views/layouts/footer.jsp"/>
 </div>
@@ -292,13 +430,6 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
 </div>
 
 <!-- 시간 날짜 미입력 모달 -->
@@ -315,14 +446,18 @@
 </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src ="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
+<%-- dateficker --%>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-            <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-            <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-
-            <%-- dateficker --%>
-            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="/resources/js/index/jquery.min.js"></script>
+<script src="/resources/js/index/owl.carousel.min.js"></script>
+<script src="/resources/js/index/app.js"></script>
 
             <script>
 
@@ -612,10 +747,94 @@
                     buy.attr("data-bs-target", "#login-modal");
                     buy.attr("location.href", "login-modal"); */
                  }
+                
+                
+                
+                
+                
+                
+                
+                
+              //리뷰 & qna 내용 미입력시 alert
+                $(document).ready(function() {
+                   var formObj1 = $("form[name='classreviewForm']");
+                   var formObj2 = $("form[name='classqnaForm']");
+
+                   $(".reviewsave").on("click", function() {
+                      if (fn_valiChk1()) {
+                         return false;
+                      }
+                      formObj1.attr("action", "/class/reviewInsert");
+                      formObj1.attr("method", "post");
+                      formObj1.submit();
+                   });
+
+                   $(".qnasave").on("click", function() {
+                      if (fn_valiChk2()) {
+                         return false;
+                      }
+                      formObj2.attr("action", "/class/qnaInsert");
+                      formObj2.attr("method", "post");
+                      formObj2.submit();
+                   });
+                })
+                function fn_valiChk1() {
+                   if ($(".chk1").val() == "" || $(".chk1").val() == null) {
+                      alert($(".chk1").attr("title"));
+                      return true;
+                   }
+                }
+
+                function fn_valiChk2() {
+                	if($("[name=classSecret]").prop("checked")){
+                       $("[name=classSecret]").attr("value", 'on');
+                       if ($(".chk3").val() == "" || $(".chk3").val() == null) {
+                    	      alert($(".chk3").attr("title"));
+                    	      return true;
+                    		}
+                   }else{
+                       $("[name=classSecret]").attr("value", null);
+                   }
+                   
+                   if ($(".chk2").val() == "" || $(".chk2").val() == null) {
+                      alert($(".chk2").attr("title"));
+                      return true;
+                   }
+                }
+                
+              //qna 모달 > 비밀글 체크 > 비밀번호입력폼
+
+                var marketer = "${sessionScope.mk}";
+
+                $("[name=classSecret]").on("click", function(){
+                	if($("[name=classSecret]").prop("checked")){
+                    	$(".secretPw").slideDown();
+                    }else{
+                    	$(".secretPw").slideUp();
+                    }
+                });
+                
+              //qna 비밀글 비밀번호 확인
+                function modalMan(obj){
+                	$(obj).parents(".qna-list").next().css("display", "block");
+                }
+
+                //qna 비밀글 비밀번호 확인 모달창 끄기
+                function delModal(obj){
+                	$("[name=classQnaPw]").val('');
+                	$(".w3-animate-opacity").css("display", "none");
+                }
+
+                function pwChk(obj){
+                	if($("[name=classQnaPw]").eq(obj).val().trim() == ""){
+                		alert("비밀번호를 입력해주세요.");
+                		$(obj).attr("type", "button");
+                	}else{
+                		$(this).attr("type", "submit");
+                	}
+                }
 
             </script>
-
-
 </body>
 </html>
 
