@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메뉴추가</title>
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+<title>bonjour noël</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style>
 hr {
@@ -56,13 +57,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<input type="text" class="form-control" id="menuName" name="menuName" placeholder="예) 마들렌" 
 								required oninvalid="this.setCustomValidity('메뉴명을 입력하세요')" oninput="this.setCustomValidity('')">
 						</div>
-						<Br>
-						<div class="form-group">
-							<label for="inputMenuPrice"> 메뉴 가격을 입력하세요</label>
-							<Br>
-							<input type="number" class="form-control" id="menuPrice" name="menuPrice" placeholder="예) 2,000원 → 2000" 
-								required oninvalid="this.setCustomValidity('가격을 입력하세요')" oninput="this.setCustomValidity('')">
-						</div>
+
 						<Br>
 						<div>
 							<input type="hidden" name="classNo" value="${classNo }">

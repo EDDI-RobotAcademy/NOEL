@@ -1,19 +1,26 @@
 package com.kh.myapp.cl.model.vo;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Review {
-    private String clReviewNo;
-    private String clNo;
-    private String marketerId;
-    private String resNo;
-    private String clReviewContent;
-    private String clReviewImg;
-    private String clReviewDate;
-    private int clReviewRating;
+
+   private int classReviewNo;
+   private int classNo;
+   private String marketerId;
+   private String classReviewContent;
+   private String userId;
+   private String userId2;
+   private Date classReviewRegdate;
+   private String classReviewName;
+   private String className;
+   private String thumNail;
+   private ArrayList<ClassReviewImg> classReviewImgList;
 }

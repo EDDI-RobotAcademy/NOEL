@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메뉴 관리</title>
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+<title>bonjour noël</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style>
 .updateBtn {
@@ -51,7 +52,6 @@
 							<tr>
 								<th scope="col">메뉴사진</th>
 								<th scope="col">메뉴명</th>
-								<th scope="col">가격(&#8361;)</th>
 								<th scope="col">수정</th>
 								<th scope="col">삭제</th>
 							</tr>
@@ -62,9 +62,6 @@
 										<img src="/resources/upload/menu/${me.menuImg }" style="width: 50px; height: 50px;">
 									</td>
 									<td>${me.menuName }</td>
-									<td>
-										<fmt:formatNumber value="${me.menuPrice}" pattern="#,###" />
-									</td>
 									<td>
 										<a href="/class/updateMenuFrm?menuNo=${me.menuNo}" id="font">수정</a>
 									</td>
