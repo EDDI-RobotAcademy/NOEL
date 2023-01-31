@@ -5,10 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+<title>bonjour noël</title>itle>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<link rel="stylesheet" href="/resources/css/class/reserveManagement.css">
+<link rel="stylesheet" href="/resources/css/member/orderManagementView.css">
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 </head>
 <body>
@@ -24,17 +25,24 @@
 			<div class="directoryDiv">mypage > 예약 관리 </div>
 			<br>
 			<h1>예약 관리</h1>
-			<form action="/searchReserve" method="post">
-				<div class="searchWrap-reserve">
-					<div class="search-area">
-						<span class="searchName">아이디</span>
-						<input type="text" name="keyword" placeholder="아직 미구현" >
-						<input type="hidden" name="reqPage" value="1">
-						<input type="submit" class="searchBtn" value="조회">
-					</div>
-				</div>
-			</form>
-			<div class="bookmark-content-list">
+				<c:choose>
+					<c:when test="${empty list }">
+						<div class="warningMark">
+						<span class="material-symbols-outlined" style="font-size: 30px;"> 예약 내역이 없습니다. </span>
+						</div>
+					</c:when>
+				<c:otherwise>
+						<div class="bookmark-content-list">
+						<form action="/searchReserve?reqPage=1" method="post">
+						<div id="type">
+							<select class="type" name="type">
+								<option value="userId">아이디</option>
+								<option value="bookNo">예약번호</option>						
+							</select> 
+							<input type="text" name="keyword" class="keyword">
+							<input type="submit" value="조회" class="submitInput ">
+						</div>
+						</form>
 				<table class="table" style="width: 800px;">
 				<tr>
 					<th scope="col">예약번호</th>
@@ -85,6 +93,8 @@
 					</c:forEach>		
 					</table>
 				</div>
+				</c:otherwise>
+				</c:choose>
 				<div class="paging">
 					<div id="pageNavi">${pageNavi }</div>
 				</div>

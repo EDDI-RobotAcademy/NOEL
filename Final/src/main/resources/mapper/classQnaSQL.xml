@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="classQna">
+
+   <!-- qna 총개수 -->
+   <select id="qnaCount" parameterType="int" resultType="int">
+      select count(cl_qna_no)
+      from noel_class_qna
+      where cl_no = #{classNo}
+   </select>
+
+   <!-- qna 게시물 목록 + 페이징 -->
+   <select id="qnaList" parameterType="hashmap" resultType="Qna">
+      select
+         cl_qna_no as classQnaNo,
+         cl_no as classNo,
+         cl_qna_content as classQnaContent,
+         substr(user_id,1,length(user_id)-3) || lpad('*',3,'*') as userId,
+         cl_qna_regdate as classQnaRegdate,
+		 cl_qna_status as classQnaStatus,
+		 cl_secret as classSecret,
+		 cl_qna_pw as classQnaPw
+      from(
+             select
+                cl_qna_no,
+                cl_no,
+                cl_qna_content,
+                user_id,
+                cl_qna_regdate,
+                cl_qna_status,
+                cl_secret,
+                cl_qna_pw,
+                row_number() over(order by cl_qna_no desc) as rNum
+             from noel_class_qna where cl_no = #{classNo})
+         <![CDATA[where rNum > #{qnadisplayPost} and rNum <= #{qnapostNum}]]>
+   </select>
+
+   <select id="qnaDetail" parameterType="int" resultType="Qna">
+      select
+         cl_qna_no as classQnaNo,
+         cl_no as classNo,
+         marketer_id as marketerId,
+         cl_qna_content as classQnaContent,
+         user_id as userId,
+         substr(user_id,1,length(user_id)-3) || lpad('*',3,'*') as userId2,
+         cl_qna_regdate as classQnaRegdate,
+         (select cl_name from noel_class where cl_no =
+         (select cl_no from noel_class_qna where cl_qna_no = #{classQnaNo}))as className
+
+      from noel_class_qna where cl_qna_no = #{classQnaNo}
+   </select>	
+
+   <select id="qnaSecretDetail" parameterType="map" resultType="Qna">
+      select
+         cl_qna_no as classQnaNo,
+         cl_no as classNo,
+         marketer_id as marketerId,
+         cl_qna_content as classQnaContent,
+         substr(user_id,1,length(user_id)-3) || lpad('*',3,'*') as userId,
+         cl_qna_pw as classQnaPw,
+         (select cl_name from noel_class where cl_no =
+         (select cl_no from noel_class_qna where cl_qna_no = #{classQnaNo}))as className
+      from noel_class_qna where cl_qna_no = #{classQnaNo} and cl_qna_pw = #{classQnaPw}
+   </select>
+
+   <insert id="qnaInsert">
+      insert into noel_class_qna(
+         cl_qna_no,
+         cl_no,
+         marketer_id,
+         user_id,
+         cl_qna_content,
+         cl_secret,
+         cl_qna_pw)
+      values(
+               cl_qna_seq.nextval,
+               #{classNo},
+               #{marketerId},
+               #{userId},
+               #{classQnaContent},
+               #{classSecret},
+               #{classQnaPw})
+   </insert>
+
+   <update id="qnaUpdate" parameterType="Qna">
+      update noel_class_qna
+      set cl_qna_content = #{classQnaContent}
+      where cl_qna_no = #{classQnaNo}
+   </update>
+
+   <delete id="qnaDelete" parameterType="int">
+      delete
+      from noel_class_qna
+      where cl_qna_no = #{classQnaNo}
+   </delete>
+
+   <!-- QNA 댓글 조회 -->
+   <select id="qnareplyList" parameterType="int" resultType="Qna">
+      select
+         cl_qna_no as classQnaNo,
+         cl_qna_reply_writer as classQnaReplyWriter,
+         cl_qna_reply as classQnaReply,
+         cl_qna_reply_date as classQnaReplyDate
+      from noel_class_qna
+      where cl_qna_no = #{classQnaNo}
+
+   </select>
+
+   <!-- 1. QNA 댓글 작성 -->
+   <update id="qnareplyWrite" parameterType="Qna">
+      update noel_class_qna set
+      	 cl_qna_reply = #{classQnaReply},	
+		 cl_qna_reply_writer = #{classQnaReplyWriter},	
+		 cl_qna_reply_date = sysdate,	
+         cl_qna_status = 1
+      where cl_qna_no = #{classQnaNo}   
+   </update>
+
+   <!-- QNA 댓글 조회 -->
+   <select id="qnareplyDetail" resultType="Qna">
+      select
+         cl_qna_reply_writer as classQnaReplyWiter,
+         cl_qna_reply as classQnaReply,
+         cl_qna_reply_date as classQnaReplyDate
+      from noel_class_qna
+      where cl_qna_no = #{classQnaNo}
+   </select>
+
+   <!-- QNA 댓글 수정 -->
+   <update id="qnareplyModify" parameterType="QnaReply">
+      update noel_class_qna set
+         classQnarContent = #{classQnaReplyContent}
+      where classQnaReplyNo = #{classQnaReplyNo}
+        and classQnaNo = #{classQnaNo}
+   </update>
+
+   <!-- QNA 댓글 삭제 -->
+   <update id="qnareplyDelete" parameterType="int">
+      update noel_class_qna set 
+        cl_qna_reply_writer = null, 
+        cl_qna_reply = null, 
+        cl_qna_reply_date = null, 
+  		cl_qna_status = 0 where cl_qna_no = #{classQnaNo}
+   </update>
+
+   <!-- QNA 댓글 개수 -->
+   <select id="qnareplyCount">
+      update noel_class_qna q
+      set q.cl_qna_reply = (
+         select count(*)
+         from noel_class_qnar
+         where cl_qna_no = #{classQnaNo})
+      where q.cl_qna_no = #{classQnaNo}
+   </select>
+
+</mapper>
