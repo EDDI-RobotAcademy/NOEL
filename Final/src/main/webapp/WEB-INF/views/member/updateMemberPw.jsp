@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+<title>비밀번호 찾기</title>
 <link rel="stylesheet" href="/resources/css/member/searchMember.css">
 </head>
 <body>
@@ -44,7 +45,7 @@
 	$(".updatePwBtn").on("mouseover",function(){
 		$(this).css("background-color","rgb(97, 76, 76)");
 		$(this).css("border","1px solid black");
-		$(this).css("color","#ffc107");
+		
 	})
 	$(".updatePwBtn").on("mouseleave",function(){
 		$(this).css("background-color","");

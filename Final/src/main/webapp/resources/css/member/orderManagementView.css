@@ -371,6 +371,7 @@ li {
 	font-size: 20px;
 }
 
+
 #category_class, #category_market {
 	display: inline-block;
 	text-decoration: none;
@@ -390,6 +391,10 @@ li {
 
 .category1>a:last-child {
 	margin-left: 30px;
+}
+
+.note{
+	
 }
 .bookmark-content-list {
     margin-top: 50px;

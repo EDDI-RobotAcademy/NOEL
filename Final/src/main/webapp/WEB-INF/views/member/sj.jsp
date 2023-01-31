@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+<title>회원가입</title>
 <link rel="stylesheet" href="/resources/css/joinFrm.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">

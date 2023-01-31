@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="classWishList">
+
     <select id="selectOneStoreBookmark" parameterType="map" resultType="com.kh.myapp.cl.model.vo.Wishlist">
         select
             wish_no as wishNo,
@@ -19,8 +20,30 @@
         delete from
             noel_class_wishlist where cl_no = #{classNo} and user_Id = #{userId}
     </delete>
+    
+    <select id="myClassWishList" parameterType="map" resultType="com.kh.myapp.cl.model.vo.Wishlist">
+		select * from
+		(select rownum as rnum, b.* from
+		(select
+			wish_no as wishNo,
+			cl_no as classNo,
+			user_id as userId,
+			(select IMG_PATH from NOEL_CLASS_IMG si where CL_NO =
+			(select min(CL_NO) from NOEL_CLASS_IMG si2 where si2.CL_NO =
+			s.CL_NO)) as thumbNail,
+			(select CL_NAME from NOEL_CLASS s1 where s1.CL_NO = s.CL_NO) as className,
+			(select to_char(CL_PRICE, '999,999,999') from NOEL_CLASS s2 where s2.CL_NO = s.CL_NO) as classPrice
+		from NOEL_CLASS_WISHLIST s where user_id = #{bookmarkId})b) where rnum
+		between #{start} and #{end} order by 1 desc
+	</select>
 
-
+	<select id="totalClassWish" parameterType="string" resultType="int">
+		select count(*) from NOEL_CLASS_WISHLIST where user_id = #{bookmarkId}
+	</select>
+	
+	<delete id="deleteClassMyWishList" parameterType="int">
+		delete from NOEL_CLASS_WISHLIST where cl_no = #{classNo}
+	</delete>
 
 
 

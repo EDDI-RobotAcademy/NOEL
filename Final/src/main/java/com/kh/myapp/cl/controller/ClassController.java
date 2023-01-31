@@ -551,11 +551,7 @@ public class ClassController {
         model.addAttribute("s", map.get("s"));
         model.addAttribute("sbm", map.get("sbm"));
 
-        // 해당상품의 리뷰 갯수, qna 갯수
-        int qnacount = qnaService.qnaCount(classNo);
-        
-        // 한 페이지에 출력할 게시물 갯수
-		int postNN = 5;
+
 
 		int postNum = 5 * rnum;
 		int qnapostNum = 5 * qnum;

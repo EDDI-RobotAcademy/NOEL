@@ -9,9 +9,12 @@
 <title>bonjour noël</title>
 <link rel="stylesheet" href="/resources/css/product/prd_add.css">
 <link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
+<script src="/resources/js/index/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="/resources/js/market/prd_update.js"></script>
 
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/layouts/header.jsp" />
@@ -43,7 +46,7 @@
 											required oninvalid="this.setCustomValidity('카테고리를 확인해주세요')"
 											oninput="this.setCustomValidity('')">
 											<option value="${prdlist.cateGory }" hidden=""
-												disabled="disabled" selected="selected" class="viewCategory">${prdlist.cateGory }</option>
+												selected="selected" class="viewCategory">${prdlist.cateGory }</option>
 											<option value="1">Bread</option>
 											<option value="2">Cake</option>
 											<option value="3">Jam</option>
@@ -78,11 +81,11 @@
 								</div>
 								<br>
 								<div class="form-group">
-									<label for="textarea">상품 내용을 확인해주세요</label> <br>
-									<textarea class="form-control" name="prdContent" id="textarea"
-										rows="4" required
-										oninvalid="this.setCustomValidity('상품 설명을 입력하세요')"
-										oninput="this.setCustomValidity('')" style="margin: 10px 0;">${prdlist.prdContent }</textarea>
+								<label for="textarea">상품 내용을 확인해주세요</label> <br>
+								<textarea class="form-control" name="prdContent" id="summernote"
+									rows="4" required
+									oninvalid="this.setCustomValidity('상품 설명을 입력하세요')"
+									oninput="this.setCustomValidity('')" style="margin: 10px 0;">${prdlist.prdContent }</textarea>
 								</div>
 								<div>
 									<input type="file" name="file" class="file-upload" id="file"

@@ -20,8 +20,8 @@
 					<div class="bookmarkList-wrap">
 						<div class="category1">
 							<a href="/myClassWishList?reqPage=1&bookmarkId=${sessionScope.m.userId}" 
-								id="category_class">Class</a> 
-							<a href="/myPrdWishList?reqPage=1&bookmarkId=${sessionScope.m.userId}"
+								id="category_class">Class</a>
+							 <a href="/myPrdWishList?reqPage=1&bookmarkId=${sessionScope.m.userId}"
 								id="category_market">Market</a>
 						</div>
 
@@ -37,22 +37,22 @@
 							<c:otherwise>
 								<div class="bookmark-content-list">
 									<ul>
-										<c:forEach items="${list }" var="prd">
+										<c:forEach items="${list }" var="class">
 
 											<c:choose>
 												<c:when test="${not empty sessionScope.m }">
-													<li class="list"><a
-														href="marketDetailView?prdNo=${prd.prdNo }&bookmarkId=${sessionScope.m.userId}&num=1&rnum=1&qnum=1">
+													<li class="list">
+													<a href="/classDetail?classNo=${class.classNo }&userId=${m.userId}">
 															<div class="bookmark-content">
 																<div class="img-box">
-																	<img src="resources/upload/product/${prd.thumbNail }"
+																	<img src="resources/upload/class/${class.thumbNail }"
 																		alt="">
 																</div>
 
 																<div class="bookmark-man">
 																	<ul>
-																		<li><b>${prd.prdName }</b></li>
-																		<li>${prd.prdPrice }</li>
+																		<li><b>${class.className }</b></li>
+																		<li>${class.classPrice }</li>
 																	</ul>
 																</div>
 															</div>
@@ -60,7 +60,7 @@
 														<div class="delBtn">
 															<button type="button" class="delButton"
 																style="border: none; background: none;"
-																onclick="deleteBookmark(this,${prd.prdNo})">
+																onclick="deleteBookmark(this,${class.classNo})">
 																<b>삭제</b>
 															</button>
 														</div></li>
@@ -68,16 +68,13 @@
 
 												<c:otherwise>
 													<li class="list"><a
-														href="/marketDetail.do?pNo=${prd.prdNo }&bookMarkId=${sessionScope.o.ownerId}">
+														href="/marketDetail.do?pNo=${class.classNo }&bookMarkId=${sessionScope.o.ownerId}">
 															<div class="bookmark-content">
-																<%-- <div class="img-box">
-                                                   <img src="/resources/img/${prd.PImg }" alt="">
-                                                </div> --%>
 
 																<div class="bookmark-man">
 																	<ul>
-																		<li>${prd.prdName }</li>
-																		<li>${prd.prdPrice }</li>
+																		<li>${class.className }</li>
+																		<li>${class.classPrice }</li>
 																	</ul>
 																</div>
 															</div>
@@ -85,7 +82,7 @@
 														<div class="delBtn">
 															<button type="button" class="btn btn-danger"
 																style="width: 80px;"
-																onclick="deleteBookmark(this,${prd.prdNo})">삭제</button>
+																onclick="deleteBookmark(this,${class.classNo})">삭제</button>
 														</div>
 												</c:otherwise>
 											</c:choose>
@@ -125,12 +122,12 @@
 	<jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
 
 	<script type="text/javascript">
-    function deleteBookmark(obj, prdNo) {
+    function deleteBookmark(obj, classNo) {
         if (confirm("삭제하시겠습니까?")) {
             $.ajax({
-                url : "/deletePrdWishList",
+                url : "/deleteClassWishList",
                 type : "post",
-                data : { prdNo : prdNo },
+                data : { classNo : classNo },
                 success : function(data) {
                     console.log(data);
                     $(obj).parent().parent().remove();

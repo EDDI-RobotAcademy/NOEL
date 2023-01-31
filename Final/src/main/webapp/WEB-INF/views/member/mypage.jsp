@@ -7,7 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+<title>bonjour noël</title>
 </head>
 <link rel="stylesheet" href="/resources/css/member/owner.css">
 <link rel="stylesheet" href="/resources/css/member/updateOwner.css">
@@ -135,7 +136,6 @@
 		$("#updateBtn").on("mouseover",function(){
 			$(this).css("background-color","rgb(97, 76, 76)");
 			$(this).css("border","1px solid black");
-			$(this).css("color","#ffc107");
 		})
 		$("#updateBtn").on("mouseleave",function(){
 			$(this).css("background-color","");

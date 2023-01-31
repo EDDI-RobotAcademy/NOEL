@@ -6,18 +6,18 @@
 	<!-- 상품 등록 -->
 	<insert id="insert" parameterType="productVO">
 		insert into
-			noel_product(prd_no, prd_category, prd_name,
-						 prd_price, prd_stock, prd_note,
-						 prd_content,prd_regdate, marketer_id)
+		noel_product(prd_no, prd_category, prd_name,
+		prd_price, prd_stock, prd_note,
+		prd_content,prd_regdate, marketer_id)
 		values(PRD_NO_SEQ.nextval, #{cateGory}, #{prdName},
-			   #{prdPrice}, #{prdStock}, #{prdNote},
-			   #{prdContent}, sysdate, #{marketerId})
+		#{prdPrice}, #{prdStock}, #{prdNote},
+		#{prdContent}, sysdate, #{marketerId})
 	</insert>
 
 	<!-- 이미지 등록 -->
 	<insert id="prdimginsert" parameterType="prdimgVO">
 		insert into
-			noel_product_img
+		noel_product_img
 		values(prdimg_seq.nextval, #{prdNo}, #{prdImgpath})
 	</insert>
 
@@ -27,58 +27,41 @@
 		from noel_product
 	</select>
 
-	<!-- 판매자 상품 리스트로 조회 -->
-	<select id="selectlist" resultType="productVO" parameterType="string">
-		select
-			prd_no as prdNo,
-			prd_category as cateGory,
-			prd_name as prdName,
-			prd_price as prdPrice,
-			prd_stock as prdStock,
-			prd_note as prdNote,
-			prd_content as prdContent,
-			prd_regdate as regDate,
-			(select prd_Img_path from noel_product_img pi where pi.prd_no = np.prd_no) as prdthumNail
-		from noel_product np
-		where marketer_id = #{marketerId}
-		order by prd_regdate desc, prd_no desc
-	</select>
-
 	<!-- 상품 조회 -->
 	<select id="read" parameterType="int" resultType="productVO">
 		select
-			prd_no as prdNo, 
-			prd_category as cateGory,
-			prd_name as prdName,
-			prd_price as prdPrice, 
-			prd_stock as prdStock, 
-			prd_note as prdNote,
-			prd_content as prdContent, 
-			prd_regdate as regDate
+		prd_no as prdNo,
+		prd_category as cateGory,
+		prd_name as prdName,
+		prd_price as prdPrice,
+		prd_stock as prdStock,
+		prd_note as prdNote,
+		prd_content as prdContent,
+		prd_regdate as regDate
 		from noel_product
-		where prd_no  =#{prdNo}
+		where prd_no =#{prdNo}
 	</select>
 
 	<!-- 상품 수정 -->
 	<update id="update" parameterType="productVO">
 		update noel_product
 		set
-			prd_category = #{cateGory},
-			prd_name = #{prdName},
-			prd_price = #{prdPrice},
-			prd_stock = #{prdStock},
-			prd_note = #{prdNote},
-			prd_content = #{prdContent},
-			prd_regdate = sysdate
+		prd_category = #{cateGory},
+		prd_name = #{prdName},
+		prd_price = #{prdPrice},
+		prd_stock = #{prdStock},
+		prd_note = #{prdNote},
+		prd_content = #{prdContent},
+		prd_regdate = sysdate
 		where prd_no = #{prdNo}
 	</update>
 
 	<!-- 첨부된 이미지 조회 -->
 	<select id="selectImg" parameterType="int" resultType="prdimgVO">
 		select
-			prd_img_no as prdImgno,
-			prd_no as prdNo,
-			prd_img_path as prdImgpath
+		prd_img_no as prdImgno,
+		prd_no as prdNo,
+		prd_img_path as prdImgpath
 		from noel_product_img
 		where prd_no = #{prdNo}
 
@@ -88,67 +71,71 @@
 	<select id="delete" parameterType="int">
 		delete from noel_product
 		where
-			prd_no = #{prdNo}
+		prd_no = #{prdNo}
 	</select>
 
 	<!-- 상품 이미지 삭제 -->
 	<delete id="prdimgdelete" parameterType="int">
 		delete from
-			noel_product_img
+		noel_product_img
 		where prd_Img_no =#{prdImgno}
 	</delete>
 
 
 	<!-- 마켓 상품 리스트 조회 -->
-	<select id="marketList" parameterType="map" resultType="productVO">
+	<select id="marketList" parameterType="map"
+		resultType="productVO">
 		select * from
-			(select row_number() over (order by rnum desc) as rnum1, rb.* from
-				(select rownum as rnum,
-				 b.* from
-					(select
-						 prd_no as prdNo,
-						 prd_category as cateGory,
-						 prd_name as prdName,
-						 to_char(prd_price, '999,999,999') as prdPrice,
-						 prd_stock as prdStock,
-						 prd_content as prdContent,
-						 prd_regdate as regDate,
-						 (select round(
-						 	avg(rating),1) 
-						 		from noel_product_review r 
-						 			where r.prd_no = p.prd_no)as rating,
-						 (select prd_img_path 
-						 	from noel_product_img pi 
-						 		where pi.prd_no = p.prd_no) as prdthumNail
-					 from noel_product p order by prdNo ASC) b )rb order by 3 desc)
-		where rnum between #{start} and #{end}
+		(select row_number() over (order by rnum desc) as rnum1, rb.* from
+		(select rownum as rnum,
+		b.* from
+		(select
+		prd_no as prdNo,
+		prd_category as cateGory,
+		prd_name as prdName,
+		to_char(prd_price, '999,999,999') as prdPrice,
+		prd_stock as prdStock,
+		prd_content as prdContent,
+		prd_regdate as regDate,
+		(select round(
+		avg(rating),1)
+		from noel_product_review r
+		where r.prd_no = p.prd_no)as rating,
+		(select prd_img_path
+		from noel_product_img pi
+		where pi.prd_no = p.prd_no) as prdthumNail
+		from noel_product p order by prdNo ASC) b )rb order by 3 desc)
+		where rnum
+		between #{start} and #{end}
 	</select>
 
 	<!-- 마켓 상품 리스트 조회(페이징) 000 -->
 	<select id="countAllList" resultType="int">
-		select count(*) from noel_product
+		select count(*) from
+		noel_product
 	</select>
 
 	<!-- 마켓에서 하나의 상품을 눌렀을때 -->
 	<select id="selectOnePrd" parameterType="_int"
-			resultType="productVO">
+		resultType="productVO">
 		select
-			prd_no as prdNo,
-			prd_category as cateGory,
-			prd_name as prdName,
-			prd_price as prdPrice,
-			prd_stock as prdStock,
-			prd_note as prdNote,
-			prd_content as prdContent,
-			prd_regdate as regDate,
-			(select prd_Img_path from noel_product_img pi where pi.prd_no = np.prd_no) as prdthumNail,
-			marketer_id as marketerId
+		prd_no as prdNo,
+		prd_category as cateGory,
+		prd_name as prdName,
+		prd_price as prdPrice,
+		prd_stock as prdStock,
+		prd_note as prdNote,
+		prd_content as prdContent,
+		prd_regdate as regDate,
+		(select prd_Img_path from noel_product_img pi where pi.prd_no = np.prd_no) as
+		prdthumNail,
+		marketer_id as marketerId
 		from noel_product np
 		where np.prd_no = #{_parameter}
 	</select>
 
 	<select id="countTagList" parameterType="String"
-			resultType="int">
+		resultType="int">
 		select count(*) from noel_product
 		where 1=1
 		<if test="value != null and value != ''">
@@ -158,58 +145,86 @@
 
 
 	<!-- 마켓 상품 카테고리 000 -->
-	<select id="selectTag" parameterType="map"	resultType="productVO">
+	<select id="selectTag" parameterType="map"
+		resultType="productVO">
 		select * from
-			(select row_number() over (order by rnum desc) as rnum1, rb.* from
-				(select rownum as rnum, b.* from
-					(select
-						 prd_no as prdNo,
-						 prd_category as cateGory,
-						 prd_name as prdName,
-						 to_char(prd_price, '999,999,999') as prdPrice,
-						 prd_stock as prdStock,
-						 prd_content as prdContent,
-						 prd_regdate as regDate,
-						 (select round(avg(rating),1) from noel_product_review r where r.prd_no =
-																			 p.prd_no) as rating,
-						 (select prd_img_path from noel_product_img pi where pi.prd_img_no = p.prd_no) 
-							 as prdthumNail 
-					from noel_product p order by prdNo desc) b
-				 where cateGory = #{category})rb order by 3 desc)
-		where rnum between #{start} and #{end}
+		(select row_number() over (order by rnum desc) as rnum1, rb.* from
+		(select rownum as rnum, b.* from
+		(select
+		prd_no as prdNo,
+		prd_category as cateGory,
+		prd_name as prdName,
+		to_char(prd_price, '999,999,999') as prdPrice,
+		prd_stock as prdStock,
+		prd_content as prdContent,
+		prd_regdate as regDate,
+		(select round(avg(rating),1) from noel_product_review r where r.prd_no =
+		p.prd_no) as rating,
+		(select prd_img_path from noel_product_img pi where pi.prd_img_no = p.prd_no)
+		as prdthumNail
+		from noel_product p order by prdNo desc) b
+		where cateGory = #{category})rb order by 3 desc)
+		where rnum between #{start}
+		and #{end}
 	</select>
-	
+
 	<!-- 마켓 상품 정렬기능(리뷰, 위시) -->
 	<select id="sortList" parameterType="map" resultType="productVO">
 		select * from
 		(select rownum as rnum, b.* from
 		(select
-			prd_no as prdNo,
-			prd_name as prdName,
-			to_char(prd_price, '999,999,999') as prdPrice,
-			prd_category as prdCategory,	
-			(select count(*) from noel_market_wishlist w where w.prd_no = s.prd_no)as wish,
-			(select count(*) from noel_product_review r where r.prd_no = s.prd_no)as reviewCount,
-			(select prd_img_path from noel_product_img si where prd_img_no = s.prd_no) as prdthumNail 
-			from noel_product s order by
-			 <choose>
-				<when test="sortList.equals('wish')">
-					wish desc
-				</when>
-				<when test="sortList.equals('reviewCount')">
-					reviewCount desc
-				</when>
-			</choose>
-			nulls last
-			 )b
-	
-			<if test="category != null and category != ''">
-				where prdCategory = #{category}
-			</if>
-			
-			)where rnum between #{start} and #{end}
+		prd_no as prdNo,
+		prd_name as prdName,
+		to_char(prd_price, '999,999,999') as prdPrice,
+		prd_category as prdCategory,
+		(select count(*) from noel_market_wishlist w where w.prd_no = s.prd_no)as
+		wish,
+		(select count(*) from noel_product_review r where r.prd_no = s.prd_no)as
+		reviewCount,
+		(select prd_img_path from noel_product_img si where prd_img_no = s.prd_no) as
+		prdthumNail
+		from noel_product s order by
+		<choose>
+			<when test="sortList.equals('wish')">
+				wish desc
+			</when>
+			<when test="sortList.equals('reviewCount')">
+				reviewCount desc
+			</when>
+		</choose>
+		nulls last
+		)b
+
+		<if test="category != null and category != ''">
+			where prdCategory = #{category}
+		</if>
+
+		)where rnum between #{start} and #{end}
 	</select>
-	
-	
-	
+
+	<select id="countMarketerPrd" resultType="int"
+		parameterType="map">
+		select count(*) from noel_product no
+		where (select marketer_id from noel_product np where no.prd_no = np.prd_no)
+		=#{marketerId}
+	</select>
+
+	<select id="selectMarketerPrd" parameterType="map"
+		resultType="productVO">
+		select
+			prd_no as prdNo,
+			prd_category as cateGory,
+			prd_name as prdName,
+			prd_price as prdPrice,
+			prd_stock as prdStock,
+			prd_note as prdNote,
+			prd_content as prdContent,
+			prd_regdate as regDate,
+			(select prd_Img_path from noel_product_img pi where pi.prd_no = ot.prd_no) as prdthumNail
+		from (select rownum as rnum, n.* from (select * from
+		noel_product order by prd_regdate desc) n )ot
+		where (select marketer_id from noel_product np where ot.prd_no = np.prd_no) = #{marketerId}
+		and rnum between #{start} and #{end}
+	</select>
+
 </mapper>

@@ -1,8 +1,31 @@
+.priceSpan {
+	font-weight: bolder;
+	font-size: 25px;
+	color: red;
+}
+#clprice{
+	font-size: 13px;
+	color: #516171;
+}
+/*datepicer 버튼 롤오버 시 손가락 모양 표시*/
+.ui-datepicker-trigger {
+	cursor: pointer;
+}
+
+/*datepicer input 롤오버 시 손가락 모양 표시*/
+.hasDatepicker {
+	cursor: pointer;
+}
+
+.hidden {
+	display: none;
+}
 /*------------헤더-----------*/
 body{
     margin: 0 auto;
     position: relative;
 }
+
 
 .login-join{
     position: absolute;
@@ -155,8 +178,8 @@ body{
     background-color: rgba(224, 224, 224, 0.36);
     margin: 0 auto;
     margin-top: 10px;
-    padding-top: 10px;
-    padding-left: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .content-wrap2-1{
@@ -166,9 +189,8 @@ body{
 }
 
 .photo-wrap{
-    width:600px;
-    height:460px;
-    border: 0.5px solid gainsboro;
+    width:450px;
+    height:450px;
     float: left;
     position: relative;
     overflow: hidden;
@@ -214,11 +236,11 @@ body{
 }
 
 .info-reserve-wrap{
-    width: 580px;
-    height: 500px;
+    width: 640px;
+    height: 450px;
     float: left;
     margin: 0 auto;
-    margin-left: 2%;
+    margin-left: 50px;
 }
 
 #infoTable td{
@@ -440,7 +462,6 @@ button[name=recommendBtn]:hover{
     margin: 0 auto;
 	width:60vw;
     height:420px;
-    border: 0.5px solid gainsboro;
     margin-bottom: 20px;
     float: left;
     position: relative;
@@ -676,5 +697,11 @@ button[name=recommendBtn]:hover{
 .hidden{
 	display:none;
 }
+
+.directoryDiv{
+	width: 1200px;
+	height: 30px;
+}
+
 
 

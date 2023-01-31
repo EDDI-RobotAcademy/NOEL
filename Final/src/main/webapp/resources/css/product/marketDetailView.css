@@ -8,8 +8,8 @@ div {
     height:500px;
     margin: 0 auto;
     margin-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
     position:relative;
     width:1250px;
     margin:0 auto;
@@ -162,9 +162,8 @@ div {
 
 /*--- 상품 중간 타이틀 ---*/
 .photo-wrap{
-    width:600px;
-    height:460px;
-    border: 0.5px solid gainsboro;
+    width:450px;
+    height:450px;
     float: left;
     position: relative;
     overflow: hidden;
@@ -209,16 +208,16 @@ div {
 
 /*--- 테이블 디브 ---*/
 .tableDiv {
-	width: 580px;
-	height: 500px;
+	width: 640px;
+	height: 450px;
 	float: left;
 	margin: 0 auto;
-	margin-left: 2%;
+	margin-left: 50px;
 }
 
 #productTable>tbody>tr>th {
 		width: 120px;
-		height: 50px;
+		height: 40px;
 }
 #productTable>tbody>tr>td {
 text-indent: 10px;
@@ -258,7 +257,6 @@ text-indent: 10px;
 
 .priceSpan {
 	font-weight: bolder;
-	font-size: 25px;
 	color: red;
 }
 
@@ -350,7 +348,6 @@ button[name=reserveBtn]:hover {
 	padding-left: 50px;
 	padding-right: 50px;
 	width: 1250px;
-	height: 2000px;
 	margin: 0 auto;
 	display: block;
 	/* border-top: 2px solid black; */
@@ -423,7 +420,6 @@ a {
     border-radius: 5px;
     height: 30px;
     width: 80px;
-    cursor: pointer;
     color: white;
 }
 
@@ -433,6 +429,11 @@ a {
     border-radius: 5px;
     height: 30px;
     width: 80px;
-    cursor: pointer;
     color: white;
+}
+
+.ordercancleBtn:hover, .orderReviewBtn:hover{
+	border: 1px solid #333333;
+	background-color: #333333;
+	cursor: pointer;
 }

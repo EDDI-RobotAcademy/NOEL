@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 마이페이지</title>
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+<title>bonjour noël</title>
 </head>
 <body>
 <style type="text/css">
@@ -82,14 +83,14 @@
 		<div class="contents" style="padding:0;">
             <h4 style="margin: 0;">회원관리</h4>
             <!---------- 검색조건 ---------->
-            <div class="searchWrap" style="width:800px; margin-top:10px; margin-bottom: 20px;">
+            <div class="searchWrap" style="width:800px; margin-top:10px; margin-bottom: 20px;" align="center">
             	<form action="/searchMember?reqPage=1" method="post">
 					<select name="type" style="width:100px; height:32px;">
 						<option value="id">아이디</option>
 						<option value="name">이름</option>
 					</select>
 					<input type="text" name="keyword" id="keywordInput" style="height:32px;">
-					<input type="submit" value="검색" id="searchBtn" style="background-color: rgb(51,51,51); color:white; width:40px; border-radius: 5px;">
+					<input type="submit" value="검색" id="searchBtn" style="background-color: #dc3534; color:white; width:40px; border-radius: 5px; border-color: #dc3534; ">
             	</form>
             </div>
             <!---------- 목록 테이블 --------->	
