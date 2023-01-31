@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
 <title>bonjour noël</title>
 </head>
 <body>
@@ -83,6 +84,8 @@
 		            	   <c:when test="${classlist.classNo != null}">
 		            	   		<Br>
 								<a href="/class/classUpdate?classNo=${classlist.classNo}" class="btn btn-brand" id="font">클래스 수정</a>
+								<a href="/class/classDelete?classNo=${classlist.classNo}" 
+								onclick="return confirm('정말 삭제하시겠습니까??');" class="btn btn-brand" id="font">클래스 삭제</a>
 		            	   </c:when>
 		            	   </c:choose>
 						</c:forEach>

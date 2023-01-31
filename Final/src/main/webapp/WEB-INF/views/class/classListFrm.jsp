@@ -5,7 +5,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+	<title>bonjour noël</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <style>
