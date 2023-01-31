@@ -12,5 +12,8 @@ public class Wishlist {
     private int wishNo;
     private String userId;
     private int classNo;
+    private String thumbNail;
+    private String className;
+    private String classPrice;
 
 }

@@ -135,7 +135,6 @@
 		$("#updateBtn").on("mouseover",function(){
 			$(this).css("background-color","rgb(97, 76, 76)");
 			$(this).css("border","1px solid black");
-			$(this).css("color","#ffc107");
 		})
 		$("#updateBtn").on("mouseleave",function(){
 			$(this).css("background-color","");
