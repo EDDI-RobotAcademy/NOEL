@@ -3,44 +3,45 @@
 <mapper namespace="reserve">
 
 
+	<!-- 판매자 > 주문관리 > 검색  -->
 	<select id="searchReserve" parameterType="map" resultType="Reserve">
-      select * from 
-          (select rownum as rnum, r.* from 
-              (select 
-                  book_no as bookNo,
-    			user_id as userId,
-    			book_date as bookDate,
-    			coupon_no as couponNo,
-    			book_time as bookTime,
-    			book_num as bookNum,
-    			coupon_no as couponNo,
-                  (select user_name from noel_user nu where user_id = nb.user_id) as reserverName
-              from noel_book nb
-              where cl_no = #{classNo} and (select user_name from noel_user nu where user_id = nb.user_id) = #{keyword} 
-              order by 5 desc) r)
-        where rnum between #{start} and #{end}
-   </select>
+		select
+			book_no as bookNo,
+			user_id as userId,
+			book_time as bookTime,
+			book_date as bookDate,
+			book_num as bookNum,
+			coupon_no as couponNo,
+			(select cl_name from noel_class nc where ot.cl_no = nc.cl_no ) as className,
+    		(select cl_price from noel_class nc where ot.cl_no = nc.cl_no ) as classPrice,
+    		(select marketer_id from noel_class nc where ot.cl_no = nc.cl_no) as marketerId
+		from (select rownum as rnum, n.* from 
+		(select * from noel_book order by book_date desc) n )ot
+		where rnum between #{start} and #{end}
+		<choose>
+			<when test="type.equals('bookNo')">
+				and book_no like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('userId')">
+				and user_id like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+	</select>
 
-    <select id="selectReserveList" parameterType="map" resultType="com.kh.myapp.cl.model.vo.Reserve">
-        select book_no      as bookNo,
-               cl_no        as classNo,
-               book_name    as bookName,
-               book_date    as bookDate,
-               book_time    as bookTime,
-               book_num     as bookNum,
-               user_id      as userId
-        from noel_book
-        where user_id = #{userId}
-    </select>
+	<!-- 판매자 > 주문관리 > 검색 > 총개수 -->
+	<select id="searchReserveCount" parameterType="map"
+		resultType="int">
+		select count(*) from noel_book nb
+		where (select marketer_id from
+		noel_class nc where nb.cl_no = nc.cl_no)
+		=#{marketerId}
+		<choose>
+			<when test="type.equals('userId')">
+				and user_id like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+	</select>
 
-    <delete id="cancleReserve" parameterType="int">
-        delete from noel_book
-        where book_no = #{_parameter}
-    </delete>
-    
-    
-    
-    
     <!-- 판매자 > 예약관리 리스트 출력 -->
 	<select id="selectAllReserveList" parameterType="map" resultType="Reserve">
 
@@ -48,7 +49,7 @@
     		book_no as bookNo,
     		user_id as userId,
     		book_date as bookDate,
-    		coupon_no as couponNo,
+    		book_tel as bookTel,
     		book_time as bookTime,
     		book_num as bookNum,
     		coupon_no as couponNo,
@@ -75,5 +76,68 @@
 		set coupon_no =#{couponNo}
 		where book_no = #{bookNo}
 	</update>
+	
+	
+	
+	
+	
+	
+	
+	   <!-- 예약한 건 확인 -->
+    <select id="checkReserve" resultType="com.kh.myapp.cl.model.vo.Reserve" parameterType="com.kh.myapp.cl.model.vo.Reserve">
+        SELECT
+            book_no as bookNo,
+            cl_no as classNo,
+            book_name as bookName,
+            user_id as userId,
+            book_tel as bookTel,
+            coupon_no as couponNo,
+            book_date as bookDate,
+            book_time as bookTime
+        from noel_book
+        where cl_no = #{classNo}
+    </select>
+
+    <select id="ajaxCheckReserveTime" resultType="com.kh.myapp.cl.model.vo.Reserve" parameterType="map">
+        SELECT
+            book_time as bookTime
+        FROM noel_book
+        WHERE cl_No=#{classNo} AND book_Date=#{selectDate}
+        GROUP BY book_time
+    </select>
+
+
+    <!-- 예약하기 -->
+    <insert id="insertReserve" parameterType="com.kh.myapp.cl.model.vo.Reserve">
+        insert into noel_book
+        values(noel_book_seq.NEXTVAL, #{classNo}, #{bookName},  #{userId}, #{bookTel}, 1, #{bookDate}, #{bookTime}, #{bookNum}, #{impUid})
+    </insert>
+    
+    
+    
+      <select id="selectReserveList" parameterType="map" resultType="Reserve">
+      select 
+      	* from
+      	(select rownum as rnum, n.* from (select 
+         book_no as bookNo,
+            cl_no as classNo,
+            book_name as bookName,
+            user_id as userId,
+            book_tel as bookTel,
+            coupon_no as couponNo,
+            book_date as bookDate,
+            book_time as bookTime
+       from noel_book
+      where user_id = #{userId}
+      order by book_no desc)n)
+      where rnum between #{start} and #{end}
+   </select>
+
+    <delete id="cancleReserve" parameterType="int">
+        delete from noel_book
+        where book_no = #{_parameter}
+    </delete>
+
+
 
 </mapper>
