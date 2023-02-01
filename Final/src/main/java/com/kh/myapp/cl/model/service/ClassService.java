@@ -102,8 +102,8 @@ public class ClassService {
 	}
 	
 	// 클래스 메뉴 수정
-	public int updateMenu(Menu menu) {
-		return dao.updateMenu(menu);
+	public int updateMenu(Menu me) {
+		return dao.updateMenu(me);
 	}
 	
 	// 클래스 메뉴 삭제

@@ -162,7 +162,6 @@
 		select
 		menu_no as menuNo,
 		menu_name as menuName,
-		menu_price as menuPrice,
 		menu_img as menuImg,
 		marketer_id as marketerId
 		from noel_menu
@@ -175,7 +174,6 @@
 		(menu_seq.nextval,
 		#{classNo},
 		#{menuName},
-		#{menuPrice},
 		#{menuImg},
 		#{marketerId}
 		)
@@ -186,7 +184,6 @@
 		menu_no as menuNo,
 		cl_no as classNo,
 		menu_name as menuName,
-		menu_price as menuPrice,
 		menu_img as menuImg,
 		marketer_id as marketerId
 		from noel_menu
@@ -196,9 +193,7 @@
 	<update id="updateMenu" parameterType="me">
 		update noel_menu
 		set
-		menu_name =
-		#{menuName},
-		menu_price = #{menuPrice},
+		menu_name = #{menuName},
 		menu_img = #{menuImg}
 		where menu_no = #{menuNo}
 	</update>
@@ -216,7 +211,6 @@
             menu_no as menuNo,
             cl_no as classNo,
             menu_name as menuName,
-            menu_price as menuPrice,
             menu_img as menuImg,
             marketer_id as marketerId
         from noel_menu

@@ -52,7 +52,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					<form role="form" method="post" action="/class/updateMenu"
 					name="updateForm" id="updateForm" enctype="multipart/form-data">
 					<input type="hidden" id="menuNo" name="menuNo" value="${menulist.menuNo }"> <br>
-					
 						<div class="form-group">
 							<label for="inputMenuName">메뉴 이름</label>
 							<br>
@@ -61,12 +60,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							required oninvalid="this.setCustomValidity('메뉴명을 입력하세요')" oninput="this.setCustomValidity('')">
 						</div>
 						<br>
-						<div class="form-group">
-							<label for="inputPrice">메뉴 가격</label>
-							<br>
-							<input type="number" class="form-control" id="menuPrice" name="menuPrice" value="${menulist.menuPrice }" required oninvalid="this.setCustomValidity('가격을 입력하세요')" oninput="this.setCustomValidity('')">
-							<span class="comment" style="font-size: 12px; padding-left: 10px;"></span>
-						</div>
 						<div>
 							
 							<input type="file" name="file" class="file-upload" id="file" style="visibility: hidden; position: absolute;" accept="image/gif, image/jpg, image/jpeg, image/png">
@@ -75,7 +68,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						</div>
 						<br>
 						<div>
-							<button type="submit" id="font" class="btn btn-brand">수정</button>
+							<button type="submit" id="font" class="btn btn-brand">완료</button>
+							<button type="button" onclick="javascript:history.go(-1);" class="btn btn-brand">취소</button>
 						</div>
 					</form>
 				</div>
