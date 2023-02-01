@@ -90,8 +90,8 @@ public class ClassDao {
 		Menu result = sqlSession.selectOne("class.readMenu", menuNo);
 		return result;
 	}
-	public int updateMenu(Menu menu) {
-		return sqlSession.update("class.updateMenu", menu);
+	public int updateMenu(Menu me) {
+		return sqlSession.update("class.updateMenu", me);
 	}
 	
 	// 클래스 메뉴 삭제

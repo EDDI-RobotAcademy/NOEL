@@ -109,7 +109,7 @@ public class ClassController {
         cv.setClassResTime(cv.getClassResTime() + "~" + closedHour);
         int result = service.addClass(cv);
 
-        return "/member/marketerMypage";
+        return "redirect:/class/marketerClassMypage";
     }
 
     // 판매자 > 클래스 관리 > 클래스 등록 시 content 내에 이미지를 삽입하기 위한 메소드
@@ -258,7 +258,7 @@ public class ClassController {
 			me.setMenuImg(menuPath);
 		}
 		int result = service.addMenu(me);
-		return "redirect:/class/marketerClassMypage";
+		return "redirect:/class/menuFrm?classNo=" + me.getClassNo();
 	}
 		
 		
@@ -293,18 +293,16 @@ public class ClassController {
 			me.setMenuImg(menuPath);
 		}
 		int result = service.updateMenu(me);
-		return "redirect:/class/marketerClassMypage";
+		return "redirect:/class/menuFrm?classNo=" + me.getClassNo();
 	}
 		
 
 	// 메뉴 삭제
 	@RequestMapping(value = "/deleteMenu", method = RequestMethod.GET)
-	public String deleteMenu(int menuNo) throws Exception {
+	public String deleteMenu(int menuNo, Menu me) throws Exception {
 		service.deleteMenu(menuNo);
-		return "redirect:/class/marketerClassMypage";
+		return "redirect:/class/menuFrm?classNo=" + me.getClassNo();
 	}
-	
-	
 	
     // 판매자 > 예약 관리
  	@RequestMapping(value = "class/reserveManagement", method = RequestMethod.GET)
