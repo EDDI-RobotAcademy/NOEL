@@ -103,36 +103,18 @@
 										accept="image/gif, image/jpg, image/jpeg, image/png">
 									<button class="inputPhoto" type="button" id="inputPhoto">썸네일변경하기</button>
 								</div>
-								<%-- <div class="form-group">
-									<label>대표 이미지를 확인해 주세요</label><br> <span
-										class="input-group-append">
-										<button class="file-upload-browse btn btn-brand" type="button"
-											id="storeImg">사진추가</button>
-									</span> <input type="file" name="file" class="file-upload-default"
-										id="file" multiple>
-									<div class="input-group col-xs-12">
-										<c:forEach var="prdImgList" items="${prdImgList }">
-											<p>
-												<input type="text" class="form-control file-upload-info"
-													name="prdImgpath" value="${prdImgList.prdImgpath}"
-													readonly="readonly">
-												<button type="button" class="imgDelBtn btn btn-brand"
-													onclick="deleteImg(this,${prdImgList.prdImgno},'${prdImgList.prdImgpath }');">삭제</button>
-											</p>
-										</c:forEach>
-
-									</div>
-								</div> --%>
 								<br> <br>
 							</form>
 							<div class="submitBtn1">
 								<button type="button" onclick="javascript:history.go(-1);"
 									class="btn btn-brand">취소</button>
+								<button type="button" onclick="javascript:history.go(-1);"
+									class="btn btn-brand">판매중지</button>
 								<button type="button" onclick="return chk_form();"
 									class="btn btn-brand">저장</button>
-								<a href="/market/prd_delete?prdNo=${prdlist.prdNo}"
+								<%-- <a href="/market/prd_delete?prdNo=${prdlist.prdNo}"
 									class="btn btn-brand" id="font"
-									onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a> <br> <br>
+									onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a> --%> <br> <br>
 								<br>
 							</div>
 

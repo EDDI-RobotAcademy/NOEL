@@ -148,6 +148,7 @@
             cl_res_date as classResDate,
             cl_res_time as classResTime,
             cl_addr as classAddr,
+            closed_day as closedDay,
             (select img_path from noel_class_img ci where ci.cl_no = nc.cl_no) as thumNail
         from noel_class nc
         where nc.cl_no = #{_parameter}
