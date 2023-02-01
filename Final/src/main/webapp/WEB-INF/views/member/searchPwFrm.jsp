@@ -13,8 +13,8 @@
 <body>
 	<div class="searchPw-wrap">
 		<div class="searchContent">
-			<fieldset>
-				<legend>비밀번호  찾기</legend>
+			<fieldset style = "border-color: #dc3545">
+				<legend>비밀번호 찾기</legend>
 					<input type="radio" name="selSearch" id="normal" value="1">
 		            <label for="normal">일반회원</label>
 		            <input type="radio" name="selSearch" id="owner" value="2">
