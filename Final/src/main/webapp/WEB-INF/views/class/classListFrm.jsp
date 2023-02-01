@@ -43,7 +43,7 @@
     text-rendering: optimizeLegibility;
 }
 
-.prod_icon.sale, .prod_icon.timesale {
+.prod_icon.best, .prod_icon.timesale {
     background: #fe5356;
     border: 1px solid #fe5356;
 }
@@ -88,7 +88,7 @@
 
                                 <div id="font">
                                     <div style="display: none">${s.classNo }</div>
-                                    <div id = "class_content" style="text-align: center"> ${s.className }</div>
+                                    <div id = "class_content" style="text-align: center; color:black;"> ${s.className }</div>
                                     <div style="text-align: center">
                                         <span><fmt:formatNumber value="${s.classPrice}"
                                                  pattern="#,###" />원</span>
@@ -96,7 +96,7 @@
                                     </div>
                                     <div style="text-align: center">
                                     <div class="prod_icon new" style="align-content: center">NEW</div>
-                                    <div class="prod_icon sale">SALE</div>
+                                    <div class="prod_icon best">BEST</div>
                                     </div>
                                 </div>
                             </a>

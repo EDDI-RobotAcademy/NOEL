@@ -322,14 +322,16 @@ button[name=reserveBtn]{
     margin-top: 10px;
     width:280px;
     height:50px;
-    border-radius: 10px;
-    background-color: rgb(51, 51, 51);
+    border-radius: 15px;
+    background-color: #dc3545;
+	border-color: #dc3545;
     color: white;
 }
 
 button[name=reserveBtn]:hover{
     background-color: white;
-    color: rgb(51, 51, 51); 
+	border-color: #d15662;
+	color: #dc3545;
     cursor: pointer;
 }
 
@@ -701,5 +703,41 @@ button[name=recommendBtn]:hover{
 	height: 30px;
 }
 
+.btnWrap {
+	/* width: 600px;
+	height: 50px;
+	display: inline;
+	float: left; */
+	margin-top: 30px;
+}
+
+button[name=wishBtn]{
+    margin-top: 10px;
+    width:280px;
+    height:50px;
+    border-radius: 15px;
+    background-color: white;
+	border-color: #dc3545;
+    color: white;
+}
 
 
+.wishlist{
+	font-family:Gowun Dodum;  
+	width:280px; 
+	height:50px; 
+	background-color: white; 
+	color: black;
+}
+
+.wishlist1{
+	font-family:Gowun Dodum;  
+	width:280px; 
+	height:50px; 
+	background-color: white; 
+	color: black;
+}
+
+.wishlist:hover, .wishlist1:hover{
+	background-color: white; 
+}

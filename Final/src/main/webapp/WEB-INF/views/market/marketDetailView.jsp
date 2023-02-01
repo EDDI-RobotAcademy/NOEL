@@ -72,80 +72,90 @@
 						</td>
 					</tr>
 				</table>
+				
+				
 				<div class="btnWrap">
-					<form action="/insertCart">
-						<c:choose>
-							<c:when test="${empty sessionScope.m}">
-								<button type="button" class="loginBtn" id="cartBtn"
-									onclick="loginCh()">장바구니</button>
-							</c:when>
-							<c:otherwise>
-								<button type="submit" class="cartBtn">장바구니</button>
-							</c:otherwise>
-						</c:choose>
-						<input type="hidden" name="prdPrice" class="allPrice"
-							value="${prd.prdPrice }"> 
-						<input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }"> 
-						<input type="hidden" name="prdName" class="pNumber"	value="${prd.prdName }">
-						<input type="hidden" name="cartQuan" class="count"> 
-						<input type="hidden" name="userId" value="${sessionScope.m.userId }">
-					</form>
-
-					<form action="/insertOrder">
-						<c:choose>
-							<c:when test="${empty sessionScope.m}">
-								<button type="button" class="loginBtn" id="cartBtn"
-									onclick="loginCh()">구매하기</button>
-							</c:when>
-							<c:otherwise>
-								<button type="submit" class="buyBtn">구매</button>
-							</c:otherwise>
-						</c:choose>
-						<input type="hidden" name="prdPrice" class="allPrice"
-							value="${prd.prdPrice }"> 
-						<input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }">
-						<input type="hidden" name="prdthumNail" class="prdthumNail" value="${prd.prdthumNail }">
-						 <input type="hidden" name="prdName" value="${prd.prdName}"> 
-						<input type="hidden" name="cartQuan" class="count"> 
-						<input
-							type="hidden" name="userId" value="${sessionScope.m.userId }">
-					</form>
 					<c:choose>
-						<c:when test="${empty sessionScope.m.userId}">
-							<button type="button" id="wishBtn" name="reserveBtn"
-								onclick="wishCh()">
-								<img style="width: 21px;" src="/resources/img/index/heart.png">
-							</button>
+						<c:when test="${prd.prdStock-prd.prdAllStock eq 0}">
+							<button type="button" class="soldoutBtn">품절된 상품입니다.</button>
 						</c:when>
 						<c:otherwise>
+							<form action="/insertCart">
+								<c:choose>
+									<c:when test="${empty sessionScope.m}">
+										<button type="button" class="loginBtn" id="cartBtn"
+											onclick="loginCh()">장바구니</button>
+									</c:when>
+									<c:otherwise>
+										<button type="submit" class="cartBtn">장바구니</button>
+									</c:otherwise>
+								</c:choose>
+								<input type="hidden" name="prdPrice" class="allPrice"
+									value="${prd.prdPrice }"> 
+								<input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }"> 
+								<input type="hidden" name="prdName" class="pNumber"	value="${prd.prdName }">
+								<input type="hidden" name="cartQuan" class="count"> 
+								<input type="hidden" name="userId" value="${sessionScope.m.userId }">
+							</form>
+		
+							<form action="/insertOrder">
+								<c:choose>
+									<c:when test="${empty sessionScope.m}">
+										<button type="button" class="loginBtn" id="cartBtn"
+											onclick="loginCh()">구매하기</button>
+									</c:when>
+									<c:otherwise>
+										<button type="submit" class="buyBtn">구매</button>
+									</c:otherwise>
+								</c:choose>
+								<input type="hidden" name="prdPrice" class="allPrice"
+									value="${prd.prdPrice }"> 
+								<input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }">
+								<input type="hidden" name="prdthumNail" class="prdthumNail" value="${prd.prdthumNail }">
+								 <input type="hidden" name="prdName" value="${prd.prdName}"> 
+								<input type="hidden" name="cartQuan" class="count"> 
+								<input
+									type="hidden" name="userId" value="${sessionScope.m.userId }">
+							</form>
 							<c:choose>
-								<c:when test="${param.bookmarkId == marketwish.userId}">
-									<button type="button" name="reserveBtn" id="wishlist"
-										style="display: none;"
-										onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+								<c:when test="${empty sessionScope.m.userId}">
+									<button type="button" id="wishBtn" name="reserveBtn"
+										onclick="wishCh()">
 										<img style="width: 21px;" src="/resources/img/index/heart.png">
-									</button>
-									<button type="button" name="reserveBtn" id="wishlist1"
-										onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-										<img style="width: 25px;"
-											src="/resources/img/index/heart-fill.png">
 									</button>
 								</c:when>
 								<c:otherwise>
-									<button type="button" name="reserveBtn" id="wishlist"
-										onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-										<img style="width: 21px;" src="/resources/img/index/heart.png">
-									</button>
-									<button type="button" name="reserveBtn" id="wishlist1"
-										style="display: none;"
-										onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
-										<img style="width: 25px;"
-											src="/resources/img/index/heart-fill.png">
-									</button>
+									<c:choose>
+										<c:when test="${param.bookmarkId == marketwish.userId}">
+											<button type="button" name="reserveBtn" id="wishlist"
+												style="display: none;"
+												onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+												<img style="width: 21px;" src="/resources/img/index/heart.png">
+											</button>
+											<button type="button" name="reserveBtn" id="wishlist1"
+												onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+												<img style="width: 25px;"
+													src="/resources/img/index/heart-fill.png">
+											</button>
+										</c:when>
+										<c:otherwise>
+											<button type="button" name="reserveBtn" id="wishlist"
+												onclick="addWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+												<img style="width: 21px;" src="/resources/img/index/heart.png">
+											</button>
+											<button type="button" name="reserveBtn" id="wishlist1"
+												style="display: none;"
+												onclick="deleteWishlist(this, ${prd.prdNo }, '${sessionScope.m.userId}')">
+												<img style="width: 25px;"
+													src="/resources/img/index/heart-fill.png">
+											</button>
+										</c:otherwise>
+									</c:choose>
 								</c:otherwise>
 							</c:choose>
 						</c:otherwise>
 					</c:choose>
+					
 				</div>
 			</div>
 		</div>

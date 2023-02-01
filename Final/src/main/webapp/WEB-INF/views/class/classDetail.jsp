@@ -90,26 +90,22 @@
                 	<span class="price" style="color: red; font-weight: bolder;"></span>원</td>
                 </tr>
             </table>
-
+			<div class="btnWrap">
             <c:choose>
                 <c:when test="${empty sbm}">
                     <c:choose>
                         <c:when test="${empty sessionScope.m}">
-                            <button name="reserveBtn" class="loginBtn" style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: rgb(51,51,51); color: white;
-                                 margin-top: 10px;" onclick="loginCh()">예약하기
+                            <button name="reserveBtn" class="loginBtn" onclick="loginCh()">예약하기
                             </button>
                         </c:when>
                         <c:otherwise>
-                        	<button name="reserveBtn" class="reserveBtn2" style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: rgb(51,51,51); color: white;
-                                 margin-top: 10px;">예약하기
+                        	<button name="reserveBtn" class="reserveBtn2" >예약하기
                             </button>
-                            <button  name="reserveBtn" id="wishlist" style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: white; color: black;
-                                 margin-top: 10px; padding: 17.3px;"  onclick="addWishlist(this, ${s.classNo}, '${m.userId}')">
-                                <img style = "width: 15px;" src="/resources/img/index/heart.svg">
+                            <button  name="wishBtn" id="wishlist" onclick="addWishlist(this, ${s.classNo}, '${m.userId}')">
+                                <img style = "width: 21px;" src="/resources/img/index/heart.png">
                             </button>
-                            <button  name="reserveBtn" id="wishlist1"   style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: white; color: black;
-                                 margin-top: 10px; padding: 17.3px; display: none;"  onclick="deleteWishlist(this, ${s.classNo}, '${m.userId}')">
-                                <img style = "width: 15px;" src="/resources/img/index/heart-fill.svg">
+                            <button  name="wishBtn" id="wishlist1"   style="display: none;"  onclick="deleteWishlist(this, ${s.classNo}, '${m.userId}')">
+                                <img style = "width: 25px;" src="/resources/img/index/heart-fill.png">
                            </button>
                         </c:otherwise>
                     </c:choose>
@@ -118,27 +114,24 @@
                 <c:otherwise>
                     <c:choose>
                         <c:when test="${!empty sessionScope.m}">
-                            <button name="reserveBtn" class="reserveBtn2" style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: rgb(51,51,51); color: white;
-                                 margin-top: 10px;">예약하기
+                            <button name="reserveBtn" class="reserveBtn2" >예약하기
                             </button>
-                            <button  name="reserveBtn" id="wishlist1" style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: white; color: black;
-                                 margin-top: 10px; padding: 17.3px;"  onclick="deleteWishlist(this, ${s.classNo}, '${m.userId}')">
-                                <img style = "width: 15px;" src="/resources/img/index/heart-fill.svg">
+                            <button  name="wishBtn" id="wishlist1" onclick="deleteWishlist(this, ${s.classNo}, '${m.userId}')">
+                                <img style = "width: 25px;" src="/resources/img/index/heart-fill.png">
                             </button>
-                            <button  name="reserveBtn" id="wishlist"   style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: white; color: black;
-                                 margin-top: 10px; padding: 17.3px; display: none;"   onclick="addWishlist(this, ${s.classNo}, '${m.userId}')">
-                                <img style = "width: 15px;" src="/resources/img/index/heart.svg">
+                            <button  name="wishBtn" id="wishlist" style="display: none;" onclick="addWishlist(this, ${s.classNo}, '${m.userId}')">
+                                <img style = "width: 21px;" src="/resources/img/index/heart.png">
                             </button>
                         </c:when>
                         
                         <c:otherwise>
-                        	<button name="reserveBtn" class="loginBtn" style="font-family:Gowun Dodum;  width:280px; height:50px; background-color: rgb(51,51,51); color: white;
-                                 margin-top: 10px;" onclick="loginCh()">예약하기
+                        	<button name="reserveBtn" class="loginBtn" onclick="loginCh()">예약하기
                             </button>    
                         </c:otherwise>
                     </c:choose>
                 </c:otherwise>
             </c:choose>
+            </div>
         </div>
     </div>
 </div>
