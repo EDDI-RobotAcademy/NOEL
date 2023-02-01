@@ -552,7 +552,9 @@ public class ClassController {
         model.addAttribute("sbm", map.get("sbm"));
 
 
-
+        int qnacount = qnaService.qnaCount(classNo);
+        int postNN = 5;
+        
 		int postNum = 5 * rnum;
 		int qnapostNum = 5 * qnum;
 		
