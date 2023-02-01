@@ -404,7 +404,7 @@
 <div class="w3-container" style="font-family:Gowun Dodum;">
     <div id="timeDateModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
         <div class="w3-modal-content w3-animate-top w3-card-4" style="width:30%; height: 40%;">
-            <header class="w3-container" style="height:10%; background-color: #ffc107;">
+            <header class="w3-container" style="height:10%; background-color: #dc3545;">
                  <span onclick="document.getElementById('timeDateModal').style.display='none'"
                        class="w3-button w3-display-topright" style="width:5%; height:10%;">&times;</span>
             </header>
@@ -445,7 +445,7 @@
                 //---------- 휴일 데이터피커 비활성화
                 let dayArr = new Array();
                 let daysArr = new Array();
-                let closedDay = "목";
+                let closedDay = "${s.closedDay}";
 
                 function disabledDays(date) {
 
