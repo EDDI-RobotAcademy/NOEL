@@ -6,21 +6,18 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" />
 <title>bonjour noël</title>
+
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"
-	type="text/javascript"></script>
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js">
-</script>
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,200" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/css/class/classDetail.css">
-<link rel="stylesheet" href="/resources/css/map.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
@@ -147,7 +144,7 @@
             <p class="menuTitle" style="margin-top: 20px;">대표 클래스</p>
         </div>
         <div class="food-wrap"
-             style="width:1200px; overflow:hidden; height:auto; margin: 0 auto; text-align:center; margin:50px 80;">
+             style="width:1200px; overflow:hidden; height:auto; margin: 0 auto; text-align:center; margin:50px 70;">
             <c:forEach items="${ menuList}" var="me">
             <input type="hidden" name="marketerId" value="${me.marketerId}">
                 <div class="w3-card" id="photoWrap"
@@ -310,7 +307,7 @@
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel"
+					<h5 class="modal-title1" id="exampleModalLabel"
 						style="font-family: Gowun Dodum;">Q&A</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
@@ -325,7 +322,7 @@
 							style="height: 15em; resize: none;" autofocus="autofocus" title="문의할 내용을 작성해주세요."></textarea>
 					<br>
 					<div>
-						<input class="checkbox" type="checkbox" name="classSecret" id="classSecret"> 
+						<input class="checkbox" type="checkbox" name="classSecret" id="classSecret" style="accent-color: #dc3545;"> 
 						<label class="form-check-label">비밀글 </label>
 					</div>
 					<div style="display:none; float:left;" class="secretPw">

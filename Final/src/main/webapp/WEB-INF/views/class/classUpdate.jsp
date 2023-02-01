@@ -111,8 +111,8 @@
             </div>
 		</form>
 		<div class="submitBtn1">
-			<button type="button" onclick="javascript:history.go(-1);" class="btn btn-brand">취소</button>
 			<button type="button" onclick="return chk_form();" class="btn btn-brand">저장</button>
+			<button type="button" onclick="javascript:history.go(-1);" class="btn btn-brand">취소</button>
 		</div>
 		</div>
 	</div>
