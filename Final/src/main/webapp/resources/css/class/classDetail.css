@@ -542,7 +542,6 @@ button[name=recommendBtn]:hover{
 /*----- 후기 부분 -----*/
 .review-wrap{
     margin: 0 auto;
-    height: 400px;
 }
 
 #reviewWrapUl{
@@ -609,7 +608,6 @@ button[name=recommendBtn]:hover{
     background-color: white;
     border-radius: 10px;
     width: 30vw;
-    height: 40vh;
     min-width: 385px;
     min-height: 288px;
 }

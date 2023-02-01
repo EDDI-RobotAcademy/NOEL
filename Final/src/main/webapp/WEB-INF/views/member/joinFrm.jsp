@@ -229,6 +229,7 @@
 				}
 			});
 		});
+		
 		//인증번호 시간제한 로직
 		let PhoneNumStr = $(".certifyNum2").val();
 		
@@ -277,6 +278,7 @@
 						$("#authMsg").css("color","red");
 		            }
 		      });
+			
 		$("#userName").on("keyup",function(){
 			const nameReg = /^[가-힣]{2,5}$/;
 			const name = $("#userName");
