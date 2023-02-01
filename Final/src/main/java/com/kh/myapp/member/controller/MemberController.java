@@ -224,7 +224,7 @@ public class MemberController {
 		String inputPw = member.getUserPw();
 		Member m = service.selectOneMember(member);
 		boolean Pwmatches = pwEncoder.matches(inputPw, m.getUserPw());
-		if (m != null && Pwmatches == true) {
+		if (m != null && Pwmatches == true ) {
 			session.setAttribute("m", m);
 			return "redirect:/";
 		} else {

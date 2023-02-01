@@ -67,7 +67,7 @@
                         </div>
                         <div style="text-align: center">
                             <div class="prod_icon new" style="align-content: center">NEW</div>
-                            <div class="prod_icon sale">SALE</div>
+                            <div class="prod_icon sale">BEST</div>
                         </div>
                     </div>
                 	</a>

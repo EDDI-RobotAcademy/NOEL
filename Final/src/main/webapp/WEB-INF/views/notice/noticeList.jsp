@@ -36,18 +36,17 @@ pageContext.setAttribute("newLine", "\n");
 				<a href="/goNoticeFrm">글쓰기</a>
 			</div>
 		</c:if>
+		
 		<c:choose>
 			<c:when test="${empty list }">
 				<div class="warningMark">
 					<span class="material-symbols-outlined" style="font-size: 70px;">
 						error </span>
 				</div>
-
-				<div class="noMsg">${msg }</div>
+				<div class="noMsg">${msg}</div>
 			</c:when>
 
 			<c:otherwise>
-
 				<div class="notice-tbl-wrap">
 					<table class="notice-tbl" style="border-top: 1px solid gray;">
 						<tr style="height: 70px;">

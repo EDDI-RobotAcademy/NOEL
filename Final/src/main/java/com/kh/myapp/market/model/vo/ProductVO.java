@@ -16,6 +16,7 @@ public class ProductVO {
 	private String prdName;
 	private String prdPrice;
 	private int prdStock;
+	private int prdAllStock;
 	private String prdNote;
 	private String prdContent;
 	private Date regDate;
