@@ -236,4 +236,13 @@
 	font-weight: 700;
 }
 
+input[type='radio'],
+input[type='radio']:checked {
+    accent-color: #dc3545;
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 100%;
+    margin-right: 0.1rem;
+}
+
 

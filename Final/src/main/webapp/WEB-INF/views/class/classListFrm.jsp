@@ -15,10 +15,8 @@
 <jsp:include page="/WEB-INF/views/layouts/header.jsp" />
 
 
-
-<!-- ////////////////////////////////////////////////////////////////// -->
 <div class="classList-content-wrap">
-    <!-- 맛집 리스트 생성 -->
+    <!-- 리스트 생성 -->
     <div class="classList-list">
         <div class="classList-list-content">
             <c:forEach items="${list}" var="s">
@@ -50,7 +48,7 @@
                                     </div>
                                     <div style="text-align: center">
                                     <div class="prod_icon new" style="align-content: center">NEW</div>
-                                    <div class="prod_icon sale">SALE</div>
+                                    <div class="prod_icon best">BEST</div>
                                     </div>
                                 </div>
                             </a>

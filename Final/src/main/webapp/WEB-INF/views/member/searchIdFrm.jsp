@@ -13,7 +13,7 @@
 <body>
 	<div class="searchId-wrap">
 		<div class="searchContent">
-			<fieldset>
+			<fieldset style = "border-color: #dc3545">
 				<legend>아이디 찾기</legend>
 					<input type="radio" name="selSearch" id="normal" value="1">
 		            <label for="normal">일반회원</label>

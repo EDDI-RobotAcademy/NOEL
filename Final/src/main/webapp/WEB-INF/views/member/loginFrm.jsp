@@ -23,7 +23,6 @@
         <div class="login-input">
             <div>Login</div>
             <div>가입하신 아이디로 로그인 하세요.</div>
-            
             <input type="radio" name="selLogin" id="normal" value="1">
             <label for="normal">일반회원</label>
             <input type="radio" name="selLogin" id="owner" value="2">
@@ -84,9 +83,6 @@
       </div>
     </div>
 </div>
-
-
-
 
     <script>
         const input = $(".Llabel").next();
