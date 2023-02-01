@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+<title>bonjour noël</title>
 <html>
 <head>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ihvkorsg7y"></script>
@@ -12,18 +14,18 @@
 {
 	position: relative;
     display:flex;
-    flex-wrap:wrap;
     align-items:center;
     margin:80px 0;
+    overflow: hidden;
 }
 .grid-image img 
 {
 	position: relative;
-    width:calc(33.333% - 10px);
-    height:500px;
+    height:450px;
+    width: 450px;
     filter: brightness(50%);
 }
-.image_text1
+.image_text
 {
 	z-index:1;
     position: absolute;
@@ -33,25 +35,9 @@
     color: white;
     font-family: 'Gowun Dodum', sans-serif;
  }
- .image_text2
-{
-	z-index:1;
-    position: absolute;
-    top: 50%;
-    left: 15%;
-    transform: translate( -50%, -50% );
-    color: white;
-    font-family: 'Gowun Dodum', sans-serif;
- }
-.image_text3
-{
-	z-index:1;
-    position: absolute;
-    top: 50%;
-    left: 82%;
-    transform: translate( -50%, -50% );
-    color: white;
-    font-family: 'Gowun Dodum', sans-serif;
+ .subpic
+ {
+ 	position: relative;
  }
 
 .grid-image img:nth-of-type(3n),
@@ -71,10 +57,10 @@
 	<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
   <div class="carousel-inner">
    <div class="carousel-item active" data-bs-interval="10000">
-      <img src="/resources/img/index/about01.jpg" class="d-block w-100" alt="about1">
+      <img src="/resources/img/index/aboutUs01.jpg" class="d-block w-100" alt="aboutUs01">
     </div>
     <div class="carousel-item">
-      <img src="/resources/img/index/about02.jpg" class="d-block w-100" alt="about2">
+      <img src="/resources/img/index/aboutUs02.jpg" class="d-block w-100" alt="aboutUs02">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
@@ -87,17 +73,23 @@
   </button>
 </div>
 
-<div class="grid-image" style="margin-left:50px; margin-right:auto;">
-  <img alt="image01" src="/resources/img/index/about2.jpg"/>
-  	<h1 class="image_text2" style="font-size:15px">글씨 출력 테스트</h1>
-  <img alt="image02" src="/resources/img/index/about2.jpg"/>
-    <h1 class="image_text1" style="font-size:15px">
+<div class="grid-image" style="margin-left:85px; margin-right:auto; max-width: 100%;" >
+  <div class="subpic">
+  <img alt="image01" src="/resources/img/index/aboutUs3.jpg"/>
+  	<span class="image_text" style="font-size:25px"> bonjour noël</span>
+  </div>
+  <div class="subpic">
+  <img alt="image02" src="/resources/img/index/aboutUs1.jpg"/>
+    <span class="image_text" style="font-size:15px">
     MARKET<BR><br><br>다양한 베이커리의 대표 상품들을<br><BR>집에서 편하게 주문해 보세요.<br><BR>보다 달콤한 크리스마스를 보낼 수 있을 거예요.
-    </h1>
-  <img alt="image03" src="/resources/img/index/about3.jpg"/>
-  	<h1 class="image_text3" style="font-size:15px">
+    </span>
+  </div>
+  <div class="subpic">
+  <img alt="image03" src="/resources/img/index/aboutUs2.jpg"/>
+  	<span class="image_text" style="font-size:15px">
     CLASS<BR><br><br>원데이 클래스를 즐겨 보세요.<br><BR>직접 만들어 더 맛있을 거예요.<br><BR>소중한 사람과 추억을 쌓아 보세요.
-    </h1>
+    </span>
+  </div>
 </div>
 
 <!-- 네이버 지도가 뿌려질 위치 -->
