@@ -87,7 +87,7 @@
             <div class="form-group">
                <label for="inputReviewName">제목</label>
                <br>
-               <input type="text" class="form-control" id="classReviewName" name="classReviewName" placeholder="클래스 가격을 입력하세요."
+               <input type="text" class="form-control" id="classReviewName" name="classReviewName" placeholder="리뷰 제목을 입력하세요."
                       required oninvalid="this.setCustomValidity('리뷰 제목을 입력하세요')" oninput="this.setCustomValidity('')">
             </div>
             <br>

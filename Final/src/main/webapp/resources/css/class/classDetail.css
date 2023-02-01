@@ -111,7 +111,7 @@ body{
     margin-top: 50px;
 }
 
-/*------------맛집 상세 페이지-----------*/
+/*------------상세 페이지-----------*/
 
 .content-wrap{
     width: 80vw;
@@ -702,6 +702,13 @@ button[name=recommendBtn]:hover{
 	width: 1200px;
 	height: 30px;
 }
-
-
-
+.div {
+    font-family: 'Gowun Dodum';
+}
+.qna-list {
+    width: 100%;
+    padding: 10px;
+    margin: 0 auto;
+    text-align: center;
+    border-collapse: collapse;
+}

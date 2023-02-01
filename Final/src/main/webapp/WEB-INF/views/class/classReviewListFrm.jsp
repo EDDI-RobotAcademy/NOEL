@@ -4,69 +4,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
-	<title>bonjour noël</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<meta charset="UTF-8">
+<link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
+<title>bonjour noël</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-<style>
-.prod_icon.new{
-    border-width: 1px;
-    border-style: solid;
-    border-color: #4f4f4f;
-}
-
-#sale_pay{
-    font-size: 9.1px;
-    text-decoration:line-through;
-}
-
-.ns-icon{
-    margin-bottom: 20px;
-    align-content: center;
-}
-
-.prod_icon.new {
-    background: #4f4f4f;
-    text-align: center;
-    align-content: center;
-}
-
-.prod_icon {
-    padding: 2px 8px;
-    font-family: Helvetica, Arial, Sans-Serif;
-    display: inline-block;
-    text-align: center;
-    color: #fff;
-    font-size: 11px;
-    vertical-align: middle;
-    text-rendering: optimizeLegibility;
-}
-
-.prod_icon.sale, .prod_icon.timesale {
-    background: #fe5356;
-    border: 1px solid #fe5356;
-}
-
-#class_content{
-    text-align: center;
-    font-size: 17px;
-    font-weight: normal;
-}
-
-</style>
 <body>
-<link rel="stylesheet" href="/resources/css/class/classList.css">
+<link rel="stylesheet" href="/resources/css/class/classReviewList.css">
 
 <jsp:include page="/WEB-INF/views/layouts/header.jsp" />
 
-
-
-<!-- ////////////////////////////////////////////////////////////////// -->
-<div class="storeList-content-wrap">
+<div class="classList-content-wrap">
     <!-- 맛집 리스트 생성 -->
-    <div class="storeList-list">
-        <div class="storeList-list-content">
+    <div class="classList-list">
+        <div class="classList-list-content">
             <c:forEach items="${list}" var="s">
                 <div class="showList">
                     <c:choose>
@@ -88,8 +39,8 @@
 
                                 <div id="font">
                                     <div style="display: none">${s.classReviewNo }</div>
-                                    <div id = "class_content" style="text-align: center"> ${s.className }</div>
-                                    <div id = "class_content" style="text-align: center"> ${s.classReviewName }</div>
+                                    <div id = "class_name" style="text-align: center"> ${s.className }</div>
+                                    <div id = "class_reviewName" style="text-align: center"> ${s.classReviewName }</div>
                                 </div>
                             </a>
                 </div>
