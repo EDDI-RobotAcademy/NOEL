@@ -73,7 +73,9 @@
             cl_date as classDate,
             cl_status as clStatus,
             cl_res_time as classResTime,
-            cl_addr as classAddr
+            cl_addr as classAddr,
+            max_num as maxNum,
+            closed_day as closedDay
 		from noel_class
 		where cl_no  =#{classNo}
 	</select>
@@ -108,15 +110,15 @@
         from
             (SELECT
                  rownum as rnum,
-                 nc.cl_no       AS classno,
-                 nc.marketer_id AS marketerid,
-                 nc.cl_name     AS classname,
-                 nc.cl_price    AS classprice,
-                 nc.cl_content  AS classcontent,
-                 nc.cl_date     AS classdate,
+                 nc.cl_no       AS classNo,
+                 nc.marketer_id AS marketerId,
+                 nc.cl_name     AS className,
+                 nc.cl_price    AS classPrice,
+                 nc.cl_content  AS classContent,
+                 nc.cl_date     AS classDate,
                  nc.cl_status   AS clStatus,
-                 nc.cl_res_time AS classrestime,
-                 nc.cl_addr     AS classaddr,
+                 nc.cl_res_time AS classRestime,
+                 nc.cl_addr     AS classAddr,
                  (
                      SELECT
                          img_path
@@ -128,7 +130,7 @@
              FROM
                  noel_class nc
              ORDER BY
-                 classno ASC)
+                 classNo desc)
         where rnum between #{start} and #{end}
     </select>
     
