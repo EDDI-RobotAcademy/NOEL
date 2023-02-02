@@ -11,7 +11,7 @@
 		prd_content,prd_regdate, marketer_id)
 		values(PRD_NO_SEQ.nextval, #{cateGory}, #{prdName},
 		#{prdPrice}, #{prdStock}, #{prdNote},
-		#{prdContent}, sysdate, #{marketerId})
+		#{prdContent}, sysdate, #{marketerId},1)
 	</insert>
 
 	<!-- 이미지 등록 -->
@@ -37,7 +37,8 @@
 		prd_stock as prdStock,
 		prd_note as prdNote,
 		prd_content as prdContent,
-		prd_regdate as regDate
+		prd_regdate as regDate,
+		prd_status as prdStatus
 		from noel_product
 		where prd_no =#{prdNo}
 	</select>
@@ -67,9 +68,9 @@
 
 	</select>
 
-	<!-- 상품 삭제 -->
-	<select id="delete" parameterType="int">
-		delete from noel_product
+	<!-- 상품 상태 변경 -->
+	<select id="status" parameterType="productVO">
+		update noel_product set prd_status = #{prdStatus}
 		where
 		prd_no = #{prdNo}
 	</select>
@@ -129,7 +130,8 @@
 		prd_regdate as regDate,
 		(select prd_Img_path from noel_product_img pi where pi.prd_no = np.prd_no) as prdthumNail,
 		marketer_id as marketerId,
-		(select sum(order_quan) from noel_order where prd_no = #{_parameter}) as prdAllStock
+		(select sum(order_quan) from noel_order where prd_no = #{_parameter}) as prdAllStock,
+		prd_status as prdStatus
 		from noel_product np
 		where np.prd_no = #{_parameter}
 	</select>
@@ -220,7 +222,8 @@
 			prd_note as prdNote,
 			prd_content as prdContent,
 			prd_regdate as regDate,
-			(select prd_Img_path from noel_product_img pi where pi.prd_no = ot.prd_no) as prdthumNail
+			(select prd_Img_path from noel_product_img pi where pi.prd_no = ot.prd_no) as prdthumNail,
+			prd_status as prdStatus
 		from (select rownum as rnum, n.* from (select * from
 		noel_product order by prd_regdate desc) n )ot
 		where (select marketer_id from noel_product np where ot.prd_no = np.prd_no) = #{marketerId}

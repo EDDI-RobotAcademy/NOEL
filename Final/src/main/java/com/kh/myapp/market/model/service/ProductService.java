@@ -61,8 +61,8 @@ public class ProductService {
 	}
 
 	// 상품 삭제
-	public int delete(int prdNo) {
-		int result = dao.delete(prdNo);
+	public int status(ProductVO vo) {
+		int result = dao.status(vo);
 		return result;
 	}
 

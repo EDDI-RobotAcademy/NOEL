@@ -23,4 +23,5 @@ public class ProductVO {
 	private ArrayList<ProductImgVO> prdImgList;
 	private String prdthumNail;
 	private String marketerId;
+	private int prdStatus;
 }
