@@ -141,8 +141,6 @@ public class ClassDao {
 	public int updateClassReview(Review review) {
 		return sqlSession.update("classReview.updateClassReview", review);
 	}
-	
-	// 클래스 리뷰 삭제
 	public int deleteReviewImg(int imgNo) {
 		return sqlSession.delete("classReview.deleteClassReviewImg", imgNo);
 	}
@@ -157,6 +155,11 @@ public class ClassDao {
         }
     }
 	
+	// 클래스 리뷰 삭제
+	public int reviewDelete(int classReviewNo) {
+		int result = sqlSession.delete("classReview.reviewDelete", classReviewNo);
+		return result;
+	}
   	
   	// 클래스 예약 관리
   	public ArrayList<Reserve> selectAllReserveList(HashMap<String, Object> map) {
