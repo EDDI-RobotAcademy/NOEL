@@ -388,7 +388,7 @@
                 <input type="hidden" name="bookDate" class="bookDate">
                 <input type="hidden" name="bookTime" class="bookTime">
                 <input type="hidden" name="bookNum" class="bookNum">
-                <input type="hidden" name="bookTel" class="bookTel">
+                <input type="hidden" name="bookTel" class="bookTel" value="${m.userTel }">
                 <div class="explanation">* 가게에서 최종 확정 시 예약이 확정됩니다.</div>
                 <button class="closeModal pointer" onclick="hideModal();" type="button" >닫기</button>
                 <button class="reserveBtn pointer" id="reserveBtn" type="button">예약하기</button>
