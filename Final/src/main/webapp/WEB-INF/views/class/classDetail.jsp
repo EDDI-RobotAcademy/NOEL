@@ -89,7 +89,7 @@
             </table>
 			<div class="btnWrap">
 			<c:choose>
-				<c:when test="${s.status eq 0}">
+				<c:when test="${s.clStatus eq 0}">
 					<button type="button" name="closeBtn">클래스 오픈 전입니다.</button>
 				</c:when>
 				<c:otherwise>

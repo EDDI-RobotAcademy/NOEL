@@ -150,29 +150,6 @@
        }
     });
    
-   //구매평 작성 클릭시
-   /* $("button[name='orderReview']").click(function(){
-	    action='orderReview';
-		type='???';
-		orderNo = this.value;
-		
-		//hidden 담기(prdNo, prdName, marketerId)
-		var row = $(this).parent().parent().parent();
-		var tr - row.children();
-		
-		var prdName = tr.eq(1).text();
-		
-		$("#prdName").val(prdName);
-		
-		$("#modal-review").modal();
-   
-   })
-   
-   $('input[name=prdNo]').attr('value', "");
-   $('input[name=prdName]').attr('value', "");
-   $('input[name=marketerId]').attr('value', ""); */
-   
-   
 </script>
 </body>
 </html>
