@@ -31,7 +31,6 @@
              #{classPrice},
              #{classContent},
              to_char(sysdate,'yyyy-mm-dd'),
-             #{clstatus},
              #{classResTime},
              #{classAddr},
              #{closedDay},

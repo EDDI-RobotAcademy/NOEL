@@ -44,11 +44,10 @@
                                     <div style="text-align: center">
                                         <span><fmt:formatNumber value="${s.classPrice}"
                                                  pattern="#,###" />원</span>
-                                        <span id="sale_pay">86,000원</span>
                                     </div>
                                     <div style="text-align: center">
                                     <div class="prod_icon new" style="align-content: center">NEW</div>
-                                    <div class="prod_icon best">BEST</div>
+                                    <div class="prod_icon best" style="background: #fe5356; border: 1px solid #fe5356;">BEST</div>
                                     </div>
                                 </div>
                             </a>
