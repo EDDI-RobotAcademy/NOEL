@@ -68,21 +68,21 @@
 		    <div class="form-group">
                <label for="inputMaxNum">시간당 최대 인원수</label>
                <br>
-               <input type="number" class="form-control" name="maxNum" id="inputMaxNum" placeholder="0" 
+               <input type="number" class="form-control" name="maxNum" id="inputMaxNum" value="${classlist.maxNum }" 
                required oninvalid="this.setCustomValidity('인원수를 선택하세요')" oninput="this.setCustomValidity('')">
             </div>
 		    <br>
             <div class="form-group">
                <label for="inputResTime">예약 가능한 시간대</label>
                <br>
-               <input type="text" class="form-control time" name="classResTime" style="background-color: #fff" id="classResTime" placeholder="시작시간" readonly>
+               <input type="text" class="form-control time" name="classResTime" style="background-color: #fff" id="classResTime" value="${classlist.classResTime }" readonly>
                <input type="text" class="form-control time" name="closedHour" style="background-color: #fff" id="closedHour" placeholder="종료시간" readonly>
             </div>
 		    <br>
 		    <div class="form-group">
 		        <label for="inputTime">휴무일</label>
 		        <br><br>
-		        <input type="hidden" class="closedDay" value="${classlist.closedDay }">
+		        <input type="hidden" class="getClosedDay" value="${classlist.closedDay }">
 		        <input type="checkbox" class="btn-check" id="btn-check1" name="closedDay" value="월" autocomplete="off">
 		        <label for="btn-check1" class="btn btnday">월</label>
 		        <input type="checkbox" class="btn-check" id="btn-check2" name="closedDay" value="화" autocomplete="off">
@@ -103,7 +103,7 @@
                <label for="inputAddress">클래스 주소</label>
                <br>
                <input type="text" class="form-control" id="inputAddress1" name="zipCode" style="background-color: #fff" 
-               onclick="searchPost();" placeholder="동/리/도로명 주소를 검색해 주세요." readonly="readonly">
+               onclick="searchPost();" value="${classlist.classAddr}" readonly="readonly">
                <input type="text" class="form-control" id="inputAddress2" style="background-color: #fff"  name="classAddr" readonly="readonly">
                <input type="text" class="form-control" id="detailAddress" name="detailAddress" required 
                oninvalid="this.setCustomValidity('주소를 입력하세요')" oninput="this.setCustomValidity('')">
@@ -214,6 +214,36 @@ $("input[type='checkbox'].btn-check").change(function()
 		}
 	});
 	
+//영업시간 자르는 로직
+function hourSlice() {
+  	const hour = $("#classResTime").val();
+  	const splitWord = hour.split("~");
+	$("#classResTime").val(splitWord[0]);
+	$("#closedHour").val(splitWord[1]);
+}
+hourSlice();
+
+// 휴무일 가져오기
+function closedDaySlice() {
+	const closedDay = $(".getClosedDay").val();
+	const splitWord = closedDay.split(",");
+	const day1 = splitWord[0];
+	const day2 = splitWord[1];
+	
+	for(var i=1;i<8;i++){
+		var day = $("#btn-check"+i);
+		var dayVal = day.val();
+		if(day1 == dayVal){
+			day.prop("checked",true);
+		}
+		if(day2 == dayVal){
+			day.prop("checked",true);
+		}
+		
+	}
+}
+closedDaySlice();
+
 //클래스오픈 및 클래스중단
 function clStatus(obj, classNo, clStatus){
 	$.ajax({
