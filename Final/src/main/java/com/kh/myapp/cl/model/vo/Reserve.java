@@ -14,7 +14,7 @@ public class Reserve {
     private String bookName;
     private String userId;
     private String bookTel;
-    private int couponNo;
+    private int bookStatus;
     private String bookDate;
     private String bookNum;
     private String bookTime;

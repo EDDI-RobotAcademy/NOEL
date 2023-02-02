@@ -91,46 +91,53 @@
                 </tr>
             </table>
 			<div class="btnWrap">
-            <c:choose>
-                <c:when test="${empty sbm}">
-                    <c:choose>
-                        <c:when test="${empty sessionScope.m}">
-                            <button name="reserveBtn" class="loginBtn" onclick="loginCh()">예약하기
-                            </button>
-                        </c:when>
-                        <c:otherwise>
-                        	<button name="reserveBtn" class="reserveBtn2" >예약하기
-                            </button>
-                            <button  name="wishBtn" id="wishlist" onclick="addWishlist(this, ${s.classNo}, '${m.userId}')">
-                                <img style = "width: 21px;" src="/resources/img/index/heart.png">
-                            </button>
-                            <button  name="wishBtn" id="wishlist1"   style="display: none;"  onclick="deleteWishlist(this, ${s.classNo}, '${m.userId}')">
-                                <img style = "width: 25px;" src="/resources/img/index/heart-fill.png">
-                           </button>
-                        </c:otherwise>
-                    </c:choose>
-                </c:when>
-
-                <c:otherwise>
-                    <c:choose>
-                        <c:when test="${!empty sessionScope.m}">
-                            <button name="reserveBtn" class="reserveBtn2" >예약하기
-                            </button>
-                            <button  name="wishBtn" id="wishlist1" onclick="deleteWishlist(this, ${s.classNo}, '${m.userId}')">
-                                <img style = "width: 25px;" src="/resources/img/index/heart-fill.png">
-                            </button>
-                            <button  name="wishBtn" id="wishlist" style="display: none;" onclick="addWishlist(this, ${s.classNo}, '${m.userId}')">
-                                <img style = "width: 21px;" src="/resources/img/index/heart.png">
-                            </button>
-                        </c:when>
-                        
-                        <c:otherwise>
-                        	<button name="reserveBtn" class="loginBtn" onclick="loginCh()">예약하기
-                            </button>    
-                        </c:otherwise>
-                    </c:choose>
-                </c:otherwise>
-            </c:choose>
+			<c:choose>
+				<c:when test="${s.status eq 0}">
+					<button type="button" name="closeBtn">클래스 오픈 전입니다.</button>
+				</c:when>
+				<c:otherwise>
+		            <c:choose>
+		                <c:when test="${empty sbm}">
+		                    <c:choose>
+		                        <c:when test="${empty sessionScope.m}">
+		                            <button name="reserveBtn" class="loginBtn" onclick="loginCh()">예약하기
+		                            </button>
+		                        </c:when>
+		                        <c:otherwise>
+		                        	<button name="reserveBtn" class="reserveBtn2" >예약하기
+		                            </button>
+		                            <button  name="wishBtn" id="wishlist" onclick="addWishlist(this, ${s.classNo}, '${m.userId}')">
+		                                <img style = "width: 21px;" src="/resources/img/index/heart.png">
+		                            </button>
+		                            <button  name="wishBtn" id="wishlist1"   style="display: none;"  onclick="deleteWishlist(this, ${s.classNo}, '${m.userId}')">
+		                                <img style = "width: 25px;" src="/resources/img/index/heart-fill.png">
+		                           </button>
+		                        </c:otherwise>
+		                    </c:choose>
+		                </c:when>
+		
+		                <c:otherwise>
+		                    <c:choose>
+		                        <c:when test="${!empty sessionScope.m}">
+		                            <button name="reserveBtn" class="reserveBtn2" >예약하기
+		                            </button>
+		                            <button  name="wishBtn" id="wishlist1" onclick="deleteWishlist(this, ${s.classNo}, '${m.userId}')">
+		                                <img style = "width: 25px;" src="/resources/img/index/heart-fill.png">
+		                            </button>
+		                            <button  name="wishBtn" id="wishlist" style="display: none;" onclick="addWishlist(this, ${s.classNo}, '${m.userId}')">
+		                                <img style = "width: 21px;" src="/resources/img/index/heart.png">
+		                            </button>
+		                        </c:when>
+		                        
+		                        <c:otherwise>
+		                        	<button name="reserveBtn" class="loginBtn" onclick="loginCh()">예약하기
+		                            </button>    
+		                        </c:otherwise>
+		                    </c:choose>
+		                </c:otherwise>
+		            </c:choose>
+            	</c:otherwise>
+			</c:choose>
             </div>
         </div>
     </div>
