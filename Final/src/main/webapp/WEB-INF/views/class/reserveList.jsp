@@ -77,7 +77,7 @@
 <link rel="stylesheet" href="/resources/css/member/owner.css">
 <link rel="stylesheet" href="/resources/css/member/updateOwner.css">
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<div class="content-wrap">
+<div class="content-wrap" style="height: 1030px;">
     <jsp:include page="/WEB-INF/views/common/memberHeader.jsp" />
     <article id="content" class="content">
         <div class="page-content">
@@ -93,7 +93,8 @@
                             <th scope="col">예약일</th>
                             <th scope="col">예약 시간</th>
                             <th scope="col">예약 인원</th>
-                            <th scope="col">예약 취소</th>
+                            <th scope="col">예약 상태</th>
+                            <th scope="col">예약 처리</th>
 
                         </tr>
                         <c:forEach items="${list }" var="rs">
@@ -104,7 +105,28 @@
                                 <td>${rs.bookDate }</td>
                                 <td>${rs.bookTime }</td>
                                 <td>${rs.bookNum }</td>
-                                <td><button type="button" class="cancleBtn">취소</button></td>
+                                <td>
+                                <c:if test="${rs.bookStatus == 1}">예약대기</c:if>
+                                <c:if test="${rs.bookStatus == 2}">예약확정</c:if>
+                                <c:if test="${rs.bookStatus == 3}">방문완료</c:if>
+                                </td>
+                                <td>
+                                	<c:choose>
+                                		<c:when test="${rs.bookStatus == 1}">
+                                			<button type="button" class="cancleBtn">예약취소</button>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<c:choose>
+                                				<c:when test="${rs.bookStatus == 2}">
+                                					<button type="button" class="cancleBtn2">취소불가</button>
+                                				</c:when>
+                                				<c:otherwise>
+                                					<button type="button" class="reviewBtn">후기작성</button>
+                                				</c:otherwise>
+                                			</c:choose>
+                                		</c:otherwise>
+                                	</c:choose>
+                                </td>
 <%--                                <td>--%>
 <%--                                    <c:choose>--%>
 <%--                                    <c:when test="${rs.visitStatus == 1 || rs.visitStatus == 2}">--%>

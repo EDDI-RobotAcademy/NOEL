@@ -11,7 +11,7 @@
 			cl_price as classPrice,
 			cl_content as classContent,
 			cl_date as classDate,
-			cl_res_date as classResDate,
+			cl_status as clStatus,
 			cl_res_time as classResTime,
 			cl_addr as classAddr,
 			closed_day as closedDay,
@@ -31,11 +31,12 @@
              #{classPrice},
              #{classContent},
              to_char(sysdate,'yyyy-mm-dd'),
-             #{classResDate},
+             #{clstatus},
              #{classResTime},
              #{classAddr},
              #{closedDay},
-             #{maxNum}
+             #{maxNum},
+             1
             )
     </insert>
     
@@ -71,7 +72,7 @@
             cl_price as classPrice,
             cl_content as classContent,
             cl_date as classDate,
-            cl_res_date as classResDate,
+            cl_status as clStatus,
             cl_res_time as classResTime,
             cl_addr as classAddr
 		from noel_class
@@ -85,7 +86,7 @@
 			cl_price = #{classPrice},
 			cl_content = #{classContent},
 			max_num = #{maxNum},
-			cl_res_date = #{classResDate},
+			cl_status = 1,
 			cl_res_time = #{classResTime},
 			closed_day = #{closedDay},
 			cl_addr = #{classAddr}
@@ -114,7 +115,7 @@
                  nc.cl_price    AS classprice,
                  nc.cl_content  AS classcontent,
                  nc.cl_date     AS classdate,
-                 nc.cl_res_date AS classresdate,
+                 nc.cl_status   AS clStatus,
                  nc.cl_res_time AS classrestime,
                  nc.cl_addr     AS classaddr,
                  (
@@ -145,7 +146,7 @@
             cl_price as classPrice,
             cl_content as classContent,
             cl_date as classDate,
-            cl_res_date as classResDate,
+            cl_status as clStatus,
             cl_res_time as classResTime,
             cl_addr as classAddr,
             closed_day as closedDay,

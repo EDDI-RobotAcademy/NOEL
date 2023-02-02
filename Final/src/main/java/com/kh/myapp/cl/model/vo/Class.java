@@ -17,7 +17,6 @@ public class Class {
     private String classPrice;
     private String classContent;
     private String classDate;
-    private String classResDate;
     private String thumNail;
     private ArrayList<ClassImg> classImgList;
     private String classResTime;
@@ -26,6 +25,7 @@ public class Class {
     private String clImg;
     private String closedDay;
     private int maxNum;
+    private String clStatus;
 
 
 }

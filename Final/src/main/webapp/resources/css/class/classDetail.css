@@ -335,6 +335,18 @@ button[name=reserveBtn]:hover{
     cursor: pointer;
 }
 
+/*--- 클래스 클로즈 버튼 ---*/
+button[name=closeBtn]{
+    margin-top: 10px;
+    width:560px;
+    height:50px;
+    border-radius: 15px;
+    background-color: #fff;
+	border-color: #dc3545;
+    color: #dc3545;
+    pointer-events : none;
+}
+
 /*--- 추천글작성 버튼 ---*/
 button[name=recommendBtn]{
     margin-top: 10px;
