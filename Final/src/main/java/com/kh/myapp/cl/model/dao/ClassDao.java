@@ -240,7 +240,7 @@ public class ClassDao {
     }
 
     public int cancleReserve(int reserveNo) {
-        return sqlSession.delete("reservce.cancleReserve", reserveNo);
+        return sqlSession.delete("reserve.cancleReserve", reserveNo);
     }
 	
 }

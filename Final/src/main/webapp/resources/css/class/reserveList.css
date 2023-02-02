@@ -1,0 +1,63 @@
+.cancleBtn, .reviewBtn{
+    background-color: #dc3545  !important;
+    border: 1px solid #dc3545  !important;
+    color: #fff !important;
+    padding: 0 10px 0 10px !important;
+    border-radius: 5px;
+    eight: 80px;
+    height: 30px;
+}
+
+.cancleBtn:hover{
+    border: 1px solid rgb(230, 83, 20);
+}
+
+.cancleBtn2 {
+	background-color: #dc3545 !important;
+    border: 1px solid #dc3545  !important;
+    color: #fff !important;
+    padding: 0 10px 0 10px !important;
+    border-radius: 5px;
+    eight: 80px;
+    height: 30px;
+    pointer-events: none;
+}
+
+
+#pageNavi{
+    width: 700px;
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#pageNavi>a{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+#pageNavi>a:hover{
+    color: #212529;
+}
+
+#pageNavi>span{
+    display: inline-block;
+    width: 30px;
+    line-height:30px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.numberDeco{
+    background-color: gray;
+    color: white;
+    border-radius: 100%;
+    text-align: center;
+    padding:0;
+}
