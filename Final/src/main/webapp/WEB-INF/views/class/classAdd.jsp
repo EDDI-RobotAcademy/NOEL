@@ -3,63 +3,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <meta charset="UTF-8">
-   <link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
-	<title>bonjour noël</title>
-   <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-   <style>
-      .btnWrap {
-         text-align: center;
-         margin-bottom: 50px;
-      }
-      .btnWrap>button {
-         display: inline-block;
-         font-weight: 400;
-         text-align: center;
-         vertical-align: middle;
-         user-select: none;
-         border: 1px solid transparent;
-         padding: 0.375rem 0.75rem;
-         font-size: 0.9375rem;
-         line-height: 1;
-         border-radius: 0.1875rem;
-         transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-         margin-right: 10px;
-         height: 40px;
-         width: 100%;
-         margin-top: 30px;
-         border: 1px solid rgb(51, 51, 51);
-         background-color: rgb(51, 51, 51);
-         color: #fff;
-      }
-      .btnWrap>button[type=submt] {
-         border: 1px solid rgb(51, 51, 51);
-         background-color: rgb(51, 51, 51);
-         color: #fff;
-      }
-      .btnWrap>button[type=submit]:hover {
-         cursor: pointer;
-         background-color: #fff;
-         color: rgb(51, 51, 51);
-      }
-      .inputPhoto {
-         width: 100%;
-         height: 50px;
-         border: 1px dashed gray;
-         background-color: transparent;
-      }
-      .inputPhoto:hover {
-         cursor: pointer;
-         background: rgb(51, 51, 51);
-         color: #fff;
-      }
-      input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
-      {
-         -webkit-appearance: none;
-         margin: 0;
-      }
-   </style>
+<meta charset="UTF-8">
+<link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" /> 
+<title>bonjour noël</title>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<style>
+.inputPhoto 
+{
+	width: 100%;
+	height: 50px;
+	border: 1px dashed gray;
+	background-color: transparent;
+}
+.inputPhoto:hover 
+{
+	cursor: pointer;
+	background: rgb(51, 51, 51);
+	color: #fff;
+}
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
+{
+	-webkit-appearance: none;
+	margin: 0;
+}
+</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layouts/header.jsp" />
@@ -67,6 +34,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <link rel="stylesheet" href="/resources/css/class/classDetail.css">
 <link rel="stylesheet" href="/resources/css/class/marketerClassMypage.css">
+
 <div class="content-wrap" style="height: 1700px;">
 <jsp:include page="/WEB-INF/views/common/marketerHeader.jsp" />
 <article id="content" class="content">
@@ -75,12 +43,11 @@
    <div class="card">
       <div class="card-body">
       <div class="directoryDiv">mypage > 클래스 관리 > 클래스 등록</div>
-         <br>
-         <h1 class="card-title">클래스 등록</h1>
-         <br>
-         <form id="addClass" method="post" action="/class/addClass" enctype="multipart/form-data">
-         <input type="hidden" name="marketerId"
-								value="${sessionScope.mk.marketerId }">
+      <br>
+      <h1 class="card-title">클래스 등록</h1>
+      <br>
+      <form id="addClass" method="post" action="/class/addClass" enctype="multipart/form-data">
+         <input type="hidden" name="marketerId" value="${sessionScope.mk.marketerId }">
             <div class="form-group">
                <label for="inputClName">클래스명을 입력하세요</label>
                <br>
@@ -88,7 +55,6 @@
                       required oninvalid="this.setCustomValidity('클래스명을 입력하세요')" oninput="this.setCustomValidity('')">
             </div>
             <br>
-
             <div class="form-group">
                <label for="inputClPrice">클래스 가격을 입력하세요</label>
                <br>
@@ -96,43 +62,35 @@
                       required oninvalid="this.setCustomValidity('클래스 가격을 입력하세요')" oninput="this.setCustomValidity('')">
             </div>
             <br>
-
             <div class="form-group">
                <label for="summernote">클래스 내용을 입력하세요</label>
                <br>
-               <textarea class="form-control" name="classContent" id="summernote" rows="4" required oninvalid="this.setCustomValidity('클래스 설명을 입력하세요')" oninput="this.setCustomValidity('')" style="margin: 10px 0;"></textarea>
+               <textarea class="form-control" name="classContent" id="summernote" rows="4" 
+               required oninvalid="this.setCustomValidity('클래스 설명을 입력하세요')" oninput="this.setCustomValidity('')" style="margin: 10px 0;">
+               </textarea>
             </div>
             <div>
-               <input type="file" name="file" class="file-upload" id="file" style="display: none;" accept="image/gif, image/jpg, image/jpeg, image/png">
+               <input type="file" name="file" class="file-upload" id="file" style="display: none;" 
+					  accept="image/gif, image/jpg, image/jpeg, image/png">
                <button class="inputPhoto" type="button" id="inputPhoto">썸네일 첨부하기</button>
             </div>
-            <br>
-
-            <br>
-            <!-- 얘도 테이블에...... -->
+            <br><br>
             <div class="form-group">
                <label for="inputMaxNum">시간당 최대 인원수를 선택하세요</label>
                <br>
                <input type="number" class="form-control" name="maxNum" id="inputMaxNum" placeholder="0"
                       required oninvalid="this.setCustomValidity('인원수를 선택하세요')" oninput="this.setCustomValidity('')">
             </div>
-
-
             <br>
-            <!-- cv.setClassResTime(cv.getClassResTime() + "~" + closedHour); -->
             <div class="form-group">
                <label for="inputResTime">예약 가능한 시간대를 입력하세요</label>
                <br>
                <input type="text" class="form-control time" name="classResTime" id="classResTime" 
-               style="background-color: #fff" placeholder="시작시간" readonly >
+               		  style="background-color: #fff" placeholder="시작시간" readonly >
                <input type="text" class="form-control time" name="closedHour" id="closedHour"
-               style="background-color: #fff"  placeholder="종료시간" readonly>
+               		  style="background-color: #fff"  placeholder="종료시간" readonly>
             </div>
-
             <br>
-
-
-            <!-- 예약일 넣을 거고 휴무일 넣을 거면 테이블 closedDay 추가하기 -->
             <div class="form-group">
                <label for="inputClDate">클래스 휴무일을 선택하세요</label>
                <br>
@@ -152,14 +110,14 @@
                <label for="btn-check7" class="btn btnday">일</label>
             </div>
             <br>
-
-            <!-- cv.setClassAddr(zipCode + "*" + cv.getClassAddr() + "*" + detailAddress); -->
             <div class="form-group">
                <label for="inputAddress">클래스 주소를 입력하세요</label>
                <br>
-               <input type="text" class="form-control" id="inputAddress1" name="zipCode" style="background-color: #fff" onclick="searchPost();" placeholder="동/리/도로명 주소를 검색해 주세요." readonly="readonly">
+               <input type="text" class="form-control" id="inputAddress1" name="zipCode" style="background-color: #fff" 
+               		  onclick="searchPost();" placeholder="동/리/도로명 주소를 검색해 주세요." readonly="readonly">
                <input type="text" class="form-control" id="inputAddress2" name="classAddr" style="background-color: #fff" readonly="readonly">
-               <input type="text" class="form-control" id="detailAddress" name="detailAddress" required oninvalid="this.setCustomValidity('주소를 입력하세요')" oninput="this.setCustomValidity('')">
+               <input type="text" class="form-control" id="detailAddress" name="detailAddress" 
+               		  required oninvalid="this.setCustomValidity('주소를 입력하세요')" oninput="this.setCustomValidity('')">
                <br>
             </div>
             <div>
@@ -171,8 +129,8 @@
       </div>
    </div>
 </div>
-		</div>
-    </article>
+</div>
+</article>
 </div>
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
@@ -181,20 +139,20 @@
 <script src="/resources/summernote/summernote-lite.js"></script>
 <script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 <script>
-   /* 이미지 업로드 */
-   (function($)
-   {
-      'use strict';
-      $(function()
-      {
-         $('.inputPhoto').on('click', function()
-         {
+/* 이미지 업로드 */
+(function($)
+{
+	'use strict';
+	$(function()
+	{
+		$('.inputPhoto').on('click', function()
+		{
             var file = $(this).parent().find('.file-upload');
             file.trigger('click');
-         });
-         $('.file-upload').on('change', function()
-         {
-            if ($(this).val() == '')
+		});
+		$('.file-upload').on('change', function()
+		{
+			if ($(this).val() == '')
             {
                $(this).parent().find('.inputPhoto').text('썸네일 첨부하기');
             }
@@ -203,57 +161,59 @@
                $(this).parent().find('.inputPhoto').text($(this).val().replace(/C:\\fakepath\\/i, ''));
             }
          });
-      });
-   })(jQuery);
-   $("#submitBtn").on('click', function(event)
-   {
-      const fileValue = $('.inputPhoto').text();
-      if (fileValue == '사진 첨부하기')
-      {
-         event.preventDefault();
-         alert("사진을 첨부해주세요.");
-      }
-   });
-   $('#summernote').summernote(
-           {
-              height : 400,
-              lang : "ko-KR",
-              callbacks :
-                      {
-                         onImageUpload : function(files)
-                         {
-                            uploadImage(files[0], this);
-                         }
-                      }
-           });
-   function uploadImage(files, editor)
-   {
-      const form = new FormData();
-      form.append("files", files);
-      $.ajax(
-              {
-                 url : "/classEditorUpload",
-                 type : "post",
-                 data : form,
-                 processData : false,
-                 contentType : false,
-                 success : function(data)
-                 {
-                    $(editor).summernote("insertImage", data);
-                 }
-              });
-   }
-</script>
-<script>
-$("input[type='checkbox'].btn-check").change(function()
+	});
+})(jQuery);
+
+$("#submitBtn").on('click', function(event)
+{
+	const fileValue = $('.inputPhoto').text();
+	if (fileValue == '사진 첨부하기')
 	{
-		var a = $("input[type='checkbox'].btn-check");
-		if(a.length == a.filter(":checked").length)
+		event.preventDefault();
+		alert("사진을 첨부해주세요.");
+	}
+});
+
+$('#summernote').summernote(
+{
+	height : 400,
+	lang : "ko-KR",
+	callbacks :
+	{
+		onImageUpload : function(files)
+        {
+			uploadImage(files[0], this);
+        }
+	}
+});
+
+function uploadImage(files, editor)
+{
+	const form = new FormData();
+	form.append("files", files);
+	$.ajax(
+	{
+		url : "/classEditorUpload",
+		type : "post",
+		data : form,
+		processData : false,
+		contentType : false,
+		success : function(data)
 		{
-			alert('영업일을 하루 이상 선택해 주세요');
-			$("input[type='checkbox'].btn-check").prop("checked", false);
+			$(editor).summernote("insertImage", data);
 		}
 	});
+}
+
+$("input[type='checkbox'].btn-check").change(function()
+{
+	var a = $("input[type='checkbox'].btn-check");
+	if(a.length == a.filter(":checked").length)
+	{
+		alert('영업일을 하루 이상 선택해 주세요');
+		$("input[type='checkbox'].btn-check").prop("checked", false);
+	}
+});
 </script>
 </body>
 </html>

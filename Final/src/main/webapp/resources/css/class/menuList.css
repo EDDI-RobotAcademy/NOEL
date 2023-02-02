@@ -14,14 +14,6 @@
 	font-family: 'Gowun Dodum', sans-serif;
 }
 
-/*업주 마이페이지*/
-.content-wrap {
-	height: 1570px;
-	width: 1100px;
-	min-width: 850px;
-	margin: 35px auto;
-	padding: 0 20px;
-}
 
 .updateRsBtn {
 	float: right;
@@ -294,13 +286,19 @@ li {
 }
 
 .saveBtn {
-	background-color: rgb(51, 51, 51) !important;
-	border: 1px solid rgb(51, 51, 51) !important;
-	color: #fff !important;
-	padding: 0 10px 0 10px !important;
-	border-radius: 5px;
+		border: 1px solid #dc3545;
+    background-color: #dc3545;
+    border-radius: 5px;
+    height: 30px;
+    width: 50px;
+    cursor: pointer;
+    color: white;
 }
-
+.saveBtn:hover{
+   background-color: #212529;
+    color: white;
+    border: 1px solid #212529;
+}
 #pageNavi {
 	width: 800px;
 	text-align: center;
@@ -365,6 +363,7 @@ li {
 	font-size: 20px;
 }
 
+
 #category_class, #category_market {
 	display: inline-block;
 	text-decoration: none;
@@ -384,6 +383,10 @@ li {
 
 .category1>a:last-child {
 	margin-left: 30px;
+}
+
+.note{
+	
 }
 .bookmark-content-list {
     margin-top: 50px;
@@ -405,9 +408,18 @@ li {
 	text-align: center;	
 }
 .submitInput{
-	background-color: rgb(51, 51, 51); 
-	color: white; 
-	width: 40px;
+	border: 1px solid #dc3545;
+    background-color: #dc3545;
+    border-radius: 5px;
+    height: 30px;
+    width: 50px;
+    cursor: pointer;
+    color: white;
+}
+.submitInput:hover{
+   background-color: #212529;
+    color: white;
+    border: 1px solid #212529;
 }
 .keywork{
 	height: 32px;
