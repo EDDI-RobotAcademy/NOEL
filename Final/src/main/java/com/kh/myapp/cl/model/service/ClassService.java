@@ -537,4 +537,10 @@ public class ClassService {
         return dao.cancleReserve(reserveNo);
     }
 
+    // 판매자 > 클래스 관리 > 클래스 오픈 및 클래스 중지
+	public int classStatus(Class vo) {
+		int result = dao.classStatus(vo);
+		return result;
+	}
+
 }

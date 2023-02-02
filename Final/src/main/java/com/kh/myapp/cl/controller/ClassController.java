@@ -32,6 +32,7 @@ import com.kh.myapp.cl.model.vo.Qna;
 import com.kh.myapp.cl.model.vo.Reserve;
 import com.kh.myapp.cl.model.vo.Review;
 import com.kh.myapp.commom.FileRename;
+import com.kh.myapp.market.model.vo.ProductVO;
 import com.kh.myapp.member.model.vo.Marketer;
 import com.kh.myapp.member.model.vo.Member;
 
@@ -207,6 +208,15 @@ public class ClassController {
 		}
 		return "redirect:/class/marketerClassMypage";
 	}
+	
+	// 판매자 > 클래스 관리 > 클래스 오픈 및 클래스 중지
+	@ResponseBody
+	@RequestMapping(value = "/class/cl_status", produces = "application/json;charset=utf-8")
+	public String classStatus(Class vo) throws Exception {
+		int result = service.classStatus(vo);
+		return null;
+	}
+	
 	
 	// 클래스 삭제
 	@RequestMapping(value = "/class/classDelete", method = RequestMethod.GET)
