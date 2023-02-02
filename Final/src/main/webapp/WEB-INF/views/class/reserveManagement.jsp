@@ -62,24 +62,26 @@
 						<td>${Reserve.bookNum}</td>
 						<form action="/class/updateReserveLevel?bookNo=${Reserve.bookNo}&reqPage=1"" method="post">
 						<input type="hidden" value="${Reserve.bookNo}" name="bookNo">
+						<input type="hidden" name="classNo" value="${Reserve.classNo }">
+						<input type="hidden" name="marketerId" value="${Reserve.marketerId }">
 						<td class="couponNoTd">
 							<c:choose>
-								<c:when test="${Reserve.couponNo eq '1'}">
-									<select name="couponNo" class="selectbox">
+								<c:when test="${Reserve.bookStatus eq '1'}">
+									<select name="bookStatus" class="selectbox">
 										<option value="1" selected>예약대기</option>
 										<option value="2">예약확정</option>
 										<option value="3">방문완료</option>
 									</select>
 								</c:when>
-								<c:when test="${Reserve.couponNo eq  '2'}">
-									<select name="couponNo" class="selectbox">
+								<c:when test="${Reserve.bookStatus eq  '2'}">
+									<select name="bookStatus" class="selectbox">
 										<option value="1">예약대기</option>
 										<option value="2" selected>예약확정</option>
 										<option value="3">방문완료</option>
 									</select>
 								</c:when>
-								<c:when test="${Reserve.couponNo eq '3'}">
-									<select name="couponNo" class="selectbox">
+								<c:when test="${Reserve.bookStatus eq '3'}">
+									<select name="bookStatus" class="selectbox">
 										<option value="1">예약대기</option>
 										<option value="2">예약확정</option>
 										<option value="3" selected>방문완료</option>

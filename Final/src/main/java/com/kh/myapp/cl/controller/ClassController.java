@@ -612,7 +612,7 @@ public class ClassController {
 
     // 예약하기
     @RequestMapping(value = "/reserve")
-    public String StoreDetail(String userId, int classNo, Reserve r, HttpServletRequest request) {
+    public String StoreDetail(String userId, String marketerId, int classNo, Reserve r, HttpServletRequest request) {
         int result = service.reserve(r);
         if (result > 0) {
             request.setAttribute("msg", "예약이 완료되었습니다.");

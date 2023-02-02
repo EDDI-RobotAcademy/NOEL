@@ -358,6 +358,7 @@
         <div class="modal-title">예약 정보</div>
         <div class="modal-content">
             <form id="order-form" action="/reserve?userId='mlolw'&classNo=${s.classNo}">
+            <input type="hidden" name="marketerId" value="${s.marketerId }">
                 <table class="w3-table w3-bordered" id="reserveCheckTbl">
                     <tr>
                         <th>클래스명</th>

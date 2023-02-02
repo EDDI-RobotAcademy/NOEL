@@ -12,6 +12,7 @@
 			book_date as bookDate,
 			book_num as bookNum,
 			book_status as bookStatus,
+			marketer_id as marketerId,
 			(select cl_name from noel_class nc where ot.cl_no = nc.cl_no ) as className,
     		(select cl_price from noel_class nc where ot.cl_no = nc.cl_no ) as classPrice,
     		(select marketer_id from noel_class nc where ot.cl_no = nc.cl_no) as marketerId
@@ -44,7 +45,6 @@
 
     <!-- 판매자 > 예약관리 리스트 출력 -->
 	<select id="selectAllReserveList" parameterType="map" resultType="Reserve">
-
 		select 
     		book_no as bookNo,
     		user_id as userId,
@@ -53,13 +53,11 @@
     		book_time as bookTime,
     		book_num as bookNum,
     		book_status as bookStatus,
-    		(select cl_name from noel_class nc where ot.cl_no = nc.cl_no ) as className,
-    		(select cl_price from noel_class nc where ot.cl_no = nc.cl_no ) as classPrice,
-    		(select marketer_id from noel_class nc where ot.cl_no = nc.cl_no) as marketerId
-    	from (select rownum as rnum, n.* from (select * from noel_book order by book_date desc) n )ot
-    	<!-- where (select marketer_id from noel_product np where ot.prd_no = np.prd_no) = #{marketerId} -->
-    	where rnum between #{start} and #{end}
-        
+    		(select marketer_id from noel_class nc where ot.cl_no = nc.cl_no) as marketerId,
+    		(select cl_no from noel_class nc where ot.cl_no = nc.cl_no) as classNo
+    	from (select rownum as rnum, n.* from (select * from noel_book order by book_no desc) n )ot
+    	where marketer_id = #{marketerId} and rnum between #{start} and #{end}
+ 
 	</select>
 
     <!--  판매자 > 예약관리 > 예약 총개수 -->
@@ -93,9 +91,10 @@
             book_tel as bookTel,
             book_status as bookStatus,
             book_date as bookDate,
-            book_time as bookTime
+            book_time as bookTime,
+            marketer_id as marketerId
         from noel_book
-        where cl_no = #{classNo}
+        where cl_no = #{classNo} 
     </select>
 
     <select id="ajaxCheckReserveTime" resultType="com.kh.myapp.cl.model.vo.Reserve" parameterType="map">
@@ -110,7 +109,8 @@
     <!-- 예약하기 -->
     <insert id="insertReserve" parameterType="com.kh.myapp.cl.model.vo.Reserve">
         insert into noel_book
-        values(noel_book_seq.NEXTVAL, #{classNo}, #{bookName},  #{userId}, #{bookTel}, 1, #{bookDate}, #{bookTime}, #{bookNum}, #{impUid})
+        values(noel_book_seq.NEXTVAL, #{classNo}, #{bookName},  #{userId}, #{bookTel}, 1, 
+        #{bookDate}, #{bookTime}, #{bookNum}, #{impUid}, #{marketerId})
     </insert>
     
     
@@ -123,7 +123,8 @@
                book_time    as bookTime,
                book_num     as bookNum,
                user_id      as userId,
-               book_status    as bookStatus
+               book_status    as bookStatus,
+               marketer_id as marketerId
         from noel_book
         where user_id = #{userId}
     </select>
