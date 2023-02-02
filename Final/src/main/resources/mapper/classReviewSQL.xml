@@ -28,7 +28,7 @@
              FROM
                  noel_class_review nr
              ORDER BY
-                 classReviewNo ASC)
+                 classReviewNo desc)
         where rnum between #{start} and #{end}
     </select>
    

@@ -397,9 +397,9 @@ public class ClassController {
         int result = service.addClassReview(review);
 
         if (result > 0) {
-            return "redirect:/classDetail?reqPage=1&classNo=" + classNo + "&rnum=1&qnum=1";
+        	return "redirect:/classReviewListFrm?reqPage=1";
         }
-        return "redirect:/classDetail?reqPage=1&classNo=" + classNo + "&rnum=1&qnum=1";
+        return "redirect:/classReviewListFrm?reqPage=1";
     }
 
     // 구매자 > 예약 내역 > 리뷰 등록 시 content 내에 이미지를 삽입하기 위한 메소드
