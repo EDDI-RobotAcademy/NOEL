@@ -19,6 +19,19 @@
 <link rel="stylesheet" href="/resources/css/class/classDetail.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
+<style>
+.food-wrap
+{
+	display: flex;
+	flex-wrap: wrap;
+  	justify-content: center;
+  	align-items: center;
+}
+.food-wrap img:first-child {
+	width: calc(33.33% - 20px);
+  	margin-right: 10px;
+}
+</style>
 <body>
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
 <div class="content-wrap2" style="width:1200px; margin: 0 auto; background-color: rgba(255, 255, 255, 0.06);">
@@ -151,7 +164,7 @@
             <p class="menuTitle" style="margin-top: 20px;">대표 클래스</p>
         </div>
         <div class="food-wrap"
-             style="width:1200px; overflow:hidden; height:auto; margin: 0 auto; text-align:center; margin:50px 70;">
+             style="width:1200px; overflow:hidden; height:auto; margin: 0 auto; text-align:center;">
             <c:forEach items="${ menuList}" var="me">
             <input type="hidden" name="marketerId" value="${me.marketerId}">
                 <div class="w3-card" id="photoWrap"
