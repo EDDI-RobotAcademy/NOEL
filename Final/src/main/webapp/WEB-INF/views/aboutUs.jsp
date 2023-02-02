@@ -14,9 +14,12 @@
 {
 	position: relative;
     display:flex;
-    align-items:center;
-    margin:80px 0;
     overflow: hidden;
+    justify-content: center;
+    width:100%; 
+    height:450px; 
+    margin-top: 80px;
+    
 }
 .grid-image img 
 {
@@ -73,7 +76,7 @@
   </button>
 </div>
 
-<div class="grid-image" style="margin-left:85px; margin-right:auto; max-width: 100%;" >
+<div class="grid-image">
   <div class="subpic">
   <img alt="image01" src="/resources/img/index/aboutUs3.jpg"/>
   	<span class="image_text" style="font-size:25px"> bonjour noël</span>
