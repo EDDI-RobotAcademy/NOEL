@@ -219,6 +219,11 @@
         order by menu_no DESC
     </select>
 
-
+	<!-- 상품 상태 변경 -->
+	<select id="classStatus" parameterType="com.kh.myapp.cl.model.vo.Class">
+		update noel_class set cl_status = #{clStatus}
+		where
+		cl_no = #{classNo}
+	</select>
 
 </mapper>

@@ -113,6 +113,16 @@
 		<div class="submitBtn1">
 			<button type="button" onclick="return chk_form();" class="btn btn-brand">저장</button>
 			<button type="button" onclick="javascript:history.go(-1);" class="btn btn-brand">취소</button>
+			<c:choose>
+				<c:when test="${classlist.clStatus eq 1 }">
+					<button type="button" onclick="clStatus(this, ${classlist.classNo},0)"
+						class="clStatus btn btn-brand">클래스 중지</button>
+				</c:when>
+				<c:otherwise>
+					<button type="button" onclick="clStatus(this, ${classlist.classNo},1)"
+						class="clStatus btn btn-brand">클래스 오픈</button>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		</div>
 	</div>
@@ -193,8 +203,7 @@
                  }
               });
    }
-</script>
-<script>
+   
 $("input[type='checkbox'].btn-check").change(function()
 	{
 		var a = $("input[type='checkbox'].btn-check");
@@ -204,6 +213,25 @@ $("input[type='checkbox'].btn-check").change(function()
 			$("input[type='checkbox'].btn-check").prop("checked", false);
 		}
 	});
+	
+//클래스오픈 및 클래스중단
+function clStatus(obj, classNo, clStatus){
+	$.ajax({
+	 type: "POST",
+	 url: "/class/cl_status",
+	 data: {classNo : classNo, clStatus : clStatus},
+	 success : function(data){
+	  	alert("클래스 상태를 변경 하시겠습니까?");
+	          console.log("success");
+	          console.log(data);
+	          let url='/class/marketerClassMypage?reqPage=1';
+	          location.replace(url);
+	 },
+	 error : function(e){
+	  alert("다시 시도해주시기 바랍니다.");
+	 }
+	});
+}
 </script>
 </body>
 </html>

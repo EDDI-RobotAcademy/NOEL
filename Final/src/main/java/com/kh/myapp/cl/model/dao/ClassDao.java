@@ -242,5 +242,11 @@ public class ClassDao {
     public int cancleReserve(int reserveNo) {
         return sqlSession.delete("reserve.cancleReserve", reserveNo);
     }
+
+    // 판매자 > 클래스 관리 > 클래스 오픈 및 클래스 중지
+	public int classStatus(Class vo) {
+		int result = sqlSession.update("class.classStatus", vo);
+		return result;
+	}
 	
 }

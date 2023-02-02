@@ -86,6 +86,13 @@
 								<a href="/class/classUpdate?classNo=${classlist.classNo}" class="btn btn-brand" id="font">클래스 수정</a>
 								<a href="/class/classDelete?classNo=${classlist.classNo}" 
 								onclick="return confirm('정말 삭제하시겠습니까??');" class="btn btn-brand" id="font">클래스 삭제</a>
+								<c:choose>
+									<c:when test="${classlist.clStatus eq 0 }">
+										<div style="text-align: center; height:50px; margin-top:20px;" >
+											<b>" ${classlist.className } " 는 중지된 클래스입니다. </b>
+										</div>
+									</c:when>
+								</c:choose>
 		            	   </c:when>
 		            	   </c:choose>
 						</c:forEach>
