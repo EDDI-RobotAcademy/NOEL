@@ -49,10 +49,13 @@
 											<fmt:formatDate value="${prdlist.regDate }"
 												pattern="yyyy-MM-dd" />
 										</div>
+										<c:choose>
+											<c:when test="${prdlist.prdStatus eq 0 }">
+												<div style="text-align: center">판매중지 된 상품입니다.</div>
+											</c:when>
+										</c:choose>
 									</a>
 									<div  style="text-align: center">
-									<a href="/market/prd_delete?prdNo=${prdlist.prdNo}" id="font"
-									onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a>
 									</div>
 									</div>
 								</c:forEach>

@@ -48,8 +48,8 @@ public class ProductDAO {
 	}
 
 	// 상품 삭제
-	public int delete(int prdNo) {
-		int result = sql.delete("productMapper.delete", prdNo);
+	public int status(ProductVO vo) {
+		int result = sql.update("productMapper.status", vo);
 		return result;
 	}
 

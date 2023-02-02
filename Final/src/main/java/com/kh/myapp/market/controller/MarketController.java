@@ -203,11 +203,12 @@ public class MarketController {
 		return "redirect:/market/marketerProductMypage?reqPage=1";
 	}
 
-	// 판매자 상품 삭제하기
-	@RequestMapping(value = "/market/prd_delete", method = RequestMethod.GET)
-	public String deletePrd(int prdNo) throws Exception {
-		productService.delete(prdNo);
-		return "redirect:/market/marketerProductMypage?reqPage=1";
+	// 판매자 상품 판매중지 및 판매재개
+	@ResponseBody
+	@RequestMapping(value = "/market/prd_status", produces = "application/json;charset=utf-8")
+	public String deletePrd(ProductVO vo) throws Exception {
+		int result = productService.status(vo);
+		return null;
 	}
 
 	// 마켓 상품 리스트 페이지

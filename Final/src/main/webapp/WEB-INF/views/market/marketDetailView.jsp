@@ -79,6 +79,9 @@
 						<c:when test="${prd.prdStock-prd.prdAllStock eq 0}">
 							<button type="button" class="soldoutBtn">품절된 상품입니다.</button>
 						</c:when>
+						<c:when test="${prd.prdStatus eq 0}">
+							<button type="button" class="soldoutBtn">판매중지된 상품입니다.</button>
+						</c:when>
 						<c:otherwise>
 							<form action="/insertCart">
 								<c:choose>
@@ -168,7 +171,6 @@
 				<p class="menuTitle" style="margin-top: 20px;">PRODUCT DETAIL</p>
 				<br>
 				<div class="contentWrap2">${prd.prdContent}</div>
-				<!-- <hr style="border: 1px"> -->
 			</div>
 		</div>
 	</div>
@@ -273,7 +275,6 @@
 <!-- 리뷰 모달 끝 -->
 
 <!-- QNA 목록 시작 -->
-<%-- <c:if test="${user != null}"></c:if> //유저일때 모달창 오픈--%>
 <div class="qna-wrap" id="qna-wrap">
 	<div class="qna-title">
 		<br> <br> <br>
@@ -300,12 +301,6 @@
 				<c:forEach items="${qnalist}" var="qnalist" varStatus="i">
 					<table class="qna-list">
 					<tbody>						
-						<!-- <tr height="50">
-							<th width="15%">상태</th>
-							<th width="55%">제목</th>
-							<th width="15%">작성자</th>
-							<th width="15%">등록일</th>
-						</tr> -->
 						
 						<tr height="60px">
 							<td width="15%">

@@ -108,13 +108,22 @@
 							<div class="submitBtn1">
 								<button type="button" onclick="javascript:history.go(-1);"
 									class="btn btn-brand">취소</button>
-								<button type="button" onclick="javascript:history.go(-1);"
-									class="btn btn-brand">판매중지</button>
 								<button type="button" onclick="return chk_form();"
 									class="btn btn-brand">저장</button>
-								<%-- <a href="/market/prd_delete?prdNo=${prdlist.prdNo}"
-									class="btn btn-brand" id="font"
-									onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a> --%> <br> <br>
+									<c:choose>
+										<c:when test="${prdlist.prdStatus eq 1 }">
+											<button type="button" onclick="prdStatuss(this, ${prdlist.prdNo},0)"
+												class="prdStatus btn btn-brand">판매중지</button>
+										</c:when>
+										<c:otherwise>
+											<button type="button" onclick="prdStatuss(this, ${prdlist.prdNo},1)"
+												class="prdStatus btn btn-brand">판매재개</button>
+										
+										</c:otherwise>
+									</c:choose>
+									
+									
+									<br> <br>
 								<br>
 							</div>
 
@@ -213,6 +222,28 @@
 	       }
 	      
 	      $(".viewCategory").text(category);
+	      
+	      
+	      //판매중지 및 판매재개
+	      
+	      function prdStatuss(obj, prdNo, prdStatus){
+	    	  $.ajax({
+	    		  type: "POST",
+	    		  url: "/market/prd_status",
+	    		  data: {prdNo : prdNo, prdStatus : prdStatus},
+	    		  success : function(data){
+	    			  	alert("판매상태를 변경 하시겠습니까?");
+	    	            console.log("success");
+	    	            console.log(data);
+	    	            let url='/market/marketerProductMypage?reqPage=1';
+	    	            location.replace(url);
+	    		  },
+	    		  error : function(e){
+	    			  alert("다시 시도해주시기 바랍니다.");
+	    		  }
+	    	  });
+	      }
+	      
 </script>
 </body>
 </html>
