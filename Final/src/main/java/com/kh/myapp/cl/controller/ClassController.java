@@ -445,6 +445,14 @@ public class ClassController {
         return "/class/classReviewDetail";
     }
     
+	// 리뷰 삭제
+	@RequestMapping(value = "/class/reviewDelete", method = RequestMethod.GET)
+	public String reviewDelete(int classReviewNo) throws Exception {
+		service.reviewDelete(classReviewNo);
+		return "redirect:/classReviewListFrm?reqPage=1";
+	}
+    
+    
     // 구매자 > 예약 내역 > 리뷰 수정 폼
 	@RequestMapping(value = "/class/classReviewUpdate", method = RequestMethod.GET)
 	public String updateClassReiview(Review review, Model model) throws Exception {

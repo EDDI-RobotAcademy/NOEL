@@ -401,7 +401,11 @@ public class ClassService {
 		return result;
 	}
 	
-	
+	// 클래스 리뷰 삭제
+	public int reviewDelete(int classReviewNo) {
+		int result = dao.reviewDelete(classReviewNo);
+		return result;
+	}
 	
 	
 

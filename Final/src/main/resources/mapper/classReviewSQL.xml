@@ -120,5 +120,10 @@
 		where cl_review_num = #{imgNo}
 	</delete>
    
+	<select id="reviewDelete" parameterType="int">
+		delete from noel_class_review
+		where
+			cl_review_no = #{classReviewNo}
+	</select>
    
 </mapper>
