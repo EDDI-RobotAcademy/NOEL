@@ -17,6 +17,7 @@
                  nr.cl_review_content as classReviewContent,
                  nr.cl_review_regdate as classReviewRegdate,
                  nr.cl_review_name as classReviewName,
+                 nr.rating as rating,
                  (
                      SELECT
                          img_path
@@ -42,7 +43,8 @@
              #{userId},
              #{classReviewContent},
              to_char(sysdate,'yyyy-mm-dd'),
-             #{classReviewName}
+             #{classReviewName},
+             #{rating}
             )
     </insert>
     
@@ -72,6 +74,7 @@
             cl_review_content as classReviewContent,
             cl_review_regdate as classReviewRegdate,
             cl_review_name as classReviewName,
+            rating as rating,
             (select img_path from noel_review_img ri where ri.cl_review_no = nr.cl_review_no) as thumNail
         from noel_class_review nr
         where nr.cl_review_no = #{_parameter}
@@ -97,7 +100,8 @@
 			user_id as userId,
 			cl_review_content as classReviewContent,
 			cl_review_regdate as classReviewRegdate,
-			cl_review_name as classReviewName
+			cl_review_name as classReviewName,
+			rating as rating
 		from noel_class_review
 		where cl_review_no  =#{classReviewNo}
 	</select>
@@ -111,7 +115,8 @@
 			user_id = #{userId},
 			cl_review_content = #{classReviewContent},
 			cl_review_regdate = #{classReviewRegdate},
-			cl_review_name = #{classReviewName}
+			cl_review_name = #{classReviewName},
+			rating = #{rating}
 		where cl_review_no = #{classReviewNo}
 	</update>
 	

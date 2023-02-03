@@ -23,4 +23,5 @@ public class Review {
    private String className;
    private String thumNail;
    private ArrayList<ClassReviewImg> classReviewImgList;
+   private int rating;
 }

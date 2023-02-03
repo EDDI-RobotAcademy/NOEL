@@ -21,6 +21,8 @@
 	background: rgb(51, 51, 51);
 	color: #fff;
 }
+
+
 </style>
 </head>
 <body>
@@ -39,7 +41,7 @@
 		<br>
 		<h1 class="card-title">클래스 리뷰 등록</h1>
 		<br>
-		<form id="addClassReview" method="post" action="/class/addClassReview" enctype="multipart/form-data">
+		<form id="addClassReview" name="reviewForm" method="post" action="/class/addClassReview" enctype="multipart/form-data">
 		<input type="hidden" name="userId" name="userId" value="${sessionScope.m.userId }">
 		<input type="hidden" id="classNo" name="classNo" value="${classNo}"/>
 		<input type="hidden" id="className" name="className" value="${className}"/>
@@ -49,6 +51,21 @@
 			<br>
 			<input type="text" class="form-control" id="classReviewName" name="classReviewName" placeholder="리뷰 제목을 입력하세요."
                       required oninvalid="this.setCustomValidity('리뷰 제목을 입력하세요')" oninput="this.setCustomValidity('')">
+		</div>
+		<br>
+		<div class="inputRating">
+			<label for="inputRating">별점</label>
+			<br>
+			<input type="radio" name="rating" value="1" id="rating">
+			<label for="rate1" style="font-size: 1.5em; color: rgb(255 83 86 / 99%);">♥</label>
+			<input type="radio" name="rating" value="2" id="rating">
+			<label for="rate2" style="font-size: 1.5em; color: rgb(255 83 86 / 99%);">♥♥</label>
+			<input type="radio" name="rating" value="3" id="rating">
+			<label for="rate3" style="font-size: 1.5em; color: rgb(255 83 86 / 99%);">♥♥♥</label>
+			<input type="radio" name="rating" value="4" id="rating">
+			<label for="rate4" style="font-size: 1.5em; color: rgb(255 83 86 / 99%);">♥♥♥♥</label>
+			<input type="radio" name="rating" value="5" id="rating" checked>
+			<label for="rate5" style="font-size: 1.5em; color: rgb(255 83 86 / 99%);">♥♥♥♥♥</label>
 		</div>
 		<br>
 		<div class="form-group">
@@ -62,7 +79,6 @@
 			<input type="file" name="file" class="file-upload" id="file" style="display: none;" accept="image/gif, image/jpg, image/jpeg, image/png">
 			<button class="inputPhoto" type="button" id="inputPhoto">썸네일 첨부하기</button>
 		</div>
-		<br>
 		<div>
 			<button type="submit" class="btn btn-brand" id="font">저장</button>
 			<button type="button" onclick="javascript:history.go(-1);" class="btn btn-brand">취소</button>
@@ -143,6 +159,7 @@ function uploadImage(files, editor)
 		}
 	});
 }
+
 </script>
 </body>
 </html>
