@@ -66,8 +66,13 @@
                             <span>${s.prdPrice }원</span> <span id="sale_pay"></span>
                         </div>
                         <div style="text-align: center">
-                            <div class="prod_icon new" style="align-content: center">NEW</div>
-                            <div class="prod_icon sale">BEST</div>
+                            <!-- <div class="prod_icon new" style="align-content: center">NEW</div>
+                            <div class="prod_icon sale">BEST</div> -->
+                            <c:choose>
+                            	<c:when test="${s.prdStock eq s.prdAllStock}">
+                            		<div class="prod_icon sale">SOLDOUT</div>
+                            	</c:when>
+                            </c:choose>
                         </div>
                     </div>
                 	</a>

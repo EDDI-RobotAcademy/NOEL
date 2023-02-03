@@ -42,14 +42,16 @@
                                     <div style="display: none">${s.classNo }</div>
                                     <div id = "class_name" style="text-align: center"> ${s.className }</div>
                                     <div style="text-align: center">
-                                        <span><fmt:formatNumber value="${s.classPrice}"
-                                                 pattern="#,###" />원</span>
-                                        <span id="sale_pay">86,000원</span>
+                                        <span><fmt:formatNumber value="${s.classPrice}" pattern="#,###" />원</span>
                                     </div>
-                                    <div style="text-align: center">
-                                    <div class="prod_icon new" style="align-content: center">NEW</div>
-                                    <div class="prod_icon best">BEST</div>
-                                    </div>
+                                    <c:choose>
+										<c:when test="${s.clStatus eq 0}">
+		                                    <div style="text-align: center">
+		                                    <div class="prod_icon sale" style="align-content: center">오픈 전</div>
+		                                    <!-- <div class="prod_icon best">BEST</div> -->
+		                                    </div>
+		                                </c:when>
+		                            </c:choose>        
                                 </div>
                             </a>
                 </div>
