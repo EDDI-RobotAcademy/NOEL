@@ -221,10 +221,16 @@ public class MemberController {
 	@RequestMapping(value = "/login")
 	public String login(Member member, HttpSession session, HttpServletRequest request) {
 
+		
 		String inputPw = member.getUserPw();
 		Member m = service.selectOneMember(member);
-		boolean Pwmatches = pwEncoder.matches(inputPw, m.getUserPw());
-		if (m != null && Pwmatches == true ) {
+		
+		boolean Pwmatches = false;
+		
+		if (m != null) {
+			Pwmatches = pwEncoder.matches(inputPw, m.getUserPw());
+		}
+		if (Pwmatches == true) {
 			session.setAttribute("m", m);
 			return "redirect:/";
 		} else {
@@ -240,8 +246,14 @@ public class MemberController {
 		String inputPw = marketer.getMarketerPw();
 		// id를 기준으로 정보를 불러와서 Member 객체에 담음
 		Marketer mk = service.selectOneMarketer(marketer);
-
-		if (pwEncoder.matches(inputPw, mk.getMarketerPw())) {
+		
+		boolean pwMatches = false;
+		
+		if (mk != null) {
+			pwMatches = pwEncoder.matches(inputPw, mk.getMarketerPw());
+		}
+		
+		if (pwMatches == true) {
 			if (mk.getMarketerAuth() == 0) {
 				session.setAttribute("mk", mk);
 				request.setAttribute("msg", "가입승인 대기 상태입니다.");
