@@ -30,7 +30,7 @@
                 <tr>
                     <th scope="col">예약 번호</th>
                     <th scope="col">클래스 이름</th>
-                    <th scope="col" colspan="2">예약 시간</th>
+                    <th scope="col" colspan="2">예약 날짜 ( 시간 )</th>
                     <th scope="col">예약 인원</th>
                     <th scope="col">예약 상태</th>
                     <th scope="col">예약 처리</th>
