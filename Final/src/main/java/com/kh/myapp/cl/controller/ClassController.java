@@ -397,9 +397,9 @@ public class ClassController {
         int result = service.addClassReview(review);
 
         if (result > 0) {
-            return "redirect:/classDetail?reqPage=1&classNo=" + classNo + "&rnum=1&qnum=1";
+        	return "redirect:/classReviewListFrm?reqPage=1";
         }
-        return "redirect:/classDetail?reqPage=1&classNo=" + classNo + "&rnum=1&qnum=1";
+        return "redirect:/classReviewListFrm?reqPage=1";
     }
 
     // 구매자 > 예약 내역 > 리뷰 등록 시 content 내에 이미지를 삽입하기 위한 메소드
@@ -612,7 +612,7 @@ public class ClassController {
 
     // 예약하기
     @RequestMapping(value = "/reserve")
-    public String StoreDetail(String userId, int classNo, Reserve r, HttpServletRequest request) {
+    public String StoreDetail(String userId, String marketerId, int classNo, Reserve r, HttpServletRequest request) {
         int result = service.reserve(r);
         if (result > 0) {
             request.setAttribute("msg", "예약이 완료되었습니다.");
