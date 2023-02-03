@@ -38,7 +38,8 @@
                 <c:forEach items="${list }" var="rs">
                     <tr>
                         <td>${rs.bookNo }</td>
-                        <td>${rs.bookName }</td>
+                        <td><a href="/classDetail?classNo=${rs.classNo }">
+                        ${rs.bookName }</a></td>
                         <td colspan="2">${rs.bookDate } ( ${rs.bookTime } )</td>
                         <td>${rs.bookNum }</td>
                         <td>
