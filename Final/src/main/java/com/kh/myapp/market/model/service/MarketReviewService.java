@@ -1,5 +1,6 @@
 package com.kh.myapp.market.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.kh.myapp.market.model.dao.MarketReviewDAO;
 import com.kh.myapp.market.model.vo.MarketReviewVO;
+import com.kh.myapp.market.model.vo.MarketWishVO;
+import com.kh.myapp.market.model.vo.ProductVO;
 
 @Service
 public class MarketReviewService {
@@ -47,5 +50,19 @@ public class MarketReviewService {
       dao.reviewDelete(qnaReviewno);
 
    }
+
+	public HashMap<String, Object> userReview(int prdNo, String bookmarkId) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		HashMap<String, Object> userMap = new HashMap<String, Object>();
+		userMap.put("prdNo", prdNo);
+		userMap.put("bookmarkId", bookmarkId);
+		
+		MarketReviewVO userReview = dao.userReview(userMap);
+		map.put("userReview", userReview);
+		
+		return map;
+	}
 
 }

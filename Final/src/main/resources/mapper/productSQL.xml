@@ -164,7 +164,8 @@
 		(select round(avg(rating),1) from noel_product_review r where r.prd_no =
 		p.prd_no) as rating,
 		(select prd_img_path from noel_product_img pi where pi.prd_img_no = p.prd_no)
-		as prdthumNail
+		as prdthumNail,
+		(select sum(order_quan) from noel_order o where o.prd_no = p.prd_no) as prdAllStock 
 		from noel_product p order by prdNo desc) b
 		where cateGory = #{category})rb order by 3 desc)
 		where rnum between #{start}
@@ -180,12 +181,14 @@
 		prd_name as prdName,
 		to_char(prd_price, '999,999,999') as prdPrice,
 		prd_category as prdCategory,
+		prd_stock as prdStock,
 		(select count(*) from noel_market_wishlist w where w.prd_no = s.prd_no)as
 		wish,
 		(select count(*) from noel_product_review r where r.prd_no = s.prd_no)as
 		reviewCount,
-		(select prd_img_path from noel_product_img si where prd_img_no = s.prd_no) as
-		prdthumNail
+		(select prd_img_path from noel_product_img si where si.prd_img_no = s.prd_no) as
+		prdthumNail,
+		(select sum(order_quan) from noel_order o where o.prd_no = s.prd_no) as prdAllStock 
 		from noel_product s order by
 		<choose>
 			<when test="sortList.equals('wish')">

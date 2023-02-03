@@ -8,10 +8,12 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" /> 
 <title>bonjour noël</title>
-</head>
+<link rel="stylesheet" href="/resources/css/product/marketDetailView.css">
 <link rel="stylesheet" href="/resources/css/member/owner.css">
 <link rel="stylesheet" href="/resources/css/member/updateOwner.css">
-<link rel="stylesheet" href="/resources/css/product/marketDetailView.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
 
 <body>
 <jsp:include page="/WEB-INF/views/layouts/header.jsp" />
@@ -24,14 +26,16 @@
             <div class="form-write">
                <h4>주문 내역</h4>
             </div>
+            
             <c:choose>
                <c:when test="${empty list}">
                   <div class="warningMark">
-                          <span class="material-symbols-outlined" style="font-size: 30px;"> 
-                             주문 내역이 없습니다.
-                          </span>
-                       </div>
+                     <span class="material-symbols-outlined" style="font-size: 30px;"> 
+                        주문 내역이 없습니다.
+                     </span>
+                  </div>
                </c:when>
+               
                <c:otherwise>
                   <table class="table" style="text-align: center; vertical-align: middle;">
                      <tr>
@@ -44,7 +48,7 @@
                         <th class="th" scope="col">처리</th>
                      </tr>
                      
-                     <c:forEach items="${list}" var="list" varStatus="i">
+                     <c:forEach items="${list}" var="list" varStatus="modal">
                      <tr>
                         <td scope="row">${list.orderNo }</td>
                         <td scope="row">
@@ -61,14 +65,10 @@
                         <td scope="row">${list.orderDate }</td>
                         <td scope="row" class="orderStatus">${list.orderStatus }</td>
                         <c:choose>
-                           <c:when test="${list.orderStatus eq '배송완료' }">
+                           <c:when test="${list.orderStatus eq '배송완료'}">
                               <td scope="row">
-								<%-- <a href="marketDetailView?prdNo=${orList.prdNo }&bookmarkId=${sessionScope.m.userId}&num=1&rnum=1&qnum=1#review-wrap"
-                              style="text-decoration:none;">
-                          			 구매평 작성
-                          		 </a>	 --%>
                           		 <button type="button" class="orderReviewBtn" data-bs-toggle="modal"
-									data-bs-target="#modal-review" value="${list.prdNo}">구매평작성</button>
+									data-bs-target="#modal-review${modal.index}">구매평 작성</button>
                               </td>
                            </c:when>
                            
@@ -81,58 +81,56 @@
 						   </c:otherwise>
                         </c:choose>
                      </tr>
+                     
+                     <form name="reviewForm" id="reviewForm" method="post" action="/market/reviewInsert" >
+					   <div class="modal fade" id="modal-review${modal.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					      <div class="modal-dialog modal-dialog-centered">
+					         <div class="modal-content">
+					            <div class="modal-header">
+					               <h5 class="modal-title" id="exampleModalLabel" style="font-family: Gowun Dodum;">구매평 작성</h5>
+					               <button type="button" class="btn-close btn btn-brand" data-bs-dismiss="modal"aria-label="Close"></button>
+					            </div>
+					            <div class="modal-body mb-3">
+					               <h4>상품은 어떠셨나요?</h4>
+					               <fieldset>
+					                  <input type="hidden" name="userId" value="${sessionScope.m.userId}">
+					                  <input type="hidden" name="prdNo" value="${list.prdNo}">
+					                  <input type="hidden" name="prdName" value="${list.prdName}">
+					                  <input type="hidden" name="marketerId" value="${list.marketerId}">
+					                  <input type="hidden" name="orderNo" value="${list.orderNo}">
+					                  <input type="radio" name="rating" value="5" id="rate1" checked>
+					                  <label for="rate1">♥</label>
+					                  <input type="radio" name="rating" value="4" id="rate2">
+					                  <label for="rate2">♥</label>
+					                  <input type="radio" name="rating" value="3" id="rate3">
+					                  <label for="rate3">♥</label>
+					                  <input type="radio" name="rating" value="2" id="rate4">
+					                  <label for="rate4">♥</label>
+					                  <input type="radio" name="rating" value="1" id="rate5">
+					                  <label for="rate5">♥</label>
+					               </fieldset>
+					               <textarea name="prdReviewcontent" class="chk1 form-control" id="message-text" title="어떤점이 좋으셨나요?"
+					                         style="height:15em; resize:none;" ></textarea>
+					            </div>
+					            <div class="modal-footer">
+					               <button type="submit" class="reviewsave btn btn-brand">저장</button>
+					               <button type="button" class="reviewcancel btn btn-brand" data-bs-dismiss="modal">취소</button>
+					            </div>
+					         </div>
+					      </div>
+					   </div>
+					</form> 
+                     
                      </c:forEach>
                   </table>
                   </c:otherwise>
             </c:choose>
+            
          </div>
          <div class="page">${pageNavi }</div>
       </div>
    </article>
 </div>
-
-<!-- 리뷰 모달 시작 -->
-<c:forEach items="${list}" var="list" varStatus="i">
-<form name="reviewForm" id="reviewForm" method="post" action="/market/reviewInsert" >
-   <div class="modal fade" id="modal-review" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLabel" style="font-family: Gowun Dodum;">구매평 작성</h5>
-               <button type="button" class="btn-close btn btn-brand" data-bs-dismiss="modal"aria-label="Close"></button>
-            </div>
-            <div class="modal-body mb-3">
-               <h4>상품은 어떠셨나요?</h4>
-               <fieldset>
-                  <input type="hidden" name="userId" value="${sessionScope.m.userId}">
-                  <input type="hidden" name="prdNo" value="${list.prdNo}">
-                  <input type="hidden" name="prdName" value="${prd.prdName}">
-                  <input type="hidden" name="marketerId" value="${prd.marketerId}">
-                  <input type="radio" name="rating" value="5" id="rate1" checked>
-                  <label for="rate1">♥</label>
-                  <input type="radio" name="rating" value="4" id="rate2">
-                  <label for="rate2">♥</label>
-                  <input type="radio" name="rating" value="3" id="rate3">
-                  <label for="rate3">♥</label>
-                  <input type="radio" name="rating" value="2" id="rate4">
-                  <label for="rate4">♥</label>
-                  <input type="radio" name="rating" value="1" id="rate5">
-                  <label for="rate5">♥</label>
-               </fieldset>
-               <textarea name="prdReviewcontent" class="chk1 form-control" id="message-text" title="어떤점이 좋으셨나요?"
-                         style="height:20em; resize:none;" ></textarea>
-            </div>
-            <div class="modal-footer">
-               <button type="submit" class="reviewsave btn btn-brand">저장</button>
-               <button type="button" class="reviewcancel btn btn-brand" data-bs-dismiss="modal">취소</button>
-            </div>
-         </div>
-      </div>
-   </div>
-</form> 
-</c:forEach>
-<!-- 리뷰 모달 끝 -->
-
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
 <script>
@@ -149,7 +147,6 @@
           }
        }
     });
-   
 </script>
 </body>
 </html>
