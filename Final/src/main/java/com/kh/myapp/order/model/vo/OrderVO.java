@@ -27,5 +27,6 @@ public class OrderVO {
     private String prdthumNail;
     private String prdName;
     private String prdPrice;
+    private String marketerId;
 
 }

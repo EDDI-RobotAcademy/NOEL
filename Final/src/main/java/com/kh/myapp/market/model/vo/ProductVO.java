@@ -24,4 +24,5 @@ public class ProductVO {
 	private String prdthumNail;
 	private String marketerId;
 	private int prdStatus;
+	private int orderNo;
 }

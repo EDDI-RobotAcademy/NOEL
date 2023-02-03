@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.myapp.market.model.dao.ProductDAO;
+import com.kh.myapp.market.model.vo.MarketReviewVO;
 import com.kh.myapp.market.model.vo.MarketWishVO;
 import com.kh.myapp.market.model.vo.ProductImgVO;
 import com.kh.myapp.market.model.vo.ProductVO;
@@ -74,7 +75,6 @@ public class ProductService {
 		HashMap<String, Object> userMap = new HashMap<String, Object>();
 		userMap.put("prdNo", prdNo);
 		userMap.put("bookmarkId", bookmarkId);
-		
 		MarketWishVO marketwish = dao.selectOneMarketWish(userMap);
 
 		map.put("prd", vo);

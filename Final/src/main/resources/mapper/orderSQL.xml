@@ -135,9 +135,9 @@
 		order_quan as orderQuan,
 		order_status as orderStatus,
 		to_char(order_date, 'yyyy-mm-dd') as orderDate,
-		(select prd_name from
-		noel_product mp where ot.prd_no = mp.prd_no) as prdName,
+		(select prd_name from noel_product mp where ot.prd_no = mp.prd_no) as prdName,
 		(select prd_price from noel_product mp where ot.prd_no = mp.prd_no)*order_quan as prdPrice,
+		(select marketer_Id from noel_product mp where ot.prd_no = mp.prd_no) as marketerId,
 		imp_uid as impUid,
 		prd_no as prdNo
 		from noel_order ot
@@ -145,17 +145,6 @@
 		(select distinct imp_uid from noel_order where user_id= #{userId})
 		order by order_no desc
 	</select>
-	
-	<!-- 주문완료된 상품의 리뷰모달창 -->
-	<!-- <select id="selectOneMyOrderList" parameterType="map" resultType="OrderListVO">
-		select
-		user_id as userId,
-		prd_no as prdNo,
-		prd_name as prdName,
-		marketer_id as marketerId
-		from noel_order
-		where
-	</select> -->
 
 	<select id="countMyOrderList" parameterType="string"
 		resultType="int">

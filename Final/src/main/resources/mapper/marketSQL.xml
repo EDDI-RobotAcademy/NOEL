@@ -57,7 +57,8 @@
 		rating,
 		prd_review_content,
 		user_id,
-		prd_name)
+		prd_name,
+		order_no)
 		values(
 		prd_review_seq.nextval,
 		#{prdNo},
@@ -65,7 +66,8 @@
 		#{rating},
 		#{prdReviewcontent},
 		#{userId},
-		#{prdName}
+		#{prdName},
+		#{orderNo}
 		)
 	</insert>
 
@@ -80,6 +82,15 @@
 		from noel_product_review
 		where prd_review_no = #{prdReviewno}
 	</delete>
+	
+	<!-- 로그인한 회원의 리뷰글이 있는지 -->
+	<select id="userReview" parameterType="hashmap" resultType="MarketReviewVO">
+		select
+		distinct user_id as userId
+		from noel_product_review
+		where prd_no = #{prdNo} and user_id = #{bookmarkId}
+	</select>
+	
 
 	<!-- qna 총개수 -->
 	<select id="qnaCount" parameterType="int" resultType="int">

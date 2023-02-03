@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.myapp.market.model.vo.MarketReviewVO;
+import com.kh.myapp.market.model.vo.MarketWishVO;
 
 @Repository
 public class MarketReviewDAO {
@@ -55,5 +56,10 @@ public class MarketReviewDAO {
    public void reviewDelete(int qnaReviewno) throws Exception {
       sqlSession.delete("marketMapper.reviewDelete", qnaReviewno);
    }
+
+	public MarketReviewVO userReview(HashMap<String, Object> map) {
+		MarketReviewVO userReview = sqlSession.selectOne("marketMapper.userReview", map);
+		return userReview;
+	}
 
 }
