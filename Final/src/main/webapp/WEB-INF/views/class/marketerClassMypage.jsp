@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html>
 <html>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -25,7 +26,9 @@
 						<h1>클래스 관리</h1>
 						<input type="hidden" name="marketerId" value="${sessionScope.mk.marketerId }"> <br> 
 						<p class="classList-list-content">
-						<a href="/class/classAdd" class="btn btn-brand" id="font1">클래스 등록</a>
+							<c:if test="${ empty isNull }">
+							<a href="/class/classAdd" class="btn btn-brand" id="font1">클래스 등록</a>
+                			</c:if>
 						<c:forEach items="${classlist}" var="classlist">
 							<c:choose>
                 			<c:when test="${classlist != null}">
@@ -34,6 +37,7 @@
 							<br><br>
 							</c:when>
 							</c:choose>
+							
 							<div>
 								<label for="inputName">썸네일</label><br>
 								<img id="class_thumNail" src="/resources/upload/class/${classlist.thumNail }" style="height: 500px; width: 500px;">
