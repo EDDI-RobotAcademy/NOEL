@@ -8,19 +8,6 @@
 </head>
 
 <style>
-    /*datepicer 버튼 롤오버 시 손가락 모양 표시*/
-    .ui-datepicker-trigger {
-        cursor: pointer;
-    }
-
-    /*datepicer input 롤오버 시 손가락 모양 표시*/
-    .hasDatepicker {
-        cursor: pointer;
-    }
-
-    .hidden{
-        display:none;
-    }
 .image-box {
     width:470px;
     height:470px;
@@ -36,7 +23,6 @@
     object-fit:cover;
 }
  	
-}
 
 </style>
 <body>
@@ -72,6 +58,10 @@
 
         <%-- 상세정보 --%>
         <p class="menuTitle" style="margin-top: 20px;">Review</p>
+        <div style="color: rgb(255, 83, 86); font-size: 1.5em; float: center;">
+			<c:forEach begin="1" step="1" end="${s.rating }" varStatus="i">♥</c:forEach>
+		</div>
+		<br>
         <div class="contentWrap2" style="font-family:Gowun Dodum; text-algin:center;" >
             ${s.classReviewContent}
         </div>

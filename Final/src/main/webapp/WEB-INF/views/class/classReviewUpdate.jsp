@@ -41,6 +41,22 @@
 			<input type="text" class="form-control" id="classReviewName" name="classReviewName" value="${classReviewlist.classReviewName }">
 		</div>
 		<br>
+		<div class="inputRating">
+			<label for="inputRating">별점을 선택하세요</label>
+			<br>
+			<input type="hidden" class="rating" id="rating" name="rating" value="${classReviewlist.rating }">
+			<input type="radio" name="rating" value="1" id="rating">
+			<label for="rate1" style="font-size: 1.5em; color: rgb(255 83 86 / 99%);">♥</label>
+			<input type="radio" name="rating" value="2" id="rating">
+			<label for="rate2" style="font-size: 1.5em; color: rgb(255 83 86 / 99%);">♥♥</label>
+			<input type="radio" name="rating" value="3" id="rating">
+			<label for="rate3" style="font-size: 1.5em; color: rgb(255 83 86 / 99%);">♥♥♥</label>
+			<input type="radio" name="rating" value="4" id="rating">
+			<label for="rate4" style="font-size: 1.5em; color: rgb(255 83 86 / 99%);">♥♥♥♥</label>
+			<input type="radio" name="rating" value="5" id="rating">
+			<label for="rate5" style="font-size: 1.5em; color: rgb(255 83 86 / 99%);">♥♥♥♥♥</label>
+		</div>
+		<br>
 		<div class="form-group">
 			<label for="textarea">리뷰 내용</label> <br>
 			<textarea class="form-control" name="classReviewContent" id="textarea" rows="4" 
@@ -140,6 +156,18 @@ function uploadImage(files, editor)
 		}
 	});
 }
+
+const databaseValue  = $(".rating").val();
+var radioButtons = document.querySelectorAll('input[type="radio"]');
+
+for (var i = 0; i < radioButtons.length; i++) 
+{
+	if (radioButtons[i].value === databaseValue) 
+	{
+ 		radioButtons[i].checked = true;
+	}
+}
+
 </script>
 </body>
 </html>

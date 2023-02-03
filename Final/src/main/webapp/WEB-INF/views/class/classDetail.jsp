@@ -187,28 +187,10 @@
 
         <hr style="border: 1px">
 
-	<!-- 리뷰 -->
-	<div class="review-wrap" id="review-wrap">
-		<div class="review-title">
-			<div>
-				<b>구매평</b>
-			</div>
-		<c:choose>
-			<c:when test="${empty sessionScope.m}"></c:when>
-			<c:otherwise>
-				<br><br>
-				<a href="/class/classReviewAdd?classNo=${s.classNo}" class="btn btn-brand" id="font1">클래스 리뷰 등록</a>
-			</c:otherwise>
-		</c:choose>
-		</div>
-	</div>
-
-
-
 <!-- QNA 목록 시작 -->
 <div class="qna-wrap" id="qna-wrap">
 	<div class="qna-title">
-		<br> <br> <br>
+	<br>
 		<div>
 			<b>QnA</b><br>
 		</div>
@@ -805,6 +787,18 @@
                 	}
                 }
 
+                
+
+                //---------- 주소 * 없애기
+                var addr;
+                function addrSlice() {
+                       addr = $(".addressTd");
+                       splitWord = addr.text().split("*");
+                          addr.text(splitWord[1] + " " +splitWord[2]);
+                }// addrSlice 함수 종료
+                addrSlice();
+                
+                
             </script>
 </body>
 </html>
