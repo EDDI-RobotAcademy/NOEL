@@ -59,6 +59,14 @@ public class ClassController {
 	@RequestMapping(value = "/class/marketerClassMypage", method = RequestMethod.GET)
 	public void getMarketer(Model model, @SessionAttribute Marketer mk) throws Exception {
 		List<Class> list = service.list(mk.getMarketerId());
+		
+		if(list.isEmpty()) {
+			model.addAttribute("isNull",null);
+		}
+		else {
+			model.addAttribute("isNull",true);
+		}
+		
 		model.addAttribute("classlist", list);
 	}
 	
