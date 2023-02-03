@@ -8,7 +8,7 @@
 		insert into
 		noel_product(prd_no, prd_category, prd_name,
 		prd_price, prd_stock, prd_note,
-		prd_content,prd_regdate, marketer_id)
+		prd_content,prd_regdate, marketer_id,prd_status)
 		values(PRD_NO_SEQ.nextval, #{cateGory}, #{prdName},
 		#{prdPrice}, #{prdStock}, #{prdNote},
 		#{prdContent}, sysdate, #{marketerId},1)
