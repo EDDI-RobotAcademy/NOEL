@@ -76,7 +76,7 @@
 				
 				<div class="btnWrap">
 					<c:choose>
-						<c:when test="${prd.prdStock-prd.prdAllStock eq 0}">
+						<c:when test="${prd.prdStock eq prd.prdAllStock}">
 							<button type="button" class="soldoutBtn">품절된 상품입니다.</button>
 						</c:when>
 						<c:when test="${prd.prdStatus eq 0}">

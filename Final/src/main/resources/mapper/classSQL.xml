@@ -130,7 +130,9 @@
              FROM
                  noel_class nc
              ORDER BY
+
                  classNo desc)
+
         where rnum between #{start} and #{end}
     </select>
     
