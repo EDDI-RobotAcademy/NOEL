@@ -70,7 +70,7 @@
                           		 <%-- <button type="button" class="orderReviewBtn" data-bs-toggle="modal"
 									data-bs-target="#modal-review${modal.index}">구매평 작성</button> --%>
 								<a href="marketDetailView?prdNo=${list.prdNo}&bookmarkId=${sessionScope.m.userId}&num=1&rnum=1&qnum=1"
-                              style="text-decoration:none;" type="button" class="orderReviewBtn">구매평 작성</a>
+                              style="text-decoration:none; color:white;" type="button" class="orderReviewBtn">구매평 작성</a>
                               </td>
                            </c:when>
                            
@@ -84,7 +84,7 @@
                         </c:choose>
                      </tr>
                      
-                     <form name="reviewForm" id="reviewForm" method="post" action="/market/reviewInsert" >
+                     <%-- <form name="reviewForm" id="reviewForm" method="post" action="/market/reviewInsert" >
 					   <div class="modal fade" id="modal-review${modal.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					      <div class="modal-dialog modal-dialog-centered">
 					         <div class="modal-content">
@@ -121,7 +121,7 @@
 					         </div>
 					      </div>
 					   </div>
-					</form> 
+					</form> --%> 
                      
                      </c:forEach>
                   </table>

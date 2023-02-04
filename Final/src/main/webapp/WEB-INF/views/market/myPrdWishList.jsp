@@ -52,7 +52,7 @@
 																<div class="bookmark-man">
 																	<ul>
 																		<li><b>${prd.prdName }</b></li>
-																		<li>${prd.prdPrice }</li>
+																		<li>${prd.prdPrice }원</li>
 																	</ul>
 																</div>
 															</div>
@@ -77,7 +77,7 @@
 																<div class="bookmark-man">
 																	<ul>
 																		<li>${prd.prdName }</li>
-																		<li>${prd.prdPrice }</li>
+																		<li>${prd.prdPrice }원</li>
 																	</ul>
 																</div>
 															</div>
@@ -103,19 +103,8 @@
 						</div>
 						<div class="noMsg1" style="display: none;">아직 찜한 목록이 없습니다.</div>
 
-						<div class="paging">
-							<!-- <a href="#"><span class="material-symbols-outlined" style="font-size: 30px;">
-		               chevron_left
-		               </span>
-		           </a>
-		           <a href="#"><span>1</span></a>
-		           <a href="#"><span>2</span></a>
-		           <a href="#"><span>3</span></a>
-		           <a href="#"><span class="material-symbols-outlined"  style="font-size: 30px;">
-		               chevron_right
-		               </span></a>  -->
-							<%--                   ${pageNavi }
-							--%>
+						<div class="pageNavi">${pageNavi }</div>
+							
 						</div>
 					</div>
 				</div>
