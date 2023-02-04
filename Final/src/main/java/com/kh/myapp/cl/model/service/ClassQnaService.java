@@ -71,7 +71,6 @@ public class ClassQnaService {
 	// QNA 댓글 개수
 	public void qnarCount(int classQnaNo) throws Exception {
 		dao.qnarCount(classQnaNo);
-		System.out.println("classqnano service" + classQnaNo);
 	}
 
 	// 판매자의 QNA 댓글등록시 QNA 답변완료로 변경

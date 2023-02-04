@@ -64,7 +64,7 @@
 			<label for=rate3 style="font-size: 1.5em; color: rgb(255 83 86 / 99%);">♥♥♥</label>
 			<input type=radio name=rating value=4 class=rating>
 			<label for=rate4 style="font-size: 1.5em; color: rgb(255 83 86 / 99%);">♥♥♥♥</label>
-			<input type=radio name=rating value=5 class=rating>
+			<input type=radio name=rating value=5 class=rating checked>
 			<label for=rate5 style="font-size: 1.5em; color: rgb(255 83 86 / 99%);">♥♥♥♥♥</label>
 
 		</div>
@@ -80,6 +80,7 @@
 			<input type="file" name="file" class="file-upload" id="file" style="display: none;" accept="image/gif, image/jpg, image/jpeg, image/png">
 			<button class="inputPhoto" type="button" id="inputPhoto">썸네일 첨부하기</button>
 		</div>
+		<br>
 		<div>
 			<button type="submit" class="btn btn-brand" id="font">저장</button>
 			<button type="button" onclick="javascript:history.go(-1);" class="btn btn-brand">취소</button>

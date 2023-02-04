@@ -73,7 +73,6 @@ public class ClassController {
 	// 판매자 > 클래스 관리 > 클래스 등록 폼
 	@RequestMapping(value = "/class/classAdd", method = RequestMethod.GET)
 	public void getClassAdd() throws Exception {
-		System.out.println("classAdd.jsp로 이동");
 	}
 	
     // 판매자 > 클래스 관리 > 클래스 등록
@@ -365,8 +364,6 @@ public class ClassController {
 		int classNo = Integer.parseInt(request.getParameter("classNo"));
 		model.addAttribute("classNo", classNo);
 		model.addAttribute("className", bookName);
-		System.out.println(bookName);
-		System.out.println("classReviewAdd.jsp로 이동");
 	}
 	
 	// 구매자 > 예약 내역 > 리뷰 등록
@@ -490,9 +487,6 @@ public class ClassController {
 	public String updateClassReview(int[] imgNoList, Review review, String[] imgpathList, MultipartFile[] file,
 			HttpServletRequest request) throws Exception 
 	{
-			
-		System.out.println(" review : " +review.toString());
-		
 		ArrayList<ClassReviewImg> classReviewImgList = new ArrayList<ClassReviewImg>();
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/classReview/");
 		if (!file[0].isEmpty()) {
