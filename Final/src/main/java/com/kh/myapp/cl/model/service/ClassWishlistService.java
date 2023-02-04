@@ -29,7 +29,7 @@ public class ClassWishlistService {
 	public HashMap<String, Object> myClassWishList(String bookmarkId, int reqPage) {
 		
 		// 화면에 보이는 게시물 수 
-		int numPerPage = 6;
+		int numPerPage = 4;
 		
 		// 끝 페이지
 		int end = numPerPage * reqPage;
@@ -52,7 +52,7 @@ public class ClassWishlistService {
 			totalPage = totalCount / numPerPage + 1;
 		}
 		
-		int pageNaviSize = 5;
+		int pageNaviSize = 4;
 		int pageNo = 1;
 		
 		if(reqPage > 3) {
@@ -71,7 +71,7 @@ public class ClassWishlistService {
 			if(reqPage == pageNo) {
 				pageNavi += "<span class='pageNo'>" + pageNo + "</span>";
 			}else {
-				pageNavi += "<a href='/myBookmarkList.do?bookmarkId=" + bookmarkId + "&reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+				pageNavi += "<a href='/myClassWishList?bookmarkId=" + bookmarkId + "&reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
 			}
 			
 			pageNo++;
@@ -82,7 +82,7 @@ public class ClassWishlistService {
 		}
 		
 		if(pageNo <= totalPage) {
-			pageNavi += "<a href='/myBookmarkList.do?bookmarkId=" + bookmarkId + "&reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+			pageNavi += "<a href='/myClassWishList?bookmarkId=" + bookmarkId + "&reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_right\r\n" + 
 					"            </span></a>";
 		}

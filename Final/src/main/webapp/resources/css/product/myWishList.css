@@ -180,14 +180,14 @@ ul {
     border-radius: 100%;
 }
 
-.pageNo {
+/* .pageNo {
     font-size: 20px;
     background-color: gray;
     color: white;
     width: 30px;
     border-radius: 100%;
     line-height: 34px;
-}
+} */
 
 .category1 {
     width: 500px;
@@ -217,4 +217,35 @@ ul {
 
 .category1>a:last-child {
     margin-left: 30px;
+}
+
+.pageNavi {
+	width: 800px;
+	text-align: center;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.pageNavi>a {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	text-decoration: none;
+	font-size: 20px;
+}
+
+.pageNavi>a:hover {
+	color: #212529;
+}
+
+.pageNavi>span {
+	color: #dc3545;
+	display: inline-block;
+	width: 30px;
+	line-height: 30px;
+	text-decoration: none;
+	font-size: 20px;
 }
