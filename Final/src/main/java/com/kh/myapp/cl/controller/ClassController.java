@@ -360,8 +360,12 @@ public class ClassController {
 	// 구매자 > 예약 내역 > 리뷰 등록 폼
 	@RequestMapping(value = "/class/classReviewAdd", method = RequestMethod.GET)
 	public void getClassReviewAdd(HttpServletRequest request, Model model) throws Exception {
+		 
+		String bookName = request.getParameter("bookName");
 		int classNo = Integer.parseInt(request.getParameter("classNo"));
 		model.addAttribute("classNo", classNo);
+		model.addAttribute("className", bookName);
+		System.out.println(bookName);
 		System.out.println("classReviewAdd.jsp로 이동");
 	}
 	

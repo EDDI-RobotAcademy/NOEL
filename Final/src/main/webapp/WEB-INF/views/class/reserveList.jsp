@@ -58,7 +58,7 @@
                         					<button type="button" class="cancleBtn2">취소불가</button>
                         				</c:when>
                         				<c:otherwise>
-                        					<a href="/class/classReviewAdd?classNo=${rs.classNo}" class="btn reviewBtn" id="font1">후기작성</a>
+                        					<a href="/class/classReviewAdd?classNo=${rs.classNo}&bookName=${rs.bookName}" class="btn reviewBtn" id="font1">후기작성</a>
                         				</c:otherwise>
                         			</c:choose>
                         		</c:otherwise>
