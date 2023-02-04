@@ -67,8 +67,10 @@
                         <c:choose>
                            <c:when test="${list.orderStatus eq '배송완료'}">
                               <td scope="row">
-                          		 <button type="button" class="orderReviewBtn" data-bs-toggle="modal"
-									data-bs-target="#modal-review${modal.index}">구매평 작성</button>
+                          		 <%-- <button type="button" class="orderReviewBtn" data-bs-toggle="modal"
+									data-bs-target="#modal-review${modal.index}">구매평 작성</button> --%>
+								<a href="marketDetailView?prdNo=${list.prdNo}&bookmarkId=${sessionScope.m.userId}&num=1&rnum=1&qnum=1"
+                              style="text-decoration:none;" type="button" class="orderReviewBtn">구매평 작성</a>
                               </td>
                            </c:when>
                            
@@ -98,7 +100,7 @@
 					                  <input type="hidden" name="prdName" value="${list.prdName}">
 					                  <input type="hidden" name="marketerId" value="${list.marketerId}">
 					                  <input type="hidden" name="orderNo" value="${list.orderNo}">
-					                  <input type="radio" name="rating" value="5" id="rate1" checked>
+					                  <input type="radio"  name="rating" value="5" id="rate1" checked>
 					                  <label for="rate1">♥</label>
 					                  <input type="radio" name="rating" value="4" id="rate2">
 					                  <label for="rate2">♥</label>
