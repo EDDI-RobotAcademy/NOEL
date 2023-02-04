@@ -34,43 +34,38 @@
 <jsp:include page="/WEB-INF/views/layouts/header.jsp" />
 
 <div class="classList-content-wrap">
-    <!-- 맛집 리스트 생성 -->
+    <!-- 리스트 생성 -->
     <div class="classList-list">
         <div class="classList-list-content">
           <c:if test="${empty list }">
-				    <div class="warningMark">
-					    <span class="material-symbols-outlined" style="font-size: 70px;">
-						  error </span>
-				    </div>
-				    <div class="noMsg">${msg}</div>
-			  </c:if>
-            <c:forEach items="${list}" var="s">
-                <div class="showList">
-                    <c:choose>
-                    
-                    <c:when test="${not empty sessionScope.m }">
-                    <a href="/classReviewDetail?classReviewNo=${s.classReviewNo }&userId=${m.userId}">
+			<div class="warningMark">
+				<span class="material-symbols-outlined" style="font-size: 70px;">error </span>
+			</div>
+			<div class="noMsg">${msg}</div>
+		</c:if>
+		<c:forEach items="${list}" var="s">
+			<div class="showList">
+				<c:choose>
+					<c:when test="${not empty sessionScope.m }">
+                    	<a href="/classReviewDetail?classReviewNo=${s.classReviewNo }&userId=${m.userId}">
                     </c:when>
-
-                        <c:when test="${not empty sessionScope.o}">
+					<c:when test="${not empty sessionScope.o}">
                         <a href="/classReviewDetail?classReviewNo=${s.classReviewNo }&userId='mlolw2'">
-                        </c:when>
-                                <c:otherwise>
-                                <a href="/classReviewDetail?classReviewNo=${s.classReviewNo }">
-                                </c:otherwise>
-                                </c:choose>
-                                <div>
-                                    <img src="resources/upload/classReview/${s.thumNail }">
-                                </div>
-
-                                <div id="font">
-                                    <div style="display: none">${s.classReviewNo }</div>
-                                    <div id = "class_name" style="text-align: center"> ${s.className }</div>
-                                    <div id = "class_reviewName" style="text-align: center"> ${s.classReviewName }</div>
-                                </div>
-                            </a>
-                </div>
-            </c:forEach>
+                    </c:when>
+					<c:otherwise>
+						<a href="/classReviewDetail?classReviewNo=${s.classReviewNo }">
+					</c:otherwise>
+				</c:choose>
+			<div>
+				<img src="resources/upload/classReview/${s.thumNail }">
+			</div>
+			<div id="font">
+ 				<div style="display: none">${s.classReviewNo }</div>
+				<div id = "class_name" style="text-align: center"> ${s.className }</div>
+				<div id = "class_reviewName" style="text-align: center"> ${s.classReviewName }</div>
+			</div>
+			</div>
+		</c:forEach>
         </div>
     </div>
     <!-- 페이지 네비 -->

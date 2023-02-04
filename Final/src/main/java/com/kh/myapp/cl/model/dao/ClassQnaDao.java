@@ -33,7 +33,6 @@ public class ClassQnaDao {
 		data.put("classNo", classNo);
 		data.put("qnadisplayPost", qnadisplayPost);
 		data.put("qnapostNum", qnapostNum);
-		System.out.println("qnaList는 " + data);
 		return sqlSession.selectList("classQna.qnaList", data);
 	}
 
