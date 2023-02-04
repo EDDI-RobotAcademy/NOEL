@@ -95,8 +95,8 @@
                <tr height="80px">
                   <td style="text-align:center;"> 구매평 </td>
                   <td>
-                              <textarea name="prdReviewcontent" class="form-control" id="message-text"
-                                        style="height:10em; width:500px; resize:none;" readonly="readonly">${reviewdetail.prdReviewcontent}</textarea>
+                      <textarea name="prdReviewcontent" class="form-control" id="message-text"
+                                style="height:10em; width:500px; resize:none;" readonly="readonly">${reviewdetail.prdReviewcontent}</textarea>
                   </td>
                </tr>
                </tbody>

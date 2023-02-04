@@ -111,11 +111,10 @@
 										<button type="submit" class="buyBtn">구매</button>
 									</c:otherwise>
 								</c:choose>
-								<input type="hidden" name="prdPrice" class="allPrice"
-									value="${prd.prdPrice }"> 
+								<input type="hidden" name="prdPrice" class="allPrice" value="${prd.prdPrice }"> 
 								<input type="hidden" name="prdNo" class="pNumber" value="${prd.prdNo }">
 								<input type="hidden" name="prdthumNail" class="prdthumNail" value="${prd.prdthumNail }">
-								 <input type="hidden" name="prdName" value="${prd.prdName}"> 
+								<input type="hidden" name="prdName" value="${prd.prdName}"> 
 								<input type="hidden" name="cartQuan" class="count"> 
 								<input
 									type="hidden" name="userId" value="${sessionScope.m.userId }">

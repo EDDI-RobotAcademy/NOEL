@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.kh.myapp.market.model.service.MarketReviewService;
 import com.kh.myapp.market.model.vo.MarketReviewVO;
-import com.kh.myapp.market.model.vo.ProductVO;
+import com.kh.myapp.member.model.vo.Member;
 
 @Controller
 public class MarketReviewController {
@@ -42,15 +42,17 @@ public class MarketReviewController {
 
     // 리뷰 수정
     @RequestMapping(value = "/market/reviewUpdate", method = RequestMethod.POST)
-    public String reviewUpdate(MarketReviewVO marketReviewVO, int prdNo) throws Exception {
+    public String reviewUpdate(MarketReviewVO marketReviewVO, int prdNo, @SessionAttribute Member m) throws Exception {
         reviewService.reviewUpdate(marketReviewVO);
-        return "redirect:/marketDetailView?reqPage=1&prdNo=" + prdNo + "&rnum=1&qnum=1";
+        String userId = m.getUserId();
+        return "redirect:/marketDetailView?prdNo="+prdNo+"&bookmarkId="+userId+"&num=1&rnum=1&qnum=1";
     }
 
     // 리뷰 삭제
     @RequestMapping(value = "/market/reviewDelete")
-    public String reviewDelete(MarketReviewVO marketReviewVO, int prdNo) throws Exception {
+    public String reviewDelete(MarketReviewVO marketReviewVO, int prdNo, @SessionAttribute Member m) throws Exception {
         reviewService.reviewDelete(marketReviewVO.getPrdReviewno());
-        return "redirect:/marketDetailView?reqPage=1&prdNo=" + prdNo + "&rnum=1&qnum=1";
+        String userId = m.getUserId();
+        return "redirect:/marketDetailView?prdNo="+prdNo+"&bookmarkId="+userId+"&num=1&rnum=1&qnum=1";
     }
 }
