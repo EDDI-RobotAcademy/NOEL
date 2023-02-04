@@ -57,8 +57,7 @@
 		rating,
 		prd_review_content,
 		user_id,
-		prd_name,
-		order_no)
+		prd_name)
 		values(
 		prd_review_seq.nextval,
 		#{prdNo},
@@ -66,8 +65,7 @@
 		#{rating},
 		#{prdReviewcontent},
 		#{userId},
-		#{prdName},
-		#{orderNo}
+		#{prdName}
 		)
 	</insert>
 
