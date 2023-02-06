@@ -129,10 +129,11 @@
         where user_id = #{userId}
     </select>
 
-    <delete id="cancleReserve" parameterType="int">
-        delete from noel_book
-        where book_no = #{_parameter}
-    </delete>
+    <update id="cancleReserve" parameterType="int">
+		update noel_book nb
+		set book_status = 4
+		where book_no = #{bookNo}
+	</update>
 
 
 
