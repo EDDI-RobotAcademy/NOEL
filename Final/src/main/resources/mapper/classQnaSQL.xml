@@ -21,7 +21,8 @@
          cl_qna_regdate as classQnaRegdate,
 		 cl_qna_status as classQnaStatus,
 		 cl_secret as classSecret,
-		 cl_qna_pw as classQnaPw
+		 cl_qna_pw as classQnaPw,
+		 cl_name as className
       from(
              select
                 cl_qna_no,
@@ -32,6 +33,7 @@
                 cl_qna_status,
                 cl_secret,
                 cl_qna_pw,
+                cl_name,
                 row_number() over(order by cl_qna_no desc) as rNum
              from noel_class_qna where cl_no = #{classNo})
          <![CDATA[where rNum > #{qnadisplayPost} and rNum <= #{qnapostNum}]]>
@@ -46,6 +48,7 @@
          user_id as userId,
          substr(user_id,1,length(user_id)-3) || lpad('*',3,'*') as userId2,
          cl_qna_regdate as classQnaRegdate,
+         cl_name as className,
          (select cl_name from noel_class where cl_no =
          (select cl_no from noel_class_qna where cl_qna_no = #{classQnaNo}))as className
 
@@ -60,6 +63,7 @@
          cl_qna_content as classQnaContent,
          substr(user_id,1,length(user_id)-3) || lpad('*',3,'*') as userId,
          cl_qna_pw as classQnaPw,
+         cl_name as className,
          (select cl_name from noel_class where cl_no =
          (select cl_no from noel_class_qna where cl_qna_no = #{classQnaNo}))as className
       from noel_class_qna where cl_qna_no = #{classQnaNo} and cl_qna_pw = #{classQnaPw}
@@ -73,7 +77,8 @@
          user_id,
          cl_qna_content,
          cl_secret,
-         cl_qna_pw)
+         cl_qna_pw,
+         cl_name)
       values(
                cl_qna_seq.nextval,
                #{classNo},
@@ -81,7 +86,8 @@
                #{userId},
                #{classQnaContent},
                #{classSecret},
-               #{classQnaPw})
+               #{classQnaPw},
+               #{className})
    </insert>
 
    <update id="qnaUpdate" parameterType="Qna">
@@ -155,4 +161,46 @@
       where q.cl_qna_no = #{classQnaNo}
    </select>
 
+
+		<!-- 회원 > 마이페이지 > QNA > 클래스-->
+	<select id="memberClassQna" parameterType="hashmap" resultType="Qna">
+		select
+		cl_qna_no as classQnaNo,
+		cl_no as classNo,
+		marketer_id as marketerId,
+		user_id as userId,
+		cl_qna_content as classQnaContent,
+		cl_qna_regdate as classQnaRegdate,
+		cl_secret as classSecret,
+		cl_qna_pw as classQnaPw,
+		cl_qna_reply as classQnaReply,
+		cl_qna_reply_writer as classQnaReplyWriter,
+		cl_qna_reply_date as classQnaReplyDate,
+		cl_qna_status as classQnaStatus,
+		cl_name as className
+		from(
+		select
+		cl_qna_no,
+		cl_no,
+		marketer_id,
+		user_id,
+		cl_qna_content,
+		cl_qna_regdate,
+		cl_secret,
+		cl_qna_pw,
+		cl_qna_reply,
+		cl_qna_reply_writer,
+		cl_qna_reply_date,
+		cl_qna_status,
+		cl_name,
+		row_number() over(order by cl_qna_no desc) as rNum
+		from noel_class_qna ncq where user_id = #{userId} order by cl_qna_regdate desc)
+	</select>
+	
+	<!-- 회원 > 마이페이지 > QNA > 클래스 개수 -->
+	<select id="countmemberClassQna" parameterType="String" resultType="int">
+		select count(cl_qna_no)
+		from noel_class_qna
+		where user_id = #{userId}
+	</select>
 </mapper>
