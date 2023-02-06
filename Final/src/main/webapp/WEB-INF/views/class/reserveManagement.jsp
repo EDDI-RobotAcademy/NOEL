@@ -73,6 +73,7 @@
 										<option value="1" selected>예약대기</option>
 										<option value="2">예약확정</option>
 										<option value="3">방문완료</option>
+										<option value="4">예약취소</option>
 									</select>
 								</c:when>
 								<c:when test="${Reserve.bookStatus eq  '2'}">
@@ -80,6 +81,7 @@
 										<option value="1">예약대기</option>
 										<option value="2" selected>예약확정</option>
 										<option value="3">방문완료</option>
+										<option value="4">예약취소</option>
 									</select>
 								</c:when>
 								<c:when test="${Reserve.bookStatus eq '3'}">
@@ -87,6 +89,15 @@
 										<option value="1">예약대기</option>
 										<option value="2">예약확정</option>
 										<option value="3" selected>방문완료</option>
+										<option value="4">예약취소</option>
+									</select>
+								</c:when>
+								<c:when test="${Reserve.bookStatus eq '4'}">
+									<select name="bookStatus" class="selectbox">
+										<option value="1">예약대기</option>
+										<option value="2">예약확정</option>
+										<option value="3">방문완료</option>
+										<option value="4" selected>예약취소</option>
 									</select>
 								</c:when>
 							</c:choose>
