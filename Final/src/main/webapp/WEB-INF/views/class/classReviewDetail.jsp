@@ -22,7 +22,6 @@
     height:100%;
     object-fit:cover;
 }
- 	
 
 </style>
 <body>
@@ -50,18 +49,25 @@
 
 <div class="content-wrap4"
      style="font-family:Gowun Dodum; margin-top:30px; height:auto; width:1200px; margin-bottom:100px; margin:0 auto;">
-	<%-- 메뉴 --%>
 	<p class="menuTitle" style="margin-top: 20px;">Review</p>
-	<div style="color: rgb(255, 83, 86); font-size: 1.5em; float: center;">
-		<c:forEach begin="1" step="1" end="${s.rating }" varStatus="i">♥</c:forEach>
-	</div>
-	<br>
+	<table class="table" style="width: 1200px; color: var(--body);">
+	<tr >
+		<th scope="col" style="text-align: left;">클래스 이름 : ${s.className }</th>
+		<th scope="col" style="text-align: left;">리뷰 이름 : ${s.classReviewName }</th>
+		<th scope="col" style="text-align: letf;"> 작성자 : ${s.userId }</th>
+		<th scope="col" style="text-align: right;"> 별점 : </th>
+		<th style="color: rgb(255 83 86 / 99%);">
+			<c:forEach begin="1" step="1" end="${s.rating }" varStatus="i">♥</c:forEach></th>
+	</tr>
+	</Table>
+	<Br>
 	<div class="contentWrap2" style="font-family:Gowun Dodum; text-algin:center;" >${s.classReviewContent}</div>
 	<hr style="border: 1px">
 </div>
 <c:choose>
 	<c:when test="${sessionScope.m.userId eq s.userId}">
-		<div class="qnaDetail_btn">
+		<div class="qnaDetail_btn" style="float:right; margin-right:160px;"
+		>
 		<a href="/class/classReviewUpdate?classReviewNo=${s.classReviewNo}">
 		<button type="submit" class="btn btn-brand">수정</button></a>
 		<a href="/class/reviewDelete?classReviewNo=${s.classReviewNo}" onclick="return confirm('정말 삭제하시겠습니까??');">

@@ -22,7 +22,6 @@
 	color: #fff;
 }
 
-
 </style>
 </head>
 <body>
@@ -57,8 +56,8 @@
 			<label for="inputRating">별점</label>
 			<br>
 			<input type=radio name=rating value=1 class=rating>
-			<label for=rate1 style="font-size: 1.5em; color: rgb(255 83 86 / 99%);">♥</label>
-			<input type=radio name=rating value=2 class=rating>
+			<label for=rate1 style="font-size: 1.5em; color: rgb(255 83 86 / 99%); ">♥</label>
+			<input type=radio name=rating value=2 class=rating >
 			<label for=rate2 style="font-size: 1.5em; color: rgb(255 83 86 / 99%);">♥♥</label>
 			<input type=radio name=rating value=3 class=rating>
 			<label for=rate3 style="font-size: 1.5em; color: rgb(255 83 86 / 99%);">♥♥♥</label>

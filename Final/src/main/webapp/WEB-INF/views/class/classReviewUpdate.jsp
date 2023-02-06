@@ -76,6 +76,7 @@
 			<button class="inputPhoto" type="button" id="inputPhoto">썸네일 변경하기</button>
 		</div>
 		</form>
+		<br>
 		<div class="submitBtn1">
 			<button type="button" onclick="return chk_form();" class="btn btn-brand">저장</button>
 			<button type="button" onclick="javascript:history.go(-1);" class="btn btn-brand">취소</button>
