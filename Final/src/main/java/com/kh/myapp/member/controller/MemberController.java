@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import com.kh.myapp.market.model.service.ProductService;
+
 import com.kh.myapp.member.model.service.MemberService;
 import com.kh.myapp.member.model.vo.Marketer;
 import com.kh.myapp.member.model.vo.Member;
@@ -34,9 +34,6 @@ public class MemberController {
 
 	@Autowired
 	private BCryptPasswordEncoder pwEncoder;
-
-	@Autowired
-	private ProductService productService;
 
 	@RequestMapping(value = "/joinFrm")
 	public String joinFrm() {
@@ -563,7 +560,7 @@ public class MemberController {
 		Member m = (Member) session.getAttribute("m");
 		String userId = m.getUserId();
 		HashMap<String, Object> map = service.selectMyOrderList(reqPage, userId);
-	
+
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));

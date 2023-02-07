@@ -28,5 +28,7 @@ public class OrderVO {
     private String prdName;
     private String prdPrice;
     private String marketerId;
+    private String userReview;
+    private int userReviewno;
 
 }
