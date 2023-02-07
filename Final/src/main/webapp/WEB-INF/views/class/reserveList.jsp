@@ -46,6 +46,7 @@
                         <c:if test="${rs.bookStatus == 1}">예약대기</c:if>
                         <c:if test="${rs.bookStatus == 2}">예약확정</c:if>
                         <c:if test="${rs.bookStatus == 3}">방문완료</c:if>
+                        <c:if test="${rs.bookStatus == 4}">예약취소</c:if>
                         </td>
                         <td>
                         	<c:choose>
@@ -56,6 +57,9 @@
                         			<c:choose>
                         				<c:when test="${rs.bookStatus == 2}">
                         					<button type="button" class="cancleBtn2">취소불가</button>
+                        				</c:when>
+                        				<c:when test="${rs.bookStatus == 4}">
+                        					<button type="button" class="cancleBtn2">취소완료</button>
                         				</c:when>
                         				<c:otherwise>
                         					<a href="/class/classReviewAdd?classNo=${rs.classNo}&bookName=${rs.bookName}" class="btn reviewBtn" id="font1">후기작성</a>

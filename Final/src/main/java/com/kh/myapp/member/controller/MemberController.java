@@ -589,7 +589,6 @@ public class MemberController {
 	@RequestMapping(value = "/cancleOrder")
 	public String cancleOrder(int orderNo, HttpServletRequest request) {
 		int result = service.cancleOrder(orderNo);
-		System.out.println("컨트롤러:"+orderNo);
 		if (result > 0) {
 			request.setAttribute("msg", "주문이 취소되었습니다.");
 			request.setAttribute("url", "/userOrderList?reqPage=1");
@@ -646,6 +645,24 @@ public class MemberController {
 		model.addAttribute("userId", userId);
 		
 		return "/member/memberQna";
+	}
+	
+	// 회원 > QnA > 클래스
+	@RequestMapping(value = "/memberClassQna")
+	public String memberClassQna(HttpSession session, int reqPage, Model model) {
+
+		Member m = (Member) session.getAttribute("m");
+		String userId = m.getUserId();
+		HashMap<String, Object> map = service.memberClassQna(reqPage, userId);
+
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("userId", userId);
+		
+		return "/member/memberClassQna";
 	}
 	
 	//판매자 > 주문관리 > 주문상세 > 배송상세

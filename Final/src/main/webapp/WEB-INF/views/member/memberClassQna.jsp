@@ -42,8 +42,8 @@
    <article id="content" class="content">
       <div class="contents">
          <div class="membership-form">
-         	<div class="category1">
-				<a href="/memberClassQna?reqPage=1" id="category_class">Class</a> 
+			<div class="category1">
+				<a href="/memberClassQna?reqPage=1" id="category_class">Class</a>
 				<a href="/memberQna?reqPage=1" id="category_market">Market</a>
 			</div>
             <div class="form-write">
@@ -69,18 +69,18 @@
                      
                      <c:forEach items="${list}" var="list" varStatus="i">
                      <tr>                      
-                        <td scope="row">${list.prdName}</td>
+                        <td scope="row">${list.className}</td>
                         <td>
-                        	<a href="/market/qnaDetail?prdQnano=${list.prdQnano}"> 
-								<c:out value="${list.prdQnacontent}" />
+                        	<a href="/market/qnaDetail?prdQnano=${list.classQnaNo}"> 
+								<c:out value="${list.classQnaContent}" />
 							</a>
                         </td>
                         <td scope="row">
-                        	<fmt:formatDate value="${list.prdQnaregdate}" pattern="yyyy-MM-dd" />
+                        	<fmt:formatDate value="${list.classQnaRegdate}" pattern="yyyy-MM-dd" />
                         </td>
                         <td scope="row">
                        		<c:choose>
-								<c:when test="${list.prdQnastatus == 0}">
+								<c:when test="${list.classQnaStatus == 0}">
 	                              답변대기
 	                            </c:when>
 								<c:otherwise>

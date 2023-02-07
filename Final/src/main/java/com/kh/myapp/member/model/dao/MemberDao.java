@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.myapp.cl.model.vo.Qna;
 import com.kh.myapp.market.model.vo.MarketQnaVO;
 import com.kh.myapp.member.model.vo.Marketer;
 import com.kh.myapp.member.model.vo.Member;
@@ -186,9 +187,12 @@ public class MemberDao {
 		List list = sqlSession.selectList("order.uidCnt", userId);
 		return null;
 	}
+	
+	//회원 > 주문관리 > 주문취소
 	public int cancleOrder(int orderNo) {
-		return sqlSession.delete("order.cancleOrder", orderNo);
+		return sqlSession.update("order.cancleOrder", orderNo);
 	}
+	
 	//판매자 > 주문관리 > 주문 상세 (상품명 조회) 
 	public String selectPrdName(int prdNo) {
 		String result = sqlSession.selectOne("order.selectPrdName", prdNo);
@@ -238,6 +242,16 @@ public class MemberDao {
 	// 회원 > QnA 개수
 	public int countmemberQna(String userId) {
 		return sqlSession.selectOne("marketMapper.countmemberQna", userId) ;
+	}
+	
+	// 회원 > QnA > 클래스
+	public ArrayList<Qna> memberClassQna(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("classQna.memberClassQna", map);
+		return (ArrayList<Qna>) list;
+	}
+	// 회원 > QnA > 클래스 개수
+	public int countmemberClassQna(String userId) {
+		return sqlSession.selectOne("classQna.countmemberClassQna", userId) ;
 	}
 	
 	//판매자 > 주문관리 > 주문상세 > 배송상세

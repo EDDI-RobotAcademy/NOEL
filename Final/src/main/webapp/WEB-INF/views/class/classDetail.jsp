@@ -318,6 +318,7 @@
 					<input type="hidden" name="userId" value="${sessionScope.m.userId}"> 
 					<input type="hidden" name="classNo" value="${s.classNo}"> 
 					<input type="hidden" name="marketerId" value="${s.marketerId}"> 
+					<input type="hidden" name="className" value="${s.className}"> 
 					<label
 						for="message-text" class="col-form-label">문의할 내용을 작성해주세요.</label>
 					<textarea name="classQnaContent" class="chk2 form-control" id="message-text" 

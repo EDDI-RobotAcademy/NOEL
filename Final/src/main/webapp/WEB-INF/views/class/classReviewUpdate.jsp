@@ -35,6 +35,7 @@
 		<input type="hidden" id="classReviewNo" name="classReviewNo" value="${classReviewlist.classReviewNo }">
 		<input type="hidden" id="classNo" name="classNo" value="${classReviewlist.classNo }">
 		<input type="hidden" id="userId" name="userId" value="${classReviewlist.userId }">
+		<input type="hidden" id="className" name="className" value="${classReviewlist.className}"/>
 								
 		<div class="form-group">
 			<label for="classReviewName">리뷰 이름</label> 
@@ -76,6 +77,7 @@
 			<button class="inputPhoto" type="button" id="inputPhoto">썸네일 변경하기</button>
 		</div>
 		</form>
+		<br>
 		<div class="submitBtn1">
 			<button type="button" onclick="return chk_form();" class="btn btn-brand">저장</button>
 			<button type="button" onclick="javascript:history.go(-1);" class="btn btn-brand">취소</button>
