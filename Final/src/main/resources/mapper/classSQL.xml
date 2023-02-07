@@ -153,7 +153,8 @@
             cl_res_time as classResTime,
             cl_addr as classAddr,
             closed_day as closedDay,
-            (select img_path from noel_class_img ci where ci.cl_no = nc.cl_no) as thumNail
+            (select img_path from noel_class_img ci where ci.cl_no = nc.cl_no) as thumNail,
+            max_num as maxNum
         from noel_class nc
         where nc.cl_no = #{_parameter}
 
