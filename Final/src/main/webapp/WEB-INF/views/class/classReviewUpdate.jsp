@@ -35,6 +35,7 @@
 		<input type="hidden" id="classReviewNo" name="classReviewNo" value="${classReviewlist.classReviewNo }">
 		<input type="hidden" id="classNo" name="classNo" value="${classReviewlist.classNo }">
 		<input type="hidden" id="userId" name="userId" value="${classReviewlist.userId }">
+		<input type="hidden" id="className" name="className" value="${classReviewlist.className}"/>
 								
 		<div class="form-group">
 			<label for="classReviewName">리뷰 이름</label> 
