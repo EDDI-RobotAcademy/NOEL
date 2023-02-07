@@ -67,9 +67,8 @@
                         <c:choose>
                            <c:when test="${list.orderStatus eq '배송완료'}">
                               <td scope="row">
-                          		 <%-- <button type="button" class="orderReviewBtn" data-bs-toggle="modal"
-									data-bs-target="#modal-review${modal.index}">구매평 작성</button> --%>
-								<a href="marketDetailView?prdNo=${list.prdNo}&bookmarkId=${sessionScope.m.userId}&num=1&rnum=1&qnum=1"
+
+								<a href="marketDetailView?prdNo=${list.prdNo}&bookmarkId=${sessionScope.m.userId}&num=1&rnum=1&qnum=1#review-wrap"
                               style="text-decoration:none; color:white;" type="button" class="orderReviewBtn">구매평 작성</a>
                               </td>
                            </c:when>
@@ -84,45 +83,7 @@
                         </c:choose>
                      </tr>
                      
-                     <%-- <form name="reviewForm" id="reviewForm" method="post" action="/market/reviewInsert" >
-					   <div class="modal fade" id="modal-review${modal.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					      <div class="modal-dialog modal-dialog-centered">
-					         <div class="modal-content">
-					            <div class="modal-header">
-					               <h5 class="modal-title" id="exampleModalLabel" style="font-family: Gowun Dodum;">구매평 작성</h5>
-					               <button type="button" class="btn-close btn btn-brand" data-bs-dismiss="modal"aria-label="Close"></button>
-					            </div>
-					            <div class="modal-body mb-3">
-					               <h4>상품은 어떠셨나요?</h4>
-					               <fieldset>
-					                  <input type="hidden" name="userId" value="${sessionScope.m.userId}">
-					                  <input type="hidden" name="prdNo" value="${list.prdNo}">
-					                  <input type="hidden" name="prdName" value="${list.prdName}">
-					                  <input type="hidden" name="marketerId" value="${list.marketerId}">
-					                  <input type="hidden" name="orderNo" value="${list.orderNo}">
-					                  <input type="radio"  name="rating" value="5" id="rate1" checked>
-					                  <label for="rate1">♥</label>
-					                  <input type="radio" name="rating" value="4" id="rate2">
-					                  <label for="rate2">♥</label>
-					                  <input type="radio" name="rating" value="3" id="rate3">
-					                  <label for="rate3">♥</label>
-					                  <input type="radio" name="rating" value="2" id="rate4">
-					                  <label for="rate4">♥</label>
-					                  <input type="radio" name="rating" value="1" id="rate5">
-					                  <label for="rate5">♥</label>
-					               </fieldset>
-					               <textarea name="prdReviewcontent" class="chk1 form-control" id="message-text" title="어떤점이 좋으셨나요?"
-					                         style="height:15em; resize:none;" ></textarea>
-					            </div>
-					            <div class="modal-footer">
-					               <button type="submit" class="reviewsave btn btn-brand">저장</button>
-					               <button type="button" class="reviewcancel btn btn-brand" data-bs-dismiss="modal">취소</button>
-					            </div>
-					         </div>
-					      </div>
-					   </div>
-					</form> --%> 
-                     
+                   
                      </c:forEach>
                   </table>
                   </c:otherwise>

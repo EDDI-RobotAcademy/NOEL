@@ -589,7 +589,6 @@ public class MemberController {
 	@RequestMapping(value = "/cancleOrder")
 	public String cancleOrder(int orderNo, HttpServletRequest request) {
 		int result = service.cancleOrder(orderNo);
-		System.out.println("컨트롤러:"+orderNo);
 		if (result > 0) {
 			request.setAttribute("msg", "주문이 취소되었습니다.");
 			request.setAttribute("url", "/userOrderList?reqPage=1");

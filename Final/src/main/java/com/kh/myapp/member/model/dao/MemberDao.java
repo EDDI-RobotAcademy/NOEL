@@ -187,9 +187,12 @@ public class MemberDao {
 		List list = sqlSession.selectList("order.uidCnt", userId);
 		return null;
 	}
+	
+	//회원 > 주문관리 > 주문취소
 	public int cancleOrder(int orderNo) {
-		return sqlSession.delete("order.cancleOrder", orderNo);
+		return sqlSession.update("order.cancleOrder", orderNo);
 	}
+	
 	//판매자 > 주문관리 > 주문 상세 (상품명 조회) 
 	public String selectPrdName(int prdNo) {
 		String result = sqlSession.selectOne("order.selectPrdName", prdNo);
