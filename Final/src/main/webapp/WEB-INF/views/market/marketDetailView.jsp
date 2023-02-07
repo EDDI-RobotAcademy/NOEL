@@ -517,10 +517,16 @@ function loginCh() {
 //---------- 수량 늘리기
 var countNumVal = $(".peopleTd").text();
 var price = "${prd.prdPrice}";
+var stock = "${prd.prdStock}"-"${prd.prdAllStock}"
+
 $(".priceSpan").text((countNumVal * price).toLocaleString('ko-KR'));
 let count = 1;
 
 $("#up").on("click", function(e) {
+	if (count == stock) {
+		alert('남은 재고수량은 ${prd.prdStock-prd.prdAllStock}개 입니다.');
+        return false;
+    }
    count++;
    $(".countNum").text(count);
    var countNumVal = $(".peopleTd").text();

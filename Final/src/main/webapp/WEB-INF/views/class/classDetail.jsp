@@ -51,7 +51,7 @@
 					<td colspan="3" class="addressTd" style="color: black;">${s.classAddr }</td>
 			</tr>
 			<tr>
-                <th>운영시간</th>
+                <th>운영시간${s.maxNum}</th>
                     <td colspan="3" class="openHourTd" style="color:black;">${s.classResTime }</td>
             </tr>
             <tr>
@@ -544,7 +544,7 @@
                                 btnVal.push(document.getElementsByClassName('timeBtn')[i].value + ":00");
                             }
 
-                            var maxNum = "4";
+                            var maxNum = "${s.maxNum}";
                             var selectDate = $("#datePicker").val();
 
                             $.ajax({
@@ -572,15 +572,15 @@
                     }); //--------------ajax종료
                 });//데이트 피커 눌렀을 떄 함수 종료
 
-
                 <%-- 인원수 늘리기 --%>
                 var countNumVal = $(".peopleTd").text();
                 var price = "${s.classPrice }";
+                
                 $(".price").text((countNumVal * price).toLocaleString('ko-KR'));
                 let count = 1;
                 $("#up").on("click", function (e) {
-                    if (count == 4) {
-                    	alert('한번에 최대 4명 예약만 가능합니다.');
+                    if (count == "${s.maxNum}") {
+                    	alert('한번에 최대 ${s.maxNum}명 예약만 가능합니다.');
                         return false;
                     }
                     count++;
