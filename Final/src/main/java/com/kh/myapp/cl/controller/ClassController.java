@@ -12,6 +12,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -362,7 +364,9 @@ public class ClassController {
 		 
 		String bookName = request.getParameter("bookName");
 		int classNo = Integer.parseInt(request.getParameter("classNo"));
+		int bookNo = Integer.parseInt(request.getParameter("bookNo"));
 		model.addAttribute("classNo", classNo);
+		model.addAttribute("bookNo", bookNo);
 		model.addAttribute("className", bookName);
 	}
 	
@@ -370,6 +374,14 @@ public class ClassController {
     @RequestMapping(value = "/class/addClassReview", method = RequestMethod.POST)
     public String addClassReview(Review review, MultipartFile[] file, HttpServletRequest request, int classNo)
     {
+    	// 리뷰 등록시 기존  등록 여부를 확인 하는 코드
+    	int reviewConfirm = service.getReviewState(review.getBookNo());
+    	if(reviewConfirm>=1) {
+    		return "redirect:/";
+    	}
+    	 
+    	
+    	
         // 첨부이미지 목록 저장할 리스트 생성
         ArrayList<ClassReviewImg> classReviewImgList = new ArrayList<ClassReviewImg>();
 
@@ -638,7 +650,12 @@ public class ClassController {
     public String reserveList(@SessionAttribute Member m, Model model, int reqPage) {
         String userId = m.getUserId();
         HashMap<String, Object> map = service.selectReserveList(reqPage, userId);
-        model.addAttribute("list", map.get("list"));
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("userId", userId);
         return "class/reserveList";
     }
     
@@ -656,5 +673,21 @@ public class ClassController {
             return "layouts/alert";
         }
     }
-	
+    
+    // 리뷰 작성 중복 불가
+    @RequestMapping(value = "/addReserveReview")
+    @ResponseBody
+    public ResponseEntity<?> addReserveReview(@RequestParam int bookNo, HttpServletRequest request) {
+        int result = service.getReviewState(bookNo);
+//        if(result > 0) {
+//            return "/class/classReviewListFrm?reqPage=1";
+//        } else {
+//        	return "redirect:/";
+//        }
+        
+        //http://localhost:8080/addReserveReview?bookNo=29
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+    
+    
 }

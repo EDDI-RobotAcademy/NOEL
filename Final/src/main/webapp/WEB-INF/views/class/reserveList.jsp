@@ -8,6 +8,12 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" /> 
 <title>bonjour noël</title>
+<style>
+#button
+{
+	font-size:10px;
+}
+</style>
 </head>
 <link rel="stylesheet" href="/resources/css/member/owner.css">
 <link rel="stylesheet" href="/resources/css/member/updateOwner.css">
@@ -36,6 +42,7 @@
                     <th scope="col">예약 처리</th>
                 </tr>
                 <c:forEach items="${list }" var="rs">
+                <input type="hidden" class="bookNo" name="bookNo" value="${rs.bookNo }">
                     <tr>
                         <td>${rs.bookNo }</td>
                         <td><a href="/classDetail?classNo=${rs.classNo }">
@@ -62,7 +69,12 @@
                         					<button type="button" class="cancleBtn2">취소완료</button>
                         				</c:when>
                         				<c:otherwise>
-                        					<a href="/class/classReviewAdd?classNo=${rs.classNo}&bookName=${rs.bookName}" class="btn reviewBtn" id="font1">후기작성</a>
+                        					<c:if test="${rs.review != 1}">
+                        					<a href="/class/classReviewAdd?classNo=${rs.classNo}&bookName=${rs.bookName}&bookNo=${rs.bookNo}" 
+                        							style="line-height: inherit;" class="btn reviewBtn" id="font1">후기작성</a>
+                        					</c:if>
+                        					<c:if test="${rs.review == 1}">
+                        					</c:if>
                         				</c:otherwise>
                         			</c:choose>
                         		</c:otherwise>
