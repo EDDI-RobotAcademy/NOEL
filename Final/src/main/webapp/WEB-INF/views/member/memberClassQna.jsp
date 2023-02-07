@@ -71,7 +71,7 @@
                      <tr>                      
                         <td scope="row">${list.className}</td>
                         <td>
-                        	<a href="/market/qnaDetail?prdQnano=${list.classQnaNo}"> 
+                        	<a href="/class/qnaDetail?classQnaNo=${list.classQnaNo}"> 
 								<c:out value="${list.classQnaContent}" />
 							</a>
                         </td>
