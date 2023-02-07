@@ -81,7 +81,7 @@
 		where prd_review_no = #{prdReviewno}
 	</delete>
 	
-	<!-- 로그인한 회원의 리뷰글이 있는지 -->
+	<!-- 마켓상세 > 로그인한 회원의 리뷰글이 있는지 -->
 	<select id="userReview" parameterType="hashmap" resultType="MarketReviewVO">
 		select
 		distinct user_id as userId
@@ -89,7 +89,6 @@
 		where prd_no = #{prdNo} and user_id = #{bookmarkId}
 	</select>
 	
-
 	<!-- qna 총개수 -->
 	<select id="qnaCount" parameterType="int" resultType="int">
 		select count(prd_qna_no)

@@ -139,7 +139,9 @@
 		(select prd_price from noel_product mp where ot.prd_no = mp.prd_no)*order_quan as prdPrice,
 		(select marketer_Id from noel_product mp where ot.prd_no = mp.prd_no) as marketerId,
 		imp_uid as impUid,
-		prd_no as prdNo
+		prd_no as prdNo,
+		(select distinct user_id as userId from noel_product_review mp where ot.prd_no = mp.prd_no) as userReview,
+		(select distinct prd_review_no as prdReviewno from noel_product_review mp where ot.prd_no = mp.prd_no) as userReviewno
 		from noel_order ot
 		where imp_uid in
 		(select distinct imp_uid from noel_order where user_id= #{userId})

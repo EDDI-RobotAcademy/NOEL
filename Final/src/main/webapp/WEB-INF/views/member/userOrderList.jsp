@@ -67,9 +67,12 @@
                         <c:choose>
                            <c:when test="${list.orderStatus eq '배송완료'}">
                               <td scope="row">
-
-								<a href="marketDetailView?prdNo=${list.prdNo}&bookmarkId=${sessionScope.m.userId}&num=1&rnum=1&qnum=1#review-wrap"
-                              style="text-decoration:none; color:white;" type="button" class="orderReviewBtn">구매평 작성</a>
+								<c:if test="${empty list.userReview}">
+									<a href="marketDetailView?prdNo=${list.prdNo}&bookmarkId=${sessionScope.m.userId}&num=1&rnum=1&qnum=1#review-wrap"
+	                              style="text-decoration:none; color:white;" type="button" class="orderReviewBtn">구매평 작성</a>
+								</c:if>
+									<a href="/market/reviewDetail?prdReviewno=${list.userReviewno}"
+	                              style="text-decoration:none; color:white;" type="button" class="orderReviewBtn">구매평 확인</a>
                               </td>
                            </c:when>
                            
