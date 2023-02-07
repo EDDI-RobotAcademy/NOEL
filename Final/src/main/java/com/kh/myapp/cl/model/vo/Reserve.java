@@ -21,6 +21,7 @@ public class Reserve {
     private String impUid;
     private String marketerId;
     private String reserverName;
+    private int review;
     
     
 }

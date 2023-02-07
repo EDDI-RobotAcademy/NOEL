@@ -238,11 +238,25 @@ public class ClassDao {
         List list = sqlSession.selectList("reserve.selectReserveList",map);
         return (ArrayList<Reserve>) list;
     }
+    
+	// 예약 총 수량
+	public int countReserveList(String userId) {
+		return sqlSession.selectOne("reserve.countReserveList", userId) ;
+	}
 
     public int cancleReserve(int reserveNo) {
         return sqlSession.update("reserve.cancleReserve", reserveNo);
     }
+    
+    public int addReserveReview(int bookNo) {
+        return sqlSession.update("reserve.addReserveReview", bookNo);
+    }
 
+    public Integer getReviewState(int bookNo) {
+        return sqlSession.selectOne("reserve.getReviewState", bookNo);
+    }
+
+    
     // 판매자 > 클래스 관리 > 클래스 오픈 및 클래스 중지
 	public int classStatus(Class vo) {
 		int result = sqlSession.update("class.classStatus", vo);

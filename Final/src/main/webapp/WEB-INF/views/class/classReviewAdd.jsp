@@ -21,7 +21,17 @@
 	background: rgb(51, 51, 51);
 	color: #fff;
 }
-
+.saveBtn
+{
+    border-color: #dc3545;
+    background-color: #dc3545;
+    color: #fff;
+    padding: 8px 26px;
+    line-height: 1.5;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
 </style>
 </head>
 <body>
@@ -44,6 +54,7 @@
 		<input type="hidden" name="userId" name="userId" value="${sessionScope.m.userId }">
 		<input type="hidden" id="classNo" name="classNo" value="${classNo}"/>
 		<input type="hidden" id="className" name="className" value="${className}"/>
+		<input type="hidden" id="bookNo" class="bookNo" name="bookNo" value="${bookNo }">
          
 		<div class="form-group">
 			<label for="inputReviewName">제목</label>
@@ -81,7 +92,7 @@
 		</div>
 		<br>
 		<div>
-			<button type="submit" class="btn btn-brand" id="font">저장</button>
+			<button type="button" class="saveBtn" id="font">저장</button>
 			<button type="button" onclick="javascript:history.go(-1);" class="btn btn-brand">취소</button>
 		</div>
 		</form>
@@ -95,6 +106,47 @@
 <script src="/resources/summernote/summernote-lite.js"></script>
 <script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 <script>
+$(".saveBtn").on("click", function() {
+	const classReviewName =$("#classReviewName").val();
+	if(!classReviewName){
+		$("#classReviewName").focus();
+		alert("title input");
+		return;
+	}
+    if (confirm("리뷰를 등록하시겠습니까?")) {
+        const bookNo = $("#bookNo").val();
+        console.log(bookNo);
+        //$(location).attr('href', "/addReserveReview?bookNo=" + bookNo);
+        
+        getReviewState(bookNo);
+    }
+});
+
+
+function getReviewState(bookNo){
+	
+	$.ajax({
+		url:"/addReserveReview",
+		type:"get",
+		data:{bookNo},
+		success:function(res){
+			console.log(" res : " , res);
+			if(parseInt(res)===0){
+				//alert(" 등록 .");
+				$("#addClassReview").submit();
+				
+			}else{
+				alert("이미 등록 되었습니다.");
+			}
+		},
+		error:function(err){
+			console.log(" err : ", err);
+		}
+		
+	})
+	
+}
+
 /* 이미지 업로드 */
 (function($)
 {
@@ -160,7 +212,6 @@ function uploadImage(files, editor)
 		}
 	});
 }
-
 </script>
 </body>
 </html>

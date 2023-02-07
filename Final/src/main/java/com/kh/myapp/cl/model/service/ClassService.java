@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.myapp.cl.model.dao.ClassDao;
 import com.kh.myapp.cl.model.vo.Class;
@@ -15,6 +16,7 @@ import com.kh.myapp.cl.model.vo.Menu;
 import com.kh.myapp.cl.model.vo.Reserve;
 import com.kh.myapp.cl.model.vo.Review;
 import com.kh.myapp.cl.model.vo.Wishlist;
+import com.kh.myapp.order.model.vo.OrderVO;
 
 @Service
 public class ClassService {
@@ -345,10 +347,13 @@ public class ClassService {
     }
     
     // 클래스 리뷰 등록
+    @Transactional
     public int addClassReview(Review review)
     {
 
         int result = dao.addClassReview(review);
+        dao.addReserveReview(review.getBookNo());
+        
         if (result > 0) {
             int classReviewNo = dao.selectClassReviewNo();
             for (ClassReviewImg ri : review.getClassReviewImgList()) {
@@ -521,20 +526,78 @@ public class ClassService {
     }
     
     public HashMap<String, Object> selectReserveList(int reqPage, String userId) {
+    	
+		// 화면에 보여주는 게시물 수
+		int numPerPage = 10;
+		
+		// 끝페이지
+		int end = numPerPage * reqPage;
+		
+		// 시작페이지
+		int start = (end - numPerPage) + 1;
+				
         HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("reqPage", reqPage);
-        map.put("userId", userId);
+		map.put("start", start);
+		map.put("end", end);
+		map.put("userId", userId);
+
         ArrayList<Reserve> list = dao.selectReserveList(map);
 
+		int totalCnt = dao.countReserveList(userId);
+		int totalPage = 0;
+		if (totalCnt % numPerPage == 0) {
+			totalPage = totalCnt / numPerPage;
+		} else {
+			totalPage = totalCnt / numPerPage + 1;
+		}
+
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
+		// 페이지 네비게이션 제작 시작
+		String pageNavi = "<ul class='pagination circle-style'>";
+		// 페이지 숫자
+		for (int i = 0; i < pageNaviSize; i++) {
+			if (pageNo == reqPage) {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item active-page' href='/reserveList?reqPage=" + pageNo
+						+ "' style='text-decoration:none;'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			} else {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item' href='/reserveList?reqPage=" + pageNo
+						+ "' style='text-decoration:none;'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}
+			pageNo++;
+			if (pageNo > totalPage) {
+				break;
+			}
+		}
+		
         HashMap<String, Object> reserveMap = new HashMap<String, Object>();
         reserveMap.put("list", list);
-
+        reserveMap.put("reqPage", reqPage);
+        reserveMap.put("pageNavi", pageNavi);
+        reserveMap.put("total", totalPage);
+        reserveMap.put("pageNo", pageNo);
         return reserveMap;
 
     }
 
     public int cancleReserve(int reserveNo) {
         return dao.cancleReserve(reserveNo);
+    }
+    
+    public int addReserveReview(int bookNo) {
+        return dao.addReserveReview(bookNo);
+    }
+    
+    
+    
+    public Integer getReviewState(int bookNo) {
+        return dao.getReviewState(bookNo);
     }
 
     // 판매자 > 클래스 관리 > 클래스 오픈 및 클래스 중지
