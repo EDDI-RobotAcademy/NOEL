@@ -1,0 +1,14 @@
+.image-box {
+    width:470px;
+    height:470px;
+    overflow:hidden;
+    margin:0 auto;
+    margin-left: 25%;
+    margin-right: 75%;
+}
+
+.image-thumbnail {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}

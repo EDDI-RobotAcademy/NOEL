@@ -6,29 +6,13 @@
     <link rel="shortcut icon" href="./resources/img/index/favicon (1).ico" /> 
 	<title>bonjour noël</title>
 </head>
-
-<style>
-.image-box {
-    width:470px;
-    height:470px;
-    overflow:hidden;
-    margin:0 auto;
-    margin-left: 25%;
-    margin-right: 75%;
-}
-
-.image-thumbnail {
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-</style>
 <body>
 <jsp:include page="/WEB-INF/views/layouts/header.jsp"/>
 
 
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,200"/>
+<link rel="stylesheet" href="/resources/css/class/classReviewDetail.css">
 <link rel="stylesheet" href="/resources/css/class/classDetail.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

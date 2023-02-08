@@ -8,12 +8,6 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" /> 
 <title>bonjour noël</title>
-<style>
-#button
-{
-	font-size:10px;
-}
-</style>
 </head>
 <link rel="stylesheet" href="/resources/css/member/owner.css">
 <link rel="stylesheet" href="/resources/css/member/updateOwner.css">

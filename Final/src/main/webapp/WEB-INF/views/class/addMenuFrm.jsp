@@ -7,27 +7,12 @@
 <link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" /> 
 <title>bonjour noël</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<style>
-.inputPhoto 
-{
-	width: 100%;
-	height: 50px;
-	border: 1px dashed gray;
-	background-color: transparent;
-}
-
-.inputPhoto:hover 
-{
-	cursor: pointer;
-	background: rgb(51, 51, 51);
-	color: #fff;
-}
-</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layouts/header.jsp" />
 	<link rel="stylesheet" href="/resources/css/class/marketerClassMypage.css">
 	<link rel="stylesheet" href="/resources/css/class/classDetail.css">
+	<link rel="stylesheet" href="/resources/css/class/addMenuFrm.css">
 	<div class="content-wrap">
 		<jsp:include page="/WEB-INF/views/common/marketerHeader.jsp" />
 		<article id="content" class="content">
