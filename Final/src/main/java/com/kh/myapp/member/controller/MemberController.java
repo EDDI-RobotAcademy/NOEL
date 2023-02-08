@@ -662,6 +662,42 @@ public class MemberController {
 		return "/member/memberClassQna";
 	}
 	
+	// 판매자 > QnA > 상품
+	@RequestMapping(value = "/marketerProductQna")
+	public String marketerProductQna(HttpSession session, int reqPage, Model model) {
+		
+		Marketer mk = (Marketer) session.getAttribute("mk");
+		String marketerId = mk.getMarketerId();
+		HashMap<String, Object> map = service.marketerProductQna(reqPage, marketerId);
+		
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("marketerId", marketerId);
+		
+		return "/member/marketerProductQna";
+	}
+	
+	// 판매자 > QnA > 클래스
+	@RequestMapping(value = "/marketerClassQna")
+	public String marketerClassQna(HttpSession session, int reqPage, Model model) {
+
+		Marketer mk = (Marketer) session.getAttribute("mk");
+		String marketerId = mk.getMarketerId();
+		HashMap<String, Object> map = service.marketerClassQna(reqPage, marketerId);
+
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("marketerId", marketerId);
+		
+		return "/member/memberClassQna";
+	}
+	
 	//판매자 > 주문관리 > 주문상세 > 배송상세
 	@RequestMapping(value = "market/shippingDetail" )
 	public void shippingDetail(OrderlistVO vo,Model model, int orderNo) throws Exception {

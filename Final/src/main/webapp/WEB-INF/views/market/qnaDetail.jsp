@@ -69,11 +69,11 @@
 					<ul style="padding-left: 1rem;">
 						<c:forEach items="${qnareply}" var="qnareply">
 							<li><c:choose>
-									<c:when test="${not empty sessionScope.m.userId}">
+									<c:when test="${not empty sessionScope.m.userId && not empty qnareply.pqnaReplywriter}">
 										<div>
 											<br>
 											<p>
-												<b>${qnareply.pqnaReplywriter}</b> &nbsp;&nbsp;&nbsp;
+												<b>[판매자]${qnareply.pqnaReplywriter}</b> &nbsp;&nbsp;&nbsp;
 												<fmt:formatDate value="${qnareply.pqnaReplydate}"
 													pattern="yyyy-MM-dd" />
 											<p>${qnareply.pqnaReply}</p>
@@ -142,7 +142,7 @@
 							<div>
 								<br>
 								<p>
-									<b>${qnareply.pqnaReplywriter}</b> /
+									<b>[판매자]${qnareply.pqnaReplywriter}</b> /
 									<fmt:formatDate value="${qnareply.pqnaReplydate}"
 										pattern="yyyy-MM-dd" />
 								<p>${qnareply.pqnaReply}</p>
