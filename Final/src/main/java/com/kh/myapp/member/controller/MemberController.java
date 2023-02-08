@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-
 import com.kh.myapp.member.model.service.MemberService;
 import com.kh.myapp.member.model.vo.Marketer;
 import com.kh.myapp.member.model.vo.Member;
@@ -688,6 +687,7 @@ public class MemberController {
 		String marketerId = mk.getMarketerId();
 		HashMap<String, Object> map = service.marketerClassQna(reqPage, marketerId);
 
+		
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));
@@ -695,7 +695,9 @@ public class MemberController {
 		model.addAttribute("pageNo", map.get("pageNo"));
 		model.addAttribute("marketerId", marketerId);
 		
-		return "/member/memberClassQna";
+		return "/member/marketerClassQna";
+		
+		
 	}
 	
 	//판매자 > 주문관리 > 주문상세 > 배송상세

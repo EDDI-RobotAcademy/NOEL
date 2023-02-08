@@ -949,7 +949,7 @@ public class MemberService {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("start", start);
 			map.put("end", end);
-			map.put("userId", marketerId);
+			map.put("marketerId", marketerId);
 			ArrayList<Qna> list = dao.marketerClassQna(map);
 			int totalCnt = dao.countmarketerClassQna(marketerId);
 			int totalPage = 0;
@@ -958,7 +958,7 @@ public class MemberService {
 			} else {
 				totalPage = totalCnt / numPerPage + 1;
 			}
-
+			
 			int pageNaviSize = 5;
 			int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
 			// 페이지 네비게이션 제작 시작
@@ -1008,6 +1008,7 @@ public class MemberService {
 			searchMap.put("total", totalPage);
 			searchMap.put("pageNo", pageNo);
 			//searchMap.put("uidCnt", uidCnt);
+			
 			return searchMap;
 
 		}
