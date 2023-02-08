@@ -113,7 +113,7 @@
     <insert id="insertReserve" parameterType="com.kh.myapp.cl.model.vo.Reserve">
         insert into noel_book
         values(noel_book_seq.NEXTVAL, #{classNo}, #{bookName},  #{userId}, #{bookTel}, 1, 
-        #{bookDate}, #{bookTime}, #{bookNum}, #{impUid}, #{marketerId}, #{review})
+        #{bookDate}, #{bookTime}, #{bookNum}, #{impUid}, #{marketerId}, null)
     </insert>
     
     
