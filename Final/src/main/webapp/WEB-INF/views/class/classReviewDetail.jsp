@@ -65,11 +65,9 @@
 	<Br>
 	<div class="contentWrap2" style="font-family:Gowun Dodum; text-algin:center;" >${s.classReviewContent}</div>
 	<hr style="border: 1px">
-</div>
-<c:choose>
+	<c:choose>
 	<c:when test="${sessionScope.m.userId eq s.userId}">
-		<div class="qnaDetail_btn" style="float:right; margin-right:160px;"
-		>
+		<div class="qnaDetail_btn" style="float:right;">
 		<a href="/class/classReviewUpdate?classReviewNo=${s.classReviewNo}">
 		<button type="submit" class="btn btn-brand">수정</button></a>
 		<a href="/class/reviewDelete?classReviewNo=${s.classReviewNo}" onclick="return confirm('정말 삭제하시겠습니까??');">
@@ -78,6 +76,7 @@
 		</div>
 	</c:when>
 </c:choose>
+</div>
 
 <jsp:include page="/WEB-INF/views/layouts/footer.jsp" />
 <script src="/resources/js/index/jquery.min.js"></script>

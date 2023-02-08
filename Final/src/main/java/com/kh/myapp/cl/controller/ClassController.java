@@ -679,13 +679,6 @@ public class ClassController {
     @ResponseBody
     public ResponseEntity<?> addReserveReview(@RequestParam int bookNo, HttpServletRequest request) {
         int result = service.getReviewState(bookNo);
-//        if(result > 0) {
-//            return "/class/classReviewListFrm?reqPage=1";
-//        } else {
-//        	return "redirect:/";
-//        }
-        
-        //http://localhost:8080/addReserveReview?bookNo=29
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
     
