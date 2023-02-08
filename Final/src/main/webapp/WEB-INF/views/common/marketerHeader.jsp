@@ -11,9 +11,6 @@
 					<a href="/marketerMypage">내 정보 수정</a>
 				</div>
 				<div>
-					<a href="/deleteMarketer?marketerId=${sessionScope.mk.marketerId }" class="delMember">회원 탈퇴</a>
-				</div>
-				<div>
 					<a href="/class/marketerClassMypage">클래스 관리</a>
 				</div>				
 				<div>
@@ -24,6 +21,12 @@
 				</div>
 				<div>
 					<a href="/class/reserveManagement?reqPage=1">예약 관리</a>
+				</div>
+				<div>
+					<a href="/marketerProductQna?&reqPage=1">Q&A 관리</a>
+				</div>
+				<div>
+					<a href="/deleteMarketer?marketerId=${sessionScope.mk.marketerId }" class="delMember">회원 탈퇴</a>
 				</div>
 			</c:if>
 			</li>

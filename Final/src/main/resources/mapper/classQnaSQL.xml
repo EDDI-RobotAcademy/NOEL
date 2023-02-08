@@ -203,4 +203,46 @@
 		from noel_class_qna
 		where user_id = #{userId}
 	</select>
+	
+		<!-- 회원 > 마이페이지 > QNA > 클래스-->
+	<select id="marketerClassQna" parameterType="hashmap" resultType="Qna">
+		select
+		cl_qna_no as classQnaNo,
+		cl_no as classNo,
+		marketer_id as marketerId,
+		user_id as userId,
+		cl_qna_content as classQnaContent,
+		cl_qna_regdate as classQnaRegdate,
+		cl_secret as classSecret,
+		cl_qna_pw as classQnaPw,
+		cl_qna_reply as classQnaReply,
+		cl_qna_reply_writer as classQnaReplyWriter,
+		cl_qna_reply_date as classQnaReplyDate,
+		cl_qna_status as classQnaStatus,
+		cl_name as className
+		from(
+		select
+		cl_qna_no,
+		cl_no,
+		marketer_id,
+		user_id,
+		cl_qna_content,
+		cl_qna_regdate,
+		cl_secret,
+		cl_qna_pw,
+		cl_qna_reply,
+		cl_qna_reply_writer,
+		cl_qna_reply_date,
+		cl_qna_status,
+		cl_name,
+		row_number() over(order by cl_qna_no desc) as rNum
+		from noel_class_qna ncq where marketer_id = #{marketerId} order by cl_qna_regdate desc)
+	</select>
+	
+	<!-- 회원 > 마이페이지 > QNA > 클래스 개수 -->
+	<select id="countmemberClassQna" parameterType="String" resultType="int">
+		select count(cl_qna_no)
+		from noel_class_qna
+		where marketer_id = #{marketerId}
+	</select>
 </mapper>

@@ -254,10 +254,33 @@ public class MemberDao {
 		return sqlSession.selectOne("classQna.countmemberClassQna", userId) ;
 	}
 	
+	//판매자 > QnA 
+	public ArrayList<MarketQnaVO> marketerProductQna(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("marketMapper.marketerQna", map);
+		return (ArrayList<MarketQnaVO>) list;
+	}
+	
+	// 판매자 > QnA 개수
+		public int countmarketerQna(String marketerId) {
+			return sqlSession.selectOne("marketMapper.countmaketerQna", marketerId);
+		}
+	
 	//판매자 > 주문관리 > 주문상세 > 배송상세
 	public List shippingDetail(int orderNo) {
 		return sqlSession.selectList("order.shippingDetail", orderNo);
 	}
+	
+	// 판매자 > QnA > 클래스 개수
+	public ArrayList<Qna> marketerClassQna(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("classQna.marketerClassQna", map);
+		return (ArrayList<Qna>) list;
+	}
+	
+	// 판매자 > QnA > 클래스 개수
+		public int countmarketerClassQna(String marketerId) {
+			return sqlSession.selectOne("classQna.countmarketerClassQna", marketerId) ;
+		}
+	
 
 	
 }

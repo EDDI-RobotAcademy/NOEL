@@ -8,6 +8,27 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" /> 
 <title>bonjour noël</title>
+<Style>
+.category1 
+{
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 20px;
+}
+#category_class, #category_market 
+{
+    display: inline-block;
+    text-decoration: none;
+    color: lightgray;
+    font-weight: bold;
+}
+.category1>a:first-child {
+    margin-right: 30px;
+}
+</Style>
 </head>
 <link rel="stylesheet" href="/resources/css/member/owner.css">
 <link rel="stylesheet" href="/resources/css/member/updateOwner.css">
@@ -17,16 +38,20 @@
 <jsp:include page="/WEB-INF/views/layouts/header.jsp" />
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <div class="content-wrap" style="height: 1030px;">
-   <jsp:include page="/WEB-INF/views/common/memberHeader.jsp" />
+   <jsp:include page="/WEB-INF/views/common/marketerHeader.jsp" />
    <article id="content" class="content">
       <div class="contents">
          <div class="membership-form">
+         <div class="category1">
+				<a href="#" id="category_class">Class</a> 
+				<a href="/marketerProductQna?&reqPage=1" id="category_market">Market</a>
+			</div>
             <div class="form-write">
                <h4>Q&A</h4>
             </div>
             <c:choose>
                <c:when test="${empty list}">
-               	  <input type="hidden" name="userId" value="${sessionScope.m.userId }">
+               	  <input type="hidden" name="marketerId" value="${sessionScope.m.marketerId }">
                   <div class="warningMark">
                      <span class="material-symbols-outlined" style="font-size: 30px;"> 
                         등록한 문의글이 없습니다.

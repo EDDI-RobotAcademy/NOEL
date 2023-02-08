@@ -277,10 +277,44 @@
 		from noel_product_qna npq where user_id = #{userId} order by prd_qna_regdate desc)
 	</select>
 	
-	<!-- 회원 > 마이페이지 > QNA 개수 -->
+	<!--  > 마이페이지 > QNA 개수 -->
 	<select id="countmemberQna" parameterType="String" resultType="int">
 		select count(prd_qna_no)
 		from noel_product_qna
 		where user_id = #{userId}
+	</select>
+	
+	<!-- 판매자 > 마이페이지 > QNA -->
+	<select id="marketerQna" parameterType="hashmap" resultType="marketQnaVO">
+		select
+		prd_qna_no as prdQnano,
+		prd_no as prdNo,
+		prd_qna_content as prdQnacontent,
+		user_id as userId,
+		prd_qna_regdate as prdQnaregdate,
+		prd_qna_status as prdQnastatus,
+		secret,
+		prd_qna_pw as prdQnapw,
+		prd_name as prdName
+		from(
+		select
+		prd_qna_no,
+		prd_no,
+		prd_qna_content,
+		user_id,
+		prd_qna_regdate,
+		prd_qna_status,
+		secret,
+		prd_qna_pw,
+		prd_name,
+		row_number() over(order by prd_qna_no desc) as rNum
+		from noel_product_qna npq where marketer_id = #{marketerId} order by prd_qna_regdate desc)
+	</select>
+	
+	<!-- 판매자 > 마이페이지 > QNA 개수 -->
+	<select id="countmaketerQna" parameterType="String" resultType="int">
+		select count(prd_qna_no)
+		from noel_product_qna
+		where marketer_id = #{marketer_id}
 	</select>
 </mapper>
