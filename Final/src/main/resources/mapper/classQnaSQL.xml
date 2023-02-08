@@ -204,7 +204,7 @@
 		where user_id = #{userId}
 	</select>
 	
-		<!-- 회원 > 마이페이지 > QNA > 클래스-->
+		<!-- 판매자 > 마이페이지 > QNA > 클래스-->
 	<select id="marketerClassQna" parameterType="hashmap" resultType="Qna">
 		select
 		cl_qna_no as classQnaNo,
@@ -239,8 +239,8 @@
 		from noel_class_qna ncq where marketer_id = #{marketerId} order by cl_qna_regdate desc)
 	</select>
 	
-	<!-- 회원 > 마이페이지 > QNA > 클래스 개수 -->
-	<select id="countmemberClassQna" parameterType="String" resultType="int">
+	<!-- 판매자 > 마이페이지 > QNA > 클래스 개수 -->
+	<select id="countmarketerClassQna" parameterType="String" resultType="int">
 		select count(cl_qna_no)
 		from noel_class_qna
 		where marketer_id = #{marketerId}
