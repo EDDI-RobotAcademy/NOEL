@@ -1,0 +1,24 @@
+.inputPhoto 
+{
+	width: 100%;
+	height: 50px;
+	border: 1px dashed gray;
+	background-color: transparent;
+}
+.inputPhoto:hover 
+{
+	cursor: pointer;
+	background: rgb(51, 51, 51);
+	color: #fff;
+}
+.saveBtn
+{
+    border-color: #dc3545;
+    background-color: #dc3545;
+    color: #fff;
+    padding: 8px 26px;
+    line-height: 1.5;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}

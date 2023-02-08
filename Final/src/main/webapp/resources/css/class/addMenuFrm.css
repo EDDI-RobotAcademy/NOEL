@@ -1,0 +1,14 @@
+.inputPhoto 
+{
+	width: 100%;
+	height: 50px;
+	border: 1px dashed gray;
+	background-color: transparent;
+}
+
+.inputPhoto:hover 
+{
+	cursor: pointer;
+	background: rgb(51, 51, 51);
+	color: #fff;
+}

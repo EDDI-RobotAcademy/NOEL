@@ -450,11 +450,16 @@ button[name=recommendBtn]:hover{
 
 
 /*--- 메뉴 사진 ---*/
-.food-wrap{
-    margin: 0 auto;
-    width:60vw;
-    height:800px;
-    margin-top: 10px;
+.food-wrap
+{
+	display: flex;
+	flex-wrap: wrap;
+  	justify-content: center;
+  	align-items: center;
+}
+.food-wrap img:first-child {
+	width: calc(33.33% - 20px);
+  	margin-right: 10px;
 }
 
 #photoWrap{

@@ -7,36 +7,11 @@
 <link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" /> 
 <title>bonjour noël</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<style>
-.inputPhoto 
-{
-	width: 100%;
-	height: 50px;
-	border: 1px dashed gray;
-	background-color: transparent;
-}
-.inputPhoto:hover 
-{
-	cursor: pointer;
-	background: rgb(51, 51, 51);
-	color: #fff;
-}
-.saveBtn
-{
-    border-color: #dc3545;
-    background-color: #dc3545;
-    color: #fff;
-    padding: 8px 26px;
-    line-height: 1.5;
-    vertical-align: middle;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
-}
-</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layouts/header.jsp" />
 <link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
+<link rel="stylesheet" href="/resources/css/class/classReviewAdd.css">
 <link rel="stylesheet" href="/resources/css/class/marketerClassMypage.css">
 
 <div class="content-wrap" style="height: auto;">

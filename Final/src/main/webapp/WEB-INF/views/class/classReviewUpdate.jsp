@@ -8,18 +8,11 @@
 <link rel="shortcut icon" href="/resources/img/index/favicon (1).ico" /> 
 <title>bonjour noël</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<style>
-.inputPhoto {
-    width: 100%;
-    height: 50px;
-    border: 1px dashed gray;
-    background-color: transparent;
-}
-</style>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/layouts/header.jsp" />
 <link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
+<link rel="stylesheet" href="/resources/css/class/addMenuFrm.css">
 <div class="content-wrap" style="height: 1700px;">
 <jsp:include page="/WEB-INF/views/common/memberHeader.jsp" />
 <article id="content" class="content">

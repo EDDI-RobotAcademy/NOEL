@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="/resources/css/index/owl.carousel.min.css">
 <link rel="stylesheet"
 	href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<link rel="stylesheet" href="/resources/css/product/class_add.css">
 <link rel="stylesheet" href="/resources/css/product/qnaDetail.css">
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
