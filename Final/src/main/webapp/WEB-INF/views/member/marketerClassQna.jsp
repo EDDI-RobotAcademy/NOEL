@@ -42,16 +42,16 @@
    <article id="content" class="content">
       <div class="contents">
          <div class="membership-form">
-         <div class="category1">
-				<a href="/marketerClassQna?&reqPage=1" id="category_class">Class</a> 
+			<div class="category1">
+				<a href="/marketerClassQna?&reqPage=1" id="category_class">Class</a>
 				<a href="/marketerProductQna?&reqPage=1" id="category_market">Market</a>
 			</div>
             <div class="form-write">
-               <h4>[Market]Q&A</h4>
+               <h4>[Class]Q&A</h4>
             </div>
             <c:choose>
                <c:when test="${empty list}">
-               	  <input type="hidden" name="marketerId" value="${sessionScope.m.marketerId }">
+               	  <input type="hidden" name="marketerId" value="${sessionScope.mk.marketerId }">
                   <div class="warningMark">
                      <span class="material-symbols-outlined" style="font-size: 30px;"> 
                         등록한 문의글이 없습니다.
@@ -61,7 +61,7 @@
                <c:otherwise>
                   <table class="table" style="text-align: center; vertical-align: middle;">
                      <tr>
-                        <th>상품명</th>
+                        <th>클래스명</th>
                         <th>내용</th>
                         <th>작성일</th>
                         <th>답변상태</th>
@@ -69,18 +69,18 @@
                      
                      <c:forEach items="${list}" var="list" varStatus="i">
                      <tr>                      
-                        <td scope="row">${list.prdName}</td>
+                        <td scope="row">${list.className}</td>
                         <td>
-                        	<a href="/market/qnaDetail?prdQnano=${list.prdQnano}"> 
-								<c:out value="${list.prdQnacontent}" />
+                        	<a href="/class/qnaDetail?classQnaNo=${list.classQnaNo}"> 
+								<c:out value="${list.classQnaContent}" />
 							</a>
                         </td>
                         <td scope="row">
-                        	<fmt:formatDate value="${list.prdQnaregdate}" pattern="yyyy-MM-dd" />
+                        	<fmt:formatDate value="${list.classQnaRegdate}" pattern="yyyy-MM-dd" />
                         </td>
                         <td scope="row">
                        		<c:choose>
-								<c:when test="${list.prdQnastatus == 0}">
+								<c:when test="${list.classQnaStatus == 0}">
 	                              답변대기
 	                            </c:when>
 								<c:otherwise>
