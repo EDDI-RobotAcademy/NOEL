@@ -51,7 +51,7 @@
 					<td colspan="3" class="addressTd" style="color: black;">${s.classAddr }</td>
 			</tr>
 			<tr>
-                <th>운영시간${s.maxNum}</th>
+                <th>운영시간</th>
                     <td colspan="3" class="openHourTd" style="color:black;">${s.classResTime }</td>
             </tr>
             <tr>
