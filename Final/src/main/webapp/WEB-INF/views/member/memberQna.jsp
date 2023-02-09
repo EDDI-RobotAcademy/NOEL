@@ -14,8 +14,8 @@
     width: 500px;
     margin: 0 auto;
     text-align: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     font-size: 20px;
 }
 #category_class, #category_market 
@@ -43,11 +43,11 @@
       <div class="contents">
          <div class="membership-form">
          	<div class="category1">
-				<a href="/memberClassQna?reqPage=1" id="category_class">Class</a> 
 				<a href="/memberQna?reqPage=1" id="category_market">Market</a>
+				<a href="/memberClassQna?reqPage=1" id="category_class">Class</a> 
 			</div>
             <div class="form-write">
-               <h4>Q&A</h4>
+               <h4>[Market] Q&A</h4>
             </div>
             <c:choose>
                <c:when test="${empty list}">

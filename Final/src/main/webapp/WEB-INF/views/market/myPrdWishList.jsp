@@ -19,10 +19,10 @@
 				<div class="wish-form">
 					<div class="bookmarkList-wrap">
 						<div class="category1">
-							<a href="/myClassWishList?reqPage=1&bookmarkId=${sessionScope.m.userId}" 
-								id="category_class">Class</a> 
 							<a href="/myPrdWishList?reqPage=1&bookmarkId=${sessionScope.m.userId}"
 								id="category_market">Market</a>
+							<a href="/myClassWishList?reqPage=1&bookmarkId=${sessionScope.m.userId}" 
+								id="category_class">Class</a> 
 						</div>
 
 						<c:choose>
