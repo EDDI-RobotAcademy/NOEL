@@ -163,8 +163,7 @@
 		prd_regdate as regDate,
 		(select round(avg(rating),1) from noel_product_review r where r.prd_no =
 		p.prd_no) as rating,
-		(select prd_img_path from noel_product_img pi where pi.prd_img_no = p.prd_no)
-		as prdthumNail,
+		(select prd_img_path from noel_product_img pi where pi.prd_no = p.prd_no) as prdthumNail,
 		(select sum(order_quan) from noel_order o where o.prd_no = p.prd_no) as prdAllStock 
 		from noel_product p order by prdNo desc) b
 		where cateGory = #{category})rb order by 3 desc)
