@@ -91,7 +91,6 @@ $(".saveBtn").on("click", function() {
     if (confirm("리뷰를 등록하시겠습니까?")) {
         const bookNo = $("#bookNo").val();
         console.log(bookNo);
-        //$(location).attr('href', "/addReserveReview?bookNo=" + bookNo);
         
         getReviewState(bookNo);
     }
