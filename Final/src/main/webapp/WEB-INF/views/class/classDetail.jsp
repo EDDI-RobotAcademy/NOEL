@@ -156,7 +156,7 @@
             <input type="hidden" name="marketerId" value="${me.marketerId}">
                 <div class="w3-card" id="photoWrap"
                      style="font-family:Gowun Dodum; width:300px; height:300px; margin: 10px 25px;">
-                    <img src=/resources/upload/menu/${me.menuImg} style='width: 100%; height: 250px;'>
+                    <img src="/resources/upload/menu/${me.menuImg}" style='width: 100%; height: 250px;'>
                     <div class="w3-container" style="font-family:Gowun Dodum;">
                         <p style="font-weight: bold; font-size: 18px; margin-top:10px;">${me.menuName}</p>
                     </div>
